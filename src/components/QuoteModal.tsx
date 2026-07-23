@@ -59,18 +59,18 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
             <div style={{ width: '70px', height: '70px', background: 'rgba(232, 168, 23, 0.15)', color: '#e8a817', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px' }}>
               <CheckCircle size={40} />
             </div>
-            <h3 className="card-title" style={{ fontSize: '1.8rem', color: '#0f3b5e' }}>Quote Request Submitted!</h3>
+            <h3 className="card-title" style={{ fontSize: '1.8rem', color: '#51847D' }}>Quote Request Submitted!</h3>
             <p style={{ color: '#4a5568', marginTop: '10px' }}>
               Thank you, <strong>{name || 'Valued Client'}</strong>. Our metallurgy engineers are reviewing your specs for <strong>{quantityTons} Tons</strong> of {material}. We will respond within 2 business hours.
             </p>
-            <div style={{ background: '#f6f9fc', borderRadius: '12px', padding: '16px', marginTop: '20px', fontSize: '0.9rem', color: '#0f3b5e', fontWeight: 600 }}>
+            <div style={{ background: '#f6f9fc', borderRadius: '12px', padding: '16px', marginTop: '20px', fontSize: '0.9rem', color: '#51847D', fontWeight: 600 }}>
               Estimated Project Value: ${estimatedTotal.toLocaleString()} USD
             </div>
           </div>
         ) : (
           <>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
-              <div style={{ background: 'rgba(15, 59, 94, 0.08)', padding: '8px', borderRadius: '8px', color: '#0f3b5e' }}>
+              <div style={{ background: 'rgba(15, 59, 94, 0.08)', padding: '8px', borderRadius: '8px', color: '#51847D' }}>
                 <Calculator size={22} />
               </div>
               <span className="small-label label-gold" style={{ marginBottom: 0 }}>Instant Metallurgy Specifier</span>
@@ -129,7 +129,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
 
                 <div style={{ background: '#f6f9fc', border: '1px solid #edf2f7', padding: '12px 16px', borderRadius: '10px', marginTop: '4px' }}>
                   <div style={{ fontSize: '0.75rem', fontWeight: 600, color: '#4a5568', textTransform: 'uppercase' }}>Est. Material Budget</div>
-                  <div style={{ fontSize: '1.3rem', fontWeight: 800, color: '#0f3b5e' }}>
+                  <div style={{ fontSize: '1.3rem', fontWeight: 800, color: '#51847D' }}>
                     ${estimatedTotal.toLocaleString()} <span style={{ fontSize: '0.8rem', fontWeight: 500 }}>USD</span>
                   </div>
                 </div>
@@ -184,7 +184,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                 ></textarea>
               </div>
 
-              <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '16px', background: '#0f3b5e' }}>
+              <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '16px', background: '#51847D' }}>
                 Submit Quote Request <Send size={18} />
               </button>
             </form>

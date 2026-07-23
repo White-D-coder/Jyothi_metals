@@ -6,8 +6,10 @@ import {
   Briefcase,
   Trophy,
   Globe,
-  Play,
   X,
+  Search,
+  SlidersHorizontal,
+  Star,
 } from 'lucide-react';
 
 interface HomeProps {
@@ -26,9 +28,6 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
 
   // Video Modal State
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
-
-  // Testimonial Carousel Auto-Slide State
-  const [testimonialIdx, setTestimonialIdx] = useState(0);
 
   // Active Benefit Hover State (0, 1, 2, 3)
   const [activeBenefitIdx, setActiveBenefitIdx] = useState(0);
@@ -102,48 +101,90 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
   const statsRef = useRef<HTMLDivElement>(null);
   const [hasAnimatedStats, setHasAnimatedStats] = useState(false);
 
-  // Testimonial Automatic Sliding Rotation (Every 4 seconds)
+  // 9 Enterprise Testimonials for 3-Column Vertical Infinite Marquee
   const testimonials = [
     {
       id: 1,
-      quote: 'Impressed by the professionalism and attention to detail.',
-      author: 'Guy Hawkins',
-      handle: '@guyhawkins',
-      role: 'Chief Supply Officer, AeroTech',
+      quote:
+        'Jyothi Metals provided 316L seamless pipes that exceeded our mill test certificates with sub-micron wall thickness precision and rapid dispatch.',
+      author: 'Ethan Morales',
+      handle: '@ethanmorales',
+      role: 'Procurement Specialist, PetroChem',
       avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80',
     },
     {
       id: 2,
-      quote: 'A seamless experience from start to finish. Highly recommend!',
-      author: 'Karla Lynn',
-      handle: '@karlalynn98',
-      role: 'VP of Procurement, PetroChem',
+      quote:
+        'I appreciate how practical and thoughtfully crafted each metal specification is, making it easier for our engineers to extract exact CAD tolerances.',
+      author: 'Daniel Hart',
+      handle: '@danielhart',
+      role: 'UX Engineering Lead, AeroTech',
       avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=120&q=80',
     },
     {
       id: 3,
-      quote: 'Their 48-hour dispatch on 316L stainless pipes saved our offshore refinery project.',
-      author: 'Rajesh Varma',
-      handle: '@rajeshvarma',
-      role: 'Director of Operations, Larsen Infra',
+      quote:
+        'The system is reliable, adaptable, and easy to adopt. Their forged ANSI B16.5 flanges perform flawlessly under high-pressure testing.',
+      author: 'Jonathan Reeves',
+      handle: '@jonathanreeves',
+      role: 'Product Designer, Siemens Energy',
       avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80',
     },
     {
       id: 4,
-      quote: 'Sub-micron CNC laser cutting precision on titanium plates. Outstanding partner.',
-      author: 'Dr. Aris Thorne',
-      handle: '@aristhorne',
-      role: 'Defense Metallurgy Lead',
+      quote:
+        'Working with this supplier has improved our operational efficiency in ways we did not expect. Rapid mill dispatch saved our project timeline.',
+      author: 'Marcus Wright',
+      handle: '@marcuswright',
+      role: 'Operations Supervisor, Larsen Infra',
       avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80',
     },
+    {
+      id: 5,
+      quote:
+        'Sub-micron CNC laser cutting precision on titanium plates. Best ISO 9001 certified raw metal supplier in the industry.',
+      author: 'Dr. Aris Thorne',
+      handle: '@aristhorne',
+      role: 'Defense Metallurgy Lead, AeroSpace Inc',
+      avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=120&q=80',
+    },
+    {
+      id: 6,
+      quote:
+        'A seamless experience from start to finish. Their custom tube sheet drilling and mirror finish stainless sheets are second to none.',
+      author: 'Karla Lynn',
+      handle: '@karlalynn98',
+      role: 'VP of Procurement, PetroChemical Systems',
+      avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=120&q=80',
+    },
+    {
+      id: 7,
+      quote:
+        'Impressed by the professionalism and attention to detail. Every consignment arrives with complete chemical composition test reports.',
+      author: 'Guy Hawkins',
+      handle: '@guyhawkins',
+      role: 'Chief Supply Officer, Global Marine',
+      avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=120&q=80',
+    },
+    {
+      id: 8,
+      quote:
+        'Direct-from-mill raw materials delivered with unyielding structural stability. Their round bars and shaft stock meet exact aerospace tolerances.',
+      author: 'Vikramaditya Rao',
+      handle: '@vikramrao',
+      role: 'Structural Engineering Head, Tata Power',
+      avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=120&q=80',
+    },
+    {
+      id: 9,
+      quote:
+        'Extremely high strength-to-weight ratio titanium alloy plates. The team at Jyothi Metals ensures zero defects across every production batch.',
+      author: 'Sarah Jenkins',
+      handle: '@sarahjenkins',
+      role: 'Quality Audit Specialist, Defense Corp',
+      avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&q=80',
+    },
   ];
-
-  useEffect(() => {
-    const testimonialTimer = setInterval(() => {
-      setTestimonialIdx((prev) => (prev + 1) % (testimonials.length - 1));
-    }, 4000);
-    return () => clearInterval(testimonialTimer);
-  }, [testimonials.length]);
 
   // Scroll Reveal Observer & Stats Counter Observer
   useEffect(() => {
@@ -214,35 +255,123 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
     requestAnimationFrame(step);
   };
 
-  const featuredProducts = [
+  // Interactive Catalog State (Image 3 Style Catalog Browser)
+  const [activeCatalogTab, setActiveCatalogTab] = useState<string>('all');
+  const [activeSubCat, setActiveSubCat] = useState<string>('all');
+  const [catalogSearch, setCatalogSearch] = useState<string>('');
+
+  // 8 Product Categories from Image 2 Content
+  const catalogProducts = [
     {
-      id: 'stainless-pipes',
-      title: 'Seamless Stainless Steel Pipes (316L / 304)',
-      category: 'Pipe & Tube',
+      id: 'pipe-and-tubes',
+      title: 'Seamless & Welded Stainless Steel Pipes (316L / 304)',
+      mainCat: 'pipes',
+      subCat: 'Pipes & Tubes',
+      category: 'Pipes & Tubes',
       image: '/images/stainless_pipes.png',
       specs: ['ASTM A312', 'OD: 6mm - 1200mm', 'Corrosion Resistant'],
       description:
-        'Engineered for extreme pressure environments, chemical processing plants, and marine infrastructure with tight wall thickness tolerances.',
+        'Precision seamless and welded stainless steel pipes engineered for extreme pressure environments, chemical plants, and offshore marine lines.',
     },
     {
-      id: 'titanium-plates',
-      title: 'Aerospace Grade Titanium Plates (Ti-6Al-4V)',
+      id: 'sheets-and-coils',
+      title: 'Cold Rolled Stainless Steel Sheets & Mirror Coils',
+      mainCat: 'sheets',
+      subCat: 'Sheets & Coils',
+      category: 'Sheets & Coils',
+      image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+      specs: ['ASTM A240', 'Thk: 0.5mm - 6mm', '2B / 8K Mirror Finish'],
+      description:
+        'High-surface finish stainless steel 304/316 sheets and mirror polished coils suitable for architectural cladding and pharmaceutical tanks.',
+    },
+    {
+      id: 'plates-and-heavy',
+      title: 'Aerospace Grade Titanium & SS Heavy Plates',
+      mainCat: 'sheets',
+      subCat: 'Plates & Heavy Sheets',
       category: 'Plates & Sheets',
       image: '/images/titanium_plates.png',
-      specs: ['Grade 5 Ti', 'AMS 4911', 'High Strength-to-Weight'],
+      specs: ['Grade 5 Ti / SS316L', 'AMS 4911 / ASTM A240', 'High Strength'],
       description:
-        'Ultra-lightweight high-tensile titanium sheets designed for defense, aviation turbines, and high-temperature industrial heat exchangers.',
+        'Ultra-lightweight high-tensile titanium plates and heavy stainless sheets engineered for defense armor, aviation turbines, and heat exchangers.',
+    },
+    {
+      id: 'forged-flanges',
+      title: 'Forged Pipe Flanges (Slip-On, Blind, Weld-Neck)',
+      mainCat: 'flanges',
+      subCat: 'Forged Flanges',
+      category: 'Flanges',
+      image: '/images/flanges_industrial.png',
+      specs: ['ANSI B16.5', 'Class 150 - 2500', 'Forged SS316L / Carbon'],
+      description:
+        'Heavy-duty forged pipe flanges engineered for leak-proof high-pressure piping connections in gas refineries, power stations, and chemical plants.',
+    },
+    {
+      id: 'solid-round-bars',
+      title: 'Solid Stainless Steel Round Bars & Shafts',
+      mainCat: 'bars',
+      subCat: 'Round Bars',
+      category: 'Round Bars',
+      image: '/images/round_bars.png',
+      specs: ['ASTM A276', 'Dia: 8mm - 500mm', 'Bright Drawn / Turned'],
+      description:
+        'High-precision machined round bars, hex rods, and ground metal shafts for pump impellers, automotive driveshafts, and heavy equipment.',
+    },
+    {
+      id: 'butt-weld-fittings',
+      title: 'Butt-Weld Pipe Fittings (Elbows, Tees, Reducers)',
+      mainCat: 'flanges',
+      subCat: 'Pipe Fittings',
+      category: 'Butt-Weld Fittings',
+      image: '/images/pipe_fittings.png',
+      specs: ['ASME B16.9', 'Sch 10S to Sch 160', 'SS316 / Monel / Inconel'],
+      description:
+        'Sub-micron calibrated butt-weld pipe elbows (90°/45°), equal tees, concentric reducers, and stub ends for seamless fluid flow control.',
     },
     {
       id: 'structural-beams',
-      title: 'Heavy Structural Steel I-Beams (A36 / S355)',
-      category: 'Structural Beams',
+      title: 'Heavy Structural Steel I-Beams & Channels',
+      mainCat: 'bars',
+      subCat: 'Angles & Channels',
+      category: 'Structural Angles',
       image: '/images/structural_beams.png',
       specs: ['EN 10025', 'Custom Lengths', 'High Load Capacity'],
       description:
-        'Hot-rolled structural steel profiles delivering unyielding structural stability for skyscrapers, bridges, and heavy industrial facilities.',
+        'Hot-rolled structural steel I-beams, C-channels, and equal angles delivering unyielding load stability for skyscrapers and bridges.',
+    },
+    {
+      id: 'perforated-circles',
+      title: 'Perforated Sheets & Precision CNC Tube Sheets',
+      mainCat: 'sheets',
+      subCat: 'Perforated & Circles',
+      category: 'Circles & Discs',
+      image: '/images/precision_parts.png',
+      specs: ['ISO 9001 Tested', 'Sub-Micron Hole Pitch', 'Custom CAD Specs'],
+      description:
+        'Laser-cut metal discs, perforated filter sheets, and precision tube sheets engineered for filtration systems and acoustic panels.',
     },
   ];
+
+  // Real-time catalog filtering logic
+  const filteredCatalog = catalogProducts.filter((prod) => {
+    if (activeCatalogTab !== 'all' && prod.mainCat !== activeCatalogTab) {
+      return false;
+    }
+    if (activeSubCat !== 'all' && prod.subCat !== activeSubCat) {
+      return false;
+    }
+    if (catalogSearch.trim() !== '') {
+      const q = catalogSearch.toLowerCase();
+      const matchTitle = prod.title.toLowerCase().includes(q);
+      const matchCat = prod.category.toLowerCase().includes(q);
+      const matchDesc = prod.description.toLowerCase().includes(q);
+      const matchSpecs = prod.specs.some((s) => s.toLowerCase().includes(q));
+      if (!matchTitle && !matchCat && !matchDesc && !matchSpecs) {
+        return false;
+      }
+    }
+    return true;
+  });
 
   return (
     <div>
@@ -284,12 +413,12 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
         <div className="container" style={{ position: 'relative', zIndex: 10, width: '100%' }}>
           <div className="hero-content reveal" style={{ maxWidth: '880px', margin: '0 auto', textAlign: 'center' }}>
             <h1 className="hero-title" style={{ fontSize: '4.2rem', marginBottom: '24px', color: '#ffffff' }}>
-              Precision Metal Solutions for <span style={{ color: '#38bdf8' }}>Modern Industry</span>
+              Precision Metal Solutions for <span style={{ color: '#77b8b0' }}>Modern Industry</span>
             </h1>
             <p style={{ fontSize: '1.25rem', color: '#f1f5f9', margin: '0 auto 36px', maxWidth: '750px', lineHeight: 1.6, textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
               Supplying certified high-performance stainless steel, titanium alloys, structural profiles, and custom fabricated components for global aerospace, energy, and defense projects.
             </p>
-            <div className="hero-actions" style={{ justifyContent: 'center', gap: '20px', marginTop: '36px' }}>
+            <div className="hero-actions" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px', marginTop: '36px' }}>
               <button
                 onClick={() => onNavigate('products')}
                 className="btn btn-accent"
@@ -297,10 +426,11 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                   padding: '16px 36px',
                   fontSize: '1rem',
                   fontWeight: 700,
-                  background: '#0284c7',
+                  background: '#51847D',
                   color: '#ffffff',
-                  border: '2px solid #0284c7',
+                  border: '2px solid #51847D',
                   cursor: 'pointer',
+                  boxShadow: '0 4px 14px rgba(81, 132, 125, 0.4)',
                 }}
               >
                 Explore Catalog <ArrowRight size={18} />
@@ -312,13 +442,13 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                   padding: '16px 36px',
                   fontSize: '1rem',
                   fontWeight: 700,
-                  border: '2px solid #ffffff',
-                  color: '#ffffff',
                   background: 'transparent',
+                  color: '#ffffff',
+                  border: '2px solid #ffffff',
                   cursor: 'pointer',
                 }}
               >
-                Learn Our Process
+                Learn More
               </button>
             </div>
           </div>
@@ -326,23 +456,23 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
       </section>
 
       {/* 2. Floating White Elevated Stats Card Bar */}
-      <div className="stats-floating-bar" ref={statsRef}>
+      <div className="stats-floating-bar reveal" ref={statsRef}>
         <div className="container">
-          <div className="stats-card-white reveal">
+          <div className="stats-card-white">
             <div className="stats-grid">
               <div className="stat-item-white">
                 <div className="stat-icon-container">
-                  <Users size={30} />
+                  <Users size={32} />
                 </div>
                 <div>
                   <div className="stat-number-white">{stats.clients.toLocaleString()}+</div>
-                  <div className="stat-label-white">Global Clients</div>
+                  <div className="stat-label-white">Global Enterprise Clients</div>
                 </div>
               </div>
 
               <div className="stat-item-white">
                 <div className="stat-icon-container">
-                  <Briefcase size={30} />
+                  <Briefcase size={32} />
                 </div>
                 <div>
                   <div className="stat-number-white">{stats.projects.toLocaleString()}k+</div>
@@ -352,17 +482,17 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
 
               <div className="stat-item-white">
                 <div className="stat-icon-container">
-                  <Trophy size={30} />
+                  <Trophy size={32} />
                 </div>
                 <div>
-                  <div className="stat-number-white">{stats.awards}+</div>
-                  <div className="stat-label-white">Awards &amp; Certifications</div>
+                  <div className="stat-number-white">{stats.awards}</div>
+                  <div className="stat-label-white">ISO &amp; Quality Awards</div>
                 </div>
               </div>
 
               <div className="stat-item-white">
                 <div className="stat-icon-container">
-                  <Globe size={30} />
+                  <Globe size={32} />
                 </div>
                 <div>
                   <div className="stat-number-white">{stats.countries}+</div>
@@ -374,120 +504,119 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
         </div>
       </div>
 
-      {/* 3. Multidisciplinary Engineering Video Feature Section */}
-      <section className="section bg-white" style={{ padding: '100px 0 80px' }}>
-        <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: '60px', alignItems: 'center' }}>
-            <div className="reveal" style={{ position: 'relative' }}>
-              <div
+      {/* 3. Multidisciplinary Engineering Feature Section (Image 2 Style Layout: Flush Left Arch Image, Right Text Column) */}
+      <section
+        style={{
+          background: '#ffffff',
+          padding: '90px 0',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        <div
+          className="catalog-mobile-grid"
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'minmax(300px, 46vw) 1fr',
+            gap: '60px',
+            alignItems: 'center',
+          }}
+        >
+          {/* Left Column: Full-Bleed Flush Image Card with Top-Right Arch Curve */}
+          <div className="reveal" style={{ width: '100%' }}>
+            <div
+              className="about-arch-frame-left"
+              style={{
+                width: '100%',
+                height: '520px',
+                borderTopRightRadius: '240px !important',
+              }}
+            >
+              <img
+                src="/images/pexels-alex-60339926-9878853.jpg"
+                alt="Jyoti Metal Foundry Production Facilities"
                 style={{
-                  position: 'absolute',
-                  top: '16px',
-                  left: '-16px',
                   width: '100%',
                   height: '100%',
-                  background: '#d4a017',
-                  zIndex: 1,
+                  objectFit: 'cover',
+                  transition: 'transform 0.6s ease',
                 }}
+                onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.06)')}
+                onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
               />
-              <div
-                style={{
-                  position: 'relative',
-                  zIndex: 2,
-                  height: '340px',
-                  overflow: 'hidden',
-                  boxShadow: '0 15px 35px rgba(0,0,0,0.15)',
-                  cursor: 'pointer',
-                }}
-                onClick={() => setIsVideoModalOpen(true)}
-              >
-                <img
-                  src="/images/pexels-alex-60339926-9878853.jpg"
-                  alt="Jyothi Metals Foundry Production Facilities"
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                  }}
-                />
-                <div
-                  style={{
-                    position: 'absolute',
-                    inset: 0,
-                    background: 'rgba(0, 0, 0, 0.25)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <div
-                    style={{
-                      width: '68px',
-                      height: '68px',
-                      borderRadius: '50% !important',
-                      background: '#ffffff',
-                      boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    <Play size={26} fill="#d4a017" color="#d4a017" style={{ marginLeft: '4px' }} />
-                  </div>
-                </div>
-              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Text & Pill Action Button (Constrained inside Right Padding) */}
+          <div className="reveal" style={{ paddingRight: '5%', maxWidth: '620px' }}>
+            <div
+              style={{
+                fontSize: '0.82rem',
+                fontWeight: 700,
+                letterSpacing: '0.14em',
+                color: '#51847D',
+                textTransform: 'uppercase',
+                marginBottom: '16px',
+              }}
+            >
+              About Jyoti Metal
             </div>
 
-            <div className="reveal">
-              <h2
-                className="section-title"
+            <h2
+              style={{
+                fontSize: '2.85rem',
+                lineHeight: 1.2,
+                marginBottom: '24px',
+                color: '#0f172a',
+                fontWeight: 800,
+                fontFamily: 'Outfit, sans-serif',
+                letterSpacing: '-0.02em',
+              }}
+            >
+              Multidisciplinary engineering and metallurgy supply services
+            </h2>
+
+            <p
+              style={{
+                fontSize: '1.05rem',
+                color: '#475569',
+                lineHeight: 1.75,
+                marginBottom: '36px',
+                maxWidth: '540px',
+              }}
+            >
+              With diverse knowledge spanning over three decades, our talented and versatile engineering team manufactures, cuts, and manages the construction supply of thousands of high-precision metal projects across energy, infrastructure, defense, and industrial manufacturing sectors.
+            </p>
+
+            <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+              <button
+                onClick={() => onNavigate('about')}
                 style={{
-                  fontSize: '2.4rem',
-                  lineHeight: 1.25,
-                  marginBottom: '20px',
-                  color: '#0f172a',
-                  fontWeight: 800,
+                  padding: '14px 32px',
+                  fontSize: '0.92rem',
+                  fontWeight: 700,
+                  background: '#1c2826',
+                  color: '#ffffff',
+                  border: 'none',
+                  borderRadius: '30px !important',
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  boxShadow: '0 6px 20px rgba(0, 0, 0, 0.12)',
+                  transition: 'all 0.3s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = '#51847D';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = '#1c2826';
+                  e.currentTarget.style.transform = 'translateY(0)';
                 }}
               >
-                Multidisciplinary engineering and metallurgy supply services
-              </h2>
-
-              <p style={{ fontSize: '1.05rem', color: '#475569', lineHeight: 1.7, marginBottom: '32px' }}>
-                With diverse knowledge spanning over three decades, our talented and versatile engineering team manufactures, cuts, and manages the construction supply of thousands of high-precision metal projects across energy, infrastructure, defense, and industrial manufacturing sectors.
-              </p>
-
-              <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-                <button
-                  onClick={() => onNavigate('products')}
-                  className="btn"
-                  style={{
-                    padding: '14px 32px',
-                    fontSize: '0.95rem',
-                    fontWeight: 700,
-                    background: '#d4a017',
-                    color: '#0f172a',
-                    border: '2px solid #d4a017',
-                    cursor: 'pointer',
-                  }}
-                >
-                  Our Services
-                </button>
-                <button
-                  onClick={() => onNavigate('about')}
-                  className="btn"
-                  style={{
-                    padding: '14px 32px',
-                    fontSize: '0.95rem',
-                    fontWeight: 700,
-                    background: 'transparent',
-                    color: '#d4a017',
-                    border: '2px solid #d4a017',
-                    cursor: 'pointer',
-                  }}
-                >
-                  View Projects
-                </button>
-              </div>
+                Learn More <ArrowRight size={16} />
+              </button>
             </div>
           </div>
         </div>
@@ -554,8 +683,8 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
           textAlign: 'center',
           color: '#ffffff',
           overflow: 'hidden',
-          borderTop: '3px solid #0284c7',
-          borderBottom: '3px solid #0284c7',
+          borderTop: '3px solid #51847D',
+          borderBottom: '3px solid #51847D',
         }}
       >
         <div className="container reveal" style={{ maxWidth: '1100px', margin: '0 auto' }}>
@@ -565,7 +694,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
               fontWeight: 800,
               letterSpacing: '0.3em',
               textTransform: 'uppercase',
-              color: '#38bdf8',
+              color: '#77b8b0',
               marginBottom: '16px',
             }}
           >
@@ -610,8 +739,8 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
               padding: '16px 40px',
               fontSize: '1rem',
               fontWeight: 700,
-              background: '#0284c7',
-              borderColor: '#0284c7',
+              background: '#51847D',
+              borderColor: '#51847D',
               color: '#ffffff',
               cursor: 'pointer',
             }}
@@ -621,64 +750,489 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
         </div>
       </section>
 
-      {/* 5. Featured Products Section */}
-      <section className="section bg-tint" style={{ paddingTop: '80px' }}>
+      {/* 4.5. High Quality Products Category Grid Showcase (Image 2 Style 8-Category Arch Grid) */}
+      <section className="section bg-white" style={{ paddingTop: '90px', paddingBottom: '80px', borderBottom: '1px solid #e2e8f0' }}>
         <div className="container">
-          <div style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto 60px' }} className="reveal">
-            <h2 className="section-title">Engineered Metal Stock &amp; Fabrication</h2>
-            <p>
-              Direct-from-mill raw materials and finished structural products tested to exceed global aerospace and industrial standards.
+          <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 55px' }} className="reveal">
+            <span className="small-label" style={{ color: '#51847D', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
+              OUR
+            </span>
+            <h2 className="section-title" style={{ fontSize: '2.5rem', color: '#061221', marginBottom: '14px', fontWeight: 900, letterSpacing: '0.02em' }}>
+              HIGH QUALITY PRODUCTS
+            </h2>
+            <div style={{ width: '60px', height: '4px', background: '#51847D', margin: '0 auto 16px' }} />
+            <p style={{ color: '#475569', fontSize: '1.05rem', lineHeight: 1.6 }}>
+              Direct mill stock and precision manufactured metal components certified to exceed international ISO &amp; ASTM engineering standards.
             </p>
           </div>
 
-          <div className="products-grid">
-            {featuredProducts.map((prod, index) => (
+          {/* 8 Product Category Cards Grid (Image 1 Style Luxury Dark Overlay Cards) */}
+          <div
+            className="category-arch-grid"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(4, 1fr)',
+              gap: '28px',
+            }}
+          >
+            {[
+              {
+                title: 'Sheets',
+                subCat: 'Sheets & Coils',
+                mainCat: 'sheets',
+                tag: 'ASTM A240 / 304 & 316',
+                image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+              },
+              {
+                title: 'Pipe and Tubes',
+                subCat: 'Pipes & Tubes',
+                mainCat: 'pipes',
+                tag: 'OD: 6mm - 1200mm',
+                image: '/images/stainless_pipes.png',
+              },
+              {
+                title: 'Plates',
+                subCat: 'Plates & Heavy Sheets',
+                mainCat: 'sheets',
+                tag: 'Grade 5 Ti & Heavy SS',
+                image: '/images/titanium_plates.png',
+              },
+              {
+                title: 'Flanges',
+                subCat: 'Forged Flanges',
+                mainCat: 'flanges',
+                tag: 'ANSI B16.5 Class 150-2500',
+                image: '/images/flanges_industrial.png',
+              },
+              {
+                title: 'Round Bars',
+                subCat: 'Round Bars',
+                mainCat: 'bars',
+                tag: 'Solid Turned & Polished',
+                image: '/images/round_bars.png',
+              },
+              {
+                title: 'Buttweld Fittings',
+                subCat: 'Pipe Fittings',
+                mainCat: 'flanges',
+                tag: 'ASME B16.9 Fittings',
+                image: '/images/pipe_fittings.png',
+              },
+              {
+                title: 'Angles & Channels',
+                subCat: 'Angles & Channels',
+                mainCat: 'bars',
+                tag: 'Heavy Structural Beams',
+                image: '/images/structural_beams.png',
+              },
+              {
+                title: 'Tube Sheet',
+                subCat: 'Perforated & Circles',
+                mainCat: 'sheets',
+                tag: 'Laser Cut & CNC Drilled',
+                image: '/images/precision_parts.png',
+              },
+            ].map((cat) => (
               <div
-                key={prod.id}
-                className={`product-card reveal reveal-delay-${index + 1}`}
+                key={cat.title}
+                className="category-arch-card reveal"
+                onClick={() => {
+                  setActiveCatalogTab(cat.mainCat);
+                  setActiveSubCat(cat.subCat);
+                  const el = document.getElementById('catalog-browser');
+                  if (el) {
+                    el.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+                style={{
+                  cursor: 'pointer',
+                  height: '320px',
+                  position: 'relative',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                }}
               >
-                <div className="product-image-container">
-                  <img src={prod.image} alt={prod.title} className="product-img" />
-                  <span className="product-badge">{prod.category}</span>
+                {/* Full Height Background Image */}
+                <img
+                  src={cat.image}
+                  alt={cat.title}
+                  className="category-arch-img"
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                  }}
+                />
+
+                {/* Bottom Dark Gradient Overlay for Typography Contrast */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background:
+                      'linear-gradient(to top, rgba(6, 18, 33, 0.95) 0%, rgba(6, 18, 33, 0.45) 45%, transparent 100%)',
+                    zIndex: 1,
+                  }}
+                />
+
+                {/* Top-Right White Floating Circle Arrow Button (Image 1 Style) */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '18px',
+                    right: '18px',
+                    zIndex: 2,
+                  }}
+                >
+                  <div className="arch-floating-btn">
+                    <ArrowRight size={18} />
+                  </div>
                 </div>
-                <div className="product-body">
-                  <h3 className="card-title">{prod.title}</h3>
-                  <div className="product-specs">
-                    {prod.specs.map((spec, sIdx) => (
-                      <span key={sIdx} className="spec-pill">
-                        {spec}
-                      </span>
-                    ))}
+
+                {/* Bottom Left Content Overlay (Sub-tag & Bold Title) */}
+                <div
+                  style={{
+                    position: 'relative',
+                    zIndex: 2,
+                    padding: '24px 20px',
+                    marginTop: 'auto',
+                  }}
+                >
+                  <div
+                    style={{
+                      fontSize: '0.72rem',
+                      fontWeight: 800,
+                      color: '#77b8b0',
+                      letterSpacing: '0.08em',
+                      textTransform: 'uppercase',
+                      marginBottom: '6px',
+                    }}
+                  >
+                    {cat.tag}
                   </div>
-                  <p style={{ fontSize: '0.9rem', marginBottom: '20px' }}>{prod.description}</p>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <button
-                      onClick={() => onOpenQuoteModal(prod.title)}
-                      className="btn btn-accent"
-                      style={{ padding: '8px 18px', fontSize: '0.85rem' }}
-                    >
-                      Get Quote
-                    </button>
-                    <button
-                      onClick={() => onNavigate('products')}
-                      style={{
-                        background: 'none',
-                        border: 'none',
-                        color: '#0284c7',
-                        fontWeight: 700,
-                        fontSize: '0.85rem',
-                        cursor: 'pointer',
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '4px',
-                      }}
-                    >
-                      View Specs <ChevronRight size={16} />
-                    </button>
-                  </div>
+                  <h3
+                    className="card-title-text"
+                    style={{
+                      fontSize: '1.35rem',
+                      fontWeight: 800,
+                      margin: 0,
+                      lineHeight: 1.2,
+                    }}
+                  >
+                    {cat.title}
+                  </h3>
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Interactive Industrial Product Catalog (Image 3 Style Catalog Browser with Image 2 Content) */}
+      <section id="catalog-browser" className="section bg-tint" style={{ paddingTop: '90px', paddingBottom: '100px' }}>
+        <div className="container">
+          {/* Section Header */}
+          <div style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto 40px' }} className="reveal">
+            <span className="small-label" style={{ color: '#51847D', fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+              ENTERPRISE METALLURGY CATALOG
+            </span>
+            <h2 className="section-title" style={{ fontSize: '2.6rem', color: '#0f172a', marginBottom: '16px' }}>
+              Industrial Metal Product Catalog
+            </h2>
+            <p style={{ color: '#475569', fontSize: '1.1rem', lineHeight: 1.6 }}>
+              Explore our complete range of certified stainless steel, titanium alloys, structural profiles, forged flanges, and precision machined components.
+            </p>
+          </div>
+
+          {/* Top Horizontal Main Category Tabs Bar (Image 3 Catalog Tabs Style) */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '12px',
+              flexWrap: 'wrap',
+              marginBottom: '36px',
+            }}
+          >
+            {[
+              { id: 'all', label: 'All Metal Products' },
+              { id: 'pipes', label: 'Pipes & Tubes' },
+              { id: 'sheets', label: 'Plates & Sheets' },
+              { id: 'flanges', label: 'Flanges & Fittings' },
+              { id: 'bars', label: 'Bars & Structurals' },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => {
+                  setActiveCatalogTab(tab.id);
+                  setActiveSubCat('all');
+                }}
+                style={{
+                  padding: '12px 24px',
+                  fontSize: '0.92rem',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  background: activeCatalogTab === tab.id ? '#51847D' : '#ffffff',
+                  color: activeCatalogTab === tab.id ? '#ffffff' : '#1e293b',
+                  border: activeCatalogTab === tab.id ? '2px solid #51847D' : '1px solid #cbd5e1',
+                  boxShadow: activeCatalogTab === tab.id ? '0 6px 18px rgba(81, 132, 125, 0.3)' : '0 2px 4px rgba(0,0,0,0.02)',
+                  transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
+                }}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Main 2-Column Catalog Container (Left Sub-Categories Sidebar + Right Product Grid) */}
+          <div style={{ display: 'grid', gridTemplateColumns: '280px 1fr', gap: '32px', alignItems: 'start' }}>
+            
+            {/* Left Sub-Categories Sidebar (Inspired by Image 3 Left Navigation Panel) */}
+            <div
+              style={{
+                background: '#ffffff',
+                border: '1px solid #cbd5e1',
+                borderTop: '4px solid #51847D',
+                boxShadow: '0 8px 24px rgba(0, 0, 0, 0.05)',
+                position: 'sticky',
+                top: '100px',
+              }}
+            >
+              {/* Sidebar Header */}
+              <div
+                style={{
+                  background: '#061221',
+                  color: '#ffffff',
+                  padding: '16px 20px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  fontWeight: 800,
+                  fontSize: '0.92rem',
+                  letterSpacing: '0.05em',
+                  textTransform: 'uppercase',
+                }}
+              >
+                <SlidersHorizontal size={18} color="#77b8b0" />
+                <span>Sub Categories</span>
+              </div>
+
+              {/* Sub-Category Items List */}
+              <div style={{ padding: '8px 0' }}>
+                {[
+                  { id: 'all', label: 'All Sub-Categories' },
+                  { id: 'Pipes & Tubes', label: 'Pipe & Tube Lines' },
+                  { id: 'Sheets & Coils', label: 'Sheets & Mirror Coils' },
+                  { id: 'Plates & Heavy Sheets', label: 'Plates & Heavy Sheets' },
+                  { id: 'Forged Flanges', label: 'Forged Pipe Flanges' },
+                  { id: 'Round Bars', label: 'Solid Round Bars' },
+                  { id: 'Pipe Fittings', label: 'Butt-Weld Fittings' },
+                  { id: 'Angles & Channels', label: 'Structural Beams' },
+                  { id: 'Perforated & Circles', label: 'Perforated Circles' },
+                ].map((sub) => {
+                  const isActive = activeSubCat === sub.id;
+                  return (
+                    <button
+                      key={sub.id}
+                      onClick={() => setActiveSubCat(sub.id)}
+                      style={{
+                        width: '100%',
+                        textAlign: 'left',
+                        padding: '12px 20px',
+                        background: isActive ? '#edf5f4' : 'transparent',
+                        color: isActive ? '#51847D' : '#334155',
+                        borderLeft: isActive ? '4px solid #51847D' : '4px solid transparent',
+                        borderBottom: '1px solid #f1f5f9',
+                        fontWeight: isActive ? 700 : 500,
+                        fontSize: '0.88rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        cursor: 'pointer',
+                        transition: 'background 0.2s, color 0.2s',
+                      }}
+                    >
+                      <span>{sub.label}</span>
+                      <ChevronRight size={16} style={{ opacity: isActive ? 1 : 0.4 }} />
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Sidebar Support Callout */}
+              <div
+                style={{
+                  padding: '20px',
+                  background: '#f8fafc',
+                  borderTop: '1px solid #e2e8f0',
+                  textAlign: 'center',
+                }}
+              >
+                <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#0f172a', marginBottom: '6px' }}>
+                  Need Custom Mill Specs?
+                </div>
+                <div style={{ fontSize: '0.78rem', color: '#64748b', marginBottom: '14px' }}>
+                  Speak directly with sales desk: +91 9322281549
+                </div>
+                <button
+                  onClick={() => onOpenQuoteModal()}
+                  className="btn btn-accent"
+                  style={{ width: '100%', padding: '10px 14px', fontSize: '0.8rem' }}
+                >
+                  Custom Spec Inquiry
+                </button>
+              </div>
+            </div>
+
+            {/* Right Product Grid Area */}
+            <div>
+              {/* Filter & Search Header Strip */}
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: '16px',
+                  flexWrap: 'wrap',
+                  background: '#ffffff',
+                  padding: '16px 24px',
+                  border: '1px solid #cbd5e1',
+                  marginBottom: '24px',
+                }}
+              >
+                <div style={{ fontSize: '0.9rem', color: '#475569', fontWeight: 600 }}>
+                  Showing <strong style={{ color: '#0f172a' }}>{filteredCatalog.length}</strong> Metal Product Series
+                </div>
+
+                {/* Real-time Search Input */}
+                <div style={{ position: 'relative', width: '300px', maxWidth: '100%' }}>
+                  <Search size={16} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} />
+                  <input
+                    type="text"
+                    placeholder="Search grade, alloy, flange..."
+                    value={catalogSearch}
+                    onChange={(e) => setCatalogSearch(e.target.value)}
+                    style={{
+                      width: '100%',
+                      padding: '10px 14px 10px 36px',
+                      fontSize: '0.88rem',
+                      border: '1px solid #cbd5e1',
+                      outline: 'none',
+                      background: '#f8fafc',
+                    }}
+                  />
+                  {catalogSearch && (
+                    <button
+                      onClick={() => setCatalogSearch('')}
+                      style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8', fontSize: '0.8rem' }}
+                    >
+                      Clear
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {/* Product Cards Grid */}
+              {filteredCatalog.length === 0 ? (
+                <div style={{ background: '#ffffff', padding: '60px', textAlign: 'center', border: '1px solid #cbd5e1' }}>
+                  <h3 style={{ color: '#0f172a', marginBottom: '8px' }}>No products match your search query</h3>
+                  <p style={{ color: '#64748b', fontSize: '0.9rem', marginBottom: '20px' }}>Try clearing your search term or selecting another sub-category.</p>
+                  <button
+                    onClick={() => { setActiveCatalogTab('all'); setActiveSubCat('all'); setCatalogSearch(''); }}
+                    className="btn btn-accent"
+                    style={{ padding: '10px 24px' }}
+                  >
+                    Reset Catalog Filters
+                  </button>
+                </div>
+              ) : (
+                <div className="products-grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '24px' }}>
+                  {filteredCatalog.map((prod) => (
+                    <div
+                      key={prod.id}
+                      className="product-card"
+                      style={{
+                        background: '#ffffff',
+                        border: '1px solid #cbd5e1',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        transition: 'transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease',
+                      }}
+                    >
+                      <div className="product-image-container" style={{ height: '200px', position: 'relative', overflow: 'hidden' }}>
+                        <img
+                          src={prod.image}
+                          alt={prod.title}
+                          className="product-img"
+                          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        />
+                        <span className="product-badge" style={{ background: '#51847D', color: '#ffffff', padding: '4px 10px', fontSize: '0.72rem', fontWeight: 800 }}>
+                          {prod.category}
+                        </span>
+                      </div>
+
+                      <div className="product-body" style={{ padding: '20px', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                        <h3 className="card-title" style={{ fontSize: '1.05rem', fontWeight: 800, color: '#0f172a', marginBottom: '12px', lineHeight: 1.35 }}>
+                          {prod.title}
+                        </h3>
+
+                        <div className="product-specs" style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '14px' }}>
+                          {prod.specs.map((spec, sIdx) => (
+                            <span
+                              key={sIdx}
+                              style={{
+                                background: '#edf5f4',
+                                color: '#51847D',
+                                fontSize: '0.72rem',
+                                fontWeight: 700,
+                                padding: '3px 8px',
+                              }}
+                            >
+                              {spec}
+                            </span>
+                          ))}
+                        </div>
+
+                        <p style={{ fontSize: '0.88rem', color: '#475569', lineHeight: 1.5, marginBottom: '20px', flex: 1 }}>
+                          {prod.description}
+                        </p>
+
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '12px', borderTop: '1px solid #f1f5f9' }}>
+                          <button
+                            onClick={() => onOpenQuoteModal(prod.title)}
+                            className="btn btn-accent"
+                            style={{ padding: '8px 16px', fontSize: '0.82rem', fontWeight: 700 }}
+                          >
+                            Get Quote
+                          </button>
+                          <button
+                            onClick={() => onNavigate('products')}
+                            style={{
+                              background: 'none',
+                              border: 'none',
+                              color: '#51847D',
+                              fontWeight: 700,
+                              fontSize: '0.82rem',
+                              cursor: 'pointer',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '4px',
+                            }}
+                          >
+                            View Specs <ChevronRight size={14} />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
           </div>
 
           <div style={{ textAlign: 'center', marginTop: '50px' }}>
@@ -687,7 +1241,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
               className="btn btn-outline"
               style={{ padding: '14px 36px' }}
             >
-              Browse Full 2026 Product Catalog <ArrowRight size={18} />
+              Browse Full Product Catalog Specs <ArrowRight size={18} />
             </button>
           </div>
         </div>
@@ -718,16 +1272,17 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
         </div>
 
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.25fr', gap: '60px', alignItems: 'center' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.25fr', gap: '60px', alignItems: 'flex-start' }}>
             {/* Left Column: Title & Dynamic Crossfading Industrial Visual Frame */}
             <div className="reveal">
               <h2
                 className="section-title"
                 style={{
-                  fontSize: '2.8rem',
+                  fontSize: '2.6rem',
                   lineHeight: 1.15,
                   marginBottom: '28px',
                   color: '#0f172a',
+                  marginTop: 0,
                 }}
               >
                 Why Industry Leaders Trust Jyothi Metals
@@ -772,7 +1327,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                     color: '#ffffff',
                   }}
                 >
-                  <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#38bdf8', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '4px' }}>
+                  <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#77b8b0', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '4px' }}>
                     BENEFIT FOCUS {benefits[activeBenefitIdx].num}
                   </div>
                   <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#ffffff' }}>
@@ -783,7 +1338,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
             </div>
 
             {/* Right Column: Numbered List (01, 02, 03, 04) with Interactive Hover Animations */}
-            <div className="reveal" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <div className="reveal" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               {benefits.map((b, idx) => {
                 const isActive = activeBenefitIdx === idx;
                 return (
@@ -792,13 +1347,13 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                     onMouseEnter={() => setActiveBenefitIdx(idx)}
                     style={{
                       display: 'flex',
-                      gap: '24px',
+                      gap: '20px',
                       alignItems: 'flex-start',
-                      padding: '20px 24px',
+                      padding: '18px 24px',
                       background: isActive ? '#ffffff' : 'transparent',
                       border: 'none',
                       boxShadow: isActive ? '0 12px 30px rgba(0, 0, 0, 0.06)' : 'none',
-                      transform: isActive ? 'translateX(12px)' : 'translateX(0px)',
+                      transform: isActive ? 'translateX(10px)' : 'translateX(0px)',
                       transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
                       cursor: 'pointer',
                     }}
@@ -806,26 +1361,29 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                     <span
                       style={{
                         fontFamily: 'Outfit, sans-serif',
-                        fontSize: '3.2rem',
+                        fontSize: '2.5rem',
                         fontWeight: 900,
-                        color: isActive ? '#0284c7' : '#cbd5e1',
-                        lineHeight: 0.9,
+                        color: isActive ? '#51847D' : '#cbd5e1',
+                        lineHeight: 1,
                         flexShrink: 0,
-                        transform: isActive ? 'scale(1.1)' : 'scale(1)',
+                        marginTop: '-2px',
+                        transform: isActive ? 'scale(1.05)' : 'scale(1)',
                         transition: 'color 0.35s ease, transform 0.35s ease',
                       }}
                     >
                       {b.num}
                     </span>
-                    <div>
+                    <div style={{ flex: 1 }}>
                       <h3
                         style={{
-                          fontSize: '1.15rem',
+                          fontSize: '1.1rem',
                           fontWeight: 800,
-                          color: isActive ? '#0284c7' : '#0f172a',
+                          color: isActive ? '#51847D' : '#0f172a',
                           textTransform: 'uppercase',
                           letterSpacing: '0.04em',
-                          marginBottom: '8px',
+                          marginTop: 0,
+                          marginBottom: '6px',
+                          lineHeight: 1.25,
                           transition: 'color 0.35s ease',
                         }}
                       >
@@ -851,91 +1409,133 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
         </div>
       </section>
 
-      {/* 7. Client Testimonials Automated Sliding Carousel Section */}
+      {/* 7. Client Testimonials 3-Column Vertical Infinite Marquee Section (Image 1 Style) */}
       <section
-        className="section bg-tint"
+        className="section bg-white"
         style={{
-          padding: '90px 0 110px',
+          padding: '95px 0 100px',
           position: 'relative',
           overflow: 'hidden',
-          background: '#ffffff',
         }}
       >
-        <div
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: '280px',
-            backgroundImage: 'url("/images/factory_skyline_lineart.png")',
-            backgroundRepeat: 'repeat-x',
-            backgroundPosition: 'bottom center',
-            backgroundSize: 'contain',
-            opacity: 0.18,
-            pointerEvents: 'none',
-            zIndex: 1,
-          }}
-        />
-
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <div style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto 60px' }} className="reveal">
-            <h2 className="section-title">What Enterprise Leaders Say About Jyothi Metals</h2>
-            <p>
-              Trusted by defense contractors, petroleum refiners, and aerospace engineers worldwide.
+          {/* Header Title */}
+          <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 50px' }} className="reveal">
+            <h2 className="section-title" style={{ fontSize: '2.7rem', color: '#0f172a', marginBottom: '14px', fontWeight: 900 }}>
+              What our users are saying
+            </h2>
+            <p style={{ color: '#475569', fontSize: '1.05rem', lineHeight: 1.6 }}>
+              Our direct-mill metallurgical stock has delivered consistent and measurable performance for industrial leaders across defense, energy, and infrastructure.
             </p>
           </div>
 
-          <div className="reveal" style={{ position: 'relative', maxWidth: '1100px', margin: '0 auto' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '28px' }}>
-              {[
-                testimonials[testimonialIdx],
-                testimonials[(testimonialIdx + 1) % testimonials.length],
-              ].map((t) => (
-                <div
-                  key={t.id}
-                  style={{
-                    background: '#ffffff',
-                    borderRadius: '16px !important',
-                    border: '1px solid #e2e8f0',
-                    padding: '36px 32px 28px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between',
-                    minHeight: '260px',
-                    boxShadow: '0 8px 30px rgba(0,0,0,0.04)',
-                    transition: 'all 0.5s ease',
-                  }}
-                >
-                  <div>
-                    <div style={{ color: '#cbd5e1', fontSize: '3.5rem', fontFamily: 'serif', lineHeight: 0.8, marginBottom: '16px', userSelect: 'none' }}>
-                      ““
-                    </div>
-                    <p style={{ fontSize: '1.25rem', fontWeight: 600, color: '#1e293b', lineHeight: 1.4, marginBottom: '28px' }}>
-                      {t.quote}
-                    </p>
-                  </div>
-
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-                    <img
-                      src={t.avatar}
-                      alt={t.author}
+          {/* 3-Column Infinite Vertical Marquee Viewport */}
+          <div className="vertical-marquee-viewport reveal">
+            <div className="marquee-vertical-grid">
+              {/* Column 1 (Scrolling UP) */}
+              <div className="marquee-col-wrapper">
+                <div className="marquee-vertical-col marquee-up">
+                  {[...testimonials.slice(0, 3), ...testimonials.slice(0, 3)].map((t, idx) => (
+                    <div
+                      key={`col1-${t.id}-${idx}`}
+                      className="testimonial-marquee-card"
                       style={{
-                        width: '48px',
-                        height: '48px',
-                        borderRadius: '50% !important',
-                        objectFit: 'cover',
-                        border: '2px solid #ffffff',
-                        boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                        background: '#ffffff',
+                        border: '1px solid #e2e8f0',
+                        borderRadius: '16px !important',
+                        padding: '26px 24px',
+                        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.03)',
                       }}
-                    />
-                    <div>
-                      <div style={{ fontWeight: 800, color: '#0f172a', fontSize: '0.98rem', lineHeight: 1.2 }}>{t.author}</div>
-                      <div style={{ fontSize: '0.82rem', color: '#64748b', fontWeight: 500, marginTop: '2px' }}>{t.handle}</div>
+                    >
+                      {/* 5 Gold Stars Rating */}
+                      <div style={{ display: 'flex', gap: '3px', marginBottom: '14px' }}>
+                        {[...Array(5)].map((_, sIdx) => (
+                          <Star key={sIdx} size={16} fill="#f59e0b" color="#f59e0b" />
+                        ))}
+                      </div>
+
+                      <p style={{ fontSize: '0.94rem', color: '#334155', lineHeight: 1.6, marginBottom: '22px', fontWeight: 500 }}>
+                        "{t.quote}"
+                      </p>
+
+                      <div style={{ paddingTop: '14px', borderTop: '1px solid #f1f5f9' }}>
+                        <div style={{ fontWeight: 800, color: '#0f172a', fontSize: '0.92rem' }}>{t.author}</div>
+                        <div style={{ fontSize: '0.78rem', color: '#64748b', fontWeight: 500, marginTop: '2px' }}>{t.role}</div>
+                      </div>
                     </div>
-                  </div>
+                  ))}
                 </div>
-              ))}
+              </div>
+
+              {/* Column 2 (Scrolling DOWN) */}
+              <div className="marquee-col-wrapper">
+                <div className="marquee-vertical-col marquee-down">
+                  {[...testimonials.slice(3, 6), ...testimonials.slice(3, 6)].map((t, idx) => (
+                    <div
+                      key={`col2-${t.id}-${idx}`}
+                      className="testimonial-marquee-card"
+                      style={{
+                        background: '#ffffff',
+                        border: '1px solid #e2e8f0',
+                        borderRadius: '16px !important',
+                        padding: '26px 24px',
+                        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.03)',
+                      }}
+                    >
+                      {/* 5 Gold Stars Rating */}
+                      <div style={{ display: 'flex', gap: '3px', marginBottom: '14px' }}>
+                        {[...Array(5)].map((_, sIdx) => (
+                          <Star key={sIdx} size={16} fill="#f59e0b" color="#f59e0b" />
+                        ))}
+                      </div>
+
+                      <p style={{ fontSize: '0.94rem', color: '#334155', lineHeight: 1.6, marginBottom: '22px', fontWeight: 500 }}>
+                        "{t.quote}"
+                      </p>
+
+                      <div style={{ paddingTop: '14px', borderTop: '1px solid #f1f5f9' }}>
+                        <div style={{ fontWeight: 800, color: '#0f172a', fontSize: '0.92rem' }}>{t.author}</div>
+                        <div style={{ fontSize: '0.78rem', color: '#64748b', fontWeight: 500, marginTop: '2px' }}>{t.role}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Column 3 (Scrolling UP Fast) */}
+              <div className="marquee-col-wrapper">
+                <div className="marquee-vertical-col marquee-up-fast">
+                  {[...testimonials.slice(6, 9), ...testimonials.slice(6, 9)].map((t, idx) => (
+                    <div
+                      key={`col3-${t.id}-${idx}`}
+                      className="testimonial-marquee-card"
+                      style={{
+                        background: '#ffffff',
+                        border: '1px solid #e2e8f0',
+                        borderRadius: '16px !important',
+                        padding: '26px 24px',
+                        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.03)',
+                      }}
+                    >
+                      {/* 5 Gold Stars Rating */}
+                      <div style={{ display: 'flex', gap: '3px', marginBottom: '14px' }}>
+                        {[...Array(5)].map((_, sIdx) => (
+                          <Star key={sIdx} size={16} fill="#f59e0b" color="#f59e0b" />
+                        ))}
+                      </div>
+
+                      <p style={{ fontSize: '0.94rem', color: '#334155', lineHeight: 1.6, marginBottom: '22px', fontWeight: 500 }}>
+                        "{t.quote}"
+                      </p>
+
+                      <div style={{ paddingTop: '14px', borderTop: '1px solid #f1f5f9' }}>
+                        <div style={{ fontWeight: 800, color: '#0f172a', fontSize: '0.92rem' }}>{t.author}</div>
+                        <div style={{ fontSize: '0.78rem', color: '#64748b', fontWeight: 500, marginTop: '2px' }}>{t.role}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>

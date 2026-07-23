@@ -53,22 +53,22 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
 
   const keyPillars = [
     {
-      icon: <Flame size={28} color="#0284c7" />,
+      icon: <Flame size={28} color="#51847D" />,
       title: 'Electric Arc Smelting',
       desc: 'High-purity vacuum arc remelting providing ultra-clean alloy grain structures with minimal non-metallic inclusions.',
     },
     {
-      icon: <Cpu size={28} color="#0284c7" />,
+      icon: <Cpu size={28} color="#51847D" />,
       title: 'Micron Laser Calibration',
       desc: 'Multi-axis CNC laser cutting lines maintaining sub-millimeter tolerances across heavy structural profiles.',
     },
     {
-      icon: <ShieldCheck size={28} color="#0284c7" />,
+      icon: <ShieldCheck size={28} color="#51847D" />,
       title: 'Spectral Lab Testing',
       desc: '100% positive material identification (PMI) and ultrasonic weld inspection included with every mill test certificate.',
     },
     {
-      icon: <Globe2 size={28} color="#0284c7" />,
+      icon: <Globe2 size={28} color="#51847D" />,
       title: 'Global Warehouse Logistics',
       desc: 'Redundant inventory stock located near major international ports ensuring rapid 48-hour container dispatch.',
     },
@@ -86,7 +86,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
           backgroundRepeat: 'no-repeat',
           color: '#ffffff',
           padding: '120px 0 90px',
-          borderBottom: '3px solid #0284c7',
+          borderBottom: '3px solid #51847D',
           position: 'relative',
           overflow: 'hidden',
         }}
@@ -109,7 +109,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
               <button
                 onClick={onOpenQuoteModal}
                 className="btn btn-accent"
-                style={{ padding: '16px 36px', fontSize: '1rem', background: '#0284c7', borderColor: '#0284c7' }}
+                style={{ padding: '16px 36px', fontSize: '1rem', background: '#51847D', borderColor: '#51847D' }}
               >
                 Request Enterprise Specifications <ArrowRight size={18} />
               </button>
@@ -151,7 +151,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                     style={{
                       background: '#f8fafc',
                       border: '1px solid #cbd5e1',
-                      borderLeft: '4px solid #0284c7',
+                      borderLeft: '4px solid #51847D',
                       padding: '20px',
                     }}
                   >
@@ -170,11 +170,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
             {/* Right Side: Industrial Visual Frame & Stats */}
             <div>
               <div
+                className="about-arch-frame-reversed"
                 style={{
-                  position: 'relative',
                   border: '2px solid #0f172a',
-                  boxShadow: '0 20px 50px rgba(0,0,0,0.12)',
-                  overflow: 'hidden',
                   background: '#061221',
                 }}
               >
@@ -205,7 +203,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <Factory size={32} color="#38bdf8" />
+                    <Factory size={32} color="#77b8b0" />
                     <div>
                       <div style={{ fontWeight: 900, fontSize: '1.2rem', color: '#ffffff' }}>
                         120,000 m&sup2; Manufacturing Hub
@@ -216,7 +214,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                     </div>
                   </div>
 
-                  <div style={{ textAlign: 'right', borderLeft: '2px solid #0284c7', paddingLeft: '20px' }}>
+                  <div style={{ textAlign: 'right', borderLeft: '2px solid #51847D', paddingLeft: '20px' }}>
                     <div style={{ fontWeight: 900, fontSize: '1.4rem', color: '#d4a017' }}>850k+ Tons</div>
                     <div style={{ fontSize: '0.8rem', color: '#cbd5e1' }}>Annual Throughput</div>
                   </div>
@@ -246,7 +244,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                 style={{
                   background: '#ffffff',
                   border: '1px solid #cbd5e1',
-                  borderLeft: '6px solid #0284c7',
+                  borderLeft: '6px solid #51847D',
                   padding: '28px 32px',
                   display: 'grid',
                   gridTemplateColumns: '120px 1fr',
@@ -255,7 +253,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                   boxShadow: '0 4px 16px rgba(0,0,0,0.03)',
                 }}
               >
-                <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '2.2rem', fontWeight: 900, color: '#0284c7' }}>
+                <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '2.2rem', fontWeight: 900, color: '#51847D' }}>
                   {item.year}
                 </div>
                 <div>
@@ -291,17 +289,17 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                 style={{
                   background: '#ffffff',
                   border: '1px solid #cbd5e1',
-                  borderTop: '4px solid #0284c7',
+                  borderTop: '4px solid #51847D',
                   padding: '30px 24px',
                   textAlign: 'center',
                   boxShadow: '0 6px 20px rgba(0,0,0,0.04)',
                 }}
               >
-                <FileCheck size={36} color="#0284c7" style={{ margin: '0 auto 16px' }} />
+                <FileCheck size={36} color="#51847D" style={{ margin: '0 auto 16px' }} />
                 <h3 style={{ fontSize: '1.2rem', fontWeight: 900, color: '#0f172a', marginBottom: '8px' }}>
                   {cert.code}
                 </h3>
-                <div style={{ fontSize: '0.9rem', fontWeight: 700, color: '#0284c7', marginBottom: '8px' }}>
+                <div style={{ fontSize: '0.9rem', fontWeight: 700, color: '#51847D', marginBottom: '8px' }}>
                   {cert.label}
                 </div>
                 <div style={{ fontSize: '0.82rem', color: '#64748b' }}>
@@ -313,13 +311,13 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
 
           <div style={{ textAlign: 'center', marginTop: '60px' }}>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: '#0f172a', fontWeight: 800, fontSize: '1.1rem', marginBottom: '24px' }}>
-              <CheckCircle2 size={22} color="#0284c7" /> Need Material Test Reports (MTR) for an upcoming contract?
+              <CheckCircle2 size={22} color="#51847D" /> Need Material Test Reports (MTR) for an upcoming contract?
             </div>
             <div>
               <button
                 onClick={onOpenQuoteModal}
                 className="btn btn-accent"
-                style={{ padding: '16px 36px', fontSize: '1rem', background: '#0284c7' }}
+                style={{ padding: '16px 36px', fontSize: '1rem', background: '#51847D' }}
               >
                 Download Test Certificate Samples or Get Quote <ChevronRight size={18} />
               </button>

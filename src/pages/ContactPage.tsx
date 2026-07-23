@@ -202,27 +202,27 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenQuoteModal }) =>
           </div>
         </div>
 
-        {/* Global Support SLAs */}
+        {/* Global Support SLAs & Direct Contacts */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
-          <div style={{ background: '#ffffff', padding: '24px', borderRadius: '16px', border: '1px solid #edf2f7', display: 'flex', gap: '16px', alignItems: 'center' }}>
-            <Clock size={32} color="#0f3b5e" />
+          <div style={{ background: '#ffffff', padding: '24px', border: '1px solid #cbd5e1', display: 'flex', gap: '16px', alignItems: 'center' }}>
+            <Clock size={32} color="#51847D" />
             <div>
-              <div style={{ fontWeight: 800, color: '#0f3b5e' }}>2-Hour Response SLA</div>
-              <div style={{ fontSize: '0.85rem', color: '#4a5568' }}>Dedicated engineering desk</div>
+              <div style={{ fontWeight: 800, color: '#0f172a' }}>2-Hour Response SLA</div>
+              <div style={{ fontSize: '0.85rem', color: '#475569' }}>Dhawal Choudhary: +91 9322281549</div>
             </div>
           </div>
-          <div style={{ background: '#ffffff', padding: '24px', borderRadius: '16px', border: '1px solid #edf2f7', display: 'flex', gap: '16px', alignItems: 'center' }}>
-            <Phone size={32} color="#0f3b5e" />
+          <div style={{ background: '#ffffff', padding: '24px', border: '1px solid #cbd5e1', display: 'flex', gap: '16px', alignItems: 'center' }}>
+            <Phone size={32} color="#51847D" />
             <div>
-              <div style={{ fontWeight: 800, color: '#0f3b5e' }}>24/7 Metallurgy Hotline</div>
-              <div style={{ fontSize: '0.85rem', color: '#4a5568' }}>+1 (800) 555-APEX</div>
+              <div style={{ fontWeight: 800, color: '#0f172a' }}>Mumbai Office Hotline</div>
+              <div style={{ fontSize: '0.85rem', color: '#475569' }}>(022) 2380 2758 / 2382 5068</div>
             </div>
           </div>
-          <div style={{ background: '#ffffff', padding: '24px', borderRadius: '16px', border: '1px solid #edf2f7', display: 'flex', gap: '16px', alignItems: 'center' }}>
-            <MapPin size={32} color="#0f3b5e" />
+          <div style={{ background: '#ffffff', padding: '24px', border: '1px solid #cbd5e1', display: 'flex', gap: '16px', alignItems: 'center' }}>
+            <MapPin size={32} color="#51847D" />
             <div>
-              <div style={{ fontWeight: 800, color: '#0f3b5e' }}>Global Warehouses</div>
-              <div style={{ fontSize: '0.85rem', color: '#4a5568' }}>USA, Germany, Singapore</div>
+              <div style={{ fontWeight: 800, color: '#0f172a' }}>Key Locations</div>
+              <div style={{ fontSize: '0.85rem', color: '#475569' }}>Mumbai &amp; Delhi Branch</div>
             </div>
           </div>
         </div>

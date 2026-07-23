@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, Layers, Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, X, Phone, Mail, Clock } from 'lucide-react';
 
 interface NavbarProps {
   activeTab: string;
@@ -32,10 +32,39 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header style={{ width: '100%', position: 'sticky', top: 0, zIndex: 1000 }}>
-      {/* Main White Navigation Bar with Dropdowns (Top Utility Bar Removed) */}
+      {/* Sleek Top Announcement Utility Bar (Call Us | Mail Us | Timing) */}
+      <div className="top-announcement-bar">
+        <div className="container top-announcement-container">
+          <div className="top-announcement-wrapper">
+            <a href="tel:+919322281549" className="top-bar-item">
+              <Phone size={13} className="top-bar-icon" />
+              <span className="top-bar-label">CALL US:</span>
+              <span className="top-bar-val">+91 9322281549</span>
+            </a>
+
+            <span className="top-bar-divider">|</span>
+
+            <a href="mailto:info@jyotimetal.co.in" className="top-bar-item">
+              <Mail size={13} className="top-bar-icon" />
+              <span className="top-bar-label">MAIL US:</span>
+              <span className="top-bar-val">info@jyotimetal.co.in</span>
+            </a>
+
+            <span className="top-bar-divider">|</span>
+
+            <div className="top-bar-item">
+              <Clock size={13} className="top-bar-icon" />
+              <span className="top-bar-label">TIMING:</span>
+              <span className="top-bar-val">Mon - Sat: 9:00 AM - 7:00 PM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Main White Navigation Bar with Dropdowns */}
       <div className="navbar-main">
         <div className="container nav-main-container">
-          {/* Logo */}
+          {/* Official JMI Brand Logo */}
           <a
             href="#home"
             onClick={(e) => {
@@ -44,12 +73,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             }}
             className="logo-link"
           >
-            <div className="logo-box">
-              <Layers size={22} />
-            </div>
+            <img
+              src="/images/jmi_logo.png"
+              alt="JMI - Jyoti Metal (India) Logo"
+              style={{ height: '48px', width: 'auto', objectFit: 'contain' }}
+            />
             <div className="brand-text-full">
-              <span className="brand-title-text">JYOTHI</span>
-              <span className="brand-subtitle-text">METAL PRIVATE LIMITED</span>
+              <span className="brand-title-text">JYOTI METAL (INDIA)</span>
+              <span className="brand-subtitle-text">AN ISO 9001:2015 CERTIFIED COMPANY</span>
             </div>
           </a>
 

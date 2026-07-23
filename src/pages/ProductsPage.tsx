@@ -233,8 +233,8 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onOpenQuoteModal }) 
                   style={{
                     padding: '10px 20px',
                     border: '1px solid',
-                    borderColor: selectedCategory === cat ? '#0284c7' : '#cbd5e1',
-                    background: selectedCategory === cat ? '#0284c7' : '#ffffff',
+                    borderColor: selectedCategory === cat ? '#51847D' : '#cbd5e1',
+                    background: selectedCategory === cat ? '#51847D' : '#ffffff',
                     color: selectedCategory === cat ? '#ffffff' : '#0f172a',
                     fontSize: '0.9rem',
                     fontWeight: 700,
@@ -259,7 +259,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onOpenQuoteModal }) 
               flexWrap: 'wrap',
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.82rem', fontWeight: 800, color: '#0284c7', textTransform: 'uppercase', letterSpacing: '0.06em', flexShrink: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.82rem', fontWeight: 800, color: '#51847D', textTransform: 'uppercase', letterSpacing: '0.06em', flexShrink: 0 }}>
               <Filter size={15} /> SUB-CATEGORIES:
             </div>
 
@@ -293,7 +293,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onOpenQuoteModal }) 
         {/* Product Grid */}
         {filteredProducts.length === 0 ? (
           <div style={{ textAlign: 'center', padding: '60px 20px', background: '#ffffff', border: '1px solid #cbd5e1' }}>
-            <Info size={40} color="#0284c7" style={{ marginBottom: '12px' }} />
+            <Info size={40} color="#51847D" style={{ marginBottom: '12px' }} />
             <h3 style={{ fontSize: '1.4rem', color: '#0f172a', marginBottom: '8px' }}>
               No products found matching filters
             </h3>
@@ -319,7 +319,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onOpenQuoteModal }) 
                   <span className="product-badge">{product.category}</span>
                 </div>
                 <div className="product-body">
-                  <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#0284c7', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '4px' }}>
+                  <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#51847D', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '4px' }}>
                     {product.subCategory}
                   </div>
                   <h3 className="card-title" style={{ fontSize: '1.2rem', marginBottom: '8px' }}>
@@ -381,7 +381,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onOpenQuoteModal }) 
           <div className="modal-backdrop" onClick={() => setSelectedProduct(null)}>
             <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '750px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-                <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#0284c7', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#51847D', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
                   Technical Spec Sheet &amp; Metallurgy Data
                 </span>
                 <button
@@ -444,7 +444,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onOpenQuoteModal }) 
                         color: '#0f172a',
                       }}
                     >
-                      <Check size={14} style={{ display: 'inline', marginRight: '4px', color: '#0284c7' }} />
+                      <Check size={14} style={{ display: 'inline', marginRight: '4px', color: '#51847D' }} />
                       {app}
                     </span>
                   ))}
