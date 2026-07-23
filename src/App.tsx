@@ -9,6 +9,7 @@ import { ContactPage } from './pages/ContactPage';
 
 export function App() {
   const [activeTab, setActiveTab] = useState<string>('home');
+  const [selectedProductCategory, setSelectedProductCategory] = useState<string>('All');
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState<boolean>(false);
   const [quoteProduct, setQuoteProduct] = useState<string>('Stainless Steel 316L');
 
@@ -19,6 +20,12 @@ export function App() {
     setIsQuoteModalOpen(true);
   };
 
+  const handleSelectCategory = (categoryName: string) => {
+    setSelectedProductCategory(categoryName);
+    setActiveTab('products');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       {/* Primary Fixed Navbar with Frosted Glass scroll effect */}
@@ -26,6 +33,7 @@ export function App() {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         onOpenQuoteModal={() => handleOpenQuoteModal()}
+        onSelectCategory={handleSelectCategory}
       />
 
       {/* Main Page View Routing */}
@@ -38,7 +46,10 @@ export function App() {
         )}
 
         {activeTab === 'products' && (
-          <ProductsPage onOpenQuoteModal={handleOpenQuoteModal} />
+          <ProductsPage
+            initialCategory={selectedProductCategory}
+            onOpenQuoteModal={handleOpenQuoteModal}
+          />
         )}
 
         {activeTab === 'about' && (

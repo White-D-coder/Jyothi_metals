@@ -5,17 +5,22 @@ interface NavbarProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
   onOpenQuoteModal: () => void;
+  onSelectCategory?: (category: string) => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   activeTab,
   setActiveTab,
   onOpenQuoteModal,
+  onSelectCategory,
 }) => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const handleNavClick = (id: string) => {
+  const handleNavClick = (id: string, category?: string) => {
+    if (category && onSelectCategory) {
+      onSelectCategory(category);
+    }
     setActiveTab(id);
     setActiveDropdown(null);
     setMobileMenuOpen(false);
@@ -29,6 +34,17 @@ export const Navbar: React.FC<NavbarProps> = ({
       setActiveDropdown(dropdownName);
     }
   };
+
+  const productDropdownItems = [
+    'Pipes & Tubes',
+    'Plates & Sheets',
+    'Round Bars',
+    'Flanges',
+    'Forged Fittings',
+    'Buttweld Fittings',
+    'Fasteners',
+    'Specialized Product',
+  ];
 
   return (
     <header style={{ width: '100%', position: 'sticky', top: 0, zIndex: 1000 }}>
@@ -176,56 +192,19 @@ export const Navbar: React.FC<NavbarProps> = ({
                 Products <ChevronDown size={14} />
               </a>
               <div className={`dropdown-menu ${activeDropdown === 'products' ? 'is-open' : ''}`}>
-                <a
-                  href="#products"
-                  className="dropdown-item"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick('products');
-                  }}
-                >
-                  Seamless Stainless Steel Pipes
-                </a>
-                <a
-                  href="#products"
-                  className="dropdown-item"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick('products');
-                  }}
-                >
-                  Aerospace Titanium Sheets &amp; Plates
-                </a>
-                <a
-                  href="#products"
-                  className="dropdown-item"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick('products');
-                  }}
-                >
-                  Heavy Structural Steel I-Beams
-                </a>
-                <a
-                  href="#products"
-                  className="dropdown-item"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick('products');
-                  }}
-                >
-                  Precision Machined CNC Parts
-                </a>
-                <a
-                  href="#products"
-                  className="dropdown-item"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick('products');
-                  }}
-                >
-                  Structural Aluminum Extrusions
-                </a>
+                {productDropdownItems.map((item) => (
+                  <a
+                    key={item}
+                    href="#products"
+                    className="dropdown-item"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavClick('products', item);
+                    }}
+                  >
+                    {item}
+                  </a>
+                ))}
               </div>
             </li>
 

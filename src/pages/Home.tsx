@@ -7,10 +7,13 @@ import {
   Trophy,
   Globe,
   X,
-  Search,
-  SlidersHorizontal,
   Star,
 } from 'lucide-react';
+import {
+  catalogProducts,
+  getSubCategoriesForCategory,
+  getFirstSubCategoryForCategory,
+} from '../data/catalogData';
 
 interface HomeProps {
   onNavigate: (page: string) => void;
@@ -30,7 +33,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
   // Active Benefit Hover State (0, 1, 2, 3)
-  const [activeBenefitIdx, setActiveBenefitIdx] = useState(0);
+  const [activeBenefitIdx, setActiveBenefitIdx] = useState<number>(0);
 
   // Benefits Data with Corresponding Visuals
   const benefits = [
@@ -255,122 +258,44 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
     requestAnimationFrame(step);
   };
 
-  // Interactive Catalog State (Image 3 Style Catalog Browser)
-  const [activeCatalogTab, setActiveCatalogTab] = useState<string>('all');
-  const [activeSubCat, setActiveSubCat] = useState<string>('all');
-  const [catalogSearch, setCatalogSearch] = useState<string>('');
+  // Interactive Catalog State
+  const [activeCatalogTab, setActiveCatalogTab] = useState<string>('Pipes & Tubes');
+  const [activeSubCat, setActiveSubCat] = useState<string>('Stainless Steel Pipes & Tubes');
+  const [showAllProducts, setShowAllProducts] = useState<boolean>(false);
 
-  // 8 Product Categories from Image 2 Content
-  const catalogProducts = [
-    {
-      id: 'pipe-and-tubes',
-      title: 'Seamless & Welded Stainless Steel Pipes (316L / 304)',
-      mainCat: 'pipes',
-      subCat: 'Pipes & Tubes',
-      category: 'Pipes & Tubes',
-      image: '/images/stainless_pipes.png',
-      specs: ['ASTM A312', 'OD: 6mm - 1200mm', 'Corrosion Resistant'],
-      description:
-        'Precision seamless and welded stainless steel pipes engineered for extreme pressure environments, chemical plants, and offshore marine lines.',
-    },
-    {
-      id: 'sheets-and-coils',
-      title: 'Cold Rolled Stainless Steel Sheets & Mirror Coils',
-      mainCat: 'sheets',
-      subCat: 'Sheets & Coils',
-      category: 'Sheets & Coils',
-      image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
-      specs: ['ASTM A240', 'Thk: 0.5mm - 6mm', '2B / 8K Mirror Finish'],
-      description:
-        'High-surface finish stainless steel 304/316 sheets and mirror polished coils suitable for architectural cladding and pharmaceutical tanks.',
-    },
-    {
-      id: 'plates-and-heavy',
-      title: 'Aerospace Grade Titanium & SS Heavy Plates',
-      mainCat: 'sheets',
-      subCat: 'Plates & Heavy Sheets',
-      category: 'Plates & Sheets',
-      image: '/images/titanium_plates.png',
-      specs: ['Grade 5 Ti / SS316L', 'AMS 4911 / ASTM A240', 'High Strength'],
-      description:
-        'Ultra-lightweight high-tensile titanium plates and heavy stainless sheets engineered for defense armor, aviation turbines, and heat exchangers.',
-    },
-    {
-      id: 'forged-flanges',
-      title: 'Forged Pipe Flanges (Slip-On, Blind, Weld-Neck)',
-      mainCat: 'flanges',
-      subCat: 'Forged Flanges',
-      category: 'Flanges',
-      image: '/images/flanges_industrial.png',
-      specs: ['ANSI B16.5', 'Class 150 - 2500', 'Forged SS316L / Carbon'],
-      description:
-        'Heavy-duty forged pipe flanges engineered for leak-proof high-pressure piping connections in gas refineries, power stations, and chemical plants.',
-    },
-    {
-      id: 'solid-round-bars',
-      title: 'Solid Stainless Steel Round Bars & Shafts',
-      mainCat: 'bars',
-      subCat: 'Round Bars',
-      category: 'Round Bars',
-      image: '/images/round_bars.png',
-      specs: ['ASTM A276', 'Dia: 8mm - 500mm', 'Bright Drawn / Turned'],
-      description:
-        'High-precision machined round bars, hex rods, and ground metal shafts for pump impellers, automotive driveshafts, and heavy equipment.',
-    },
-    {
-      id: 'butt-weld-fittings',
-      title: 'Butt-Weld Pipe Fittings (Elbows, Tees, Reducers)',
-      mainCat: 'flanges',
-      subCat: 'Pipe Fittings',
-      category: 'Butt-Weld Fittings',
-      image: '/images/pipe_fittings.png',
-      specs: ['ASME B16.9', 'Sch 10S to Sch 160', 'SS316 / Monel / Inconel'],
-      description:
-        'Sub-micron calibrated butt-weld pipe elbows (90°/45°), equal tees, concentric reducers, and stub ends for seamless fluid flow control.',
-    },
-    {
-      id: 'structural-beams',
-      title: 'Heavy Structural Steel I-Beams & Channels',
-      mainCat: 'bars',
-      subCat: 'Angles & Channels',
-      category: 'Structural Angles',
-      image: '/images/structural_beams.png',
-      specs: ['EN 10025', 'Custom Lengths', 'High Load Capacity'],
-      description:
-        'Hot-rolled structural steel I-beams, C-channels, and equal angles delivering unyielding load stability for skyscrapers and bridges.',
-    },
-    {
-      id: 'perforated-circles',
-      title: 'Perforated Sheets & Precision CNC Tube Sheets',
-      mainCat: 'sheets',
-      subCat: 'Perforated & Circles',
-      category: 'Circles & Discs',
-      image: '/images/precision_parts.png',
-      specs: ['ISO 9001 Tested', 'Sub-Micron Hole Pitch', 'Custom CAD Specs'],
-      description:
-        'Laser-cut metal discs, perforated filter sheets, and precision tube sheets engineered for filtration systems and acoustic panels.',
-    },
-  ];
+  // Automatically select the first sub-category whenever activeCatalogTab changes
+  useEffect(() => {
+    const defaultSub = getFirstSubCategoryForCategory(activeCatalogTab);
+    setActiveSubCat(defaultSub);
+    setShowAllProducts(false);
+  }, [activeCatalogTab]);
+
+  const currentSubList = getSubCategoriesForCategory(activeCatalogTab);
+  const effectiveSubCat = currentSubList.some(
+    (s) => s.id === activeSubCat || s.id.toLowerCase() === activeSubCat.toLowerCase()
+  )
+    ? activeSubCat
+    : currentSubList.length > 0
+    ? currentSubList[0].id
+    : activeSubCat;
 
   // Real-time catalog filtering logic
   const filteredCatalog = catalogProducts.filter((prod) => {
-    if (activeCatalogTab !== 'all' && prod.mainCat !== activeCatalogTab) {
-      return false;
+    let matchMain = true;
+    if (activeCatalogTab !== 'all') {
+      matchMain = prod.category.toLowerCase().includes(activeCatalogTab.toLowerCase()) ||
+                  prod.subCat.toLowerCase().includes(activeCatalogTab.toLowerCase());
     }
-    if (activeSubCat !== 'all' && prod.subCat !== activeSubCat) {
-      return false;
+
+    let matchSub = true;
+    if (effectiveSubCat && effectiveSubCat !== 'all' && effectiveSubCat !== 'All Sub-Categories') {
+      const q = effectiveSubCat.toLowerCase();
+      matchSub = prod.subCat.toLowerCase() === q ||
+                 prod.subCat.toLowerCase().includes(q) ||
+                 prod.title.toLowerCase().includes(q);
     }
-    if (catalogSearch.trim() !== '') {
-      const q = catalogSearch.toLowerCase();
-      const matchTitle = prod.title.toLowerCase().includes(q);
-      const matchCat = prod.category.toLowerCase().includes(q);
-      const matchDesc = prod.description.toLowerCase().includes(q);
-      const matchSpecs = prod.specs.some((s) => s.toLowerCase().includes(q));
-      if (!matchTitle && !matchCat && !matchDesc && !matchSpecs) {
-        return false;
-      }
-    }
-    return true;
+
+    return matchMain && matchSub;
   });
 
   return (
@@ -750,505 +675,8 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
         </div>
       </section>
 
-      {/* 4.5. High Quality Products Category Grid Showcase (Image 2 Style 8-Category Arch Grid) */}
-      <section className="section bg-white" style={{ paddingTop: '90px', paddingBottom: '80px', borderBottom: '1px solid #e2e8f0' }}>
-        <div className="container">
-          <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 55px' }} className="reveal">
-            <span className="small-label" style={{ color: '#51847D', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
-              OUR
-            </span>
-            <h2 className="section-title" style={{ fontSize: '2.5rem', color: '#061221', marginBottom: '14px', fontWeight: 900, letterSpacing: '0.02em' }}>
-              HIGH QUALITY PRODUCTS
-            </h2>
-            <div style={{ width: '60px', height: '4px', background: '#51847D', margin: '0 auto 16px' }} />
-            <p style={{ color: '#475569', fontSize: '1.05rem', lineHeight: 1.6 }}>
-              Direct mill stock and precision manufactured metal components certified to exceed international ISO &amp; ASTM engineering standards.
-            </p>
-          </div>
-
-          {/* 8 Product Category Cards Grid (Image 1 Style Luxury Dark Overlay Cards) */}
-          <div
-            className="category-arch-grid"
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
-              gap: '28px',
-            }}
-          >
-            {[
-              {
-                title: 'Sheets',
-                subCat: 'Sheets & Coils',
-                mainCat: 'sheets',
-                tag: 'ASTM A240 / 304 & 316',
-                image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
-              },
-              {
-                title: 'Pipe and Tubes',
-                subCat: 'Pipes & Tubes',
-                mainCat: 'pipes',
-                tag: 'OD: 6mm - 1200mm',
-                image: '/images/stainless_pipes.png',
-              },
-              {
-                title: 'Plates',
-                subCat: 'Plates & Heavy Sheets',
-                mainCat: 'sheets',
-                tag: 'Grade 5 Ti & Heavy SS',
-                image: '/images/titanium_plates.png',
-              },
-              {
-                title: 'Flanges',
-                subCat: 'Forged Flanges',
-                mainCat: 'flanges',
-                tag: 'ANSI B16.5 Class 150-2500',
-                image: '/images/flanges_industrial.png',
-              },
-              {
-                title: 'Round Bars',
-                subCat: 'Round Bars',
-                mainCat: 'bars',
-                tag: 'Solid Turned & Polished',
-                image: '/images/round_bars.png',
-              },
-              {
-                title: 'Buttweld Fittings',
-                subCat: 'Pipe Fittings',
-                mainCat: 'flanges',
-                tag: 'ASME B16.9 Fittings',
-                image: '/images/pipe_fittings.png',
-              },
-              {
-                title: 'Angles & Channels',
-                subCat: 'Angles & Channels',
-                mainCat: 'bars',
-                tag: 'Heavy Structural Beams',
-                image: '/images/structural_beams.png',
-              },
-              {
-                title: 'Tube Sheet',
-                subCat: 'Perforated & Circles',
-                mainCat: 'sheets',
-                tag: 'Laser Cut & CNC Drilled',
-                image: '/images/precision_parts.png',
-              },
-            ].map((cat) => (
-              <div
-                key={cat.title}
-                className="category-arch-card reveal"
-                onClick={() => {
-                  setActiveCatalogTab(cat.mainCat);
-                  setActiveSubCat(cat.subCat);
-                  const el = document.getElementById('catalog-browser');
-                  if (el) {
-                    el.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-                style={{
-                  cursor: 'pointer',
-                  height: '320px',
-                  position: 'relative',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                }}
-              >
-                {/* Full Height Background Image */}
-                <img
-                  src={cat.image}
-                  alt={cat.title}
-                  className="category-arch-img"
-                  style={{
-                    position: 'absolute',
-                    inset: 0,
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                  }}
-                />
-
-                {/* Bottom Dark Gradient Overlay for Typography Contrast */}
-                <div
-                  style={{
-                    position: 'absolute',
-                    inset: 0,
-                    background:
-                      'linear-gradient(to top, rgba(6, 18, 33, 0.95) 0%, rgba(6, 18, 33, 0.45) 45%, transparent 100%)',
-                    zIndex: 1,
-                  }}
-                />
-
-                {/* Top-Right White Floating Circle Arrow Button (Image 1 Style) */}
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: '18px',
-                    right: '18px',
-                    zIndex: 2,
-                  }}
-                >
-                  <div className="arch-floating-btn">
-                    <ArrowRight size={18} />
-                  </div>
-                </div>
-
-                {/* Bottom Left Content Overlay (Sub-tag & Bold Title) */}
-                <div
-                  style={{
-                    position: 'relative',
-                    zIndex: 2,
-                    padding: '24px 20px',
-                    marginTop: 'auto',
-                  }}
-                >
-                  <div
-                    style={{
-                      fontSize: '0.72rem',
-                      fontWeight: 800,
-                      color: '#77b8b0',
-                      letterSpacing: '0.08em',
-                      textTransform: 'uppercase',
-                      marginBottom: '6px',
-                    }}
-                  >
-                    {cat.tag}
-                  </div>
-                  <h3
-                    className="card-title-text"
-                    style={{
-                      fontSize: '1.35rem',
-                      fontWeight: 800,
-                      margin: 0,
-                      lineHeight: 1.2,
-                    }}
-                  >
-                    {cat.title}
-                  </h3>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 5. Interactive Industrial Product Catalog (Image 3 Style Catalog Browser with Image 2 Content) */}
-      <section id="catalog-browser" className="section bg-tint" style={{ paddingTop: '90px', paddingBottom: '100px' }}>
-        <div className="container">
-          {/* Section Header */}
-          <div style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto 40px' }} className="reveal">
-            <span className="small-label" style={{ color: '#51847D', fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
-              ENTERPRISE METALLURGY CATALOG
-            </span>
-            <h2 className="section-title" style={{ fontSize: '2.6rem', color: '#0f172a', marginBottom: '16px' }}>
-              Industrial Metal Product Catalog
-            </h2>
-            <p style={{ color: '#475569', fontSize: '1.1rem', lineHeight: 1.6 }}>
-              Explore our complete range of certified stainless steel, titanium alloys, structural profiles, forged flanges, and precision machined components.
-            </p>
-          </div>
-
-          {/* Top Horizontal Main Category Tabs Bar (Image 3 Catalog Tabs Style) */}
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '12px',
-              flexWrap: 'wrap',
-              marginBottom: '36px',
-            }}
-          >
-            {[
-              { id: 'all', label: 'All Metal Products' },
-              { id: 'pipes', label: 'Pipes & Tubes' },
-              { id: 'sheets', label: 'Plates & Sheets' },
-              { id: 'flanges', label: 'Flanges & Fittings' },
-              { id: 'bars', label: 'Bars & Structurals' },
-            ].map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => {
-                  setActiveCatalogTab(tab.id);
-                  setActiveSubCat('all');
-                }}
-                style={{
-                  padding: '12px 24px',
-                  fontSize: '0.92rem',
-                  fontWeight: 700,
-                  cursor: 'pointer',
-                  background: activeCatalogTab === tab.id ? '#51847D' : '#ffffff',
-                  color: activeCatalogTab === tab.id ? '#ffffff' : '#1e293b',
-                  border: activeCatalogTab === tab.id ? '2px solid #51847D' : '1px solid #cbd5e1',
-                  boxShadow: activeCatalogTab === tab.id ? '0 6px 18px rgba(81, 132, 125, 0.3)' : '0 2px 4px rgba(0,0,0,0.02)',
-                  transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
-                }}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Main 2-Column Catalog Container (Left Sub-Categories Sidebar + Right Product Grid) */}
-          <div style={{ display: 'grid', gridTemplateColumns: '280px 1fr', gap: '32px', alignItems: 'start' }}>
-            
-            {/* Left Sub-Categories Sidebar (Inspired by Image 3 Left Navigation Panel) */}
-            <div
-              style={{
-                background: '#ffffff',
-                border: '1px solid #cbd5e1',
-                borderTop: '4px solid #51847D',
-                boxShadow: '0 8px 24px rgba(0, 0, 0, 0.05)',
-                position: 'sticky',
-                top: '100px',
-              }}
-            >
-              {/* Sidebar Header */}
-              <div
-                style={{
-                  background: '#061221',
-                  color: '#ffffff',
-                  padding: '16px 20px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '10px',
-                  fontWeight: 800,
-                  fontSize: '0.92rem',
-                  letterSpacing: '0.05em',
-                  textTransform: 'uppercase',
-                }}
-              >
-                <SlidersHorizontal size={18} color="#77b8b0" />
-                <span>Sub Categories</span>
-              </div>
-
-              {/* Sub-Category Items List */}
-              <div style={{ padding: '8px 0' }}>
-                {[
-                  { id: 'all', label: 'All Sub-Categories' },
-                  { id: 'Pipes & Tubes', label: 'Pipe & Tube Lines' },
-                  { id: 'Sheets & Coils', label: 'Sheets & Mirror Coils' },
-                  { id: 'Plates & Heavy Sheets', label: 'Plates & Heavy Sheets' },
-                  { id: 'Forged Flanges', label: 'Forged Pipe Flanges' },
-                  { id: 'Round Bars', label: 'Solid Round Bars' },
-                  { id: 'Pipe Fittings', label: 'Butt-Weld Fittings' },
-                  { id: 'Angles & Channels', label: 'Structural Beams' },
-                  { id: 'Perforated & Circles', label: 'Perforated Circles' },
-                ].map((sub) => {
-                  const isActive = activeSubCat === sub.id;
-                  return (
-                    <button
-                      key={sub.id}
-                      onClick={() => setActiveSubCat(sub.id)}
-                      style={{
-                        width: '100%',
-                        textAlign: 'left',
-                        padding: '12px 20px',
-                        background: isActive ? '#edf5f4' : 'transparent',
-                        color: isActive ? '#51847D' : '#334155',
-                        borderLeft: isActive ? '4px solid #51847D' : '4px solid transparent',
-                        borderBottom: '1px solid #f1f5f9',
-                        fontWeight: isActive ? 700 : 500,
-                        fontSize: '0.88rem',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        cursor: 'pointer',
-                        transition: 'background 0.2s, color 0.2s',
-                      }}
-                    >
-                      <span>{sub.label}</span>
-                      <ChevronRight size={16} style={{ opacity: isActive ? 1 : 0.4 }} />
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Sidebar Support Callout */}
-              <div
-                style={{
-                  padding: '20px',
-                  background: '#f8fafc',
-                  borderTop: '1px solid #e2e8f0',
-                  textAlign: 'center',
-                }}
-              >
-                <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#0f172a', marginBottom: '6px' }}>
-                  Need Custom Mill Specs?
-                </div>
-                <div style={{ fontSize: '0.78rem', color: '#64748b', marginBottom: '14px' }}>
-                  Speak directly with sales desk: +91 9322281549
-                </div>
-                <button
-                  onClick={() => onOpenQuoteModal()}
-                  className="btn btn-accent"
-                  style={{ width: '100%', padding: '10px 14px', fontSize: '0.8rem' }}
-                >
-                  Custom Spec Inquiry
-                </button>
-              </div>
-            </div>
-
-            {/* Right Product Grid Area */}
-            <div>
-              {/* Filter & Search Header Strip */}
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  gap: '16px',
-                  flexWrap: 'wrap',
-                  background: '#ffffff',
-                  padding: '16px 24px',
-                  border: '1px solid #cbd5e1',
-                  marginBottom: '24px',
-                }}
-              >
-                <div style={{ fontSize: '0.9rem', color: '#475569', fontWeight: 600 }}>
-                  Showing <strong style={{ color: '#0f172a' }}>{filteredCatalog.length}</strong> Metal Product Series
-                </div>
-
-                {/* Real-time Search Input */}
-                <div style={{ position: 'relative', width: '300px', maxWidth: '100%' }}>
-                  <Search size={16} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} />
-                  <input
-                    type="text"
-                    placeholder="Search grade, alloy, flange..."
-                    value={catalogSearch}
-                    onChange={(e) => setCatalogSearch(e.target.value)}
-                    style={{
-                      width: '100%',
-                      padding: '10px 14px 10px 36px',
-                      fontSize: '0.88rem',
-                      border: '1px solid #cbd5e1',
-                      outline: 'none',
-                      background: '#f8fafc',
-                    }}
-                  />
-                  {catalogSearch && (
-                    <button
-                      onClick={() => setCatalogSearch('')}
-                      style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8', fontSize: '0.8rem' }}
-                    >
-                      Clear
-                    </button>
-                  )}
-                </div>
-              </div>
-
-              {/* Product Cards Grid */}
-              {filteredCatalog.length === 0 ? (
-                <div style={{ background: '#ffffff', padding: '60px', textAlign: 'center', border: '1px solid #cbd5e1' }}>
-                  <h3 style={{ color: '#0f172a', marginBottom: '8px' }}>No products match your search query</h3>
-                  <p style={{ color: '#64748b', fontSize: '0.9rem', marginBottom: '20px' }}>Try clearing your search term or selecting another sub-category.</p>
-                  <button
-                    onClick={() => { setActiveCatalogTab('all'); setActiveSubCat('all'); setCatalogSearch(''); }}
-                    className="btn btn-accent"
-                    style={{ padding: '10px 24px' }}
-                  >
-                    Reset Catalog Filters
-                  </button>
-                </div>
-              ) : (
-                <div className="products-grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '24px' }}>
-                  {filteredCatalog.map((prod) => (
-                    <div
-                      key={prod.id}
-                      className="product-card"
-                      style={{
-                        background: '#ffffff',
-                        border: '1px solid #cbd5e1',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        transition: 'transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease',
-                      }}
-                    >
-                      <div className="product-image-container" style={{ height: '200px', position: 'relative', overflow: 'hidden' }}>
-                        <img
-                          src={prod.image}
-                          alt={prod.title}
-                          className="product-img"
-                          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                        />
-                        <span className="product-badge" style={{ background: '#51847D', color: '#ffffff', padding: '4px 10px', fontSize: '0.72rem', fontWeight: 800 }}>
-                          {prod.category}
-                        </span>
-                      </div>
-
-                      <div className="product-body" style={{ padding: '20px', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                        <h3 className="card-title" style={{ fontSize: '1.05rem', fontWeight: 800, color: '#0f172a', marginBottom: '12px', lineHeight: 1.35 }}>
-                          {prod.title}
-                        </h3>
-
-                        <div className="product-specs" style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '14px' }}>
-                          {prod.specs.map((spec, sIdx) => (
-                            <span
-                              key={sIdx}
-                              style={{
-                                background: '#edf5f4',
-                                color: '#51847D',
-                                fontSize: '0.72rem',
-                                fontWeight: 700,
-                                padding: '3px 8px',
-                              }}
-                            >
-                              {spec}
-                            </span>
-                          ))}
-                        </div>
-
-                        <p style={{ fontSize: '0.88rem', color: '#475569', lineHeight: 1.5, marginBottom: '20px', flex: 1 }}>
-                          {prod.description}
-                        </p>
-
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '12px', borderTop: '1px solid #f1f5f9' }}>
-                          <button
-                            onClick={() => onOpenQuoteModal(prod.title)}
-                            className="btn btn-accent"
-                            style={{ padding: '8px 16px', fontSize: '0.82rem', fontWeight: 700 }}
-                          >
-                            Get Quote
-                          </button>
-                          <button
-                            onClick={() => onNavigate('products')}
-                            style={{
-                              background: 'none',
-                              border: 'none',
-                              color: '#51847D',
-                              fontWeight: 700,
-                              fontSize: '0.82rem',
-                              cursor: 'pointer',
-                              display: 'inline-flex',
-                              alignItems: 'center',
-                              gap: '4px',
-                            }}
-                          >
-                            View Specs <ChevronRight size={14} />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-
-          </div>
-
-          <div style={{ textAlign: 'center', marginTop: '50px' }}>
-            <button
-              onClick={() => onNavigate('products')}
-              className="btn btn-outline"
-              style={{ padding: '14px 36px' }}
-            >
-              Browse Full Product Catalog Specs <ArrowRight size={18} />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* 6. Why Industry Leaders Trust Jyothi Metals (Interactive Hover Animated 01-04 Layout) */}
-      <section className="section bg-white" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden' }}>
+      {/* Why Industry Leaders Trust Jyothi Metals (Interactive Hover Animated 01-04 Layout) */}
+      <section className="section bg-white" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden', borderBottom: '1px solid #e2e8f0' }}>
         {/* Far Right Vertical Rotated Backdrop Typography */}
         <div
           style={{
@@ -1405,6 +833,447 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                 );
               })}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4.5. High Quality Products Category Grid Showcase (Image 2 Style 8-Category Arch Grid) */}
+      <section className="section bg-white" style={{ paddingTop: '90px', paddingBottom: '80px', borderBottom: '1px solid #e2e8f0' }}>
+        <div className="container">
+          <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 55px' }} className="reveal">
+            <span className="small-label" style={{ color: '#51847D', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
+              OUR
+            </span>
+            <h2 className="section-title" style={{ fontSize: '2.5rem', color: '#061221', marginBottom: '14px', fontWeight: 900, letterSpacing: '0.02em' }}>
+              HIGH QUALITY PRODUCTS
+            </h2>
+            <div style={{ width: '60px', height: '4px', background: '#51847D', margin: '0 auto 16px' }} />
+            <p style={{ color: '#475569', fontSize: '1.05rem', lineHeight: 1.6 }}>
+              Direct mill stock and precision manufactured metal components certified to exceed international ISO &amp; ASTM engineering standards.
+            </p>
+          </div>
+
+          {/* 8 Product Category Cards Grid (Image 1 Style Luxury Dark Overlay Cards) */}
+          <div
+            className="category-arch-grid"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(4, 1fr)',
+              gap: '28px',
+            }}
+          >
+            {[
+              {
+                title: 'Sheets',
+                mainCat: 'Plates & Sheets',
+                tag: 'ASTM A240 / 304 & 316',
+                image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+              },
+              {
+                title: 'Pipe and Tubes',
+                mainCat: 'Pipes & Tubes',
+                tag: 'OD: 6mm - 1200mm',
+                image: '/images/stainless_pipes.png',
+              },
+              {
+                title: 'Plates',
+                mainCat: 'Plates & Sheets',
+                tag: 'Grade 5 Ti & Heavy SS',
+                image: '/images/titanium_plates.png',
+              },
+              {
+                title: 'Flanges',
+                mainCat: 'Flanges',
+                tag: 'ANSI B16.5 Class 150-2500',
+                image: '/images/flanges_industrial.png',
+              },
+              {
+                title: 'Round Bars',
+                mainCat: 'Round Bars',
+                tag: 'Solid Turned & Polished',
+                image: '/images/round_bars.png',
+              },
+              {
+                title: 'Buttweld Fittings',
+                mainCat: 'Buttweld Fittings',
+                tag: 'ASME B16.9 Fittings',
+                image: '/images/pipe_fittings.png',
+              },
+              {
+                title: 'Forged Fittings',
+                mainCat: 'Forged Fittings',
+                tag: '3000# / 6000# Socket Weld',
+                image: '/images/pipe_fittings.png',
+              },
+              {
+                title: 'Specialized Product',
+                mainCat: 'Specialized Product',
+                tag: 'Laser Cut & CNC Drilled',
+                image: '/images/precision_parts.png',
+              },
+            ].map((cat) => (
+              <div
+                key={cat.title}
+                className="category-arch-card reveal"
+                onClick={() => {
+                  setActiveCatalogTab(cat.mainCat);
+                  setActiveSubCat('all');
+                  const el = document.getElementById('catalog-browser');
+                  if (el) {
+                    el.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+                style={{
+                  cursor: 'pointer',
+                  height: '320px',
+                  position: 'relative',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                }}
+              >
+                {/* Full Height Background Image */}
+                <img
+                  src={cat.image}
+                  alt={cat.title}
+                  className="category-arch-img"
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                  }}
+                />
+
+                {/* Bottom Dark Gradient Overlay for Typography Contrast */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background:
+                      'linear-gradient(to top, rgba(6, 18, 33, 0.95) 0%, rgba(6, 18, 33, 0.45) 45%, transparent 100%)',
+                    zIndex: 1,
+                  }}
+                />
+
+                {/* Top-Right White Floating Circle Arrow Button (Image 1 Style) */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '18px',
+                    right: '18px',
+                    zIndex: 2,
+                  }}
+                >
+                  <div className="arch-floating-btn">
+                    <ArrowRight size={18} />
+                  </div>
+                </div>
+
+                {/* Bottom Left Content Overlay (Sub-tag & Bold Title) */}
+                <div
+                  style={{
+                    position: 'relative',
+                    zIndex: 2,
+                    padding: '24px 20px',
+                    marginTop: 'auto',
+                  }}
+                >
+                  <div
+                    style={{
+                      fontSize: '0.72rem',
+                      fontWeight: 800,
+                      color: '#77b8b0',
+                      letterSpacing: '0.08em',
+                      textTransform: 'uppercase',
+                      marginBottom: '6px',
+                    }}
+                  >
+                    {cat.tag}
+                  </div>
+                  <h3
+                    className="card-title-text"
+                    style={{
+                      fontSize: '1.35rem',
+                      fontWeight: 800,
+                      margin: 0,
+                      lineHeight: 1.2,
+                    }}
+                  >
+                    {cat.title}
+                  </h3>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Interactive Industrial Product Catalog (Image 3 Style Catalog Browser with Image 2 Content) */}
+      <section id="catalog-browser" className="section bg-tint" style={{ paddingTop: '90px', paddingBottom: '100px' }}>
+        <div className="container">
+          {/* Section Header */}
+          <div style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto 40px' }} className="reveal">
+            <span className="small-label" style={{ color: '#51847D', fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+              ENTERPRISE METALLURGY CATALOG
+            </span>
+            <h2 className="section-title" style={{ fontSize: '2.6rem', color: '#0f172a', marginBottom: '16px' }}>
+              Industrial Metal Product Catalog
+            </h2>
+            <p style={{ color: '#475569', fontSize: '1.1rem', lineHeight: 1.6 }}>
+              Explore our complete range of certified stainless steel, titanium alloys, structural profiles, forged flanges, and precision machined components.
+            </p>
+          </div>
+
+          {/* Top Horizontal Main Category Tabs Bar (Original Button Size, Single Line Row) */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '10px',
+              flexWrap: 'nowrap',
+              overflowX: 'auto',
+              marginBottom: '36px',
+              paddingBottom: '6px',
+              maxWidth: '100%',
+            }}
+          >
+            {[
+              { id: 'Pipes & Tubes', label: 'Pipes & Tubes' },
+              { id: 'Plates & Sheets', label: 'Plates & Sheets' },
+              { id: 'Round Bars', label: 'Round Bars' },
+              { id: 'Flanges', label: 'Flanges' },
+              { id: 'Forged Fittings', label: 'Forged Fittings' },
+              { id: 'Buttweld Fittings', label: 'Buttweld Fittings' },
+              { id: 'Fasteners', label: 'Fasteners' },
+              { id: 'Specialized Product', label: 'Specialized Product' },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => {
+                  setActiveCatalogTab(tab.id);
+                  const defaultSub = getFirstSubCategoryForCategory(tab.id);
+                  setActiveSubCat(defaultSub);
+                  setShowAllProducts(false);
+                }}
+                style={{
+                  padding: '11px 20px',
+                  fontSize: '0.88rem',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  whiteSpace: 'nowrap',
+                  background: activeCatalogTab === tab.id ? '#51847D' : '#ffffff',
+                  color: activeCatalogTab === tab.id ? '#ffffff' : '#1e293b',
+                  border: activeCatalogTab === tab.id ? '2px solid #51847D' : '1px solid #e2e8f0',
+                  borderRadius: '0px',
+                  boxShadow: activeCatalogTab === tab.id ? '0 6px 18px rgba(81, 132, 125, 0.25)' : '0 2px 4px rgba(0,0,0,0.02)',
+                  transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
+                  flexShrink: 0,
+                }}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Main 2-Column Catalog Container (Left Sub-Categories Sidebar + Right Product Grid) */}
+          <div style={{ display: 'grid', gridTemplateColumns: '280px 1fr', gap: '32px', alignItems: 'start' }}>
+            
+            {/* Left Sub-Categories Sidebar (Modern Redesigned Navigation Panel with Scrolling System) */}
+            <div className="sidebar-nav-panel">
+              {/* Sub-Category Items List with Custom Scrollbar */}
+              <div className="custom-sidebar-scroll">
+                {getSubCategoriesForCategory(activeCatalogTab).map((sub) => {
+                  const isActive = effectiveSubCat === sub.id;
+                  return (
+                    <button
+                      key={sub.id}
+                      onClick={() => {
+                        setActiveSubCat(sub.id);
+                        setShowAllProducts(false);
+                      }}
+                      className={`sidebar-nav-item ${isActive ? 'active' : ''}`}
+                    >
+                      <span>{sub.label}</span>
+                      <ChevronRight size={15} style={{ opacity: isActive ? 1 : 0.35, color: isActive ? '#51847D' : '#64748b' }} />
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Sidebar Support & See All Callout */}
+              <div
+                style={{
+                  padding: '20px',
+                  background: '#f8fafc',
+                  borderTop: '1px solid #EEF2F3',
+                  textAlign: 'center',
+                }}
+              >
+                <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#0f172a', marginBottom: '6px' }}>
+                  Need Custom Mill Specs?
+                </div>
+                <div style={{ fontSize: '0.78rem', color: '#64748b', marginBottom: '14px', lineHeight: 1.4 }}>
+                  Speak directly with sales desk:
+                  <div style={{ fontWeight: 700, color: '#51847D', marginTop: '4px', fontSize: '0.84rem' }}>
+                    +91 9322281549
+                  </div>
+                </div>
+                <button
+                  onClick={() => onOpenQuoteModal()}
+                  className="btn btn-accent"
+                  style={{ width: '100%', padding: '10px 14px', fontSize: '0.8rem', borderRadius: '0px', marginBottom: filteredCatalog.length > 9 ? '10px' : '0' }}
+                >
+                  Custom Spec Inquiry
+                </button>
+
+                {filteredCatalog.length > 9 && (
+                  <button
+                    onClick={() => setShowAllProducts(!showAllProducts)}
+                    style={{
+                      width: '100%',
+                      padding: '8px 12px',
+                      fontSize: '0.78rem',
+                      fontWeight: 700,
+                      color: '#51847D',
+                      background: '#edf5f4',
+                      border: '1px solid #77b8b0',
+                      borderRadius: '0px',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    {showAllProducts ? 'Show Max 3 Lines' : `See All (${filteredCatalog.length} Items)`}
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* Right Column: Product Cards Grid (Limited to Max 3 Lines / 9 Boxes) */}
+            <div style={{ flex: 1 }}>
+              {/* Product Cards Grid */}
+              {filteredCatalog.length === 0 ? (
+                <div style={{ background: '#ffffff', padding: '60px', textAlign: 'center', border: '1px solid #e2e8f0', borderRadius: '0px' }}>
+                  <h3 style={{ color: '#0f172a', marginBottom: '8px' }}>No products match your search query</h3>
+                  <p style={{ color: '#64748b', fontSize: '0.9rem', marginBottom: '20px' }}>Try clearing your search term or selecting another sub-category.</p>
+                  <button
+                    onClick={() => { setActiveCatalogTab('Pipes & Tubes'); setActiveSubCat('Stainless Steel Pipes & Tubes'); }}
+                    className="btn btn-accent"
+                    style={{ padding: '10px 24px', borderRadius: '0px' }}
+                  >
+                    Reset Catalog Filters
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <div className="products-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '24px', alignItems: 'stretch' }}>
+                    {(showAllProducts ? filteredCatalog : filteredCatalog.slice(0, 9)).map((prod) => (
+                      <div
+                        key={prod.id}
+                        className="product-card"
+                        style={{
+                          background: '#ffffff',
+                          border: '1px solid #e2e8f0',
+                          borderRadius: '0px',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          height: '100%',
+                          transition: 'transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease',
+                        }}
+                      >
+                      <div className="product-image-container" style={{ height: '200px', position: 'relative', overflow: 'hidden' }}>
+                        <img
+                          src={prod.image}
+                          alt={prod.title}
+                          className="product-img"
+                          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        />
+                        <span className="product-badge" style={{ background: '#51847D', color: '#ffffff', padding: '4px 10px', fontSize: '0.72rem', fontWeight: 800, borderRadius: '0px' }}>
+                          {prod.category}
+                        </span>
+                      </div>
+
+                      <div className="product-body" style={{ padding: '20px', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                        <h3 className="card-title" style={{ fontSize: '1.05rem', fontWeight: 800, color: '#0f172a', marginBottom: '12px', lineHeight: 1.35, minHeight: '2.8rem' }}>
+                          {prod.title}
+                        </h3>
+
+                        <div className="product-specs" style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '14px', minHeight: '52px', alignContent: 'flex-start' }}>
+                          {prod.specs.map((spec, sIdx) => (
+                            <span
+                              key={sIdx}
+                              style={{
+                                background: '#edf5f4',
+                                color: '#51847D',
+                                fontSize: '0.72rem',
+                                fontWeight: 700,
+                                padding: '3px 8px',
+                                borderRadius: '0px',
+                              }}
+                            >
+                              {spec}
+                            </span>
+                          ))}
+                        </div>
+
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '16px', marginTop: 'auto', borderTop: '1px solid #f1f5f9' }}>
+                          <button
+                            onClick={() => onOpenQuoteModal(prod.title)}
+                            className="btn btn-accent"
+                            style={{ padding: '8px 16px', fontSize: '0.82rem', fontWeight: 700 }}
+                          >
+                            Get Quote
+                          </button>
+                          <button
+                            onClick={() => onNavigate('products')}
+                            style={{
+                              background: 'none',
+                              border: 'none',
+                              color: '#51847D',
+                              fontWeight: 700,
+                              fontSize: '0.82rem',
+                              cursor: 'pointer',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '4px',
+                            }}
+                          >
+                            View Specs <ChevronRight size={14} />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {filteredCatalog.length > 9 && (
+                    <div style={{ textAlign: 'center', marginTop: '36px' }}>
+                      <button
+                        onClick={() => setShowAllProducts(!showAllProducts)}
+                        className="btn btn-accent"
+                        style={{ padding: '12px 32px', fontSize: '0.9rem', borderRadius: '0px', background: '#51847D' }}
+                      >
+                        {showAllProducts
+                          ? 'Show Max 3 Lines'
+                          : `See All ${activeCatalogTab !== 'all' ? activeCatalogTab : ''} Products (${filteredCatalog.length} Total Items)`}
+                      </button>
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
+
+          </div>
+
+          <div style={{ textAlign: 'center', marginTop: '50px' }}>
+            <button
+              onClick={() => onNavigate('products')}
+              className="btn btn-outline"
+              style={{ padding: '14px 36px' }}
+            >
+              Browse Full Product Catalog Specs <ArrowRight size={18} />
+            </button>
           </div>
         </div>
       </section>

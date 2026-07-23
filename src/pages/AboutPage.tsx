@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ShieldCheck,
   Factory,
@@ -16,6 +16,39 @@ interface AboutPageProps {
 }
 
 export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
+  const [activeBenefitIdx, setActiveBenefitIdx] = useState<number>(1);
+
+  const benefits = [
+    {
+      num: '01',
+      title: 'ADVANCED METALLURGY TECHNOLOGY',
+      desc: 'Multi-axis CNC laser cutting and computer-controlled rolling lines ensure sub-micron tolerance precision across all metal components and titanium sheets.',
+      image: '/images/pexels-alex-60339926-9878853.jpg',
+      alt: 'Computer Controlled CNC Laser Cutting Line',
+    },
+    {
+      num: '02',
+      title: 'DUAL ISO 9001 & AS9100D CERTIFIED',
+      desc: 'Comprehensive lab testing, X-ray weld inspection, and full heat-lot traceability reports included with every shipment for aerospace compliance.',
+      image: '/images/titanium_plates.png',
+      alt: 'Aerospace Grade Titanium Testing & Accreditation',
+    },
+    {
+      num: '03',
+      title: '30+ YEARS EXPERT ENGINEERING TEAMS',
+      desc: 'In-house metallurgists assist in customizing heat-treatment schedules and bespoke extrusion profiles tailored to your exact CAD files.',
+      image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+      alt: 'In-house Metallurgical Testing & Heat-Treatment Facility',
+    },
+    {
+      num: '04',
+      title: 'EXPEDITED 48H GLOBAL SUPPLY CHAIN',
+      desc: 'Strategic warehouses in North America, Europe, and Asia guaranteeing rapid dispatch and real-time tracking on standard alloy stock.',
+      image: '/images/stainless_pipes.png',
+      alt: 'Global Port Stock Warehouse Distribution',
+    },
+  ];
+
   const timelineMilestones = [
     {
       year: '1991',
@@ -220,6 +253,168 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Industry Leaders Trust Jyothi Metals (Interactive Hover Animated 01-04 Layout) */}
+      <section className="section bg-white" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden', borderTop: '1px solid #e2e8f0' }}>
+        {/* Far Right Vertical Rotated Backdrop Typography */}
+        <div
+          style={{
+            position: 'absolute',
+            right: '-10px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            writingMode: 'vertical-rl',
+            fontSize: 'clamp(5rem, 12vw, 9rem)',
+            fontWeight: 900,
+            fontFamily: 'Outfit, sans-serif',
+            letterSpacing: '0.12em',
+            color: '#f1f5f9',
+            textTransform: 'uppercase',
+            userSelect: 'none',
+            pointerEvents: 'none',
+            zIndex: 1,
+          }}
+        >
+          BENEFIT
+        </div>
+
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.25fr', gap: '60px', alignItems: 'flex-start' }}>
+            {/* Left Column: Title & Dynamic Crossfading Industrial Visual Frame */}
+            <div>
+              <h2
+                className="section-title"
+                style={{
+                  fontSize: '2.6rem',
+                  lineHeight: 1.15,
+                  marginBottom: '28px',
+                  color: '#0f172a',
+                  marginTop: 0,
+                }}
+              >
+                Why Industry Leaders Trust Jyothi Metals
+              </h2>
+
+              {/* Dynamic Crossfading Visual Frame responding to activeBenefitIdx */}
+              <div
+                style={{
+                  position: 'relative',
+                  height: '400px',
+                  border: '2px solid #0f172a',
+                  boxShadow: '0 20px 40px rgba(0,0,0,0.12)',
+                  overflow: 'hidden',
+                  background: '#061221',
+                }}
+              >
+                {benefits.map((b, bIdx) => (
+                  <div
+                    key={b.num}
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      backgroundImage: `url("${b.image}")`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      opacity: activeBenefitIdx === bIdx ? 1 : 0,
+                      transform: activeBenefitIdx === bIdx ? 'scale(1)' : 'scale(1.06)',
+                      transition: 'opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s ease-out',
+                    }}
+                  />
+                ))}
+
+                {/* Badge Overlay for Active Benefit */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    background: 'linear-gradient(to top, rgba(6, 18, 33, 0.95), transparent)',
+                    padding: '24px',
+                    color: '#ffffff',
+                  }}
+                >
+                  <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#77b8b0', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '4px' }}>
+                    BENEFIT FOCUS {benefits[activeBenefitIdx].num}
+                  </div>
+                  <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#ffffff' }}>
+                    {benefits[activeBenefitIdx].alt}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Numbered List (01, 02, 03, 04) with Interactive Hover Animations */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              {benefits.map((b, idx) => {
+                const isActive = activeBenefitIdx === idx;
+                return (
+                  <div
+                    key={b.num}
+                    onMouseEnter={() => setActiveBenefitIdx(idx)}
+                    style={{
+                      display: 'flex',
+                      gap: '20px',
+                      alignItems: 'flex-start',
+                      padding: '18px 24px',
+                      background: isActive ? '#ffffff' : 'transparent',
+                      border: 'none',
+                      boxShadow: isActive ? '0 12px 30px rgba(0, 0, 0, 0.06)' : 'none',
+                      transform: isActive ? 'translateX(10px)' : 'translateX(0px)',
+                      transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontFamily: 'Outfit, sans-serif',
+                        fontSize: '2.5rem',
+                        fontWeight: 900,
+                        color: isActive ? '#51847D' : '#cbd5e1',
+                        lineHeight: 1,
+                        flexShrink: 0,
+                        marginTop: '-2px',
+                        transform: isActive ? 'scale(1.05)' : 'scale(1)',
+                        transition: 'color 0.35s ease, transform 0.35s ease',
+                      }}
+                    >
+                      {b.num}
+                    </span>
+                    <div style={{ flex: 1 }}>
+                      <h3
+                        style={{
+                          fontSize: '1.1rem',
+                          fontWeight: 800,
+                          color: isActive ? '#51847D' : '#0f172a',
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.04em',
+                          marginTop: 0,
+                          marginBottom: '6px',
+                          lineHeight: 1.25,
+                          transition: 'color 0.35s ease',
+                        }}
+                      >
+                        {b.title}
+                      </h3>
+                      <p
+                        style={{
+                          fontSize: '0.92rem',
+                          color: isActive ? '#334155' : '#64748b',
+                          lineHeight: 1.6,
+                          margin: 0,
+                          transition: 'color 0.35s ease',
+                        }}
+                      >
+                        {b.desc}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

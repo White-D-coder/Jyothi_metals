@@ -24,7 +24,7 @@
   --bg-tertiary: #e9ecef;    /* Darker tint for placeholders/cards */
   --text: #0f172a;           /* High contrast heading text */
   --text-secondary: #475569; /* Body text slate gray */
-  --border-light: #cbd5e1;   /* Sharp card borders */
+  --border-light: #e2e8f0;   /* Clean light card borders */
   --topbar-bg: #061221;      /* Utility Header Top Bar background */
 
   /* Spacing Tokens (8px Grid) */
@@ -334,7 +334,7 @@ h1, h2, h3, h4, h5, h6 {
   left: 0;
   min-width: 240px;
   background: #ffffff;
-  border: 1px solid #cbd5e1;
+  border: 1px solid #e2e8f0;
   border-top: 3px solid #51847D;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   padding: 8px 0;
@@ -702,12 +702,78 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* Modern Sidebar Navigation Panel Styles */
+.sidebar-nav-panel {
+  background: #ffffff;
+  border: 1px solid #E6ECEB;
+  border-radius: 0px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 100px;
+  overflow: hidden;
+}
+
+/* Custom Sidebar Scrolling System */
+.custom-sidebar-scroll {
+  max-height: 480px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f8fafc;
+}
+
+.custom-sidebar-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+
+.custom-sidebar-scroll::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+
+.custom-sidebar-scroll::-webkit-scrollbar-thumb {
+  background: #51847D;
+  border-radius: 0px;
+}
+
+.sidebar-nav-item {
+  width: 100%;
+  text-align: left;
+  padding: 16px 20px;
+  background: transparent;
+  color: #334155;
+  border: none;
+  border-left: 4px solid transparent;
+  border-bottom: 1px solid #EEF2F3;
+  font-weight: 500;
+  font-size: 0.86rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-nav-item:last-child {
+  border-bottom: none;
+}
+
+.sidebar-nav-item:hover {
+  background-color: #F3FAF8;
+  color: #51847D;
+}
+
+.sidebar-nav-item.active {
+  background-color: #EEF7F5;
+  color: #51847D;
+  border-left: 4px solid #51847D;
+  font-weight: 600;
+}
+
 /* Product Category Card Showcase Styles (Image 1 Inspired Luxury Layout) */
 .category-arch-card {
   position: relative;
   overflow: hidden;
   border-radius: 0 !important;
-  border: 1px solid #cbd5e1;
+  border: 1px solid #e2e8f0;
   background: #061221;
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s ease, box-shadow 0.4s ease;
 }
