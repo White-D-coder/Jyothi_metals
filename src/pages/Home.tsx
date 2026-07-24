@@ -10,7 +10,6 @@ import {
   Globe,
   X,
   Star,
-  Search,
 } from 'lucide-react';
 import {
   catalogProducts,
@@ -265,7 +264,6 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
   const [activeCatalogTab, setActiveCatalogTab] = useState<string>('Pipes & Tubes');
   const [activeSubCat, setActiveSubCat] = useState<string>('Stainless Steel Pipes & Tubes');
   const [showAllProducts, setShowAllProducts] = useState<boolean>(false);
-  const [homepageSearchQuery, setHomepageSearchQuery] = useState<string>('');
   const [isMainCatDropdownOpen, setIsMainCatDropdownOpen] = useState<boolean>(false);
   const [isSubCatDropdownOpen, setIsSubCatDropdownOpen] = useState<boolean>(false);
 
@@ -301,16 +299,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                  prod.title.toLowerCase().includes(q);
     }
 
-    let matchSearch = true;
-    if (homepageSearchQuery.trim() !== '') {
-      const q = homepageSearchQuery.toLowerCase();
-      matchSearch = prod.title.toLowerCase().includes(q) ||
-                    prod.category.toLowerCase().includes(q) ||
-                    prod.subCat.toLowerCase().includes(q) ||
-                    prod.specs.some(s => s.toLowerCase().includes(q));
-    }
-
-    return matchMain && matchSub && matchSearch;
+    return matchMain && matchSub;
   });
 
   return (
@@ -1042,47 +1031,6 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
             <p style={{ color: '#475569', fontSize: '1.1rem', lineHeight: 1.6, marginBottom: '28px' }}>
               Explore our complete range of certified stainless steel, titanium alloys, structural profiles, forged flanges, and precision machined components.
             </p>
-
-            {/* Instant Product Search Bar for Homepage */}
-            <div style={{ maxWidth: '640px', margin: '0 auto 10px', position: 'relative' }}>
-              <div style={{ position: 'relative', width: '100%' }}>
-                <Search size={18} style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: '#51847D' }} />
-                <input
-                  type="text"
-                  placeholder="Search instant alloy stock (e.g. 316L, Titanium, Flanges)..."
-                  value={homepageSearchQuery}
-                  onChange={(e) => setHomepageSearchQuery(e.target.value)}
-                  aria-label="Search product catalog"
-                  style={{
-                    width: '100%',
-                    paddingLeft: '46px',
-                    paddingRight: '40px',
-                    paddingTop: '14px',
-                    paddingBottom: '14px',
-                    fontSize: '16px', // Enforces 16px to prevent iOS Safari auto-zoom
-                    border: '2px solid #51847D',
-                    outline: 'none',
-                    background: '#ffffff',
-                    boxShadow: '0 4px 14px rgba(81, 132, 125, 0.12)',
-                    borderRadius: '0px',
-                  }}
-                />
-                {homepageSearchQuery && (
-                  <button
-                    onClick={() => setHomepageSearchQuery('')}
-                    aria-label="Clear product search"
-                    style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', padding: '4px' }}
-                  >
-                    <X size={18} color="#64748b" />
-                  </button>
-                )}
-              </div>
-              {homepageSearchQuery && (
-                <div style={{ textAlign: 'left', marginTop: '8px', fontSize: '0.84rem', color: '#51847D', fontWeight: 700 }}>
-                  Found {filteredCatalog.length} matching product(s) for "{homepageSearchQuery}"
-                </div>
-              )}
-            </div>
           </div>
 
           {/* Mobile Phone View: Custom White Theme Dropdowns (Matching Image 1 Popup Theme) */}
