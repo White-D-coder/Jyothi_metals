@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import {
   ArrowRight,
   ChevronRight,
-  ChevronLeft,
   ChevronDown,
   Check,
   Users,
@@ -270,39 +269,6 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
   const [isMainCatDropdownOpen, setIsMainCatDropdownOpen] = useState<boolean>(false);
   const [isSubCatDropdownOpen, setIsSubCatDropdownOpen] = useState<boolean>(false);
 
-  // High Quality Products Mobile Carousel State & Handlers
-  const categoryCarouselRef = useRef<HTMLDivElement>(null);
-  const [activeCategorySlide, setActiveCategorySlide] = useState<number>(0);
-
-  const scrollCategoryCarousel = (direction: 'left' | 'right') => {
-    if (categoryCarouselRef.current) {
-      const cardWidth = categoryCarouselRef.current.clientWidth * 0.82 + 16;
-      categoryCarouselRef.current.scrollBy({
-        left: direction === 'left' ? -cardWidth : cardWidth,
-        behavior: 'smooth',
-      });
-    }
-  };
-
-  const scrollToCategorySlide = (index: number) => {
-    if (categoryCarouselRef.current) {
-      const cardWidth = categoryCarouselRef.current.clientWidth * 0.82 + 16;
-      categoryCarouselRef.current.scrollTo({
-        left: index * cardWidth,
-        behavior: 'smooth',
-      });
-    }
-  };
-
-  const handleCategoryCarouselScroll = () => {
-    if (categoryCarouselRef.current) {
-      const scrollLeft = categoryCarouselRef.current.scrollLeft;
-      const cardWidth = categoryCarouselRef.current.clientWidth * 0.82 + 16;
-      const index = Math.round(scrollLeft / cardWidth);
-      setActiveCategorySlide(Math.min(Math.max(0, index), 7));
-    }
-  };
-
   // Automatically select the first sub-category whenever activeCatalogTab changes
   useEffect(() => {
     const defaultSub = getFirstSubCategoryForCategory(activeCatalogTab);
@@ -488,7 +454,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
         }}
       >
         <div
-          className="catalog-mobile-grid grid-responsive-about"
+          className="container catalog-mobile-grid grid-responsive-about"
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
@@ -521,8 +487,8 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
             </div>
           </div>
 
-          {/* Right Column: Text & Pill Action Button (Constrained inside Right Padding) */}
-          <div className="reveal" style={{ paddingRight: '5%', maxWidth: '620px' }}>
+          {/* Right Column: Text & Pill Action Button */}
+          <div className="reveal multidisciplinary-text-col" style={{ paddingRight: '5%', maxWidth: '620px' }}>
             <div
               style={{
                 fontSize: '0.82rem',
@@ -906,8 +872,6 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
 
           {/* 8 Product Category Cards Grid on Desktop / Phone View Horizontal Carousel */}
           <div
-            ref={categoryCarouselRef}
-            onScroll={handleCategoryCarouselScroll}
             className="category-arch-grid"
             style={{
               display: 'grid',
@@ -1059,36 +1023,6 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                 </div>
               </div>
             ))}
-          </div>
-
-          {/* Mobile Carousel Navigation Bar (Arrows & Dot Indicators) */}
-          <div className="mobile-carousel-controls">
-            <button
-              onClick={() => scrollCategoryCarousel('left')}
-              aria-label="Previous Category"
-              className="carousel-arrow-btn"
-            >
-              <ChevronLeft size={20} />
-            </button>
-
-            <div className="carousel-dots-container">
-              {[0, 1, 2, 3, 4, 5, 6, 7].map((idx) => (
-                <button
-                  key={idx}
-                  onClick={() => scrollToCategorySlide(idx)}
-                  aria-label={`Go to slide ${idx + 1}`}
-                  className={`carousel-dot ${activeCategorySlide === idx ? 'active' : ''}`}
-                />
-              ))}
-            </div>
-
-            <button
-              onClick={() => scrollCategoryCarousel('right')}
-              aria-label="Next Category"
-              className="carousel-arrow-btn"
-            >
-              <ChevronRight size={20} />
-            </button>
           </div>
         </div>
       </section>
