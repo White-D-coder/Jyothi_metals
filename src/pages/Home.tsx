@@ -2,6 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import {
   ArrowRight,
   ChevronRight,
+  ChevronLeft,
+  ChevronDown,
+  Check,
   Users,
   Briefcase,
   Trophy,
@@ -264,7 +267,41 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
   const [activeSubCat, setActiveSubCat] = useState<string>('Stainless Steel Pipes & Tubes');
   const [showAllProducts, setShowAllProducts] = useState<boolean>(false);
   const [homepageSearchQuery, setHomepageSearchQuery] = useState<string>('');
-  const [showAllMobileCategories, setShowAllMobileCategories] = useState<boolean>(false);
+  const [isMainCatDropdownOpen, setIsMainCatDropdownOpen] = useState<boolean>(false);
+  const [isSubCatDropdownOpen, setIsSubCatDropdownOpen] = useState<boolean>(false);
+
+  // High Quality Products Mobile Carousel State & Handlers
+  const categoryCarouselRef = useRef<HTMLDivElement>(null);
+  const [activeCategorySlide, setActiveCategorySlide] = useState<number>(0);
+
+  const scrollCategoryCarousel = (direction: 'left' | 'right') => {
+    if (categoryCarouselRef.current) {
+      const cardWidth = categoryCarouselRef.current.clientWidth * 0.82 + 16;
+      categoryCarouselRef.current.scrollBy({
+        left: direction === 'left' ? -cardWidth : cardWidth,
+        behavior: 'smooth',
+      });
+    }
+  };
+
+  const scrollToCategorySlide = (index: number) => {
+    if (categoryCarouselRef.current) {
+      const cardWidth = categoryCarouselRef.current.clientWidth * 0.82 + 16;
+      categoryCarouselRef.current.scrollTo({
+        left: index * cardWidth,
+        behavior: 'smooth',
+      });
+    }
+  };
+
+  const handleCategoryCarouselScroll = () => {
+    if (categoryCarouselRef.current) {
+      const scrollLeft = categoryCarouselRef.current.scrollLeft;
+      const cardWidth = categoryCarouselRef.current.clientWidth * 0.82 + 16;
+      const index = Math.round(scrollLeft / cardWidth);
+      setActiveCategorySlide(Math.min(Math.max(0, index), 7));
+    }
+  };
 
   // Automatically select the first sub-category whenever activeCatalogTab changes
   useEffect(() => {
@@ -867,8 +904,10 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
             </p>
           </div>
 
-          {/* 8 Product Category Cards Grid (Image 1 Style Luxury Dark Overlay Cards) */}
+          {/* 8 Product Category Cards Grid on Desktop / Phone View Horizontal Carousel */}
           <div
+            ref={categoryCarouselRef}
+            onScroll={handleCategoryCarouselScroll}
             className="category-arch-grid"
             style={{
               display: 'grid',
@@ -928,7 +967,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
             ].map((cat, catIdx) => (
               <div
                 key={cat.title}
-                className={`category-arch-card reveal ${catIdx >= 4 ? 'category-card-extra' : ''} ${catIdx >= 4 && !showAllMobileCategories ? 'hide-on-mobile' : ''}`}
+                className={`category-arch-card reveal ${catIdx >= 4 ? 'category-card-extra' : ''}`}
                 onClick={() => {
                   setActiveCatalogTab(cat.mainCat);
                   setActiveSubCat('all');
@@ -1022,26 +1061,33 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
             ))}
           </div>
 
-          {/* Mobile-Only See All Categories Button */}
-          <div className="mobile-only-see-all-btn" style={{ textAlign: 'center', marginTop: '24px' }}>
+          {/* Mobile Carousel Navigation Bar (Arrows & Dot Indicators) */}
+          <div className="mobile-carousel-controls">
             <button
-              onClick={() => setShowAllMobileCategories(!showAllMobileCategories)}
-              style={{
-                padding: '12px 28px',
-                fontSize: '0.88rem',
-                fontWeight: 800,
-                background: '#edf5f4',
-                border: '2px solid #51847D',
-                color: '#51847D',
-                cursor: 'pointer',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                width: '100%',
-                justifyContent: 'center',
-              }}
+              onClick={() => scrollCategoryCarousel('left')}
+              aria-label="Previous Category"
+              className="carousel-arrow-btn"
             >
-              {showAllMobileCategories ? 'Show Fewer Categories ▲' : 'See All 8 Product Categories ▼'}
+              <ChevronLeft size={20} />
+            </button>
+
+            <div className="carousel-dots-container">
+              {[0, 1, 2, 3, 4, 5, 6, 7].map((idx) => (
+                <button
+                  key={idx}
+                  onClick={() => scrollToCategorySlide(idx)}
+                  aria-label={`Go to slide ${idx + 1}`}
+                  className={`carousel-dot ${activeCategorySlide === idx ? 'active' : ''}`}
+                />
+              ))}
+            </div>
+
+            <button
+              onClick={() => scrollCategoryCarousel('right')}
+              aria-label="Next Category"
+              className="carousel-arrow-btn"
+            >
+              <ChevronRight size={20} />
             </button>
           </div>
         </div>
@@ -1105,8 +1151,126 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
             </div>
           </div>
 
-          {/* Top Horizontal Main Category Tabs Bar (Original Button Size, Single Line Row) */}
+          {/* Mobile Phone View: Custom White Theme Dropdowns (Matching Image 1 Popup Theme) */}
+          <div className="mobile-catalog-dropdowns">
+            {/* Backdrop overlay for closing dropdowns when clicking outside */}
+            {(isMainCatDropdownOpen || isSubCatDropdownOpen) && (
+              <div
+                style={{ position: 'fixed', inset: 0, zIndex: 90, background: 'transparent' }}
+                onClick={() => {
+                  setIsMainCatDropdownOpen(false);
+                  setIsSubCatDropdownOpen(false);
+                }}
+              />
+            )}
+
+            {/* Dropdown 1: Main Category Selection */}
+            <div className="mobile-dropdown-wrapper main-cat-wrapper" style={{ zIndex: isMainCatDropdownOpen ? 100 : 10 }}>
+              <button
+                type="button"
+                onClick={() => {
+                  setIsMainCatDropdownOpen(!isMainCatDropdownOpen);
+                  setIsSubCatDropdownOpen(false);
+                }}
+                className="custom-mobile-dropdown-btn"
+              >
+                <span>{activeCatalogTab}</span>
+                <ChevronDown
+                  size={18}
+                  style={{
+                    transform: isMainCatDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                    transition: 'transform 0.25s ease',
+                    color: '#51847D',
+                  }}
+                />
+              </button>
+
+              {isMainCatDropdownOpen && (
+                <div className="custom-mobile-dropdown-menu">
+                  {[
+                    'Pipes & Tubes',
+                    'Plates & Sheets',
+                    'Round Bars',
+                    'Flanges',
+                    'Forged Fittings',
+                    'Buttweld Fittings',
+                    'Fasteners',
+                    'Specialized Product',
+                  ].map((catId) => {
+                    const isSelected = activeCatalogTab === catId;
+                    return (
+                      <button
+                        key={catId}
+                        type="button"
+                        onClick={() => {
+                          setActiveCatalogTab(catId);
+                          const defaultSub = getFirstSubCategoryForCategory(catId);
+                          setActiveSubCat(defaultSub);
+                          setShowAllProducts(false);
+                          setIsMainCatDropdownOpen(false);
+                        }}
+                        className={`custom-mobile-dropdown-item ${isSelected ? 'is-selected' : ''}`}
+                      >
+                        <span>{catId}</span>
+                        {isSelected && <Check size={16} color="#51847D" />}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            {/* Dropdown 2: Sub-Category Selection (Default Selected = First) */}
+            <div className="mobile-dropdown-wrapper sub-cat-wrapper" style={{ zIndex: isSubCatDropdownOpen ? 100 : 9 }}>
+              <button
+                type="button"
+                onClick={() => {
+                  setIsSubCatDropdownOpen(!isSubCatDropdownOpen);
+                  setIsMainCatDropdownOpen(false);
+                }}
+                className="custom-mobile-dropdown-btn"
+              >
+                <span>
+                  {getSubCategoriesForCategory(activeCatalogTab).find((s) => s.id === effectiveSubCat)?.label || effectiveSubCat}
+                </span>
+                <ChevronDown
+                  size={18}
+                  style={{
+                    transform: isSubCatDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                    transition: 'transform 0.25s ease',
+                    color: '#51847D',
+                  }}
+                />
+              </button>
+
+              {isSubCatDropdownOpen && (
+                <div className="custom-mobile-dropdown-menu">
+                  {getSubCategoriesForCategory(activeCatalogTab).map((sub) => {
+                    const isSelected = effectiveSubCat === sub.id;
+                    return (
+                      <button
+                        key={sub.id}
+                        type="button"
+                        onClick={() => {
+                          setActiveSubCat(sub.id);
+                          setShowAllProducts(false);
+                          setIsSubCatDropdownOpen(false);
+                        }}
+                        className={`custom-mobile-dropdown-item ${isSelected ? 'is-selected' : ''}`}
+                      >
+                        <span>{sub.label}</span>
+                        {isSelected && <Check size={16} color="#51847D" />}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Top Horizontal Main Category Tabs Bar (Desktop View Only) */}
           <div
+            className="desktop-catalog-tabs"
             style={{
               display: 'flex',
               alignItems: 'center',

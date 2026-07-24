@@ -428,7 +428,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             aria-label="Toggle navigation menu"
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-nav-drawer"
-            style={{ minWidth: '44px', minHeight: '44px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
+            style={{ minWidth: '44px', minHeight: '44px', alignItems: 'center', justifyContent: 'center' }}
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>

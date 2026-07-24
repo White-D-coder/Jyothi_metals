@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, ChevronRight, Info } from 'lucide-react';
+import { Search, ChevronRight, ChevronDown, Check, Info } from 'lucide-react';
 import {
   catalogProducts,
   type CatalogProduct,
@@ -19,6 +19,8 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
   const [selectedSubCat, setSelectedSubCat] = useState<string>('Stainless Steel Pipes & Tubes');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [showAllProducts, setShowAllProducts] = useState<boolean>(false);
+  const [isMainCatDropdownOpen, setIsMainCatDropdownOpen] = useState<boolean>(false);
+  const [isSubCatDropdownOpen, setIsSubCatDropdownOpen] = useState<boolean>(false);
 
   useEffect(() => {
     if (initialCategory && initialCategory !== 'All') {
@@ -145,6 +147,122 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
               Showing {filteredProducts.length} matching product(s) for "{searchQuery}"
             </div>
           )}
+        </div>
+
+        {/* Mobile Phone View: Custom White Theme Dropdowns (Matching Image 1 Popup Theme) */}
+        <div className="mobile-catalog-dropdowns">
+          {/* Backdrop overlay for closing dropdowns when clicking outside */}
+          {(isMainCatDropdownOpen || isSubCatDropdownOpen) && (
+            <div
+              style={{ position: 'fixed', inset: 0, zIndex: 90, background: 'transparent' }}
+              onClick={() => {
+                setIsMainCatDropdownOpen(false);
+                setIsSubCatDropdownOpen(false);
+              }}
+            />
+          )}
+
+          {/* Dropdown 1: Main Category Selection */}
+          <div className="mobile-dropdown-wrapper main-cat-wrapper" style={{ zIndex: isMainCatDropdownOpen ? 100 : 10 }}>
+            <button
+              type="button"
+              onClick={() => {
+                setIsMainCatDropdownOpen(!isMainCatDropdownOpen);
+                setIsSubCatDropdownOpen(false);
+              }}
+              className="custom-mobile-dropdown-btn"
+            >
+              <span>{currentCategoryName}</span>
+              <ChevronDown
+                size={18}
+                style={{
+                  transform: isMainCatDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                  transition: 'transform 0.25s ease',
+                  color: '#51847D',
+                }}
+              />
+            </button>
+
+            {isMainCatDropdownOpen && (
+              <div className="custom-mobile-dropdown-menu">
+                {[
+                  'Pipes & Tubes',
+                  'Plates & Sheets',
+                  'Round Bars',
+                  'Flanges',
+                  'Forged Fittings',
+                  'Buttweld Fittings',
+                  'Fasteners',
+                  'Specialized Product',
+                ].map((catId) => {
+                  const isSelected = currentCategoryName === catId;
+                  return (
+                    <button
+                      key={catId}
+                      type="button"
+                      onClick={() => {
+                        const defaultSub = getFirstSubCategoryForCategory(catId);
+                        setSelectedSubCat(defaultSub);
+                        setShowAllProducts(false);
+                        setIsMainCatDropdownOpen(false);
+                      }}
+                      className={`custom-mobile-dropdown-item ${isSelected ? 'is-selected' : ''}`}
+                    >
+                      <span>{catId}</span>
+                      {isSelected && <Check size={16} color="#51847D" />}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+
+          {/* Dropdown 2: Sub-Category Selection */}
+          <div className="mobile-dropdown-wrapper sub-cat-wrapper" style={{ zIndex: isSubCatDropdownOpen ? 100 : 9 }}>
+            <button
+              type="button"
+              onClick={() => {
+                setIsSubCatDropdownOpen(!isSubCatDropdownOpen);
+                setIsMainCatDropdownOpen(false);
+              }}
+              className="custom-mobile-dropdown-btn"
+            >
+              <span>
+                {getSubCategoriesForCategory(currentCategoryName).find((s) => s.id === effectiveSubCat)?.label || effectiveSubCat}
+              </span>
+              <ChevronDown
+                size={18}
+                style={{
+                  transform: isSubCatDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                  transition: 'transform 0.25s ease',
+                  color: '#51847D',
+                }}
+              />
+            </button>
+
+            {isSubCatDropdownOpen && (
+              <div className="custom-mobile-dropdown-menu">
+                {getSubCategoriesForCategory(currentCategoryName).map((sub) => {
+                  const isSelected = effectiveSubCat === sub.id;
+                  return (
+                    <button
+                      key={sub.id}
+                      type="button"
+                      onClick={() => {
+                        setSelectedSubCat(sub.id);
+                        setShowAllProducts(false);
+                        setIsSubCatDropdownOpen(false);
+                      }}
+                      className={`custom-mobile-dropdown-item ${isSelected ? 'is-selected' : ''}`}
+                    >
+                      <span>{sub.label}</span>
+                      {isSelected && <Check size={16} color="#51847D" />}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Main 2-Column Catalog Container (Left Sub-Categories Sidebar + Right Product Grid) */}

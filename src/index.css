@@ -470,12 +470,18 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Mobile Navigation Hamburger */
 .hamburger-sharp {
-  display: none;
+  display: none !important;
   background: none;
   border: 1px solid #cbd5e1;
   padding: 8px 12px;
   cursor: pointer;
   color: #0f172a;
+}
+
+@media (min-width: 769px) {
+  .hamburger-sharp {
+    display: none !important;
+  }
 }
 
 /* Card System */
@@ -722,15 +728,18 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .container {
     padding: 0 20px;
   }
   .nav-menu {
-    display: none;
+    display: none !important;
   }
   .hamburger-sharp {
-    display: block;
+    display: inline-flex !important;
+  }
+  .brand-subtitle-text {
+    display: none !important;
   }
   .products-grid, .features-grid, .footer-grid {
     grid-template-columns: 1fr;
@@ -876,15 +885,109 @@ h1, h2, h3, h4, h5, h6 {
   color: #77b8b0 !important;
 }
 
-@media (max-width: 1024px) {
-  .category-arch-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
+/* Mobile Carousel Controls & Catalog Selectors - Hidden by default on Desktop View (>768px) */
+.mobile-carousel-controls,
+.mobile-catalog-dropdowns {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .desktop-catalog-tabs {
+    display: none !important;
+  }
+
+  .sidebar-nav-panel {
+    display: none !important;
+  }
+
+  .mobile-catalog-dropdowns {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    margin-bottom: 24px !important;
+    width: 100% !important;
+  }
+
+  .mobile-dropdown-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .custom-mobile-dropdown-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 18px;
+    font-size: 0.94rem;
+    font-weight: 700;
+    color: #0f172a;
+    background: #ffffff;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 0px !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .custom-mobile-dropdown-btn:focus,
+  .custom-mobile-dropdown-btn:active {
+    border-color: #51847D;
+    box-shadow: 0 0 0 2px rgba(81, 132, 125, 0.2);
+  }
+
+  /* Custom White Dropdown Menu Panel (Image 1 Style) */
+  .custom-mobile-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.14);
+    max-height: 280px;
+    overflow-y: auto;
+    border-radius: 0px !important;
+  }
+
+  .custom-mobile-dropdown-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    background: #ffffff;
+    border: none;
+    border-bottom: 1px solid #f1f5f9;
+    color: #1e293b;
+    font-size: 0.92rem;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .custom-mobile-dropdown-item:last-child {
+    border-bottom: none;
+  }
+
+  .custom-mobile-dropdown-item:hover,
+  .custom-mobile-dropdown-item:active {
+    background-color: #F3FAF8;
+    color: #51847D;
+  }
+
+  .custom-mobile-dropdown-item.is-selected {
+    background-color: #EEF7F5;
+    color: #51847D;
+    font-weight: 700;
   }
 }
 
-@media (max-width: 600px) {
+@media (min-width: 769px) and (max-width: 1024px) {
   .category-arch-grid {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: repeat(2, 1fr) !important;
   }
 }
 
@@ -970,17 +1073,93 @@ h1, h2, h3, h4, h5, h6 {
     padding: 50px 0 !important;
   }
 
+  /* Mobile Phone View Category Arch Carousel */
   .category-arch-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 14px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    grid-template-columns: none !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 16px !important;
+    padding: 10px 4px 18px 4px !important;
+    scroll-behavior: smooth !important;
+    scrollbar-width: none !important;
+  }
+
+  .category-arch-grid::-webkit-scrollbar {
+    display: none !important;
   }
 
   .category-arch-card {
-    height: 220px !important;
+    flex: 0 0 82% !important;
+    width: 82% !important;
+    min-width: 260px !important;
+    max-width: 320px !important;
+    scroll-snap-align: center !important;
+    scroll-snap-stop: always !important;
+    height: 310px !important;
+    margin-right: 0 !important;
   }
 
   .category-arch-card .card-title-text {
-    font-size: 1.1rem !important;
+    font-size: 1.25rem !important;
+  }
+
+  .category-card-extra.hide-on-mobile {
+    display: flex !important;
+  }
+
+  .mobile-carousel-controls {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 14px;
+  }
+
+  .carousel-arrow-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #edf5f4;
+    border: 1px solid #51847D;
+    color: #51847D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .carousel-arrow-btn:active {
+    background: #51847D;
+    color: #ffffff;
+    transform: scale(0.95);
+  }
+
+  .carousel-dots-container {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #cbd5e1;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .carousel-dot.active {
+    background: #51847D;
+    width: 24px;
+    border-radius: 4px;
   }
 
   .catalog-mobile-grid,
@@ -1114,17 +1293,11 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 0.72rem !important;
   }
 
-  .category-arch-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 10px !important;
-  }
-
   .category-arch-card {
-    height: 195px !important;
-  }
-
-  .category-arch-card .card-title-text {
-    font-size: 0.95rem !important;
+    flex: 0 0 85% !important;
+    width: 85% !important;
+    min-width: 240px !important;
+    height: 290px !important;
   }
 
   .arch-floating-btn {
