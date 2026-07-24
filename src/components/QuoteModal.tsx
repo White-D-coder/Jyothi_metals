@@ -48,44 +48,63 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
   };
 
   return (
-    <div className="modal-backdrop" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <button className="modal-close" onClick={onClose} aria-label="Close modal">
+    <div className="modal-backdrop" onClick={onClose} style={{ padding: '12px' }}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ padding: '24px', position: 'relative' }}>
+        <button
+          className="modal-close"
+          onClick={onClose}
+          aria-label="Close quote modal"
+          style={{
+            position: 'absolute',
+            top: '12px',
+            right: '12px',
+            minWidth: '44px',
+            minHeight: '44px',
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: '#f1f5f9',
+            border: 'none',
+            cursor: 'pointer',
+            color: '#0f172a',
+          }}
+        >
           <X size={20} />
         </button>
 
         {submitted ? (
-          <div style={{ textAlign: 'center', padding: '40px 20px' }}>
-            <div style={{ width: '70px', height: '70px', background: 'rgba(232, 168, 23, 0.15)', color: '#e8a817', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px' }}>
-              <CheckCircle size={40} />
+          <div style={{ textAlign: 'center', padding: '30px 10px' }}>
+            <div style={{ width: '64px', height: '64px', background: 'rgba(81, 132, 125, 0.15)', color: '#51847D', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px' }}>
+              <CheckCircle size={36} />
             </div>
-            <h3 className="card-title" style={{ fontSize: '1.8rem', color: '#51847D' }}>Quote Request Submitted!</h3>
-            <p style={{ color: '#4a5568', marginTop: '10px' }}>
+            <h3 className="card-title" style={{ fontSize: '1.6rem', color: '#51847D' }}>Quote Request Submitted!</h3>
+            <p style={{ color: '#4a5568', marginTop: '10px', fontSize: '0.94rem' }}>
               Thank you, <strong>{name || 'Valued Client'}</strong>. Our metallurgy engineers are reviewing your specs for <strong>{quantityTons} Tons</strong> of {material}. We will respond within 2 business hours.
             </p>
-            <div style={{ background: '#f6f9fc', borderRadius: '12px', padding: '16px', marginTop: '20px', fontSize: '0.9rem', color: '#51847D', fontWeight: 600 }}>
-              Estimated Project Value: ${estimatedTotal.toLocaleString()} USD
+            <div style={{ background: '#edf5f4', border: '1px solid #77b8b0', padding: '14px', marginTop: '20px', fontSize: '0.9rem', color: '#51847D', fontWeight: 700 }}>
+              Estimated Project Budget: ${estimatedTotal.toLocaleString()} USD
             </div>
           </div>
         ) : (
           <>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
-              <div style={{ background: 'rgba(15, 59, 94, 0.08)', padding: '8px', borderRadius: '8px', color: '#51847D' }}>
-                <Calculator size={22} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
+              <div style={{ background: 'rgba(81, 132, 125, 0.12)', padding: '6px', color: '#51847D' }}>
+                <Calculator size={20} />
               </div>
-              <span className="small-label label-gold" style={{ marginBottom: 0 }}>Instant Metallurgy Specifier</span>
+              <span className="small-label" style={{ marginBottom: 0, color: '#51847D' }}>Instant Metallurgy Specifier</span>
             </div>
-            <h2 className="section-title" style={{ fontSize: '1.8rem', marginBottom: '8px' }}>Request a Precision Quote</h2>
-            <p style={{ color: '#4a5568', fontSize: '0.95rem', marginBottom: '24px' }}>
+            <h2 className="section-title" style={{ fontSize: '1.6rem', marginBottom: '6px' }}>Request a Precision Quote</h2>
+            <p style={{ color: '#4a5568', fontSize: '0.9rem', marginBottom: '20px' }}>
               Configure your material specifications below for an instant preliminary estimate and formal quote request.
             </p>
 
             <form onSubmit={handleSubmit}>
               {/* Alloy & Shape Selector */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+              <div className="grid-responsive-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
                 <div className="form-group">
-                  <label className="form-label">Metal Material / Grade</label>
+                  <label htmlFor="modal-material" className="form-label">Metal Material / Grade</label>
                   <select
+                    id="modal-material"
                     className="form-select"
                     value={material}
                     onChange={(e) => setMaterial(e.target.value)}
@@ -99,25 +118,27 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                 </div>
 
                 <div className="form-group">
-                  <label className="form-label">Product Form Factor</label>
+                  <label htmlFor="modal-shape" className="form-label">Product Form Factor</label>
                   <select
+                    id="modal-shape"
                     className="form-select"
                     value={shape}
                     onChange={(e) => setShape(e.target.value)}
                   >
-                    <option value="Pipes / Tubing">Seamless Pipes & Tubing</option>
-                    <option value="Plates / Sheets">Heavy Plates & Rolled Sheets</option>
-                    <option value="Beams / Channels">I-Beams & Structural Channels</option>
+                    <option value="Pipes / Tubing">Seamless Pipes &amp; Tubing</option>
+                    <option value="Plates / Sheets">Heavy Plates &amp; Rolled Sheets</option>
+                    <option value="Beams / Channels">I-Beams &amp; Structural Channels</option>
                     <option value="Custom CNC Machined">Custom CNC Machined Components</option>
                   </select>
                 </div>
               </div>
 
               {/* Quantity & Interactive Price Estimation Box */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', alignItems: 'center' }}>
+              <div className="grid-responsive-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', alignItems: 'center' }}>
                 <div className="form-group">
-                  <label className="form-label">Required Quantity (Tons)</label>
+                  <label htmlFor="modal-quantity" className="form-label">Required Quantity (Tons)</label>
                   <input
+                    id="modal-quantity"
                     type="number"
                     min="1"
                     max="1000"
@@ -127,19 +148,20 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                   />
                 </div>
 
-                <div style={{ background: '#f6f9fc', border: '1px solid #edf2f7', padding: '12px 16px', borderRadius: '10px', marginTop: '4px' }}>
-                  <div style={{ fontSize: '0.75rem', fontWeight: 600, color: '#4a5568', textTransform: 'uppercase' }}>Est. Material Budget</div>
-                  <div style={{ fontSize: '1.3rem', fontWeight: 800, color: '#51847D' }}>
-                    ${estimatedTotal.toLocaleString()} <span style={{ fontSize: '0.8rem', fontWeight: 500 }}>USD</span>
+                <div style={{ background: '#edf5f4', border: '1px solid #cbd5e1', padding: '10px 14px', marginTop: '4px' }}>
+                  <div style={{ fontSize: '0.72rem', fontWeight: 700, color: '#4a5568', textTransform: 'uppercase' }}>Est. Material Budget</div>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#51847D' }}>
+                    ${estimatedTotal.toLocaleString()} <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>USD</span>
                   </div>
                 </div>
               </div>
 
               {/* Contact Info */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+              <div className="grid-responsive-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
                 <div className="form-group">
-                  <label className="form-label">Your Full Name *</label>
+                  <label htmlFor="modal-name" className="form-label">Your Full Name *</label>
                   <input
+                    id="modal-name"
                     type="text"
                     required
                     placeholder="e.g. Sarah Jenkins"
@@ -150,8 +172,9 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                 </div>
 
                 <div className="form-group">
-                  <label className="form-label">Corporate Email *</label>
+                  <label htmlFor="modal-email" className="form-label">Corporate Email *</label>
                   <input
+                    id="modal-email"
                     type="email"
                     required
                     placeholder="s.jenkins@aerospace.com"
@@ -163,8 +186,9 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
               </div>
 
               <div className="form-group">
-                <label className="form-label">Company / Industry</label>
+                <label htmlFor="modal-company" className="form-label">Company / Industry</label>
                 <input
+                  id="modal-company"
                   type="text"
                   placeholder="e.g. Lockheed Martin / Defense"
                   className="form-input"
@@ -174,8 +198,9 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
               </div>
 
               <div className="form-group">
-                <label className="form-label">Custom Specifications & Tolerance Notes</label>
+                <label htmlFor="modal-specs" className="form-label">Custom Specifications &amp; Tolerance Notes</label>
                 <textarea
+                  id="modal-specs"
                   rows={3}
                   className="form-textarea"
                   placeholder="Specify custom outer diameter, wall thickness, heat treatments, or ASTM certification requirements..."
@@ -184,7 +209,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                 ></textarea>
               </div>
 
-              <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '16px', background: '#51847D' }}>
+              <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '14px', background: '#51847D', minHeight: '44px' }}>
                 Submit Quote Request <Send size={18} />
               </button>
             </form>

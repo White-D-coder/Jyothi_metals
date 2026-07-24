@@ -43,27 +43,24 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenQuoteModal }
       <div className="container" style={{ position: 'relative', zIndex: 2 }}>
         {/* 1. Top Newsletter Bar (Logo + Newsletter Form matching Reference Image) */}
         <div
+          className="footer-newsletter-grid"
           style={{
-            display: 'grid',
-            gridTemplateColumns: '1.2fr 1fr 1.6fr',
-            gap: '30px',
-            alignItems: 'center',
             paddingBottom: '50px',
             borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
             marginBottom: '50px',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <div className="footer-logo-brand" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
             <img
               src="/images/jmi_logo.png"
               alt="JMI - Jyoti Metal (India)"
-              style={{ height: '68px', width: 'auto', objectFit: 'contain' }}
+              style={{ height: '56px', width: 'auto', objectFit: 'contain' }}
             />
             <div>
-              <span style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 900, fontSize: '1.65rem', color: '#ffffff', lineHeight: 1.1, letterSpacing: '0.02em', display: 'block' }}>
+              <span className="footer-brand-title" style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 900, fontSize: '1.45rem', color: '#ffffff', lineHeight: 1.1, letterSpacing: '0.02em', display: 'block' }}>
                 JYOTI METAL (INDIA)
               </span>
-              <div style={{ fontSize: '0.72rem', fontWeight: 800, color: '#77b8b0', letterSpacing: '0.12em', marginTop: '4px' }}>
+              <div style={{ fontSize: '0.68rem', fontWeight: 800, color: '#77b8b0', letterSpacing: '0.12em', marginTop: '4px' }}>
                 AN ISO 9001:2015 CERTIFIED COMPANY
               </div>
             </div>
@@ -81,39 +78,45 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenQuoteModal }
                 Thank you! You are subscribed to updates.
               </div>
             ) : (
-              <form onSubmit={handleSubscribe} style={{ display: 'flex', width: '100%' }}>
+              <form onSubmit={handleSubscribe} className="footer-subscribe-form" style={{ display: 'flex', width: '100%', gap: '8px' }}>
                 <input
                   type="email"
                   placeholder="Email Address..."
                   value={newsletterEmail}
                   onChange={(e) => setNewsletterEmail(e.target.value)}
+                  aria-label="Email address for newsletter"
                   required
                   style={{
                     flex: 1,
+                    minWidth: '0',
                     background: '#1e293b',
                     border: '1px solid #334155',
                     color: '#ffffff',
                     padding: '14px 18px',
-                    fontSize: '0.9rem',
+                    fontSize: '16px', // Prevents iOS Safari auto-zoom
                     outline: 'none',
+                    minHeight: '44px',
                   }}
                 />
                 <button
                   type="submit"
+                  className="footer-join-btn"
                   style={{
                     background: '#51847D',
                     color: '#ffffff',
                     border: 'none',
-                    padding: '14px 28px',
+                    padding: '14px 24px',
                     fontWeight: 800,
                     fontSize: '0.9rem',
                     letterSpacing: '0.05em',
                     cursor: 'pointer',
                     display: 'inline-flex',
                     alignItems: 'center',
+                    justifyContent: 'center',
                     gap: '6px',
                     whiteSpace: 'nowrap',
                     transition: 'background 0.2s',
+                    minHeight: '44px',
                   }}
                   onMouseEnter={(e) => (e.currentTarget.style.background = '#3d6963')}
                   onMouseLeave={(e) => (e.currentTarget.style.background = '#51847D')}
@@ -127,14 +130,13 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenQuoteModal }
 
         {/* 2. Main 4-Column Footer Content */}
         <div
+          className="footer-main-grid"
           style={{
-            display: 'grid',
-            gridTemplateColumns: '1.4fr 1.6fr 1.2fr 1fr',
-            gap: '40px',
             paddingBottom: '50px',
             borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
           }}
         >
+
           {/* Column 1: About Company */}
           <div>
             <h4 style={{ color: '#ffffff', fontSize: '1.1rem', fontWeight: 800, marginBottom: '18px' }}>

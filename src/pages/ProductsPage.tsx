@@ -102,28 +102,53 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
               placeholder="Search products by alloy grade (e.g. 304L, C276, Gr 2), ASTM spec, or name..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
+              aria-label="Search catalog products"
               style={{
                 width: '100%',
                 paddingLeft: '48px',
-                paddingRight: '20px',
+                paddingRight: searchQuery ? '40px' : '20px',
                 paddingTop: '15px',
                 paddingBottom: '15px',
                 margin: 0,
                 background: '#ffffff',
                 border: '1.5px solid #cbd5e1',
                 borderRadius: '0px',
-                fontSize: '0.94rem',
+                fontSize: '16px', // Prevents iOS Safari auto-zoom
                 color: '#0f172a',
                 outline: 'none',
                 boxShadow: '0 6px 20px rgba(81, 132, 125, 0.08)',
                 transition: 'border-color 0.25s ease, box-shadow 0.25s ease',
               }}
             />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                aria-label="Clear search text"
+                style={{
+                  position: 'absolute',
+                  right: '14px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: '4px',
+                  color: '#64748b',
+                }}
+              >
+                &times;
+              </button>
+            )}
           </div>
+          {searchQuery && (
+            <div style={{ marginTop: '8px', fontSize: '0.84rem', color: '#51847D', fontWeight: 700 }}>
+              Showing {filteredProducts.length} matching product(s) for "{searchQuery}"
+            </div>
+          )}
         </div>
 
         {/* Main 2-Column Catalog Container (Left Sub-Categories Sidebar + Right Product Grid) */}
-        <div style={{ display: 'grid', gridTemplateColumns: '280px 1fr', gap: '32px', alignItems: 'start' }}>
+        <div className="grid-responsive-catalog" style={{ display: 'grid', gridTemplateColumns: '280px 1fr', gap: '32px', alignItems: 'start' }}>
           
           {/* Left Sub-Categories Sidebar (Modern Redesigned Navigation Panel with Custom Scrollbar) */}
           <div className="sidebar-nav-panel">

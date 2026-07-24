@@ -50,9 +50,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenQuoteModal }) =>
         </div>
 
         {/* 2 Column Layout: Interactive Metal Calculator & Contact Form */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px', marginBottom: '60px' }}>
+        <div className="grid-responsive-2col" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px', marginBottom: '60px' }}>
           {/* Column 1: Contact Form */}
-          <div style={{ background: '#ffffff', padding: '40px', borderRadius: '20px', border: '1px solid #edf2f7', boxShadow: '0 10px 30px rgba(0, 0, 0, 0.05)' }}>
+          <div style={{ background: '#ffffff', padding: '30px', borderRadius: '0px', border: '1px solid #edf2f7', boxShadow: '0 10px 30px rgba(0, 0, 0, 0.05)' }}>
             <h3 className="card-title" style={{ fontSize: '1.5rem', marginBottom: '8px', color: '#0f3b5e' }}>
               Send an Inquiry
             </h3>
@@ -61,8 +61,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenQuoteModal }) =>
             </p>
 
             {submitted ? (
-              <div style={{ padding: '30px 20px', textAlign: 'center', background: '#f6f9fc', borderRadius: '12px' }}>
-                <CheckCircle2 size={48} color="#e8a817" style={{ margin: '0 auto 12px' }} />
+              <div style={{ padding: '30px 20px', textAlign: 'center', background: '#f6f9fc', borderRadius: '0px' }}>
+                <CheckCircle2 size={48} color="#51847D" style={{ margin: '0 auto 12px' }} />
                 <h4 style={{ color: '#0f3b5e', fontSize: '1.3rem' }}>Inquiry Received!</h4>
                 <p style={{ color: '#4a5568', fontSize: '0.9rem', marginTop: '8px' }}>
                   Thank you for contacting Jyothi Metals. Reference ticket #JYO-9942 has been dispatched to our support team.
@@ -71,8 +71,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenQuoteModal }) =>
             ) : (
               <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                  <label className="form-label">Inquiry Category</label>
+                  <label htmlFor="contact-category" className="form-label">Inquiry Category</label>
                   <select
+                    id="contact-category"
                     className="form-select"
                     value={formCategory}
                     onChange={(e) => setFormCategory(e.target.value)}
@@ -80,29 +81,30 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenQuoteModal }) =>
                     <option value="Enterprise Quote">Enterprise Project Quote</option>
                     <option value="Technical Spec Consultation">Metallurgy / CAD Spec Consultation</option>
                     <option value="Mill Test Certificate">Mill Test Certificate Request</option>
-                    <option value="Career Inquiry">Careers & Supply Partnerships</option>
+                    <option value="Career Inquiry">Careers &amp; Supply Partnerships</option>
                   </select>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                <div className="grid-responsive-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                   <div className="form-group">
-                    <label className="form-label">Full Name *</label>
-                    <input type="text" required placeholder="John Doe" className="form-input" />
+                    <label htmlFor="contact-name" className="form-label">Full Name *</label>
+                    <input id="contact-name" type="text" required placeholder="John Doe" className="form-input" />
                   </div>
                   <div className="form-group">
-                    <label className="form-label">Email Address *</label>
-                    <input type="email" required placeholder="j.doe@company.com" className="form-input" />
+                    <label htmlFor="contact-email" className="form-label">Email Address *</label>
+                    <input id="contact-email" type="email" required placeholder="j.doe@company.com" className="form-input" />
                   </div>
                 </div>
 
                 <div className="form-group">
-                  <label className="form-label">Phone Number</label>
-                  <input type="tel" placeholder="+1 (555) 000-0000" className="form-input" />
+                  <label htmlFor="contact-phone" className="form-label">Phone Number</label>
+                  <input id="contact-phone" type="tel" placeholder="+91 98000 00000" className="form-input" />
                 </div>
 
                 <div className="form-group">
-                  <label className="form-label">Message / Requirement Details *</label>
+                  <label htmlFor="contact-message" className="form-label">Message / Requirement Details *</label>
                   <textarea
+                    id="contact-message"
                     rows={4}
                     required
                     className="form-textarea"
@@ -110,7 +112,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenQuoteModal }) =>
                   ></textarea>
                 </div>
 
-                <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '14px' }}>
+                <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '14px', minHeight: '44px' }}>
                   Send Inquiry <Send size={16} />
                 </button>
               </form>
@@ -118,12 +120,12 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenQuoteModal }) =>
           </div>
 
           {/* Column 2: Interactive Alloy Weight Estimator Tool */}
-          <div style={{ background: '#ffffff', padding: '40px', borderRadius: '20px', border: '1px solid #edf2f7', boxShadow: '0 10px 30px rgba(0, 0, 0, 0.05)', display: 'flex', flexDirection: 'column' }}>
+          <div style={{ background: '#ffffff', padding: '30px', borderRadius: '0px', border: '1px solid #edf2f7', boxShadow: '0 10px 30px rgba(0, 0, 0, 0.05)', display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-              <div style={{ background: 'rgba(232, 168, 23, 0.15)', padding: '8px', borderRadius: '8px', color: '#c4880f' }}>
+              <div style={{ background: 'rgba(81, 132, 125, 0.15)', padding: '8px', borderRadius: '0px', color: '#51847D' }}>
                 <Calculator size={22} />
               </div>
-              <span className="small-label label-gold" style={{ margin: 0 }}>Interactive Metallurgy Calculator</span>
+              <span className="small-label" style={{ margin: 0, color: '#51847D' }}>Interactive Metallurgy Calculator</span>
             </div>
 
             <h3 className="card-title" style={{ fontSize: '1.5rem', marginBottom: '8px', color: '#0f3b5e' }}>
@@ -134,8 +136,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenQuoteModal }) =>
             </p>
 
             <div className="form-group">
-              <label className="form-label">Select Metal Alloy Density</label>
+              <label htmlFor="calc-alloy-select" className="form-label">Select Metal Alloy Density</label>
               <select
+                id="calc-alloy-select"
                 className="form-select"
                 value={calcAlloy}
                 onChange={(e) => setCalcAlloy(e.target.value)}
@@ -147,10 +150,11 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenQuoteModal }) =>
               </select>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px' }}>
+            <div className="grid-responsive-calc" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(90px, 1fr))', gap: '12px' }}>
               <div className="form-group">
-                <label className="form-label">Length (mm)</label>
+                <label htmlFor="calc-length" className="form-label">Length (mm)</label>
                 <input
+                  id="calc-length"
                   type="number"
                   min="1"
                   className="form-input"
@@ -159,8 +163,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenQuoteModal }) =>
                 />
               </div>
               <div className="form-group">
-                <label className="form-label">Width (mm)</label>
+                <label htmlFor="calc-width" className="form-label">Width (mm)</label>
                 <input
+                  id="calc-width"
                   type="number"
                   min="1"
                   className="form-input"
@@ -169,8 +174,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenQuoteModal }) =>
                 />
               </div>
               <div className="form-group">
-                <label className="form-label">Thickness (mm)</label>
+                <label htmlFor="calc-thickness" className="form-label">Thickness (mm)</label>
                 <input
+                  id="calc-thickness"
                   type="number"
                   min="1"
                   className="form-input"
@@ -181,20 +187,20 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenQuoteModal }) =>
             </div>
 
             {/* Calculated Weight Result Card */}
-            <div style={{ background: 'linear-gradient(135deg, #0f3b5e 0%, #1a5a8a 100%)', color: '#ffffff', borderRadius: '14px', padding: '24px', marginTop: 'auto', textAlign: 'center' }}>
-              <div style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em', opacity: 0.9 }}>
+            <div style={{ background: '#061221', color: '#ffffff', borderRadius: '0px', padding: '24px', marginTop: 'auto', textAlign: 'center', borderTop: '3px solid #51847D' }}>
+              <div style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em', opacity: 0.9, color: '#77b8b0' }}>
                 Theoretical Unit Weight
               </div>
-              <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#e8a817', margin: '4px 0' }}>
-                {calculatedWeightKg.toFixed(2)} <span style={{ fontSize: '1.2rem', color: '#ffffff' }}>kg</span>
+              <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#ffffff', margin: '4px 0' }}>
+                {calculatedWeightKg.toFixed(2)} <span style={{ fontSize: '1.2rem', color: '#77b8b0' }}>kg</span>
               </div>
-              <div style={{ fontSize: '0.85rem', opacity: 0.8 }}>
+              <div style={{ fontSize: '0.85rem', opacity: 0.8, color: '#cbd5e1' }}>
                 (~{(calculatedWeightKg * 2.20462).toFixed(2)} lbs per sheet)
               </div>
               <button
                 onClick={onOpenQuoteModal}
-                className="btn btn-nav-cta"
-                style={{ width: '100%', marginTop: '16px', padding: '12px' }}
+                className="btn btn-accent"
+                style={{ width: '100%', marginTop: '16px', padding: '12px', minHeight: '44px' }}
               >
                 Request Quote with calculated dimensions
               </button>
@@ -203,7 +209,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenQuoteModal }) =>
         </div>
 
         {/* Global Support SLAs & Direct Contacts */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
+        <div className="grid-responsive-3col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
           <div style={{ background: '#ffffff', padding: '24px', border: '1px solid #cbd5e1', display: 'flex', gap: '16px', alignItems: 'center' }}>
             <Clock size={32} color="#51847D" />
             <div>

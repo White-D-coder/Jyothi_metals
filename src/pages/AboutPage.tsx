@@ -154,7 +154,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
       {/* 2. Overview & Industrial Facility Section */}
       <section className="section bg-white" style={{ padding: '100px 0 80px' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.1fr', gap: '60px', alignItems: 'center' }}>
+          <div className="grid-responsive-about" style={{ display: 'grid', gridTemplateColumns: '1fr 1.1fr', gap: '60px', alignItems: 'center' }}>
             {/* Left Side: Mission & Heritage Narrative */}
             <div>
               <h2
@@ -177,7 +177,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                 Whether supplying high-tensile titanium plates for aerospace airframes or heavy structural I-beams for skyscraper foundations, our materials undergo 100% spectral chemistry analysis and heat-lot validation.
               </p>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
+              <div className="grid-responsive-2col" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
                 {keyPillars.slice(0, 2).map((p, idx) => (
                   <div
                     key={idx}
@@ -283,7 +283,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
         </div>
 
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.25fr', gap: '60px', alignItems: 'flex-start' }}>
+          <div className="grid-responsive-about" style={{ display: 'grid', gridTemplateColumns: '1fr 1.25fr', gap: '60px', alignItems: 'flex-start' }}>
             {/* Left Column: Title & Dynamic Crossfading Industrial Visual Frame */}
             <div>
               <h2
@@ -477,7 +477,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px' }}>
+          <div className="grid-responsive-4col" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px' }}>
             {certifications.map((cert, cIdx) => (
               <div
                 key={cIdx}

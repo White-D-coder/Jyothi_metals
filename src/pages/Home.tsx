@@ -8,6 +8,7 @@ import {
   Globe,
   X,
   Star,
+  Search,
 } from 'lucide-react';
 import {
   catalogProducts,
@@ -262,6 +263,8 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
   const [activeCatalogTab, setActiveCatalogTab] = useState<string>('Pipes & Tubes');
   const [activeSubCat, setActiveSubCat] = useState<string>('Stainless Steel Pipes & Tubes');
   const [showAllProducts, setShowAllProducts] = useState<boolean>(false);
+  const [homepageSearchQuery, setHomepageSearchQuery] = useState<string>('');
+  const [showAllMobileCategories, setShowAllMobileCategories] = useState<boolean>(false);
 
   // Automatically select the first sub-category whenever activeCatalogTab changes
   useEffect(() => {
@@ -295,7 +298,16 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                  prod.title.toLowerCase().includes(q);
     }
 
-    return matchMain && matchSub;
+    let matchSearch = true;
+    if (homepageSearchQuery.trim() !== '') {
+      const q = homepageSearchQuery.toLowerCase();
+      matchSearch = prod.title.toLowerCase().includes(q) ||
+                    prod.category.toLowerCase().includes(q) ||
+                    prod.subCat.toLowerCase().includes(q) ||
+                    prod.specs.some(s => s.toLowerCase().includes(q));
+    }
+
+    return matchMain && matchSub && matchSearch;
   });
 
   return (
@@ -337,10 +349,10 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
         {/* Hero Content Container */}
         <div className="container" style={{ position: 'relative', zIndex: 10, width: '100%' }}>
           <div className="hero-content reveal" style={{ maxWidth: '880px', margin: '0 auto', textAlign: 'center' }}>
-            <h1 className="hero-title" style={{ fontSize: '4.2rem', marginBottom: '24px', color: '#ffffff' }}>
+            <h1 className="hero-title" style={{ fontSize: 'clamp(2.1rem, 5.5vw, 4.2rem)', marginBottom: '24px', color: '#ffffff' }}>
               Precision Metal Solutions for <span style={{ color: '#77b8b0' }}>Modern Industry</span>
             </h1>
-            <p style={{ fontSize: '1.25rem', color: '#f1f5f9', margin: '0 auto 36px', maxWidth: '750px', lineHeight: 1.6, textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
+            <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.25rem)', color: '#f1f5f9', margin: '0 auto 36px', maxWidth: '750px', lineHeight: 1.6, textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
               Supplying certified high-performance stainless steel, titanium alloys, structural profiles, and custom fabricated components for global aerospace, energy, and defense projects.
             </p>
             <div className="hero-actions" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px', marginTop: '36px' }}>
@@ -439,10 +451,10 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
         }}
       >
         <div
-          className="catalog-mobile-grid"
+          className="catalog-mobile-grid grid-responsive-about"
           style={{
             display: 'grid',
-            gridTemplateColumns: 'minmax(300px, 46vw) 1fr',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
             gap: '60px',
             alignItems: 'center',
           }}
@@ -488,6 +500,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
             </div>
 
             <h2
+              className="section-title multidisciplinary-title"
               style={{
                 fontSize: '2.85rem',
                 lineHeight: 1.2,
@@ -627,7 +640,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
           </p>
 
           <h2
-            className="font-runomic"
+            className="font-runomic innovation-title"
             style={{
               fontSize: 'clamp(4.8rem, 14vw, 10.5rem)',
               fontWeight: 900,
@@ -679,6 +692,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
       <section className="section bg-white" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden', borderBottom: '1px solid #e2e8f0' }}>
         {/* Far Right Vertical Rotated Backdrop Typography */}
         <div
+          className="rotated-backdrop-text"
           style={{
             position: 'absolute',
             right: '-10px',
@@ -700,11 +714,11 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
         </div>
 
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.25fr', gap: '60px', alignItems: 'flex-start' }}>
+          <div className="grid-responsive-about" style={{ display: 'grid', gap: '60px', alignItems: 'flex-start' }}>
             {/* Left Column: Title & Dynamic Crossfading Industrial Visual Frame */}
             <div className="reveal">
               <h2
-                className="section-title"
+                className="section-title benefits-title"
                 style={{
                   fontSize: '2.6rem',
                   lineHeight: 1.15,
@@ -911,10 +925,10 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                 tag: 'Laser Cut & CNC Drilled',
                 image: '/images/precision_parts.png',
               },
-            ].map((cat) => (
+            ].map((cat, catIdx) => (
               <div
                 key={cat.title}
-                className="category-arch-card reveal"
+                className={`category-arch-card reveal ${catIdx >= 4 ? 'category-card-extra' : ''} ${catIdx >= 4 && !showAllMobileCategories ? 'hide-on-mobile' : ''}`}
                 onClick={() => {
                   setActiveCatalogTab(cat.mainCat);
                   setActiveSubCat('all');
@@ -1007,8 +1021,32 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
               </div>
             ))}
           </div>
+
+          {/* Mobile-Only See All Categories Button */}
+          <div className="mobile-only-see-all-btn" style={{ textAlign: 'center', marginTop: '24px' }}>
+            <button
+              onClick={() => setShowAllMobileCategories(!showAllMobileCategories)}
+              style={{
+                padding: '12px 28px',
+                fontSize: '0.88rem',
+                fontWeight: 800,
+                background: '#edf5f4',
+                border: '2px solid #51847D',
+                color: '#51847D',
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                width: '100%',
+                justifyContent: 'center',
+              }}
+            >
+              {showAllMobileCategories ? 'Show Fewer Categories ▲' : 'See All 8 Product Categories ▼'}
+            </button>
+          </div>
         </div>
       </section>
+
 
       {/* 5. Interactive Industrial Product Catalog (Image 3 Style Catalog Browser with Image 2 Content) */}
       <section id="catalog-browser" className="section bg-tint" style={{ paddingTop: '90px', paddingBottom: '100px' }}>
@@ -1021,9 +1059,50 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
             <h2 className="section-title" style={{ fontSize: '2.6rem', color: '#0f172a', marginBottom: '16px' }}>
               Industrial Metal Product Catalog
             </h2>
-            <p style={{ color: '#475569', fontSize: '1.1rem', lineHeight: 1.6 }}>
+            <p style={{ color: '#475569', fontSize: '1.1rem', lineHeight: 1.6, marginBottom: '28px' }}>
               Explore our complete range of certified stainless steel, titanium alloys, structural profiles, forged flanges, and precision machined components.
             </p>
+
+            {/* Instant Product Search Bar for Homepage */}
+            <div style={{ maxWidth: '640px', margin: '0 auto 10px', position: 'relative' }}>
+              <div style={{ position: 'relative', width: '100%' }}>
+                <Search size={18} style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: '#51847D' }} />
+                <input
+                  type="text"
+                  placeholder="Search instant alloy stock (e.g. 316L, Titanium, Flanges)..."
+                  value={homepageSearchQuery}
+                  onChange={(e) => setHomepageSearchQuery(e.target.value)}
+                  aria-label="Search product catalog"
+                  style={{
+                    width: '100%',
+                    paddingLeft: '46px',
+                    paddingRight: '40px',
+                    paddingTop: '14px',
+                    paddingBottom: '14px',
+                    fontSize: '16px', // Enforces 16px to prevent iOS Safari auto-zoom
+                    border: '2px solid #51847D',
+                    outline: 'none',
+                    background: '#ffffff',
+                    boxShadow: '0 4px 14px rgba(81, 132, 125, 0.12)',
+                    borderRadius: '0px',
+                  }}
+                />
+                {homepageSearchQuery && (
+                  <button
+                    onClick={() => setHomepageSearchQuery('')}
+                    aria-label="Clear product search"
+                    style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', padding: '4px' }}
+                  >
+                    <X size={18} color="#64748b" />
+                  </button>
+                )}
+              </div>
+              {homepageSearchQuery && (
+                <div style={{ textAlign: 'left', marginTop: '8px', fontSize: '0.84rem', color: '#51847D', fontWeight: 700 }}>
+                  Found {filteredCatalog.length} matching product(s) for "{homepageSearchQuery}"
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Top Horizontal Main Category Tabs Bar (Original Button Size, Single Line Row) */}
@@ -1079,7 +1158,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
           </div>
 
           {/* Main 2-Column Catalog Container (Left Sub-Categories Sidebar + Right Product Grid) */}
-          <div style={{ display: 'grid', gridTemplateColumns: '280px 1fr', gap: '32px', alignItems: 'start' }}>
+          <div className="grid-responsive-catalog" style={{ display: 'grid', gridTemplateColumns: '280px 1fr', gap: '32px', alignItems: 'start' }}>
             
             {/* Left Sub-Categories Sidebar (Modern Redesigned Navigation Panel with Scrolling System) */}
             <div className="sidebar-nav-panel">

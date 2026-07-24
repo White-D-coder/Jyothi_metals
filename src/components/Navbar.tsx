@@ -48,31 +48,67 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header style={{ width: '100%', position: 'sticky', top: 0, zIndex: 1000 }}>
-      {/* Sleek Top Announcement Utility Bar (Call Us | Mail Us | Timing) */}
+      {/* Top Announcement Bar: Static on Desktop (>768px), Sliding Marquee Ticker on Mobile/Tablet (<=768px) */}
       <div className="top-announcement-bar">
-        <div className="container top-announcement-container">
-          <div className="top-announcement-wrapper">
-            <a href="tel:+919322281549" className="top-bar-item">
-              <Phone size={13} className="top-bar-icon" />
-              <span className="top-bar-label">CALL US:</span>
-              <span className="top-bar-val">+91 9322281549</span>
-            </a>
+        {/* Desktop Static Layout */}
+        <div className="top-announcement-desktop">
+          <div className="container top-announcement-container">
+            <div className="top-announcement-wrapper">
+              <a href="tel:+919322281549" className="top-bar-item">
+                <Phone size={13} className="top-bar-icon" />
+                <span className="top-bar-label">CALL US:</span>
+                <span className="top-bar-val">+91 9322281549</span>
+              </a>
 
-            <span className="top-bar-divider">|</span>
+              <span className="top-bar-divider">|</span>
 
-            <a href="mailto:info@jyotimetal.co.in" className="top-bar-item">
-              <Mail size={13} className="top-bar-icon" />
-              <span className="top-bar-label">MAIL US:</span>
-              <span className="top-bar-val">info@jyotimetal.co.in</span>
-            </a>
+              <a href="mailto:info@jyotimetal.co.in" className="top-bar-item">
+                <Mail size={13} className="top-bar-icon" />
+                <span className="top-bar-label">MAIL US:</span>
+                <span className="top-bar-val">info@jyotimetal.co.in</span>
+              </a>
 
-            <span className="top-bar-divider">|</span>
+              <span className="top-bar-divider">|</span>
 
-            <div className="top-bar-item">
-              <Clock size={13} className="top-bar-icon" />
-              <span className="top-bar-label">TIMING:</span>
-              <span className="top-bar-val">Mon - Sat: 9:00 AM - 7:00 PM</span>
+              <div className="top-bar-item">
+                <Clock size={13} className="top-bar-icon" />
+                <span className="top-bar-label">TIMING:</span>
+                <span className="top-bar-val">Mon - Sat: 9:00 AM - 7:00 PM</span>
+              </div>
             </div>
+          </div>
+        </div>
+
+        {/* Mobile & Tablet Infinite Sliding Marquee Ticker */}
+        <div className="top-announcement-mobile-ticker">
+          <div className="top-announcement-track">
+            {[...Array(3)].map((_, loopIdx) => (
+              <React.Fragment key={loopIdx}>
+                <a href="tel:+919322281549" className="top-bar-item">
+                  <Phone size={13} className="top-bar-icon" />
+                  <span className="top-bar-label">CALL US:</span>
+                  <span className="top-bar-val">+91 9322281549</span>
+                </a>
+
+                <span className="top-bar-divider">|</span>
+
+                <a href="mailto:info@jyotimetal.co.in" className="top-bar-item">
+                  <Mail size={13} className="top-bar-icon" />
+                  <span className="top-bar-label">MAIL US:</span>
+                  <span className="top-bar-val">info@jyotimetal.co.in</span>
+                </a>
+
+                <span className="top-bar-divider">|</span>
+
+                <div className="top-bar-item">
+                  <Clock size={13} className="top-bar-icon" />
+                  <span className="top-bar-label">TIMING:</span>
+                  <span className="top-bar-val">Mon - Sat: 9:00 AM - 7:00 PM</span>
+                </div>
+
+                <span className="top-bar-divider">|</span>
+              </React.Fragment>
+            ))}
           </div>
         </div>
       </div>
@@ -390,35 +426,83 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="hamburger-sharp"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle navigation menu"
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-nav-drawer"
+            style={{ minWidth: '44px', minHeight: '44px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
-        {/* Mobile Navigation Drawer */}
+        {/* Mobile Navigation Drawer & Backdrop */}
         {mobileMenuOpen && (
-          <div
-            style={{
-              background: '#ffffff',
-              borderTop: '1px solid #cbd5e1',
-              padding: '16px 20px',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '10px',
-            }}
-          >
-            <a href="#home" className="dropdown-item" onClick={() => handleNavClick('home')}>Home</a>
-            <a href="#about" className="dropdown-item" onClick={() => handleNavClick('about')}>Company / About Us</a>
-            <a href="#products" className="dropdown-item" onClick={() => handleNavClick('products')}>Products Catalog</a>
-            <a href="#contact" className="dropdown-item" onClick={() => handleNavClick('contact')}>Contact &amp; Weight Estimator</a>
-            <button
-              onClick={() => { setMobileMenuOpen(false); onOpenQuoteModal(); }}
-              className="btn btn-accent"
-              style={{ marginTop: '10px', width: '100%' }}
+          <>
+            <div
+              style={{
+                position: 'fixed',
+                inset: 0,
+                top: '120px',
+                background: 'rgba(15, 23, 42, 0.5)',
+                zIndex: 998,
+              }}
+              onClick={() => setMobileMenuOpen(false)}
+            />
+            <div
+              id="mobile-nav-drawer"
+              style={{
+                position: 'relative',
+                zIndex: 999,
+                background: '#ffffff',
+                borderTop: '1px solid #cbd5e1',
+                padding: '16px 20px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '8px',
+                maxHeight: 'calc(100vh - 120px)',
+                overflowY: 'auto',
+                boxShadow: '0 10px 25px rgba(0,0,0,0.15)',
+              }}
             >
-              Get Instant Quote
-            </button>
-          </div>
+              <a href="#home" className="dropdown-item" onClick={() => handleNavClick('home')} style={{ padding: '12px 16px', fontWeight: 700 }}>Home</a>
+              <a href="#about" className="dropdown-item" onClick={() => handleNavClick('about')} style={{ padding: '12px 16px', fontWeight: 700 }}>Company &amp; Infrastructure</a>
+              <a href="#products" className="dropdown-item" onClick={() => handleNavClick('products')} style={{ padding: '12px 16px', fontWeight: 700 }}>Products Catalog</a>
+              <a href="#contact" className="dropdown-item" onClick={() => handleNavClick('contact')} style={{ padding: '12px 16px', fontWeight: 700 }}>Contact &amp; Weight Estimator</a>
+
+              <div style={{ padding: '12px 16px', borderTop: '1px solid #e2e8f0', marginTop: '6px' }}>
+                <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#51847D', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '8px' }}>
+                  Popular Product Categories
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+                  {productDropdownItems.map((item) => (
+                    <button
+                      key={item}
+                      onClick={() => handleNavClick('products', item)}
+                      style={{
+                        background: '#edf5f4',
+                        border: '1px solid #cbd5e1',
+                        padding: '8px 10px',
+                        fontSize: '0.8rem',
+                        fontWeight: 600,
+                        color: '#0f172a',
+                        textAlign: 'left',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      {item}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <button
+                onClick={() => { setMobileMenuOpen(false); onOpenQuoteModal(); }}
+                className="btn btn-accent"
+                style={{ marginTop: '12px', width: '100%', padding: '14px' }}
+              >
+                Get Instant Quote
+              </button>
+            </div>
+          </>
         )}
       </div>
     </header>
