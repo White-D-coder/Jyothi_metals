@@ -179,31 +179,31 @@ export const Navbar: React.FC<NavbarProps> = ({
                   About Us &amp; Heritage
                 </a>
                 <a
-                  href="#about"
+                  href="#infrastructure"
                   className="dropdown-item"
                   onClick={(e) => {
                     e.preventDefault();
-                    handleNavClick('about');
+                    handleNavClick('infrastructure');
                   }}
                 >
                   Foundry Infrastructure
                 </a>
                 <a
-                  href="#about"
+                  href="#quality"
                   className="dropdown-item"
                   onClick={(e) => {
                     e.preventDefault();
-                    handleNavClick('about');
+                    handleNavClick('quality');
                   }}
                 >
                   Quality Policy &amp; ISO Standards
                 </a>
                 <a
-                  href="#about"
+                  href="#quality"
                   className="dropdown-item"
                   onClick={(e) => {
                     e.preventDefault();
-                    handleNavClick('about');
+                    handleNavClick('quality');
                   }}
                 >
                   Certifications &amp; Compliance
@@ -311,8 +311,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               onMouseLeave={() => setActiveDropdown(null)}
             >
               <a
-                href="#about"
-                className="nav-menu-link"
+                href="#services"
+                className={`nav-menu-link ${activeTab === 'services' ? 'active' : ''}`}
                 onClick={(e) => {
                   e.preventDefault();
                   handleDropdownClick('services');
@@ -322,31 +322,31 @@ export const Navbar: React.FC<NavbarProps> = ({
               </a>
               <div className={`dropdown-menu ${activeDropdown === 'services' ? 'is-open' : ''}`}>
                 <a
-                  href="#about"
+                  href="#services"
                   className="dropdown-item"
                   onClick={(e) => {
                     e.preventDefault();
-                    handleNavClick('about');
+                    handleNavClick('services');
                   }}
                 >
                   Custom Laser Cutting &amp; Milling
                 </a>
                 <a
-                  href="#about"
+                  href="#services"
                   className="dropdown-item"
                   onClick={(e) => {
                     e.preventDefault();
-                    handleNavClick('about');
+                    handleNavClick('services');
                   }}
                 >
                   Continuous Electric Arc Casting
                 </a>
                 <a
-                  href="#about"
+                  href="#services"
                   className="dropdown-item"
                   onClick={(e) => {
                     e.preventDefault();
-                    handleNavClick('about');
+                    handleNavClick('services');
                   }}
                 >
                   Ultrasonic Weld Inspection
@@ -396,11 +396,11 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <li className="nav-item">
               <a
-                href="#about"
-                className="nav-menu-link"
+                href="#blog"
+                className={`nav-menu-link ${activeTab === 'blog' ? 'active' : ''}`}
                 onClick={(e) => {
                   e.preventDefault();
-                  handleNavClick('about');
+                  handleNavClick('blog');
                 }}
               >
                 Blog
@@ -464,8 +464,14 @@ export const Navbar: React.FC<NavbarProps> = ({
               }}
             >
               <a href="#home" className="dropdown-item" onClick={() => handleNavClick('home')} style={{ padding: '12px 16px', fontWeight: 700 }}>Home</a>
-              <a href="#about" className="dropdown-item" onClick={() => handleNavClick('about')} style={{ padding: '12px 16px', fontWeight: 700 }}>Company &amp; Infrastructure</a>
+              <a href="#about" className="dropdown-item" onClick={() => handleNavClick('about')} style={{ padding: '12px 16px', fontWeight: 700 }}>About Us &amp; Heritage</a>
+              <a href="#infrastructure" className="dropdown-item" onClick={() => handleNavClick('infrastructure')} style={{ padding: '12px 16px', fontWeight: 700 }}>Foundry Infrastructure</a>
+              <a href="#quality" className="dropdown-item" onClick={() => handleNavClick('quality')} style={{ padding: '12px 16px', fontWeight: 700 }}>Quality &amp; Certifications</a>
+              <a href="#services" className="dropdown-item" onClick={() => handleNavClick('services')} style={{ padding: '12px 16px', fontWeight: 700 }}>Services</a>
               <a href="#products" className="dropdown-item" onClick={() => handleNavClick('products')} style={{ padding: '12px 16px', fontWeight: 700 }}>Products Catalog</a>
+              <a href="#blog" className="dropdown-item" onClick={() => handleNavClick('blog')} style={{ padding: '12px 16px', fontWeight: 700 }}>Blog</a>
+              <a href="#careers" className="dropdown-item" onClick={() => handleNavClick('careers')} style={{ padding: '12px 16px', fontWeight: 700 }}>Careers</a>
+              <a href="#faq" className="dropdown-item" onClick={() => handleNavClick('faq')} style={{ padding: '12px 16px', fontWeight: 700 }}>FAQ</a>
               <a href="#contact" className="dropdown-item" onClick={() => handleNavClick('contact')} style={{ padding: '12px 16px', fontWeight: 700 }}>Contact &amp; Weight Estimator</a>
 
               <div style={{ padding: '12px 16px', borderTop: '1px solid #e2e8f0', marginTop: '6px' }}>

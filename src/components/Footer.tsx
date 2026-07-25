@@ -177,10 +177,10 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenQuoteModal }
                 </li>
                 <li>
                   <a
-                    href="#products"
+                    href="#services"
                     onClick={(e) => {
                       e.preventDefault();
-                      setActiveTab('products');
+                      setActiveTab('services');
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
                     style={{ color: '#cbd5e1', textDecoration: 'none', fontSize: '0.88rem' }}
@@ -190,39 +190,41 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenQuoteModal }
                 </li>
                 <li>
                   <a
-                    href="#about"
+                    href="#infrastructure"
                     onClick={(e) => {
                       e.preventDefault();
-                      setActiveTab('about');
+                      setActiveTab('infrastructure');
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
                     style={{ color: '#cbd5e1', textDecoration: 'none', fontSize: '0.88rem' }}
                   >
-                    Work Process
+                    Infrastructure
                   </a>
                 </li>
                 <li>
                   <a
-                    href="#home"
+                    href="#blog"
                     onClick={(e) => {
                       e.preventDefault();
-                      setActiveTab('home');
+                      setActiveTab('blog');
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
                     style={{ color: '#cbd5e1', textDecoration: 'none', fontSize: '0.88rem' }}
                   >
-                    Testimonials
+                    Blog
                   </a>
                 </li>
                 <li>
                   <a
-                    href="#about"
+                    href="#careers"
                     onClick={(e) => {
                       e.preventDefault();
-                      setActiveTab('about');
+                      setActiveTab('careers');
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
                     style={{ color: '#cbd5e1', textDecoration: 'none', fontSize: '0.88rem' }}
                   >
-                    Team
+                    Careers
                   </a>
                 </li>
               </ul>
@@ -256,14 +258,28 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenQuoteModal }
                 </li>
                 <li>
                   <a
-                    href="#about"
+                    href="#quality"
                     onClick={(e) => {
                       e.preventDefault();
-                      setActiveTab('about');
+                      setActiveTab('quality');
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
                     style={{ color: '#cbd5e1', textDecoration: 'none', fontSize: '0.88rem' }}
                   >
                     Certifications
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#faq"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setActiveTab('faq');
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    style={{ color: '#cbd5e1', textDecoration: 'none', fontSize: '0.88rem' }}
+                  >
+                    FAQ
                   </a>
                 </li>
                 <li>
@@ -315,23 +331,27 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenQuoteModal }
           </div>
 
           {/* Column 4: Contact Person & Emails */}
-          <div>
-            <h4 style={{ color: '#ffffff', fontSize: '1.05rem', fontWeight: 800, marginBottom: '10px' }}>
-              Sales & Inquiry
-            </h4>
-            <p style={{ color: '#cbd5e1', fontSize: '0.85rem', lineHeight: 1.6, marginBottom: '16px' }}>
-              <strong style={{ color: '#ffffff' }}>Dhawal Choudhary</strong><br />
-              <a href="tel:+919322281549" style={{ color: '#77b8b0', textDecoration: 'none', fontWeight: 700 }}>+91 9322281549</a>
-            </p>
+          <div className="footer-contact-group">
+            <div>
+              <h4 style={{ color: '#ffffff', fontSize: '1.05rem', fontWeight: 800, marginBottom: '10px' }}>
+                Sales & Inquiry
+              </h4>
+              <p style={{ color: '#cbd5e1', fontSize: '0.85rem', lineHeight: 1.6, marginBottom: '16px' }}>
+                <strong style={{ color: '#ffffff' }}>Dhawal Choudhary</strong><br />
+                <a href="tel:+919322281549" style={{ color: '#77b8b0', textDecoration: 'none', fontWeight: 700 }}>+91 9322281549</a>
+              </p>
+            </div>
 
-            <h4 style={{ color: '#ffffff', fontSize: '1.05rem', fontWeight: 800, marginBottom: '10px' }}>
-              Email Addresses
-            </h4>
-            <p style={{ color: '#cbd5e1', fontSize: '0.82rem', margin: 0, lineHeight: 1.6 }}>
-              info@jyotimetal.co.in<br />
-              dinu1301@gmail.com<br />
-              jyotimetal2000@gmail.com
-            </p>
+            <div>
+              <h4 style={{ color: '#ffffff', fontSize: '1.05rem', fontWeight: 800, marginBottom: '10px' }}>
+                Email Addresses
+              </h4>
+              <p style={{ color: '#cbd5e1', fontSize: '0.82rem', margin: 0, lineHeight: 1.6 }}>
+                info@jyotimetal.co.in<br />
+                dinu1301@gmail.com<br />
+                jyotimetal2000@gmail.com
+              </p>
+            </div>
           </div>
         </div>
 

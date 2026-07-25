@@ -106,6 +106,9 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
   const statsRef = useRef<HTMLDivElement>(null);
   const [hasAnimatedStats, setHasAnimatedStats] = useState(false);
 
+  // Ref for the "High Quality Products" category carousel (auto-scrolls on mobile)
+  const categoryCarouselRef = useRef<HTMLDivElement>(null);
+
   // 9 Enterprise Testimonials for 3-Column Vertical Infinite Marquee
   const testimonials = [
     {
@@ -273,6 +276,96 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
     setActiveSubCat(defaultSub);
     setShowAllProducts(false);
   }, [activeCatalogTab]);
+
+  // Continuously auto-scroll the "High Quality Products" category carousel — mobile view only.
+  // Smoothly ping-pongs end-to-end, pauses while the user is touching it, and respects reduced-motion.
+  useEffect(() => {
+    const el = categoryCarouselRef.current;
+    if (!el) return;
+
+    const mql = window.matchMedia('(max-width: 768px)');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const SPEED = 0.7; // px per animation frame (~42px/s) — gentle, tunable
+
+    let rafId = 0;
+    let direction = 1;
+    let paused = false;
+    let resumeTimer = 0;
+    let pos = 0;
+
+    const step = () => {
+      if (!paused) {
+        const maxScroll = el.scrollWidth - el.clientWidth;
+        if (maxScroll > 4) {
+          pos += direction * SPEED;
+          if (pos >= maxScroll) {
+            pos = maxScroll;
+            direction = -1;
+          } else if (pos <= 0) {
+            pos = 0;
+            direction = 1;
+          }
+          el.scrollLeft = pos;
+        }
+      }
+      rafId = requestAnimationFrame(step);
+    };
+
+    const pause = () => {
+      paused = true;
+      window.clearTimeout(resumeTimer);
+    };
+    const resumeSoon = () => {
+      window.clearTimeout(resumeTimer);
+      resumeTimer = window.setTimeout(() => {
+        pos = el.scrollLeft; // re-sync after any manual swipe
+        paused = false;
+      }, 2000);
+    };
+
+    const start = () => {
+      if (rafId) return;
+      pos = el.scrollLeft;
+      el.style.scrollSnapType = 'none'; // avoid snap tug so motion stays smooth
+      el.addEventListener('pointerdown', pause);
+      el.addEventListener('touchstart', pause, { passive: true });
+      el.addEventListener('mouseenter', pause);
+      el.addEventListener('pointerup', resumeSoon);
+      el.addEventListener('touchend', resumeSoon, { passive: true });
+      el.addEventListener('mouseleave', resumeSoon);
+      rafId = requestAnimationFrame(step);
+    };
+
+    const stop = () => {
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = 0;
+      }
+      window.clearTimeout(resumeTimer);
+      el.style.scrollSnapType = '';
+      el.removeEventListener('pointerdown', pause);
+      el.removeEventListener('touchstart', pause);
+      el.removeEventListener('mouseenter', pause);
+      el.removeEventListener('pointerup', resumeSoon);
+      el.removeEventListener('touchend', resumeSoon);
+      el.removeEventListener('mouseleave', resumeSoon);
+    };
+
+    const evaluate = () => {
+      if (mql.matches && !reduceMotion.matches) start();
+      else stop();
+    };
+
+    evaluate();
+    mql.addEventListener('change', evaluate);
+    reduceMotion.addEventListener('change', evaluate);
+
+    return () => {
+      stop();
+      mql.removeEventListener('change', evaluate);
+      reduceMotion.removeEventListener('change', evaluate);
+    };
+  }, []);
 
   const currentSubList = getSubCategoriesForCategory(activeCatalogTab);
   const effectiveSubCat = currentSubList.some(
@@ -861,6 +954,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
 
           {/* 8 Product Category Cards Grid on Desktop / Phone View Horizontal Carousel */}
           <div
+            ref={categoryCarouselRef}
             className="category-arch-grid"
             style={{
               display: 'grid',

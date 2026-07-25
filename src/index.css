@@ -1447,9 +1447,129 @@ h1, h2, h3, h4, h5, h6 {
     flex-direction: column !important;
     align-items: center !important;
   }
+
+  /* Sales & Inquiry and Email Addresses side by side on mobile */
+  .footer-contact-group {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 20px !important;
+    text-align: left !important;
+  }
 }
 
 
 
 
 
+
+/* ==========================================================================
+   Inner Pages — Mobile/Responsive Polish
+   (Services / Infrastructure / Quality / Blog / Careers / FAQ)
+   Scoped under .inner-page so the original pages are never affected.
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Section headings carry inline desktop sizes (2.3–2.7rem); scale them down */
+  .inner-page .section-title {
+    font-size: clamp(1.6rem, 5.2vw, 2.1rem) !important;
+    line-height: 1.22 !important;
+  }
+  /* Trim the tall inner-page hero padding under the sticky navbar */
+  .inner-page .page-hero {
+    padding: 88px 0 56px !important;
+  }
+  .inner-page .page-hero p {
+    font-size: 1.02rem !important;
+  }
+  /* Blog featured card inner text block */
+  .inner-page .blog-featured-body {
+    padding: 30px 24px !important;
+  }
+  .inner-page .blog-featured-body h2 {
+    font-size: 1.6rem !important;
+  }
+  /* Quality policy quote block */
+  .inner-page .quality-policy-quote {
+    padding: 28px 24px !important;
+  }
+  .inner-page .quality-policy-quote p {
+    font-size: 1.18rem !important;
+    line-height: 1.5 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .inner-page .section-title {
+    font-size: clamp(1.4rem, 6.6vw, 1.85rem) !important;
+  }
+  .inner-page .page-hero {
+    padding: 72px 0 44px !important;
+  }
+  .inner-page .page-hero p {
+    font-size: 0.98rem !important;
+  }
+  /* Infrastructure hero-image stat overlay: stack cleanly on small phones */
+  .inner-page .infra-hero-overlay {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 14px !important;
+    padding: 20px !important;
+  }
+  .inner-page .infra-hero-overlay > div:last-child {
+    border-left: none !important;
+    padding-left: 0 !important;
+    text-align: left !important;
+  }
+}
+
+/* Numeric stat bands read better as 2-up on phones (vs one tall column) */
+@media (max-width: 768px) {
+  .inner-page .inner-stat-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 14px !important;
+  }
+}
+@media (max-width: 380px) {
+  .inner-page .inner-stat-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Infrastructure "Plant Capacity" band — dedicated mobile layout.
+   Desktop keeps the 5-column divided row; phones get a light 2-up stat
+   grid (number over label) with a thin teal accent rule — no boxed cards.
+   The odd last stat spans the full width. */
+@media (max-width: 768px) {
+  .inner-page .infra-capacity-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 22px 20px !important;
+  }
+  .inner-page .capacity-item {
+    display: block !important;
+    text-align: left !important;
+    padding: 14px 4px 4px !important;
+    background: transparent !important;
+    border: none !important;
+    border-top: 2px solid rgba(119, 184, 176, 0.40) !important;
+  }
+  .inner-page .capacity-value {
+    font-size: 1.55rem !important;
+    white-space: nowrap !important;
+    margin: 0 0 6px !important;
+  }
+  .inner-page .capacity-label {
+    margin-top: 0 !important;
+    text-align: left !important;
+    font-size: 0.68rem !important;
+    line-height: 1.35 !important;
+    max-width: none !important;
+  }
+  .inner-page .capacity-item:last-child {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .inner-page .capacity-value {
+    font-size: 1.3rem !important;
+  }
+}
