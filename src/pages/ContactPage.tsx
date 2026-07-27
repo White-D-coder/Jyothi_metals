@@ -40,7 +40,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenQuoteModal }) =>
       <div className="container">
         {/* Header */}
         <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto 50px' }}>
-          <span className="small-label label-gold">24/7 Technical Support &amp; Quotes</span>
+          <span className="small-label">24/7 Technical Support &amp; Quotes</span>
           <h1 className="section-title" style={{ fontSize: '3rem' }}>
             Get in Touch with Our Metallurgy Experts
           </h1>
@@ -52,7 +52,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenQuoteModal }) =>
         {/* 2 Column Layout: Interactive Metal Calculator & Contact Form */}
         <div className="grid-responsive-2col" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px', marginBottom: '60px' }}>
           {/* Column 1: Contact Form */}
-          <div style={{ background: '#ffffff', padding: '30px', borderRadius: '0px', border: '1px solid #edf2f7', boxShadow: '0 10px 30px rgba(0, 0, 0, 0.05)' }}>
+          <div style={{ background: '#ffffff', padding: '32px', borderRadius: '16px', border: '1px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0, 0, 0, 0.04)' }}>
             <h3 className="card-title" style={{ fontSize: '1.5rem', marginBottom: '8px', color: '#0f3b5e' }}>
               Send an Inquiry
             </h3>
@@ -61,7 +61,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenQuoteModal }) =>
             </p>
 
             {submitted ? (
-              <div style={{ padding: '30px 20px', textAlign: 'center', background: '#f6f9fc', borderRadius: '0px' }}>
+              <div style={{ padding: '30px 20px', textAlign: 'center', background: '#f6f9fc', borderRadius: '12px' }}>
                 <CheckCircle2 size={48} color="#51847D" style={{ margin: '0 auto 12px' }} />
                 <h4 style={{ color: '#0f3b5e', fontSize: '1.3rem' }}>Inquiry Received!</h4>
                 <p style={{ color: '#4a5568', fontSize: '0.9rem', marginTop: '8px' }}>
@@ -120,9 +120,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenQuoteModal }) =>
           </div>
 
           {/* Column 2: Interactive Alloy Weight Estimator Tool */}
-          <div style={{ background: '#ffffff', padding: '30px', borderRadius: '0px', border: '1px solid #edf2f7', boxShadow: '0 10px 30px rgba(0, 0, 0, 0.05)', display: 'flex', flexDirection: 'column' }}>
+          <div style={{ background: '#ffffff', padding: '32px', borderRadius: '16px', border: '1px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0, 0, 0, 0.04)', display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-              <div style={{ background: 'rgba(81, 132, 125, 0.15)', padding: '8px', borderRadius: '0px', color: '#51847D' }}>
+              <div style={{ background: 'rgba(81, 132, 125, 0.15)', padding: '8px', borderRadius: '10px', color: '#51847D' }}>
                 <Calculator size={22} />
               </div>
               <span className="small-label" style={{ margin: 0, color: '#51847D' }}>Interactive Metallurgy Calculator</span>
@@ -187,7 +187,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenQuoteModal }) =>
             </div>
 
             {/* Calculated Weight Result Card */}
-            <div style={{ background: '#061221', color: '#ffffff', borderRadius: '0px', padding: '24px', marginTop: 'auto', textAlign: 'center', borderTop: '3px solid #51847D' }}>
+            <div style={{ background: '#061221', color: '#ffffff', borderRadius: '14px', padding: '24px', marginTop: 'auto', textAlign: 'center', borderTop: '3px solid #51847D' }}>
               <div style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em', opacity: 0.9, color: '#77b8b0' }}>
                 Theoretical Unit Weight
               </div>
@@ -210,21 +210,21 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenQuoteModal }) =>
 
         {/* Global Support SLAs & Direct Contacts */}
         <div className="grid-responsive-3col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
-          <div style={{ background: '#ffffff', padding: '24px', border: '1px solid #cbd5e1', display: 'flex', gap: '16px', alignItems: 'center' }}>
+          <div style={{ background: '#ffffff', padding: '24px', border: '1px solid #e2e8f0', borderRadius: '16px', boxShadow: '0 6px 20px rgba(0,0,0,0.03)', display: 'flex', gap: '16px', alignItems: 'center' }}>
             <Clock size={32} color="#51847D" />
             <div>
               <div style={{ fontWeight: 800, color: '#0f172a' }}>2-Hour Response SLA</div>
               <div style={{ fontSize: '0.85rem', color: '#475569' }}>Dhawal Choudhary: +91 9322281549</div>
             </div>
           </div>
-          <div style={{ background: '#ffffff', padding: '24px', border: '1px solid #cbd5e1', display: 'flex', gap: '16px', alignItems: 'center' }}>
+          <div style={{ background: '#ffffff', padding: '24px', border: '1px solid #e2e8f0', borderRadius: '16px', boxShadow: '0 6px 20px rgba(0,0,0,0.03)', display: 'flex', gap: '16px', alignItems: 'center' }}>
             <Phone size={32} color="#51847D" />
             <div>
               <div style={{ fontWeight: 800, color: '#0f172a' }}>Mumbai Office Hotline</div>
               <div style={{ fontSize: '0.85rem', color: '#475569' }}>(022) 2380 2758 / 2382 5068</div>
             </div>
           </div>
-          <div style={{ background: '#ffffff', padding: '24px', border: '1px solid #cbd5e1', display: 'flex', gap: '16px', alignItems: 'center' }}>
+          <div style={{ background: '#ffffff', padding: '24px', border: '1px solid #e2e8f0', borderRadius: '16px', boxShadow: '0 6px 20px rgba(0,0,0,0.03)', display: 'flex', gap: '16px', alignItems: 'center' }}>
             <MapPin size={32} color="#51847D" />
             <div>
               <div style={{ fontWeight: 800, color: '#0f172a' }}>Key Locations</div>

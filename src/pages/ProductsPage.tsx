@@ -114,7 +114,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                 margin: 0,
                 background: '#ffffff',
                 border: '1.5px solid #cbd5e1',
-                borderRadius: '0px',
+                borderRadius: '12px',
                 fontSize: '16px', // Prevents iOS Safari auto-zoom
                 color: '#0f172a',
                 outline: 'none',
@@ -171,6 +171,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                 setIsSubCatDropdownOpen(false);
               }}
               className="custom-mobile-dropdown-btn"
+              style={{ borderRadius: '12px' }}
             >
               <span>{currentCategoryName}</span>
               <ChevronDown
@@ -184,7 +185,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
             </button>
 
             {isMainCatDropdownOpen && (
-              <div className="custom-mobile-dropdown-menu">
+              <div className="custom-mobile-dropdown-menu" style={{ borderRadius: '12px' }}>
                 {[
                   'Pipes & Tubes',
                   'Plates & Sheets',
@@ -226,6 +227,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                 setIsMainCatDropdownOpen(false);
               }}
               className="custom-mobile-dropdown-btn"
+              style={{ borderRadius: '12px' }}
             >
               <span>
                 {getSubCategoriesForCategory(currentCategoryName).find((s) => s.id === effectiveSubCat)?.label || effectiveSubCat}
@@ -241,7 +243,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
             </button>
 
             {isSubCatDropdownOpen && (
-              <div className="custom-mobile-dropdown-menu">
+              <div className="custom-mobile-dropdown-menu" style={{ borderRadius: '12px' }}>
                 {getSubCategoriesForCategory(currentCategoryName).map((sub) => {
                   const isSelected = effectiveSubCat === sub.id;
                   return (
@@ -311,7 +313,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
               <button
                 onClick={() => onOpenQuoteModal()}
                 className="btn btn-accent"
-                style={{ width: '100%', padding: '10px 14px', fontSize: '0.8rem', borderRadius: '0px', marginBottom: filteredProducts.length > 9 ? '10px' : '0' }}
+                style={{ width: '100%', padding: '10px 14px', fontSize: '0.8rem', borderRadius: '10px', marginBottom: filteredProducts.length > 9 ? '10px' : '0' }}
               >
                 Custom Spec Inquiry
               </button>
@@ -327,7 +329,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                     color: '#51847D',
                     background: '#edf5f4',
                     border: '1px solid #77b8b0',
-                    borderRadius: '0px',
+                    borderRadius: '10px',
                     cursor: 'pointer',
                   }}
                 >
@@ -340,14 +342,14 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
           {/* Right Column: Product Cards Grid (Max 3 Lines / 9 Boxes Initially) */}
           <div style={{ flex: 1 }}>
             {filteredProducts.length === 0 ? (
-              <div style={{ background: '#ffffff', padding: '60px', textAlign: 'center', border: '1px solid #e2e8f0', borderRadius: '0px' }}>
+              <div style={{ background: '#ffffff', padding: '60px', textAlign: 'center', border: '1px solid #e2e8f0', borderRadius: '16px' }}>
                 <Info size={40} color="#51847D" style={{ marginBottom: '12px' }} />
                 <h3 style={{ color: '#0f172a', marginBottom: '8px' }}>No products match your search query</h3>
                 <p style={{ color: '#64748b', fontSize: '0.9rem', marginBottom: '20px' }}>Try clearing your search term or selecting another sub-category.</p>
                 <button
                   onClick={() => { setSearchQuery(''); setSelectedSubCat(getFirstSubCategoryForCategory(currentCategoryName)); }}
                   className="btn btn-accent"
-                  style={{ padding: '10px 24px', borderRadius: '0px' }}
+                  style={{ padding: '10px 24px', borderRadius: '10px' }}
                 >
                   Reset Filters
                 </button>
@@ -362,7 +364,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                       style={{
                         background: '#ffffff',
                         border: '1px solid #e2e8f0',
-                        borderRadius: '0px',
+                        borderRadius: '16px',
                         display: 'flex',
                         flexDirection: 'column',
                         height: '100%',
@@ -376,7 +378,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                           className="product-img"
                           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                         />
-                        <span className="product-badge" style={{ background: '#51847D', color: '#ffffff', padding: '4px 10px', fontSize: '0.72rem', fontWeight: 800, borderRadius: '0px' }}>
+                        <span className="product-badge">
                           {prod.category}
                         </span>
                       </div>
@@ -395,8 +397,8 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                                 color: '#51847D',
                                 fontSize: '0.72rem',
                                 fontWeight: 700,
-                                padding: '3px 8px',
-                                borderRadius: '0px',
+                                padding: '4px 10px',
+                                borderRadius: '20px',
                               }}
                             >
                               {spec}
@@ -408,7 +410,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                           <button
                             onClick={() => onOpenQuoteModal(prod.title)}
                             className="btn btn-accent"
-                            style={{ padding: '8px 16px', fontSize: '0.82rem', fontWeight: 700, borderRadius: '0px' }}
+                            style={{ padding: '8px 16px', fontSize: '0.82rem', fontWeight: 700 }}
                           >
                             Get Quote
                           </button>
@@ -439,7 +441,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                     <button
                       onClick={() => setShowAllProducts(!showAllProducts)}
                       className="btn btn-accent"
-                      style={{ padding: '12px 32px', fontSize: '0.9rem', borderRadius: '0px', background: '#51847D' }}
+                      style={{ padding: '12px 32px', fontSize: '0.9rem', borderRadius: '10px' }}
                     >
                       {showAllProducts
                         ? 'Show Max 3 Lines'

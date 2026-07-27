@@ -244,65 +244,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               </div>
             </li>
 
-            {/* Materials ▾ Dropdown */}
-            <li
-              className="nav-item"
-              onMouseEnter={() => setActiveDropdown('materials')}
-              onMouseLeave={() => setActiveDropdown(null)}
-            >
-              <a
-                href="#products"
-                className="nav-menu-link"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleDropdownClick('materials');
-                }}
-              >
-                Materials <ChevronDown size={14} />
-              </a>
-              <div className={`dropdown-menu ${activeDropdown === 'materials' ? 'is-open' : ''}`}>
-                <a
-                  href="#products"
-                  className="dropdown-item"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick('products');
-                  }}
-                >
-                  Stainless Steel 316L / 304
-                </a>
-                <a
-                  href="#products"
-                  className="dropdown-item"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick('products');
-                  }}
-                >
-                  Titanium Alloy Grade 5
-                </a>
-                <a
-                  href="#products"
-                  className="dropdown-item"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick('products');
-                  }}
-                >
-                  Structural Carbon Steel A36
-                </a>
-                <a
-                  href="#products"
-                  className="dropdown-item"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick('products');
-                  }}
-                >
-                  Superalloys &amp; Inconel
-                </a>
-              </div>
-            </li>
 
             {/* Services ▾ Dropdown */}
             <li

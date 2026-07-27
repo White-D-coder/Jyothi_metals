@@ -56,10 +56,11 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
           aria-label="Close quote modal"
           style={{
             position: 'absolute',
-            top: '12px',
-            right: '12px',
-            minWidth: '44px',
-            minHeight: '44px',
+            top: '16px',
+            right: '16px',
+            minWidth: '40px',
+            minHeight: '40px',
+            borderRadius: '50%',
             display: 'inline-flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -67,6 +68,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
             border: 'none',
             cursor: 'pointer',
             color: '#0f172a',
+            transition: 'background 0.2s ease',
           }}
         >
           <X size={20} />
@@ -81,14 +83,14 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
             <p style={{ color: '#4a5568', marginTop: '10px', fontSize: '0.94rem' }}>
               Thank you, <strong>{name || 'Valued Client'}</strong>. Our metallurgy engineers are reviewing your specs for <strong>{quantityTons} Tons</strong> of {material}. We will respond within 2 business hours.
             </p>
-            <div style={{ background: '#edf5f4', border: '1px solid #77b8b0', padding: '14px', marginTop: '20px', fontSize: '0.9rem', color: '#51847D', fontWeight: 700 }}>
+            <div style={{ background: '#edf5f4', border: '1px solid #77b8b0', borderRadius: '12px', padding: '14px', marginTop: '20px', fontSize: '0.9rem', color: '#51847D', fontWeight: 700 }}>
               Estimated Project Budget: ${estimatedTotal.toLocaleString()} USD
             </div>
           </div>
         ) : (
           <>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
-              <div style={{ background: 'rgba(81, 132, 125, 0.12)', padding: '6px', color: '#51847D' }}>
+              <div style={{ background: 'rgba(81, 132, 125, 0.12)', padding: '6px', borderRadius: '8px', color: '#51847D' }}>
                 <Calculator size={20} />
               </div>
               <span className="small-label" style={{ marginBottom: 0, color: '#51847D' }}>Instant Metallurgy Specifier</span>
@@ -148,7 +150,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                   />
                 </div>
 
-                <div style={{ background: '#edf5f4', border: '1px solid #cbd5e1', padding: '10px 14px', marginTop: '4px' }}>
+                <div style={{ background: '#edf5f4', border: '1px solid #cbd5e1', borderRadius: '12px', padding: '10px 14px', marginTop: '4px' }}>
                   <div style={{ fontSize: '0.72rem', fontWeight: 700, color: '#4a5568', textTransform: 'uppercase' }}>Est. Material Budget</div>
                   <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#51847D' }}>
                     ${estimatedTotal.toLocaleString()} <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>USD</span>

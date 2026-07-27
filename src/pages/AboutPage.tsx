@@ -182,10 +182,12 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                   <div
                     key={idx}
                     style={{
-                      background: '#f8fafc',
-                      border: '1px solid #cbd5e1',
+                      background: '#ffffff',
+                      border: '1px solid #e2e8f0',
                       borderLeft: '4px solid #51847D',
-                      padding: '20px',
+                      borderRadius: '14px',
+                      padding: '24px',
+                      boxShadow: '0 6px 20px rgba(0,0,0,0.03)',
                     }}
                   >
                     <div style={{ marginBottom: '12px' }}>{p.icon}</div>
@@ -205,7 +207,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
               <div
                 className="about-arch-frame-reversed"
                 style={{
-                  border: '2px solid #0f172a',
+                  borderRadius: '20px',
+                  overflow: 'hidden',
+                  boxShadow: '0 20px 45px rgba(0,0,0,0.14)',
                   background: '#061221',
                 }}
               >
@@ -248,7 +252,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                   </div>
 
                   <div style={{ textAlign: 'right', borderLeft: '2px solid #51847D', paddingLeft: '20px' }}>
-                    <div style={{ fontWeight: 900, fontSize: '1.4rem', color: '#d4a017' }}>850k+ Tons</div>
+                    <div style={{ fontWeight: 900, fontSize: '1.4rem', color: '#77b8b0' }}>850k+ Tons</div>
                     <div style={{ fontSize: '0.8rem', color: '#cbd5e1' }}>Annual Throughput</div>
                   </div>
                 </div>
@@ -304,8 +308,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                 style={{
                   position: 'relative',
                   height: '400px',
-                  border: '2px solid #0f172a',
-                  boxShadow: '0 20px 40px rgba(0,0,0,0.12)',
+                  borderRadius: '20px',
+                  boxShadow: '0 20px 45px rgba(0,0,0,0.14)',
                   overflow: 'hidden',
                   background: '#061221',
                 }}
@@ -438,14 +442,15 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                 key={idx}
                 style={{
                   background: '#ffffff',
-                  border: '1px solid #cbd5e1',
+                  border: '1px solid #e2e8f0',
                   borderLeft: '6px solid #51847D',
+                  borderRadius: '16px',
                   padding: '28px 32px',
                   display: 'grid',
                   gridTemplateColumns: '120px 1fr',
                   gap: '24px',
                   alignItems: 'center',
-                  boxShadow: '0 4px 16px rgba(0,0,0,0.03)',
+                  boxShadow: '0 6px 20px rgba(0,0,0,0.03)',
                 }}
               >
                 <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '2.2rem', fontWeight: 900, color: '#51847D' }}>
@@ -483,11 +488,12 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                 key={cIdx}
                 style={{
                   background: '#ffffff',
-                  border: '1px solid #cbd5e1',
+                  border: '1px solid #e2e8f0',
                   borderTop: '4px solid #51847D',
+                  borderRadius: '16px',
                   padding: '30px 24px',
                   textAlign: 'center',
-                  boxShadow: '0 6px 20px rgba(0,0,0,0.04)',
+                  boxShadow: '0 8px 24px rgba(0,0,0,0.04)',
                 }}
               >
                 <FileCheck size={36} color="#51847D" style={{ margin: '0 auto 16px' }} />

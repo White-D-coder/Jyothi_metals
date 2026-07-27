@@ -1278,7 +1278,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                   setShowAllProducts(false);
                 }}
                 style={{
-                  padding: '11px 20px',
+                  padding: '11px 22px',
                   fontSize: '0.88rem',
                   fontWeight: 700,
                   cursor: 'pointer',
@@ -1286,7 +1286,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                   background: activeCatalogTab === tab.id ? '#51847D' : '#ffffff',
                   color: activeCatalogTab === tab.id ? '#ffffff' : '#1e293b',
                   border: activeCatalogTab === tab.id ? '2px solid #51847D' : '1px solid #e2e8f0',
-                  borderRadius: '0px',
+                  borderRadius: '50px',
                   boxShadow: activeCatalogTab === tab.id ? '0 6px 18px rgba(81, 132, 125, 0.25)' : '0 2px 4px rgba(0,0,0,0.02)',
                   transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
                   flexShrink: 0,
@@ -1343,7 +1343,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                 <button
                   onClick={() => onOpenQuoteModal()}
                   className="btn btn-accent"
-                  style={{ width: '100%', padding: '10px 14px', fontSize: '0.8rem', borderRadius: '0px', marginBottom: filteredCatalog.length > 9 ? '10px' : '0' }}
+                  style={{ width: '100%', padding: '10px 14px', fontSize: '0.8rem', borderRadius: '10px', marginBottom: filteredCatalog.length > 9 ? '10px' : '0' }}
                 >
                   Custom Spec Inquiry
                 </button>
@@ -1359,7 +1359,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                       color: '#51847D',
                       background: '#edf5f4',
                       border: '1px solid #77b8b0',
-                      borderRadius: '0px',
+                      borderRadius: '10px',
                       cursor: 'pointer',
                     }}
                   >
@@ -1373,13 +1373,13 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
             <div style={{ flex: 1 }}>
               {/* Product Cards Grid */}
               {filteredCatalog.length === 0 ? (
-                <div style={{ background: '#ffffff', padding: '60px', textAlign: 'center', border: '1px solid #e2e8f0', borderRadius: '0px' }}>
+                <div style={{ background: '#ffffff', padding: '60px', textAlign: 'center', border: '1px solid #e2e8f0', borderRadius: '16px' }}>
                   <h3 style={{ color: '#0f172a', marginBottom: '8px' }}>No products match your search query</h3>
                   <p style={{ color: '#64748b', fontSize: '0.9rem', marginBottom: '20px' }}>Try clearing your search term or selecting another sub-category.</p>
                   <button
                     onClick={() => { setActiveCatalogTab('Pipes & Tubes'); setActiveSubCat('Stainless Steel Pipes & Tubes'); }}
                     className="btn btn-accent"
-                    style={{ padding: '10px 24px', borderRadius: '0px' }}
+                    style={{ padding: '10px 24px', borderRadius: '10px' }}
                   >
                     Reset Catalog Filters
                   </button>
@@ -1394,7 +1394,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                         style={{
                           background: '#ffffff',
                           border: '1px solid #e2e8f0',
-                          borderRadius: '0px',
+                          borderRadius: '16px',
                           display: 'flex',
                           flexDirection: 'column',
                           height: '100%',
@@ -1408,7 +1408,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                           className="product-img"
                           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                         />
-                        <span className="product-badge" style={{ background: '#51847D', color: '#ffffff', padding: '4px 10px', fontSize: '0.72rem', fontWeight: 800, borderRadius: '0px' }}>
+                        <span className="product-badge">
                           {prod.category}
                         </span>
                       </div>
@@ -1427,8 +1427,8 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                                 color: '#51847D',
                                 fontSize: '0.72rem',
                                 fontWeight: 700,
-                                padding: '3px 8px',
-                                borderRadius: '0px',
+                                padding: '4px 10px',
+                                borderRadius: '20px',
                               }}
                             >
                               {spec}
@@ -1471,7 +1471,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                       <button
                         onClick={() => setShowAllProducts(!showAllProducts)}
                         className="btn btn-accent"
-                        style={{ padding: '12px 32px', fontSize: '0.9rem', borderRadius: '0px', background: '#51847D' }}
+                        style={{ padding: '12px 32px', fontSize: '0.9rem', borderRadius: '10px' }}
                       >
                         {showAllProducts
                           ? 'Show Max 3 Lines'
@@ -1538,7 +1538,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                       {/* 5 Gold Stars Rating */}
                       <div style={{ display: 'flex', gap: '3px', marginBottom: '14px' }}>
                         {[...Array(5)].map((_, sIdx) => (
-                          <Star key={sIdx} size={16} fill="#f59e0b" color="#f59e0b" />
+                          <Star key={sIdx} size={16} fill="#51847D" color="#51847D" />
                         ))}
                       </div>
 
@@ -1573,7 +1573,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                       {/* 5 Gold Stars Rating */}
                       <div style={{ display: 'flex', gap: '3px', marginBottom: '14px' }}>
                         {[...Array(5)].map((_, sIdx) => (
-                          <Star key={sIdx} size={16} fill="#f59e0b" color="#f59e0b" />
+                          <Star key={sIdx} size={16} fill="#51847D" color="#51847D" />
                         ))}
                       </div>
 
@@ -1608,7 +1608,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                       {/* 5 Gold Stars Rating */}
                       <div style={{ display: 'flex', gap: '3px', marginBottom: '14px' }}>
                         {[...Array(5)].map((_, sIdx) => (
-                          <Star key={sIdx} size={16} fill="#f59e0b" color="#f59e0b" />
+                          <Star key={sIdx} size={16} fill="#51847D" color="#51847D" />
                         ))}
                       </div>
 
