@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Phone, MapPin, Clock, Send, Calculator, CheckCircle2 } from 'lucide-react';
 
 interface ContactPageProps {
-  onOpenQuoteModal: () => void;
+  onOpenQuoteModal: (productName?: string) => void;
 }
 
 export const ContactPage: React.FC<ContactPageProps> = ({ onOpenQuoteModal }) => {
@@ -212,21 +212,22 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenQuoteModal }) =>
               </div>
             </div>
 
-            {/* Calculated Weight Result Card */}
-            <div style={{ background: '#061221', color: '#ffffff', borderRadius: '16px', padding: '24px', marginTop: 'auto', textAlign: 'center', borderTop: '3px solid #51847D' }}>
-              <div style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em', opacity: 0.9, color: '#77b8b0' }}>
+            {/* Calculated Weight Result Card (Crisp Light Theme Redesign) */}
+            <div style={{ background: '#EDF5F4', color: '#0F172A', border: '1px solid #588078', borderRadius: '12px', padding: '24px', marginTop: 'auto', textAlign: 'center', boxShadow: '0 4px 16px rgba(88, 128, 120, 0.08)' }}>
+              <div style={{ fontSize: '0.78rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.8px', color: '#588078' }}>
                 Theoretical Unit Weight
               </div>
-              <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#ffffff', margin: '4px 0' }}>
-                {calculatedWeightKg.toFixed(2)} <span style={{ fontSize: '1.2rem', color: '#77b8b0' }}>kg</span>
+              <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#0F172A', margin: '6px 0' }}>
+                {calculatedWeightKg.toFixed(2)} <span style={{ fontSize: '1.2rem', color: '#588078', fontWeight: 800 }}>kg</span>
               </div>
-              <div style={{ fontSize: '0.85rem', opacity: 0.8, color: '#cbd5e1' }}>
+              <div style={{ fontSize: '0.86rem', color: '#475569', fontWeight: 600 }}>
                 (~{(calculatedWeightKg * 2.20462).toFixed(2)} lbs per sheet)
               </div>
               <button
-                onClick={onOpenQuoteModal}
-                className="btn btn-accent"
-                style={{ width: '100%', marginTop: '16px', padding: '12px', minHeight: '44px' }}
+                type="button"
+                onClick={() => onOpenQuoteModal('Calculated Sheet Weight Quote')}
+                className="btn btn-primary"
+                style={{ width: '100%', marginTop: '18px', padding: '14px', minHeight: '46px', justifyContent: 'center', background: '#588078', borderColor: '#588078' }}
               >
                 Request Quote with calculated dimensions
               </button>
