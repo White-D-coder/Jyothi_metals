@@ -39,13 +39,86 @@ export const allSubCategoriesList = [
   { id: 'Alloy Steel Sheets & Plates', label: 'Alloy Steel Sheets & Plates' },
   { id: 'Other Sheets & Plates', label: 'Other Sheets & Plates' },
 
-  // Other Main Categories
-  { id: 'Round Bars', label: 'Solid Round Bars' },
-  { id: 'Flanges', label: 'Forged Pipe Flanges' },
-  { id: 'Forged Fittings', label: 'Forged Fittings' },
-  { id: 'Buttweld Fittings', label: 'Butt-Weld Fittings' },
-  { id: 'Fasteners', label: 'Fasteners & Studs' },
-  { id: 'Specialized Product', label: 'Specialized Product' },
+  // Round Bars Sub-Categories
+  { id: 'Stainless Steel Round Bars', label: 'Stainless Steel Round Bars' },
+  { id: 'Duplex / Super Duplex Round Bars', label: 'Duplex / Super Duplex Round Bars' },
+  { id: 'Inconel / Incoloy Round Bars', label: 'Inconel / Incoloy Round Bars' },
+  { id: 'Monel Round Bars', label: 'Monel Round Bars' },
+  { id: 'Nickel Round Bars', label: 'Nickel Round Bars' },
+  { id: 'Hastelloy Round Bars', label: 'Hastelloy Round Bars' },
+  { id: 'Alloy Steel Round Bars', label: 'Alloy Steel Round Bars' },
+  { id: 'Alloy 20 Round Bars', label: 'Alloy 20 Round Bars' },
+  { id: 'Brass Round Bars', label: 'Brass Round Bars' },
+  { id: 'Tantalum Round Bars', label: 'Tantalum Round Bars' },
+  { id: 'Copper Nickel Round Bars', label: 'Copper Nickel Round Bars' },
+  { id: 'Carbon Steel Round Bars', label: 'Carbon Steel Round Bars' },
+  { id: 'Titanium Round Bars', label: 'Titanium Round Bars' },
+  { id: 'Other Round Bars', label: 'Other Round Bars' },
+
+  // Flanges Sub-Categories
+  { id: 'Stainless Steel Flanges', label: 'Stainless Steel Flanges' },
+  { id: 'Duplex / Super Duplex Flanges', label: 'Duplex / Super Duplex Flanges' },
+  { id: 'Inconel / Incoloy Flanges', label: 'Inconel / Incoloy Flanges' },
+  { id: 'Monel Flanges', label: 'Monel Flanges' },
+  { id: 'Nickel Flanges', label: 'Nickel Flanges' },
+  { id: 'Hastelloy Flanges', label: 'Hastelloy Flanges' },
+  { id: 'Carbon Steel Flanges', label: 'Carbon Steel Flanges' },
+  { id: 'Alloy Steel Flanges', label: 'Alloy Steel Flanges' },
+  { id: 'Alloy 20 Flanges', label: 'Alloy 20 Flanges' },
+  { id: 'Copper Nickel Flanges', label: 'Copper Nickel Flanges' },
+  { id: 'Titanium Flanges', label: 'Titanium Flanges' },
+
+  // Forged Fittings Sub-Categories
+  { id: 'Stainless Steel Forged Fittings', label: 'Stainless Steel Forged Fittings' },
+  { id: 'Duplex / Super Duplex Forged Fittings', label: 'Duplex / Super Duplex Forged Fittings' },
+  { id: 'Inconel / Incoloy Forged Fittings', label: 'Inconel / Incoloy Forged Fittings' },
+  { id: 'Monel Forged Fittings', label: 'Monel Forged Fittings' },
+  { id: 'Nickel Forged Fittings', label: 'Nickel Forged Fittings' },
+  { id: 'Hastelloy Forged Fittings', label: 'Hastelloy Forged Fittings' },
+  { id: 'Carbon Steel Forged Fittings', label: 'Carbon Steel Forged Fittings' },
+  { id: 'Alloy Steel Forged Fittings', label: 'Alloy Steel Forged Fittings' },
+  { id: 'Alloy 20 Forged Fittings', label: 'Alloy 20 Forged Fittings' },
+  { id: 'Copper Nickel Forged Fittings', label: 'Copper Nickel Forged Fittings' },
+  { id: 'Titanium Forged Fittings', label: 'Titanium Forged Fittings' },
+
+  // Buttweld Fittings Sub-Categories
+  { id: 'Stainless Steel Buttweld Fittings', label: 'Stainless Steel Buttweld Fittings' },
+  { id: 'Duplex / Super Duplex Buttweld Fittings', label: 'Duplex / Super Duplex Buttweld Fittings' },
+  { id: 'Inconel / Incoloy Buttweld Fittings', label: 'Inconel / Incoloy Buttweld Fittings' },
+  { id: 'Monel Buttweld Fittings', label: 'Monel Buttweld Fittings' },
+  { id: 'Nickel Alloy Buttweld Fittings', label: 'Nickel Alloy Buttweld Fittings' },
+  { id: 'Hastelloy Buttweld Fittings', label: 'Hastelloy Buttweld Fittings' },
+  { id: 'Carbon Steel Buttweld Fittings', label: 'Carbon Steel Buttweld Fittings' },
+  { id: 'Alloy Steel Buttweld Fittings', label: 'Alloy Steel Buttweld Fittings' },
+  { id: 'Alloy 20 Buttweld Fittings', label: 'Alloy 20 Buttweld Fittings' },
+  { id: 'Copper Nickel Buttweld Fittings', label: 'Copper Nickel Buttweld Fittings' },
+  { id: 'Titanium Buttweld Fittings', label: 'Titanium Buttweld Fittings' },
+
+  // Fasteners Sub-Categories
+  { id: 'Stainless Steel Fasteners', label: 'Stainless Steel Fasteners' },
+  { id: 'Carbon Steel Fasteners', label: 'Carbon Steel Fasteners' },
+  { id: 'Alloy Steel Fasteners', label: 'Alloy Steel Fasteners' },
+  { id: 'Nickel Alloy Fasteners', label: 'Nickel Alloy Fasteners' },
+  { id: 'Duplex / Super Duplex Fasteners', label: 'Duplex / Super Duplex Fasteners' },
+  { id: 'Copper Nickel Fasteners', label: 'Copper Nickel Fasteners' },
+  { id: 'Monel Fasteners', label: 'Monel Fasteners' },
+  { id: 'Hastelloy Fasteners', label: 'Hastelloy Fasteners' },
+  { id: 'Inconel Alloy Fasteners', label: 'Inconel Alloy Fasteners' },
+  { id: 'Incoloy Alloy Fasteners', label: 'Incoloy Alloy Fasteners' },
+  { id: 'Alloy 20 Fasteners', label: 'Alloy 20 Fasteners' },
+  { id: 'Titanium Fasteners', label: 'Titanium Fasteners' },
+
+  // Specialized Product Sub-Categories
+  { id: 'Abrasion Resistant Plates', label: 'Abrasion Resistant Plates' },
+  { id: 'Quenched & Tempered Steel', label: 'Quenched & Tempered Steel' },
+  { id: 'Corten Steel', label: 'Corten Steel' },
+  { id: '15Mo3 Steel', label: '15Mo3 Steel' },
+  { id: '16Mo3 / SA 204 Steel', label: '16Mo3 / SA 204 Steel' },
+  { id: 'Armour Steel', label: 'Armour Steel' },
+  { id: 'DSQ Plates', label: 'DSQ Plates' },
+  { id: 'Boiler Steel', label: 'Boiler Steel' },
+  { id: 'Manganese Steel', label: 'Manganese Steel' },
+  { id: 'Tiscral Sailhard Plates', label: 'Tiscral Sailhard Plates' },
 ];
 
 export const getSubCategoriesForCategory = (mainCat: string) => {
@@ -56,6 +129,30 @@ export const getSubCategoriesForCategory = (mainCat: string) => {
   if (mainCat === 'Plates & Sheets' || mainCat === 'Sheets & Plates') {
     return allSubCategoriesList.filter(s => s.id.includes('Sheets & Plates'));
   }
+  if (mainCat === 'Round Bars') {
+    return allSubCategoriesList.filter(s => s.id.includes('Round Bar'));
+  }
+  if (mainCat === 'Flanges') {
+    return allSubCategoriesList.filter(s => s.id.includes('Flanges'));
+  }
+  if (mainCat === 'Forged Fittings') {
+    return allSubCategoriesList.filter(s => s.id.includes('Forged Fittings'));
+  }
+  if (mainCat === 'Buttweld Fittings') {
+    return allSubCategoriesList.filter(s => s.id.includes('Buttweld Fittings'));
+  }
+  if (mainCat === 'Fasteners') {
+    return allSubCategoriesList.filter(s => s.id.includes('Fasteners'));
+  }
+  if (mainCat === 'Specialized Product' || mainCat === 'Specialized Products') {
+    return allSubCategoriesList.filter(s =>
+      s.id.includes('Plates') ||
+      s.id.includes('Steel') ||
+      s.id.includes('15Mo3') ||
+      s.id.includes('16Mo3') ||
+      s.id.includes('Sailhard')
+    );
+  }
   return allSubCategoriesList.filter(s => s.id === mainCat || s.label.toLowerCase().includes(mainCat.toLowerCase()));
 };
 
@@ -65,6 +162,24 @@ export const getFirstSubCategoryForCategory = (mainCat: string) => {
   }
   if (mainCat === 'Pipes & Tubes') {
     return 'Stainless Steel Pipes & Tubes';
+  }
+  if (mainCat === 'Round Bars') {
+    return 'Stainless Steel Round Bars';
+  }
+  if (mainCat === 'Flanges') {
+    return 'Stainless Steel Flanges';
+  }
+  if (mainCat === 'Forged Fittings') {
+    return 'Stainless Steel Forged Fittings';
+  }
+  if (mainCat === 'Buttweld Fittings') {
+    return 'Stainless Steel Buttweld Fittings';
+  }
+  if (mainCat === 'Fasteners') {
+    return 'Stainless Steel Fasteners';
+  }
+  if (mainCat === 'Specialized Product' || mainCat === 'Specialized Products') {
+    return 'Abrasion Resistant Plates';
   }
   const subs = getSubCategoriesForCategory(mainCat);
   if (subs.length > 0) return subs[0].id;
@@ -839,53 +954,672 @@ export const catalogProducts: CatalogProduct[] = [
     specs: ['Modified 12% Cr', 'Corrosion Resistant Structural Sheet'],
   },
 
-  // Other Main Categories
+  // ROUND BARS PRODUCTS
+  // 1. Stainless Steel Round Bars
   {
-    id: 'solid-round-bars',
-    title: 'Solid Stainless Steel Round Bars & Shafts',
+    id: 'ss-304-bar',
+    title: 'SS 304/304L/304H Round Bars',
     category: 'Round Bars',
-    subCat: 'Round Bars',
+    subCat: 'Stainless Steel Round Bars',
     image: '/images/round_bars.png',
-    specs: ['ASTM A276', 'Dia: 8mm - 500mm', 'Bright Drawn / Turned'],
+    specs: ['ASTM A276 / A479', 'Dia: 3mm - 500mm', '304/304L/304H'],
   },
   {
-    id: 'forged-flanges',
-    title: 'Forged Pipe Flanges (Slip-On, Blind, Weld-Neck)',
+    id: 'ss-310-bar',
+    title: 'SS 309/310/310S Round Bars',
+    category: 'Round Bars',
+    subCat: 'Stainless Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['High Temp Furnace Grade', 'ASTM A276', '309/310/310S'],
+  },
+  {
+    id: 'ss-316-bar',
+    title: 'SS 316/316L/316Ti Round Bars',
+    category: 'Round Bars',
+    subCat: 'Stainless Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['Marine Grade', 'UNS S31600/S31603', 'Bright / Peeled Finish'],
+  },
+  {
+    id: 'ss-317-bar',
+    title: 'SS 317/317L Round Bars',
+    category: 'Round Bars',
+    subCat: 'Stainless Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['High Moly Alloy', 'ASTM A276', 'UNS S31700'],
+  },
+  {
+    id: 'ss-321-bar',
+    title: 'SS 321/321H Round Bars',
+    category: 'Round Bars',
+    subCat: 'Stainless Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['Titanium Stabilized', 'ASTM A276', '321/321H'],
+  },
+  {
+    id: 'ss-347-bar',
+    title: 'SS 347/347H Round Bars',
+    category: 'Round Bars',
+    subCat: 'Stainless Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['Niobium Stabilized', 'ASTM A276', 'High Temp Service'],
+  },
+  {
+    id: 'ss-410-bar',
+    title: 'SS 410 Round Bars',
+    category: 'Round Bars',
+    subCat: 'Stainless Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['Martensitic SS Bar', 'ASTM A276', 'UNS S41000'],
+  },
+  {
+    id: 'ss-420-bar',
+    title: 'SS 420 Round Bars',
+    category: 'Round Bars',
+    subCat: 'Stainless Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['High Carbon Martensitic', 'Wear & Cut Resistant'],
+  },
+  {
+    id: 'ss-430-bar',
+    title: 'SS 430 Round Bars',
+    category: 'Round Bars',
+    subCat: 'Stainless Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['Ferritic Stainless Bar', 'ASTM A276', 'Magnetic Grade'],
+  },
+  {
+    id: 'ss-431-bar',
+    title: 'SS 431 Round Bars',
+    category: 'Round Bars',
+    subCat: 'Stainless Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['High Tensile Martensitic', 'UNS S43100', 'Pump Shafting'],
+  },
+  {
+    id: 'ss-440a-bar',
+    title: 'SS 440 A Round Bars',
+    category: 'Round Bars',
+    subCat: 'Stainless Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['High Hardness SS', 'ASTM A276 Grade 440A'],
+  },
+  {
+    id: 'ss-440b-bar',
+    title: 'SS 440 B Round Bars',
+    category: 'Round Bars',
+    subCat: 'Stainless Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['Cutlery & Bearing Grade', 'ASTM A276 Grade 440B'],
+  },
+  {
+    id: 'ss-440c-bar',
+    title: 'SS 440 C Round Bars',
+    category: 'Round Bars',
+    subCat: 'Stainless Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['Extreme Hardness 60 HRC', 'UNS S44004'],
+  },
+  {
+    id: 'ss-446-bar',
+    title: 'SS 446 Round Bars',
+    category: 'Round Bars',
+    subCat: 'Stainless Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['Heat Resistant Ferritic', 'ASTM A276 Grade 446'],
+  },
+  {
+    id: 'ss-904l-bar',
+    title: 'SS 904L Round Bars',
+    category: 'Round Bars',
+    subCat: 'Stainless Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['UNS N08904', 'High Sulfuric Acid Resistance'],
+  },
+  {
+    id: 'ss-15-5ph-bar',
+    title: 'SS 15-5PH Round Bars',
+    category: 'Round Bars',
+    subCat: 'Stainless Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['Precipitation Hardening', 'UNS S15500', 'AMS 5659'],
+  },
+  {
+    id: 'ss-17-4ph-bar',
+    title: 'SS 17-4PH Round Bars',
+    category: 'Round Bars',
+    subCat: 'Stainless Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['UNS S17400', 'Condition H900/H1150', 'AMS 5643'],
+  },
+
+  // 2. Duplex / Super Duplex Round Bars
+  {
+    id: 'duplex-steel-bar',
+    title: 'Duplex Steel Round Bars',
+    category: 'Round Bars',
+    subCat: 'Duplex / Super Duplex Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['UNS S31803 / S32205', 'ASTM A276 / A479', 'High Yield'],
+  },
+  {
+    id: 'super-duplex-bar',
+    title: 'Super Duplex Steel Round Bars',
+    category: 'Round Bars',
+    subCat: 'Duplex / Super Duplex Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['UNS S32750 / S32760', 'Offshore Marine Shafting'],
+  },
+
+  // 3. Inconel / Incoloy Round Bars
+  {
+    id: 'inconel-bar',
+    title: 'Inconel Round Bars',
+    category: 'Round Bars',
+    subCat: 'Inconel / Incoloy Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['Inconel 600 / 601 / 625 / 718', 'ASTM B166 / B446'],
+  },
+  {
+    id: 'incoloy-bar',
+    title: 'Incoloy Round Bars',
+    category: 'Round Bars',
+    subCat: 'Inconel / Incoloy Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['Incoloy 800 / 800HT / 825', 'ASTM B408'],
+  },
+
+  // 4. Monel Round Bars
+  {
+    id: 'monel-bar',
+    title: 'Monel Round Bars',
+    category: 'Round Bars',
+    subCat: 'Monel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['Monel 400 / K500', 'ASTM B164 / QQ-N-286'],
+  },
+
+  // 5. Nickel Round Bars
+  {
+    id: 'nickel-bar',
+    title: 'Nickel & Nickel Alloys Round Bars',
+    category: 'Round Bars',
+    subCat: 'Nickel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['Nickel 200 / 201', 'ASTM B160', 'UNS N02200'],
+  },
+
+  // 6. Hastelloy Round Bars
+  {
+    id: 'hastelloy-bar',
+    title: 'Hastelloy Round Bars',
+    category: 'Round Bars',
+    subCat: 'Hastelloy Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['Hastelloy C276 / C22 / B2', 'ASTM B574'],
+  },
+
+  // 7. Alloy Steel Round Bars
+  {
+    id: 'as-bar-general',
+    title: 'Alloy Steel Round Bars',
+    category: 'Round Bars',
+    subCat: 'Alloy Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['High Tensile Forging Bar', 'AISI 4140 / 4340'],
+  },
+  {
+    id: 'as-f1-bar',
+    title: 'Alloy Steel F1 Round Bars',
+    category: 'Round Bars',
+    subCat: 'Alloy Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['ASTM A182 Grade F1', 'Carbon-Moly Steel Bar'],
+  },
+  {
+    id: 'as-f5-bar',
+    title: 'Alloy Steel F5 Round Bars',
+    category: 'Round Bars',
+    subCat: 'Alloy Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['ASTM A182 Grade F5', '5% Cr Alloy Bar'],
+  },
+  {
+    id: 'as-f9-bar',
+    title: 'Alloy Steel F9 Round Bars',
+    category: 'Round Bars',
+    subCat: 'Alloy Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['ASTM A182 Grade F9', '9% Cr Alloy Bar'],
+  },
+  {
+    id: 'as-f11-bar',
+    title: 'Alloy Steel F11 Round Bars',
+    category: 'Round Bars',
+    subCat: 'Alloy Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['ASTM A182 Grade F11', '1.25% Cr - 0.5% Mo'],
+  },
+  {
+    id: 'as-f12-bar',
+    title: 'Alloy Steel F12 Round Bars',
+    category: 'Round Bars',
+    subCat: 'Alloy Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['ASTM A182 Grade F12', '1% Cr - 0.5% Mo'],
+  },
+  {
+    id: 'as-f22-bar',
+    title: 'Alloy Steel F22 Round Bars',
+    category: 'Round Bars',
+    subCat: 'Alloy Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['ASTM A182 Grade F22', '2.25% Cr - 1% Mo'],
+  },
+  {
+    id: 'as-f91-bar',
+    title: 'Alloy Steel F91 Round Bars',
+    category: 'Round Bars',
+    subCat: 'Alloy Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['ASTM A182 Grade F91', '9% Cr - 1% Mo - V'],
+  },
+  {
+    id: 'as-f92-bar',
+    title: 'Alloy Steel F92 Round Bars',
+    category: 'Round Bars',
+    subCat: 'Alloy Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['ASTM A182 Grade F92', 'Ultra High Temp Power Bar'],
+  },
+
+  // 8. Alloy 20 Round Bars
+  {
+    id: 'alloy-20-bar',
+    title: 'Alloy 20 Round Bars',
+    category: 'Round Bars',
+    subCat: 'Alloy 20 Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['UNS N08020', 'ASTM B473', 'Acid Plant Shafting'],
+  },
+
+  // 9. Brass Round Bars
+  {
+    id: 'brass-bar',
+    title: 'Brass Round Bar',
+    category: 'Round Bars',
+    subCat: 'Brass Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['Free Cutting Brass C36000', 'IS 319 / BS 2874'],
+  },
+
+  // 10. Tantalum Round Bars
+  {
+    id: 'tantalum-bar',
+    title: 'Tantalum Round Bar',
+    category: 'Round Bars',
+    subCat: 'Tantalum Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['Pure Tantalum UNS R05200', 'ASTM B365', 'Extreme Chemical Proof'],
+  },
+
+  // 11. Copper Nickel Round Bars
+  {
+    id: 'cuni-7030-bar',
+    title: 'Copper Nickel 70/30 Round Bars',
+    category: 'Round Bars',
+    subCat: 'Copper Nickel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['CuNi 70/30 (C71500)', 'ASTM B151', 'Marine Hardware'],
+  },
+  {
+    id: 'cuni-9010-bar',
+    title: 'Copper Nickel 90/10 Round Bars',
+    category: 'Round Bars',
+    subCat: 'Copper Nickel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['CuNi 90/10 (C70600)', 'ASTM B151', 'Seawater Shafting'],
+  },
+
+  // 12. Carbon Steel Round Bars
+  {
+    id: 'cs-mild-steel-bar',
+    title: 'Mild Steel Round Bars',
+    category: 'Round Bars',
+    subCat: 'Carbon Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['IS 2062 / EN8 / MS Bright Bar', 'General Engineering'],
+  },
+  {
+    id: 'cs-high-tensile-bar',
+    title: 'High Strength & High Tensile Steel Round Bars',
+    category: 'Round Bars',
+    subCat: 'Carbon Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['EN19 / EN24 / AISI 4140', 'High Yield Shafting'],
+  },
+  {
+    id: 'cs-a36-bar',
+    title: 'Carbon Steel A36 Round Bars',
+    category: 'Round Bars',
+    subCat: 'Carbon Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['ASTM A36', 'Structural Carbon Steel Bar'],
+  },
+  {
+    id: 'cs-s355-bar',
+    title: 'Carbon Steel S355J2+N Round Bars',
+    category: 'Round Bars',
+    subCat: 'Carbon Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['EN 10025-2 S355J2+N', 'Normalized Structural Bar'],
+  },
+  {
+    id: 'cs-st52-bar',
+    title: 'Carbon Steel ST 52 Round Bars',
+    category: 'Round Bars',
+    subCat: 'Carbon Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['DIN 17100 ST52-3', 'High Strength Construction Bar'],
+  },
+  {
+    id: 'cs-en353-bar',
+    title: 'Carbon Steel EN 353 Round Bars',
+    category: 'Round Bars',
+    subCat: 'Carbon Steel Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['EN 353 Case Hardening Alloy Steel Bar', 'Gear Shafting'],
+  },
+
+  // 13. Titanium Round Bars
+  {
+    id: 'ti-gr1-bar',
+    title: 'Titanium Gr 1 Round Bars',
+    category: 'Round Bars',
+    subCat: 'Titanium Round Bars',
+    image: '/images/titanium_plates.png',
+    specs: ['ASTM B348 Grade 1', 'UNS R50250', 'Pure Titanium'],
+  },
+  {
+    id: 'ti-gr2-bar',
+    title: 'Titanium Gr 2 Round Bars',
+    category: 'Round Bars',
+    subCat: 'Titanium Round Bars',
+    image: '/images/titanium_plates.png',
+    specs: ['ASTM B348 Grade 2', 'UNS R50400', 'Desalination Hardware'],
+  },
+  {
+    id: 'ti-gr5-bar',
+    title: 'Titanium Gr 5 Round Bars',
+    category: 'Round Bars',
+    subCat: 'Titanium Round Bars',
+    image: '/images/titanium_plates.png',
+    specs: ['Ti-6Al-4V', 'AMS 4928 / ASTM B348', 'Aerospace Grade'],
+  },
+  {
+    id: 'ti-gr9-bar',
+    title: 'Titanium Gr 9 Round Bars',
+    category: 'Round Bars',
+    subCat: 'Titanium Round Bars',
+    image: '/images/titanium_plates.png',
+    specs: ['Ti-3Al-2.5V', 'ASTM B348 Grade 9', 'High Strength Bar'],
+  },
+
+  // 14. Other Round Bars
+  {
+    id: 'ss-316lvm-bar',
+    title: 'SS 316LVM Round Bars',
+    category: 'Round Bars',
+    subCat: 'Other Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['ASTM F138 Medical Grade', 'UNS S31673', 'Surgical Implants'],
+  },
+  {
+    id: 'beryllium-copper-bar',
+    title: 'Beryllium Copper Round Bars',
+    category: 'Round Bars',
+    subCat: 'Other Round Bars',
+    image: '/images/round_bars.png',
+    specs: ['C17200 Beryllium Copper', 'ASTM B196', 'Non-Sparking Tools'],
+  },
+  // FLANGES PRODUCTS
+  {
+    id: 'ss-weld-neck-flange',
+    title: 'SS 304/304L/316/316L Weld Neck Flanges (WNF)',
     category: 'Flanges',
-    subCat: 'Flanges',
+    subCat: 'Stainless Steel Flanges',
     image: '/images/flanges_industrial.png',
-    specs: ['ANSI B16.5', 'Class 150 - 2500', 'Forged SS316L / Carbon'],
+    specs: ['ANSI B16.5 / BS 4504', 'Class 150 - 2500#', 'Raised Face (RF) / RTJ'],
   },
   {
-    id: 'forged-fittings',
-    title: 'High Pressure Socket Weld & Threaded Forged Fittings',
+    id: 'ss-slip-on-flange',
+    title: 'SS 304/316 Slip-On Flanges (SOF)',
+    category: 'Flanges',
+    subCat: 'Stainless Steel Flanges',
+    image: '/images/flanges_industrial.png',
+    specs: ['ASME B16.5', 'Class 150 / 300 / 600#', 'FORGED SS316L'],
+  },
+  {
+    id: 'ss-blind-flange',
+    title: 'SS 316L / 321 / 347 Blind Flanges (BLRF)',
+    category: 'Flanges',
+    subCat: 'Stainless Steel Flanges',
+    image: '/images/flanges_industrial.png',
+    specs: ['ANSI B16.5', 'High Pressure End Pipe Seal', 'ASTM A182 F316L'],
+  },
+  {
+    id: 'duplex-flanges',
+    title: 'Duplex S31803 / Super Duplex S32750 Forged Flanges',
+    category: 'Flanges',
+    subCat: 'Duplex / Super Duplex Flanges',
+    image: '/images/flanges_industrial.png',
+    specs: ['ASTM A182 F51 / F53 / F55', 'Offshore Marine Pipe Joints'],
+  },
+  {
+    id: 'inconel-flanges',
+    title: 'Inconel 600 / 625 / 718 Forged Flanges',
+    category: 'Flanges',
+    subCat: 'Inconel / Incoloy Flanges',
+    image: '/images/flanges_industrial.png',
+    specs: ['ASTM B564 UNS N06625', 'Class 600 - 2500# High Temp'],
+  },
+  {
+    id: 'monel-nickel-flanges',
+    title: 'Monel 400 & Nickel 200/201 Pipe Flanges',
+    category: 'Flanges',
+    subCat: 'Monel & Nickel Flanges',
+    image: '/images/flanges_industrial.png',
+    specs: ['ASTM B564', 'UNS N04400 / UNS N02200', 'Seawater Proof'],
+  },
+  {
+    id: 'hastelloy-flanges',
+    title: 'Hastelloy C276 / C22 & Alloy 20 Flanges',
+    category: 'Flanges',
+    subCat: 'Hastelloy & Alloy 20 Flanges',
+    image: '/images/flanges_industrial.png',
+    specs: ['ASTM B564', 'Extreme Chemical Acid Service'],
+  },
+  {
+    id: 'alloy-steel-flanges',
+    title: 'Alloy Steel F5 / F9 / F11 / F22 / F91 Flanges',
+    category: 'Flanges',
+    subCat: 'Alloy Steel Flanges',
+    image: '/images/flanges_industrial.png',
+    specs: ['ASTM A182 F11 / F22 / F91', 'Boiler Steam Pipe Joints'],
+  },
+  {
+    id: 'cs-flanges',
+    title: 'Carbon Steel A105 / A350 LF2 Forged Flanges',
+    category: 'Flanges',
+    subCat: 'Carbon Steel Flanges',
+    image: '/images/flanges_industrial.png',
+    specs: ['ASTM A105 / A350 LF2', 'Low Temp & High Pressure'],
+  },
+  {
+    id: 'titanium-cuni-flanges',
+    title: 'Titanium Gr 2 / CuNi 70/30 Flanges',
+    category: 'Flanges',
+    subCat: 'Titanium & Copper Nickel Flanges',
+    image: '/images/flanges_industrial.png',
+    specs: ['ASTM B381 Grade F-2', 'Desalination & Ship Piping'],
+  },
+
+  // FORGED FITTINGS PRODUCTS
+  {
+    id: 'socket-weld-elbow',
+    title: 'High Pressure 90° & 45° Socket Weld Elbows',
     category: 'Forged Fittings',
-    subCat: 'Forged Fittings',
+    subCat: 'Socket Weld Forged Fittings',
     image: '/images/pipe_fittings.png',
-    specs: ['ASME B16.11', '3000# / 6000#', 'Forged Steel A105 / F316'],
+    specs: ['ASME B16.11', '3000# / 6000# / 9000#', 'SS316L / A105'],
   },
   {
-    id: 'butt-weld-fittings',
-    title: 'Butt-Weld Pipe Fittings (Elbows, Tees, Reducers)',
+    id: 'socket-weld-tee-coupling',
+    title: 'Socket Weld Tees, Full Couplings & Unions',
+    category: 'Forged Fittings',
+    subCat: 'Socket Weld Forged Fittings',
+    image: '/images/pipe_fittings.png',
+    specs: ['ASME B16.11', 'Equal & Reducing Socket Fittings'],
+  },
+  {
+    id: 'threaded-npt-elbow',
+    title: 'Threaded NPT / BSP Screwed 90° Elbows & Tees',
+    category: 'Forged Fittings',
+    subCat: 'Threaded / Screwed Forged Fittings',
+    image: '/images/pipe_fittings.png',
+    specs: ['ASME B16.11', '2000# / 3000# / 6000# Screwed Fittings'],
+  },
+  {
+    id: 'swage-nipple-plugs',
+    title: 'Forged Swage Nipples, Hex Plugs & Bushings',
+    category: 'Forged Fittings',
+    subCat: 'Threaded / Screwed Forged Fittings',
+    image: '/images/pipe_fittings.png',
+    specs: ['MSS SP-79 / SP-83 / SP-95', 'Concentric & Eccentric Swage'],
+  },
+  {
+    id: 'ss-forged-fittings',
+    title: 'SS 304L / 316L / 321 Forged High Pressure Fittings',
+    category: 'Forged Fittings',
+    subCat: 'Stainless Steel Forged Fittings',
+    image: '/images/pipe_fittings.png',
+    specs: ['ASTM A182 F304L / F316L', 'Corrosion Proof Chemical Line'],
+  },
+  {
+    id: 'duplex-nickel-forged-fittings',
+    title: 'Duplex S31803 & Inconel 625 Forged Fittings',
+    category: 'Forged Fittings',
+    subCat: 'Duplex & Nickel Alloy Forged Fittings',
+    image: '/images/pipe_fittings.png',
+    specs: ['ASTM A182 F51', 'ASTM B564 Inconel / Monel'],
+  },
+  {
+    id: 'cs-as-forged-fittings',
+    title: 'Carbon Steel A105 & Alloy Steel F11/F22 Forged Fittings',
+    category: 'Forged Fittings',
+    subCat: 'Alloy Steel & Carbon Steel Forged Fittings',
+    image: '/images/pipe_fittings.png',
+    specs: ['ASTM A105 / A182 F11 / F22 / F91', 'High Temp Power Line'],
+  },
+
+  // BUTTWELD FITTINGS PRODUCTS
+  {
+    id: 'bw-ss-elbow',
+    title: 'SS 304L / 316L 90° & 45° Buttweld Pipe Elbows',
     category: 'Buttweld Fittings',
-    subCat: 'Buttweld Fittings',
+    subCat: 'Stainless Steel Buttweld Fittings',
     image: '/images/pipe_fittings.png',
-    specs: ['ASME B16.9', 'Sch 10S to Sch 160', 'SS316 / Monel / Inconel'],
+    specs: ['ASME B16.9', 'Seamless & Welded', 'Sch 10S to Sch 160'],
   },
+
+  // FASTENERS PRODUCTS
   {
-    id: 'heavy-fasteners',
-    title: 'High Tensile Stainless Steel Fasteners & Stud Bolts',
+    id: 'ss-hex-bolts',
+    title: 'SS 304 / 316 / 310 / 321 Heavy Hex Bolts & Screws',
     category: 'Fasteners',
-    subCat: 'Fasteners',
+    subCat: 'Stainless Steel Fasteners',
     image: '/images/precision_parts.png',
-    specs: ['ASTM A193 B8M', 'Grade B7 / B8', 'Heavy Hex Bolts'],
+    specs: ['ASTM A193 B8 / B8M / B8T', 'M6 to M100 Threaded'],
   },
   {
-    id: 'specialized-cnc',
-    title: 'Precision CNC Machined Aerospace Components',
-    category: 'Specialized Product',
-    subCat: 'Specialized Product',
+    id: 'stud-bolts-nuts',
+    title: 'ASTM A193 Grade B7 / B8 Stud Bolts & 2H Heavy Nuts',
+    category: 'Fasteners',
+    subCat: 'High Tensile Alloy Fasteners',
     image: '/images/precision_parts.png',
-    specs: ['AS9100D Certified', 'Sub-Micron Tolerance', 'Inconel / Ti-64'],
+    specs: ['ASTM A193 B7 / B8M with A194 2H / 8M Heavy Nuts', 'Flange Bolting'],
   },
+  {
+    id: 'inconel-monel-fasteners',
+    title: 'Inconel 625 / 718 & Monel 400 High Temp Studs & Bolts',
+    category: 'Fasteners',
+    subCat: 'Inconel & Monel Fasteners',
+    image: '/images/precision_parts.png',
+    specs: ['AMS 5662 / ASTM B164', 'High Temp & Offshore Fasteners'],
+  },
+  {
+    id: 'duplex-titanium-fasteners',
+    title: 'Super Duplex S32750 & Titanium Gr 5 Fasteners',
+    category: 'Fasteners',
+    subCat: 'Duplex & Titanium Fasteners',
+    image: '/images/precision_parts.png',
+    specs: ['UNS S32750 / Ti-6Al-4V', 'Corrosion & Flight Certified'],
+  },
+
+  // SPECIALIZED PRODUCTS
+  // 1. Abrasion Resistant Plates
+  { id: 'abrex-steel-plates', title: 'Abrasion Resistant Steel Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/sheets_plates.png', specs: ['High Wear Resistance', 'Quenched & Tempered', 'Heavy Machinery Line'] },
+  { id: 'abrex-400-plates', title: 'Abrex 400 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/sheets_plates.png', specs: ['400 HBW Hardness', 'Nippon Steel Grade', 'Wear Resistant'] },
+  { id: 'abrex-450-plates', title: 'Abrex 450 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/sheets_plates.png', specs: ['450 HBW Hardness', 'Mining Equipment Plate'] },
+  { id: 'abrex-500-plates', title: 'Abrex 500 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/sheets_plates.png', specs: ['500 HBW Hardness', 'Chute & Hopper Liners'] },
+  { id: 'abrex-600-plates', title: 'Abrex 600 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/sheets_plates.png', specs: ['600 HBW Ultra Hard Plate', 'Cement Plant Liners'] },
+  { id: 'rockstar-400-plates', title: 'Rockstar 400 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/sheets_plates.png', specs: ['Essar Rockstar 400', '400 HBW Abrasion Steel'] },
+  { id: 'rockstar-450-plates', title: 'Rockstar 450 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/sheets_plates.png', specs: ['Essar Rockstar 450', '450 HBW High Toughness'] },
+  { id: 'rockstar-500-plates', title: 'Rockstar 500 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/sheets_plates.png', specs: ['Essar Rockstar 500', '500 HBW Wear Plate'] },
+  { id: 'ar-400-plates', title: 'AR 400 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/sheets_plates.png', specs: ['AR 400 Hardness Steel', 'Excavator Bucket Liners'] },
+  { id: 'ar-450-plates', title: 'AR 450 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/sheets_plates.png', specs: ['AR 450 Wear Resistant Steel', 'Quarry Liners'] },
+  { id: 'ar-500-plates', title: 'AR 500 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/sheets_plates.png', specs: ['AR 500 Severe Wear Steel', 'Crusher Equipment'] },
+  { id: 'ar-600-plates', title: 'AR 600 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/sheets_plates.png', specs: ['AR 600 Max Hardness Steel', 'Extreme Impact Armor'] },
+  { id: 'jfe-eh-plates', title: 'JFE EH 360, 400, 500 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/sheets_plates.png', specs: ['JFE EVERHARD EH 360 / 400 / 500', 'Japanese Wear Steel'] },
+
+  // 2. Quenched & Tempered Steel
+  { id: 'qt-steel-plates', title: 'Quenched & Tempered Steel Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/sheets_plates.png', specs: ['High Tensile Yield Steel', 'EN 10025-6', 'Crane & Structural Steel'] },
+  { id: 's690ql-plates', title: 'S690ql Sheets & Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/sheets_plates.png', specs: ['EN 10025-6 S690QL', '690 MPa Yield Strength', 'High Strength Crane Boom'] },
+  { id: 'weldox-700-plates', title: 'Weldox 700 Sheets & Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/sheets_plates.png', specs: ['SSAB Weldox 700 / Strenx 700', '700 MPa High Yield'] },
+  { id: 'welten-780e-plates', title: 'Welten 780E Sheets & Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/sheets_plates.png', specs: ['Nippon Steel Welten 780E', 'High Yield Structural Plate'] },
+  { id: 'jfe-hiten-780le', title: 'JFE Hiten 780LE Sheets & Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/sheets_plates.png', specs: ['JFE HITEN 780LE', 'High Tensile Structural Steel'] },
+
+  // 3. Corten Steel
+  { id: 'corten-steel-plates', title: 'Corten Steel Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/sheets_plates.png', specs: ['Atmospheric Corrosion Steel', 'Weathering Steel'] },
+  { id: 'corten-steel-a', title: 'Corten Steel A Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/sheets_plates.png', specs: ['ASTM A242 Corten A', 'Architectural Weathering Steel'] },
+  { id: 'corten-steel-b', title: 'Corten Steel B Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/sheets_plates.png', specs: ['ASTM A588 Corten B', 'Bridge & Heavy Structural'] },
+  { id: 'corten-a588', title: 'Corten Steel Gr A588 Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/sheets_plates.png', specs: ['ASTM A588 Grade A / B / C', 'High Strength Weathering'] },
+  { id: 'corten-irsm41', title: 'Corten Steel Gr 41 IRSM Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/sheets_plates.png', specs: ['IRSM 41-97 Railway Grade', 'Indian Railways Weathering Steel'] },
+
+  // 4. 15Mo3 Steel
+  { id: '15mo3-steel-plates', title: '15Mo3 Steel Plates', category: 'Specialized Product', subCat: '15Mo3 Steel', image: '/images/sheets_plates.png', specs: ['DIN 17155 15Mo3', 'EN 10028-2 16Mo3', 'Boiler Quality Steel'] },
+
+  // 5. 16Mo3 / SA 204 Steel
+  { id: '16mo3-sa204-plates', title: '16Mo3 / SA 204 Steel Plates', category: 'Specialized Product', subCat: '16Mo3 / SA 204 Steel', image: '/images/sheets_plates.png', specs: ['ASTM A204 Grade A / B / C', 'Molybdenum Alloy Pressure Vessel'] },
+
+  // 6. Armour Steel
+  { id: 'armour-steel-plates', title: 'Armour Steel Plates', category: 'Specialized Product', subCat: 'Armour Steel', image: '/images/sheets_plates.png', specs: ['Ballistic Protection Armor Plate', 'Defense Grade Steel', 'MIL-DTL Certified'] },
+
+  // 7. DSQ Plates
+  { id: 'dsq-steel-plates', title: 'DSQ Steel Plates', category: 'Specialized Product', subCat: 'DSQ Plates', image: '/images/sheets_plates.png', specs: ['Deep Drawing Quality Steel Plate', 'IS 2062 E250 / E350'] },
+
+  // 8. Boiler Steel
+  { id: 'boiler-steel-plates', title: 'Boiler Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/sheets_plates.png', specs: ['High Pressure Vessel Steel', 'ASTM A516 / ASME SA516'] },
+  { id: 'a516-gr60-plates', title: 'ASTM A516 Grade 60 Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/sheets_plates.png', specs: ['ASTM A516 Gr 60', 'Low Temp Pressure Vessel'] },
+  { id: 'a516-gr65-plates', title: 'ASTM A516 Grade 65 Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/sheets_plates.png', specs: ['ASTM A516 Gr 65', 'Moderate & Lower Temp Service'] },
+  { id: 'a516-gr70-plates', title: 'ASTM A516 Grade 70 Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/sheets_plates.png', specs: ['ASTM A516 Gr 70 / SA 516 Gr 70', 'NACE MR0175 Compliant'] },
+  { id: 'nace-hic-plates', title: 'NACE + HIC Resistant Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/sheets_plates.png', specs: ['Hydrogen Induced Cracking Resistant', 'Sour Oil & Gas Service'] },
+
+  // 9. Manganese Steel
+  { id: 'manganese-steel-plates', title: 'Manganese Steel Plates', category: 'Specialized Product', subCat: 'Manganese Steel', image: '/images/sheets_plates.png', specs: ['High Impact Work Hardening Steel'] },
+  { id: 'manganese-1214-plates', title: '12 - 14% Manganese Plates', category: 'Specialized Product', subCat: 'Manganese Steel', image: '/images/sheets_plates.png', specs: ['12-14% Mn High Hadfield Steel', 'Crusher & Shot Blast Liners'] },
+  { id: 'hadfield-manganese-plates', title: 'Hadfield Manganese Plates', category: 'Specialized Product', subCat: 'Manganese Steel', image: '/images/sheets_plates.png', specs: ['ASTM A128 Grade B2 / B3', 'Austenitic Manganese Steel'] },
+
+  // 10. Tiscral Sailhard Plates
+  { id: 'tiscral-sailhard-plates', title: 'Tiscral Sailhard Plates', category: 'Specialized Product', subCat: 'Tiscral Sailhard Plates', image: '/images/sheets_plates.png', specs: ['SAIL SAILHARD Wear Plate', 'TISCRAL High Abrasion Resistance', 'Mining & Earthmoving Steel'] },
 ];

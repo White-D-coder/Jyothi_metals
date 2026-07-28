@@ -1,51 +1,54 @@
 import React, { useState } from 'react';
 import {
-  ShieldCheck,
-  Factory,
-  Cpu,
-  Flame,
-  CheckCircle2,
   ArrowRight,
-  ChevronRight,
+  ChevronDown,
+  Award,
+  Calendar,
+  Cpu,
+  ShieldCheck,
+  Zap,
   Globe2,
-  FileCheck,
 } from 'lucide-react';
 
 interface AboutPageProps {
-  onOpenQuoteModal: () => void;
+  onOpenQuoteModal: (productName?: string) => void;
 }
 
 export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
-  const [activeBenefitIdx, setActiveBenefitIdx] = useState<number>(1);
+  const [isTimelineOpen, setIsTimelineOpen] = useState<boolean>(true);
 
-  const benefits = [
+  const executivePillars = [
     {
       num: '01',
-      title: 'ADVANCED METALLURGY TECHNOLOGY',
-      desc: 'Multi-axis CNC laser cutting and computer-controlled rolling lines ensure sub-micron tolerance precision across all metal components and titanium sheets.',
-      image: '/images/pexels-alex-60339926-9878853.jpg',
-      alt: 'Computer Controlled CNC Laser Cutting Line',
+      title: 'PRIMARY MELT & SPECTROGRAPHIC CONTROL',
+      desc: 'Dual-shell Electric Arc Furnaces (EAF) paired with AOD secondary decarburization vessels to achieve sub-ppm gas purity and 100% spectral chemistry verification.',
+      image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+      icon: Cpu,
+      tag: 'EAF & AOD REFINING',
     },
     {
       num: '02',
-      title: 'DUAL ISO 9001 & AS9100D CERTIFIED',
-      desc: 'Comprehensive lab testing, X-ray weld inspection, and full heat-lot traceability reports included with every shipment for aerospace compliance.',
-      image: '/images/titanium_plates.png',
-      alt: 'Aerospace Grade Titanium Testing & Accreditation',
+      title: 'SUB-MICRON CNC LASER FABRICATION',
+      desc: 'High-power fiber optic CNC laser cutting lines and automated cold rolling mills guaranteeing sub-micron kerf edge tolerances for defense assemblies.',
+      image: '/images/pexels-bence-szemerey-337043-6804265.jpg',
+      icon: Zap,
+      tag: 'CNC LASER CELL',
     },
     {
       num: '03',
-      title: '30+ YEARS EXPERT ENGINEERING TEAMS',
-      desc: 'In-house metallurgists assist in customizing heat-treatment schedules and bespoke extrusion profiles tailored to your exact CAD files.',
-      image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
-      alt: 'In-house Metallurgical Testing & Heat-Treatment Facility',
+      title: 'AS9100D AEROSPACE & DEFENSE QA',
+      desc: 'Phased-array ultrasonic volumetric scanning, high-energy X-ray radiography, and EN 10204 3.2 third-party witnessed mill test certificates.',
+      image: '/images/pexels-willians-huerta-2157111846-36397988.jpg',
+      icon: ShieldCheck,
+      tag: 'AS9100D ACCREDITED',
     },
     {
       num: '04',
-      title: 'EXPEDITED 48H GLOBAL SUPPLY CHAIN',
-      desc: 'Strategic warehouses in North America, Europe, and Asia guaranteeing rapid dispatch and real-time tracking on standard alloy stock.',
-      image: '/images/stainless_pipes.png',
-      alt: 'Global Port Stock Warehouse Distribution',
+      title: '48H GLOBAL LOGISTICS & TRACEABILITY',
+      desc: 'Strategic port stock hubs in Asia, Europe, and North America guaranteeing 48-hour container dispatch with QR-etched heat-lot tracking.',
+      image: '/images/pexels-jakubzerdzicki-33813584.jpg',
+      icon: Globe2,
+      tag: '48H DISPATCH SLA',
     },
   ];
 
@@ -53,476 +56,482 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
     {
       year: '1991',
       title: 'Foundation & Regional Foundry Hub',
-      desc: 'Established as a specialized regional foundry in India providing precision stainless steel castings to domestic oil refineries and chemical plants.',
+      desc: 'Established as a specialized regional foundry in India providing precision stainless steel castings to domestic oil refineries and chemical plants with 100% heat-lot chemistry tracking.',
+      image: '/images/pexels-bence-szemerey-337043-6804265.jpg',
     },
     {
       year: '2004',
       title: 'ISO 9001:2015 Quality Accreditation',
-      desc: 'Achieved full ISO accreditation and introduced computer-guided ultrasonic non-destructive testing across all continuous casting production lines.',
+      desc: 'Achieved full ISO accreditation and introduced computer-guided ultrasonic non-destructive testing vaults across all continuous casting production lines.',
+      image: '/images/pexels-tokuo-nobuhiro-79378678-20472153.jpg',
     },
     {
       year: '2012',
       title: 'Aerospace & Defense Titanium Expansion',
-      desc: 'Commissioned titanium and nickel superalloy vacuum arc remelting furnaces, securing AS9100D aerospace certification for defense turbines.',
+      desc: 'Commissioned titanium and nickel superalloy vacuum arc remelting (VAR) furnaces, securing AS9100D aerospace certification for Tier-1 defense turbine contractors.',
+      image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
     },
     {
       year: '2020',
       title: '98% Circular Electric Arc Recycling',
-      desc: 'Transitioned 100% of carbon steel production to zero-carbon electric arc smelting furnaces, reducing carbon intensity by 65%.',
+      desc: 'Transitioned melt shop operations to 98% circular scrap recycling and zero-discharge closed-loop water treatment systems with official EPD Environmental Declarations.',
+      image: '/images/pexels-jakubzerdzicki-33813584.jpg',
+    },
+    {
+      year: '2024',
+      title: 'Multi-Axis CNC Laser Cell Integration',
+      desc: 'Expanded fabrication floor area to 120,000 m² with 6kW & 12kW fiber optic CNC laser cutting lines for sub-micron kerf edge tolerance component manufacturing.',
+      image: '/images/pexels-pppsdavid-5851494.jpg',
     },
     {
       year: '2026',
-      title: 'Automated TruLaser Robotic Cells',
-      desc: 'Expanded into multi-axis robotic TruLaser cutting cells delivering sub-micron tolerance components to global prime contractors.',
+      title: 'Global Aerospace Stock Warehouse Expansion',
+      desc: 'Established strategic stock holding hubs across Europe and North America guaranteeing 48-hour container dispatch on EN 10204 3.2 certified stock.',
+      image: '/images/pexels-eugeniofr-30005294.jpg',
     },
   ];
 
   const certifications = [
-    { code: 'ISO 9001:2015', label: 'Quality Management System', desc: 'Full spectral chemistry & heat-lot validation' },
-    { code: 'AS9100D / EN 9100', label: 'Aerospace & Defense Quality', desc: 'Sub-micron tolerance airframe calibration' },
-    { code: 'ASTM International', label: 'Material Testing Compliance', desc: 'Tensile, impact & intergranular corrosion certified' },
-    { code: 'PED 2014/68/EU', label: 'Pressure Equipment Directive', desc: 'Certified for high-pressure oil & gas pipelines' },
-  ];
-
-  const keyPillars = [
     {
-      icon: <Flame size={28} color="#51847D" />,
-      title: 'Electric Arc Smelting',
-      desc: 'High-purity vacuum arc remelting providing ultra-clean alloy grain structures with minimal non-metallic inclusions.',
+      code: 'ISO 9001:2015',
+      title: 'Quality Management Systems',
+      desc: 'Complete process control across raw melt, rolling, machining, and dispatch.',
     },
     {
-      icon: <Cpu size={28} color="#51847D" />,
-      title: 'Micron Laser Calibration',
-      desc: 'Multi-axis CNC laser cutting lines maintaining sub-millimeter tolerances across heavy structural profiles.',
+      code: 'AS9100D / EN 9100',
+      title: 'Aerospace & Defense Quality',
+      desc: 'Sub-micron tolerance airframe and turbine components for defense contractors.',
     },
     {
-      icon: <ShieldCheck size={28} color="#51847D" />,
-      title: 'Spectral Lab Testing',
-      desc: '100% positive material identification (PMI) and ultrasonic weld inspection included with every mill test certificate.',
+      code: 'PED 2014/68/EU',
+      title: 'Pressure Equipment Directive',
+      desc: 'Certified manufacturing for high-pressure oil, gas, and nuclear pipelines.',
     },
     {
-      icon: <Globe2 size={28} color="#51847D" />,
-      title: 'Global Warehouse Logistics',
-      desc: 'Redundant inventory stock located near major international ports ensuring rapid 48-hour container dispatch.',
+      code: 'ISO 14001:2015',
+      title: 'Environmental Management',
+      desc: 'Zero-discharge melt shop operations and circular alloy scrap recycling.',
     },
   ];
 
   return (
-    <div className="inner-page" style={{ background: '#ffffff', minHeight: '100vh' }}>
-      {/* 1. Dark Industrial Hero Header */}
+    <div className="about-page-root" style={{ background: '#F8F8F8', minHeight: '100vh', color: '#304050' }}>
+      <style>{`
+        .about-page-root {
+          font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .single-accordion-wrapper {
+          position: relative;
+          margin-top: 20px;
+        }
+        .single-accordion-layer-2 {
+          position: absolute;
+          bottom: -8px;
+          left: 14px;
+          right: 14px;
+          height: 16px;
+          background: #FFFFFF;
+          border: 1px solid #E0E8E8;
+          z-index: 1;
+        }
+        .single-accordion-layer-1 {
+          position: absolute;
+          bottom: -4px;
+          left: 7px;
+          right: 7px;
+          height: 12px;
+          background: #F4F6F8;
+          border: 1px solid #E0E8E8;
+          z-index: 2;
+        }
+        .single-accordion-main {
+          position: relative;
+          z-index: 3;
+          background: #FFFFFF;
+          border: 1px solid #E0E8E8;
+          border-left: 5px solid #588078;
+          border-radius: 0;
+          overflow: hidden;
+        }
+
+        .timeline-row-item {
+          display: grid;
+          grid-template-columns: 110px 1fr 220px;
+          gap: 28px;
+          align-items: center;
+          padding: 24px 28px;
+          transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+          background: #FFFFFF;
+          border-left: 3px solid transparent;
+          cursor: pointer;
+        }
+        .timeline-row-item:hover {
+          background: #F8FAF9;
+          border-left-color: #588078;
+        }
+        .timeline-row-item:hover .timeline-img-frame img {
+          transform: scale(1.06);
+        }
+        .timeline-row-item:hover .timeline-year-text {
+          color: #588078;
+        }
+
+        .timeline-img-frame {
+          height: 140px;
+          overflow: hidden;
+          border: 1px solid #E0E8E8;
+          position: relative;
+        }
+        .timeline-img-frame img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 300ms ease;
+        }
+
+        @media (max-width: 768px) {
+          .timeline-row-item {
+            grid-template-columns: 1fr;
+            gap: 16px;
+            padding: 20px;
+          }
+          .timeline-img-frame {
+            height: 180px;
+          }
+        }
+
+        .btn {
+          border-radius: 0 !important;
+          font-weight: 700;
+          cursor: pointer;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          transition: background-color 150ms ease, border-color 150ms ease;
+        }
+        .btn-primary {
+          background: #588078;
+          color: #FFFFFF;
+          border: none;
+        }
+        .btn-primary:hover { background: #4D716A; }
+        .btn-secondary {
+          background: #FFFFFF;
+          color: #304050;
+          border: 1px solid #E0E8E8;
+        }
+        .btn-secondary:hover { background: #F4F6F8; border-color: #304050; }
+      `}</style>
+
+      {/* 1. Hero with Rich Background Photography */}
       <section
-        className="page-hero"
         style={{
-          backgroundImage:
-            'linear-gradient(135deg, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.92) 100%), url("/images/pexels-sergey-sergeev-2153675005-32845683.jpg")',
+          backgroundImage: 'linear-gradient(135deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.85) 100%), url("/images/pexels-sergey-sergeev-2153675005-32845683.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          color: '#ffffff',
-          padding: '120px 0 90px',
-          borderBottom: '3px solid #51847D',
-          position: 'relative',
-          overflow: 'hidden',
+          color: '#FFFFFF',
+          padding: '80px 0 60px',
+          borderBottom: '3px solid #588078',
         }}
       >
-        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <div style={{ maxWidth: '850px', margin: '0 auto', textAlign: 'center' }}>
+        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
+          <div style={{ maxWidth: '850px' }}>
             <h1
-              className="hero-title"
               style={{
-                fontSize: '3.6rem',
-                color: '#ffffff',
-                marginBottom: '32px',
-                lineHeight: 1.1,
+                fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)',
+                fontWeight: 700,
+                color: '#FFFFFF',
+                lineHeight: 1.15,
+                marginBottom: '16px',
+                letterSpacing: '0.6px',
               }}
             >
-              Over Three Decades of Precision Metallurgy &amp; Engineering Innovation
+              About Jyoti Metal India
             </h1>
 
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '16px' }}>
+            <p style={{ fontSize: '1.08rem', color: '#CBD5E1', lineHeight: 1.65, marginBottom: '28px', letterSpacing: '0.3px' }}>
+              Three decades of metallurgical innovation, certified zero-defect alloy manufacturing, and high-yield continuous casting for global aerospace, defense, and nuclear contracts.
+            </p>
+
+            <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
               <button
-                onClick={onOpenQuoteModal}
-                className="btn btn-accent"
-                style={{ padding: '16px 36px', fontSize: '1rem', background: '#51847D', borderColor: '#51847D' }}
+                type="button"
+                onClick={() => onOpenQuoteModal()}
+                className="btn btn-primary"
+                style={{ padding: '14px 30px', fontSize: '0.92rem' }}
               >
-                Request Enterprise Specifications <ArrowRight size={18} />
+                Request a Quote <ArrowRight size={18} />
               </button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2. Overview & Industrial Facility Section */}
-      <section className="section bg-white" style={{ padding: '100px 0 80px' }}>
-        <div className="container">
-          <div className="grid-responsive-about" style={{ display: 'grid', gridTemplateColumns: '1fr 1.1fr', gap: '60px', alignItems: 'center' }}>
-            {/* Left Side: Mission & Heritage Narrative */}
-            <div>
-              <h2
-                className="section-title"
-                style={{
-                  fontSize: '2.5rem',
-                  color: '#0f172a',
-                  marginBottom: '20px',
-                  lineHeight: 1.2,
-                }}
-              >
-                Uncompromising Quality in Every Alloy Batch
-              </h2>
+      {/* 2. Executive 4-Pillar Metallurgical Architecture Layout */}
+      <section style={{ padding: '70px 0', background: '#FFFFFF', borderBottom: '1px solid #E0E8E8' }}>
+        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
+          <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 48px' }}>
+            <span style={{ color: '#588078', fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.6px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
+              OPERATIONAL CORE
+            </span>
+            <h2 style={{ fontSize: 'clamp(1.7rem, 3.2vw, 2.3rem)', fontWeight: 700, color: '#304050', marginBottom: '12px', lineHeight: 1.25, letterSpacing: '0.6px' }}>
+              Four Pillars of Metallurgical Excellence
+            </h2>
+            <p style={{ fontSize: '0.98rem', color: '#7C8894', lineHeight: 1.6, margin: 0 }}>
+              Vertically integrated foundry capabilities, precision laser fabrication, and audit-certified quality systems.
+            </p>
+          </div>
 
-              <p style={{ fontSize: '1.05rem', color: '#475569', lineHeight: 1.7, marginBottom: '20px' }}>
-                Founded with a strict commitment to zero-defect manufacturing, Jyothi Metals operates state-of-the-art continuous casting, cold rolling, and multi-axis CNC machining facilities spanning over 120,000 m².
-              </p>
-
-              <p style={{ fontSize: '1.05rem', color: '#475569', lineHeight: 1.7, marginBottom: '32px' }}>
-                Whether supplying high-tensile titanium plates for aerospace airframes or heavy structural I-beams for skyscraper foundations, our materials undergo 100% spectral chemistry analysis and heat-lot validation.
-              </p>
-
-              <div className="grid-responsive-2col" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
-                {keyPillars.slice(0, 2).map((p, idx) => (
-                  <div
-                    key={idx}
-                    style={{
-                      background: '#ffffff',
-                      border: '1px solid #e2e8f0',
-                      borderLeft: '4px solid #51847D',
-                      borderRadius: '16px',
-                      padding: '24px',
-                      boxShadow: '0 6px 20px rgba(0,0,0,0.03)',
-                    }}
-                  >
-                    <div style={{ marginBottom: '12px' }}>{p.icon}</div>
-                    <h4 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#0f172a', marginBottom: '6px' }}>
-                      {p.title}
-                    </h4>
-                    <p style={{ fontSize: '0.88rem', color: '#64748b', margin: 0, lineHeight: 1.5 }}>
-                      {p.desc}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Right Side: Industrial Visual Frame & Stats */}
-            <div>
-              <div
-                className="about-arch-frame-reversed"
-                style={{
-                  overflow: 'hidden',
-                  boxShadow: '0 20px 45px rgba(0,0,0,0.14)',
-                  background: '#061221',
-                }}
-              >
-                <img
-                  src="/images/pexels-alex-60339926-9878853.jpg"
-                  alt="Jyothi Metals Precision Manufacturing Hub"
-                  style={{
-                    width: '100%',
-                    height: '460px',
-                    objectFit: 'cover',
-                    display: 'block',
-                  }}
-                />
-
-                {/* Overlapping Facility Stats Overlay */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))', gap: '24px' }}>
+            {executivePillars.map((pillar) => {
+              const Icon = pillar.icon;
+              return (
                 <div
+                  key={pillar.num}
                   style={{
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    background: 'linear-gradient(to top, rgba(6, 18, 33, 0.95), rgba(6, 18, 33, 0.4))',
-                    padding: '30px',
-                    color: '#ffffff',
+                    background: '#FFFFFF',
+                    border: '1px solid #E0E8E8',
+                    borderTop: '4px solid #588078',
+                    borderRadius: 0,
+                    overflow: 'hidden',
                     display: 'flex',
+                    flexDirection: 'column',
                     justifyContent: 'space-between',
-                    alignItems: 'center',
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <Factory size={32} color="#77b8b0" />
-                    <div>
-                      <div style={{ fontWeight: 900, fontSize: '1.2rem', color: '#ffffff' }}>
-                        120,000 m&sup2; Manufacturing Hub
-                      </div>
-                      <div style={{ fontSize: '0.82rem', color: '#94a3b8' }}>
-                        Integrated casting, rolling &amp; laser milling lines
+                  <div>
+                    <div style={{ height: '180px', overflow: 'hidden', position: 'relative' }}>
+                      <img
+                        src={pillar.image}
+                        alt={pillar.title}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      />
+                      <div
+                        style={{
+                          position: 'absolute',
+                          top: '14px',
+                          left: '14px',
+                          background: '#588078',
+                          color: '#FFFFFF',
+                          fontSize: '0.72rem',
+                          fontWeight: 700,
+                          padding: '4px 10px',
+                          letterSpacing: '0.6px',
+                        }}
+                      >
+                        {pillar.tag}
                       </div>
                     </div>
-                  </div>
 
-                  <div style={{ textAlign: 'right', borderLeft: '2px solid #51847D', paddingLeft: '20px' }}>
-                    <div style={{ fontWeight: 900, fontSize: '1.4rem', color: '#77b8b0' }}>850k+ Tons</div>
-                    <div style={{ fontSize: '0.8rem', color: '#cbd5e1' }}>Annual Throughput</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+                    <div style={{ padding: '24px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
+                        <span style={{ fontSize: '1.5rem', fontWeight: 800, color: '#588078', lineHeight: 1 }}>
+                          {pillar.num}
+                        </span>
+                        <Icon size={20} color="#588078" />
+                      </div>
 
-      {/* Why Industry Leaders Trust Jyothi Metals (Interactive Hover Animated 01-04 Layout) */}
-      <section className="section bg-white" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden', borderTop: '1px solid #e2e8f0' }}>
-        {/* Far Right Vertical Rotated Backdrop Typography */}
-        <div
-          style={{
-            position: 'absolute',
-            right: '-10px',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            writingMode: 'vertical-rl',
-            fontSize: 'clamp(5rem, 12vw, 9rem)',
-            fontWeight: 900,
-            fontFamily: 'Outfit, sans-serif',
-            letterSpacing: '0.12em',
-            color: '#f1f5f9',
-            textTransform: 'uppercase',
-            userSelect: 'none',
-            pointerEvents: 'none',
-            zIndex: 1,
-          }}
-        >
-          BENEFIT
-        </div>
-
-        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <div className="grid-responsive-about" style={{ display: 'grid', gridTemplateColumns: '1fr 1.25fr', gap: '60px', alignItems: 'flex-start' }}>
-            {/* Left Column: Title & Dynamic Crossfading Industrial Visual Frame */}
-            <div>
-              <h2
-                className="section-title"
-                style={{
-                  fontSize: '2.6rem',
-                  lineHeight: 1.15,
-                  marginBottom: '28px',
-                  color: '#0f172a',
-                  marginTop: 0,
-                }}
-              >
-                Why Industry Leaders Trust Jyothi Metals
-              </h2>
-
-              {/* Dynamic Crossfading Visual Frame responding to activeBenefitIdx */}
-              <div
-                style={{
-                  position: 'relative',
-                  height: '400px',
-                  borderRadius: '18px',
-                  boxShadow: '0 20px 45px rgba(0,0,0,0.14)',
-                  overflow: 'hidden',
-                  background: '#061221',
-                }}
-              >
-                {benefits.map((b, bIdx) => (
-                  <div
-                    key={b.num}
-                    style={{
-                      position: 'absolute',
-                      inset: 0,
-                      backgroundImage: `url("${b.image}")`,
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center',
-                      opacity: activeBenefitIdx === bIdx ? 1 : 0,
-                      transform: activeBenefitIdx === bIdx ? 'scale(1)' : 'scale(1.06)',
-                      transition: 'opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s ease-out',
-                    }}
-                  />
-                ))}
-
-                {/* Badge Overlay for Active Benefit */}
-                <div
-                  style={{
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    background: 'linear-gradient(to top, rgba(6, 18, 33, 0.95), transparent)',
-                    padding: '24px',
-                    color: '#ffffff',
-                  }}
-                >
-                  <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#77b8b0', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '4px' }}>
-                    BENEFIT FOCUS {benefits[activeBenefitIdx].num}
-                  </div>
-                  <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#ffffff' }}>
-                    {benefits[activeBenefitIdx].alt}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Column: Numbered List (01, 02, 03, 04) with Interactive Hover Animations */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              {benefits.map((b, idx) => {
-                const isActive = activeBenefitIdx === idx;
-                return (
-                  <div
-                    key={b.num}
-                    onMouseEnter={() => setActiveBenefitIdx(idx)}
-                    style={{
-                      display: 'flex',
-                      gap: '20px',
-                      alignItems: 'flex-start',
-                      padding: '18px 24px',
-                      background: isActive ? '#ffffff' : 'transparent',
-                      border: 'none',
-                      boxShadow: isActive ? '0 12px 30px rgba(0, 0, 0, 0.06)' : 'none',
-                      transform: isActive ? 'translateX(10px)' : 'translateX(0px)',
-                      transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontFamily: 'Outfit, sans-serif',
-                        fontSize: '2.5rem',
-                        fontWeight: 900,
-                        color: isActive ? '#51847D' : '#cbd5e1',
-                        lineHeight: 1,
-                        flexShrink: 0,
-                        marginTop: '-2px',
-                        transform: isActive ? 'scale(1.05)' : 'scale(1)',
-                        transition: 'color 0.35s ease, transform 0.35s ease',
-                      }}
-                    >
-                      {b.num}
-                    </span>
-                    <div style={{ flex: 1 }}>
-                      <h3
-                        style={{
-                          fontSize: '1.1rem',
-                          fontWeight: 800,
-                          color: isActive ? '#51847D' : '#0f172a',
-                          textTransform: 'uppercase',
-                          letterSpacing: '0.04em',
-                          marginTop: 0,
-                          marginBottom: '6px',
-                          lineHeight: 1.25,
-                          transition: 'color 0.35s ease',
-                        }}
-                      >
-                        {b.title}
+                      <h3 style={{ fontSize: '1.02rem', fontWeight: 700, color: '#304050', marginBottom: '10px', lineHeight: 1.3, letterSpacing: '0.5px' }}>
+                        {pillar.title}
                       </h3>
-                      <p
-                        style={{
-                          fontSize: '0.92rem',
-                          color: isActive ? '#334155' : '#64748b',
-                          lineHeight: 1.6,
-                          margin: 0,
-                          transition: 'color 0.35s ease',
-                        }}
-                      >
-                        {b.desc}
+
+                      <p style={{ fontSize: '0.88rem', color: '#7C8894', lineHeight: 1.6, margin: 0 }}>
+                        {pillar.desc}
                       </p>
                     </div>
                   </div>
-                );
-              })}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Refined Master Accordion Card (With Smooth Hover Effects & Fine Touches) */}
+      <section style={{ padding: '70px 0', background: '#F8F8F8' }}>
+        <div className="container" style={{ maxWidth: '1050px', margin: '0 auto', padding: '0 20px' }}>
+          <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 32px' }}>
+            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#588078', letterSpacing: '0.6px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
+              HERITAGE &amp; EVOLUTION
+            </span>
+            <h2 style={{ fontSize: 'clamp(1.7rem, 3.2vw, 2.3rem)', fontWeight: 700, color: '#304050', marginBottom: '10px', letterSpacing: '0.6px' }}>
+              Our Growth &amp; Engineering Timeline
+            </h2>
+            <p style={{ color: '#7C8894', fontSize: '0.96rem', lineHeight: 1.6 }}>
+              Click the accordion card below to reveal our 35-year metallurgical journey from 1991 to present day.
+            </p>
+          </div>
+
+          <div className="single-accordion-wrapper">
+            <div className="single-accordion-layer-2" />
+            <div className="single-accordion-layer-1" />
+
+            <div className="single-accordion-main">
+              {/* Accordion Header Strip */}
+              <div
+                onClick={() => setIsTimelineOpen(!isTimelineOpen)}
+                style={{
+                  padding: '24px 32px',
+                  background: '#FFFFFF',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: '20px',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                  <div style={{ width: '42px', height: '42px', background: '#EDF5F4', color: '#588078', border: '1px solid #588078', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <Calendar size={22} />
+                  </div>
+                  <div>
+                    <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#304050', margin: 0, letterSpacing: '0.5px' }}>
+                      COMPLETE METALLURGICAL TIMELINE (1991 – 2026)
+                    </h3>
+                    <p style={{ fontSize: '0.84rem', color: '#7C8894', margin: '3px 0 0 0' }}>
+                      {isTimelineOpen ? 'Click to collapse complete timeline' : 'Click to expand 6 major engineering milestones'}
+                    </p>
+                  </div>
+                </div>
+
+                <div
+                  style={{
+                    width: '36px',
+                    height: '36px',
+                    borderRadius: 0,
+                    background: '#F4F6F8',
+                    border: '1px solid #E0E8E8',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#304050',
+                    transform: isTimelineOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                    transition: 'transform 200ms ease',
+                    flexShrink: 0,
+                  }}
+                >
+                  <ChevronDown size={20} />
+                </div>
+              </div>
+
+              {/* Accordion Expanded Body */}
+              {isTimelineOpen && (
+                <div style={{ borderTop: '1px solid #E0E8E8', background: '#FFFFFF' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    {timelineMilestones.map((item, idx) => (
+                      <div
+                        key={item.year}
+                        className="timeline-row-item"
+                        style={{
+                          borderBottom: idx < timelineMilestones.length - 1 ? '1px solid #E0E8E8' : 'none',
+                        }}
+                      >
+                        {/* Year Typography */}
+                        <div>
+                          <span className="timeline-year-text" style={{ fontSize: '2.2rem', fontWeight: 800, color: '#304050', lineHeight: 1, letterSpacing: '0.6px', transition: 'color 200ms ease' }}>
+                            {item.year}
+                          </span>
+                        </div>
+
+                        {/* Title & Description (No Boxed Checkmark Tags!) */}
+                        <div>
+                          <h4 style={{ fontSize: '1.12rem', fontWeight: 700, color: '#304050', marginBottom: '8px', lineHeight: 1.3, letterSpacing: '0.4px' }}>
+                            {item.title}
+                          </h4>
+                          <p style={{ fontSize: '0.9rem', color: '#7C8894', lineHeight: 1.65, margin: 0 }}>
+                            {item.desc}
+                          </p>
+                        </div>
+
+                        {/* Photo with smooth zoom on hover */}
+                        <div className="timeline-img-frame">
+                          <img
+                            src={item.image}
+                            alt={item.title}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
       </section>
 
-      {/* 3. Interactive Milestones Timeline */}
-      <section className="section bg-tint" style={{ padding: '90px 0', background: '#f8fafc', borderTop: '1px solid #e2e8f0' }}>
-        <div className="container">
-          <div style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto 60px' }}>
-            <h2 className="section-title" style={{ fontSize: '2.5rem' }}>
-              Our Growth &amp; Engineering Timeline
-            </h2>
-            <p style={{ color: '#64748b' }}>
-              Key milestones marking our evolution from a regional foundry to a global defense and aerospace alloy supplier.
-            </p>
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '960px', margin: '0 auto' }}>
-            {timelineMilestones.map((item, idx) => (
-              <div
-                key={idx}
-                style={{
-                  background: '#ffffff',
-                  border: '1px solid #e2e8f0',
-                  borderLeft: '6px solid #51847D',
-                  borderRadius: '16px',
-                  padding: '28px 32px',
-                  display: 'grid',
-                  gridTemplateColumns: '120px 1fr',
-                  gap: '24px',
-                  alignItems: 'center',
-                  boxShadow: '0 6px 20px rgba(0,0,0,0.03)',
-                }}
-              >
-                <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '2.2rem', fontWeight: 900, color: '#51847D' }}>
-                  {item.year}
-                </div>
-                <div>
-                  <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#0f172a', marginBottom: '6px' }}>
-                    {item.title}
-                  </h3>
-                  <p style={{ fontSize: '0.95rem', color: '#475569', margin: 0, lineHeight: 1.6 }}>
-                    {item.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 4. Certifications & Mill Test Compliance Grid */}
-      <section className="section bg-white" style={{ padding: '100px 0' }}>
-        <div className="container">
-          <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 60px' }}>
-            <h2 className="section-title" style={{ fontSize: '2.5rem', marginBottom: '16px' }}>
+      {/* 4. Certifications Grid */}
+      <section style={{ padding: '70px 0', background: '#FFFFFF', borderTop: '1px solid #E0E8E8' }}>
+        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
+          <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 48px' }}>
+            <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#588078', letterSpacing: '0.6px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
+              GLOBAL ACCREDITATION
+            </span>
+            <h2 style={{ fontSize: 'clamp(1.7rem, 3.2vw, 2.3rem)', fontWeight: 700, color: '#304050', marginBottom: '12px', letterSpacing: '0.6px' }}>
               International Metallurgical Certifications
             </h2>
-            <p style={{ color: '#475569', fontSize: '1.05rem' }}>
-              Every alloy shipment from Jyothi Metals carries official Mill Test Certificates (MTC) compliant with EN 10204 3.1 &amp; 3.2 international standards.
+            <p style={{ color: '#7C8894', fontSize: '0.98rem', lineHeight: 1.6 }}>
+              Every alloy consignment carries official Mill Test Certificates (MTC) compliant with EN 10204 3.1 &amp; 3.2 standards.
             </p>
           </div>
 
-          <div className="grid-responsive-4col" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px' }}>
-            {certifications.map((cert, cIdx) => (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
+            {certifications.map((cert) => (
               <div
-                key={cIdx}
+                key={cert.code}
                 style={{
-                  background: '#ffffff',
-                  border: '1px solid #e2e8f0',
-                  borderTop: '4px solid #51847D',
-                  borderRadius: '16px',
-                  padding: '30px 24px',
+                  background: '#FFFFFF',
+                  border: '1px solid #E0E8E8',
+                  borderTop: '3px solid #588078',
+                  borderRadius: 0,
+                  padding: '28px 24px',
                   textAlign: 'center',
-                  boxShadow: '0 8px 24px rgba(0,0,0,0.04)',
                 }}
               >
-                <FileCheck size={36} color="#51847D" style={{ margin: '0 auto 16px' }} />
-                <h3 style={{ fontSize: '1.2rem', fontWeight: 900, color: '#0f172a', marginBottom: '8px' }}>
+                <Award size={32} color="#588078" style={{ margin: '0 auto 14px' }} />
+                <div style={{ fontSize: '1.15rem', fontWeight: 700, color: '#304050', marginBottom: '6px', letterSpacing: '0.4px' }}>
                   {cert.code}
-                </h3>
-                <div style={{ fontSize: '0.9rem', fontWeight: 700, color: '#51847D', marginBottom: '8px' }}>
-                  {cert.label}
                 </div>
-                <div style={{ fontSize: '0.82rem', color: '#64748b' }}>
+                <div style={{ fontSize: '0.86rem', fontWeight: 700, color: '#588078', marginBottom: '10px' }}>
+                  {cert.title}
+                </div>
+                <div style={{ fontSize: '0.84rem', color: '#7C8894', lineHeight: 1.55 }}>
                   {cert.desc}
                 </div>
               </div>
             ))}
           </div>
+        </div>
+      </section>
 
-          <div style={{ textAlign: 'center', marginTop: '60px' }}>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: '#0f172a', fontWeight: 800, fontSize: '1.1rem', marginBottom: '24px' }}>
-              <CheckCircle2 size={22} color="#51847D" /> Need Material Test Reports (MTR) for an upcoming contract?
-            </div>
-            <div>
-              <button
-                onClick={onOpenQuoteModal}
-                className="btn btn-accent"
-                style={{ padding: '16px 36px', fontSize: '1rem', background: '#51847D' }}
-              >
-                Download Test Certificate Samples or Get Quote <ChevronRight size={18} />
-              </button>
-            </div>
+      {/* 5. Light Theme Closing CTA */}
+      <section
+        style={{
+          background: '#FFFFFF',
+          color: '#304050',
+          padding: '70px 0',
+          borderTop: '3px solid #588078',
+          textAlign: 'center',
+        }}
+      >
+        <div className="container" style={{ maxWidth: '760px', margin: '0 auto', padding: '0 20px' }}>
+          <h2 style={{ fontSize: 'clamp(1.8rem, 3.4vw, 2.3rem)', fontWeight: 700, color: '#304050', marginBottom: '14px', lineHeight: 1.25, letterSpacing: '0.6px' }}>
+            Partner with Jyoti Metal India
+          </h2>
+          <p style={{ color: '#7C8894', fontSize: '1.02rem', lineHeight: 1.65, marginBottom: '32px' }}>
+            Discuss your material requirements, custom extrusion profiles, or third-party witnessed testing with our QA engineers.
+          </p>
+
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '14px', flexWrap: 'wrap' }}>
+            <button
+              type="button"
+              onClick={() => onOpenQuoteModal()}
+              className="btn btn-primary"
+              style={{ padding: '15px 32px', fontSize: '0.92rem', letterSpacing: '0.6px' }}
+            >
+              Request a Quote <ArrowRight size={18} />
+            </button>
           </div>
         </div>
       </section>

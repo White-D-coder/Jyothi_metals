@@ -263,12 +263,36 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
     requestAnimationFrame(step);
   };
 
-  // Interactive Catalog State
   const [activeCatalogTab, setActiveCatalogTab] = useState<string>('Pipes & Tubes');
   const [activeSubCat, setActiveSubCat] = useState<string>('Stainless Steel Pipes & Tubes');
   const [showAllProducts, setShowAllProducts] = useState<boolean>(false);
   const [isMainCatDropdownOpen, setIsMainCatDropdownOpen] = useState<boolean>(false);
   const [isSubCatDropdownOpen, setIsSubCatDropdownOpen] = useState<boolean>(false);
+  const [activeCategoryDot, setActiveCategoryDot] = useState<number>(0);
+  const [isMobileView, setIsMobileView] = useState<boolean>(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobileView(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const initialProductsLimit = isMobileView ? 4 : 9;
+
+  const handleCategoryScroll = () => {
+    if (categoryCarouselRef.current) {
+      const el = categoryCarouselRef.current;
+      const maxScroll = el.scrollWidth - el.clientWidth;
+      if (maxScroll > 0) {
+        const scrollRatio = el.scrollLeft / maxScroll;
+        const index = Math.min(7, Math.max(0, Math.round(scrollRatio * 7)));
+        setActiveCategoryDot(index);
+      }
+    }
+  };
 
   // Automatically select the first sub-category whenever activeCatalogTab changes
   useEffect(() => {
@@ -955,6 +979,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
           {/* 8 Product Category Cards Grid on Desktop / Phone View Horizontal Carousel */}
           <div
             ref={categoryCarouselRef}
+            onScroll={handleCategoryScroll}
             className="category-arch-grid"
             style={{
               display: 'grid',
@@ -1106,6 +1131,53 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Mobile / Phone View Manual Carousel Controls & Animated Dotted Pagination */}
+          <div
+            className="mobile-carousel-controls"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '16px',
+              marginTop: '24px',
+            }}
+          >
+
+
+            {/* Dotted Sliding Animation Pagination Dots */}
+            <div className="carousel-dots-container" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              {[0, 1, 2, 3, 4, 5, 6, 7].map((dotIdx) => (
+                <button
+                  key={dotIdx}
+                  type="button"
+                  onClick={() => {
+                    if (categoryCarouselRef.current) {
+                      const el = categoryCarouselRef.current;
+                      const maxScroll = el.scrollWidth - el.clientWidth;
+                      const targetScroll = (dotIdx / 7) * maxScroll;
+                      el.scrollTo({ left: targetScroll, behavior: 'smooth' });
+                      setActiveCategoryDot(dotIdx);
+                    }
+                  }}
+                  className={`carousel-dot ${activeCategoryDot === dotIdx ? 'active' : ''}`}
+                  style={{
+                    width: activeCategoryDot === dotIdx ? '26px' : '8px',
+                    height: '8px',
+                    borderRadius: activeCategoryDot === dotIdx ? '4px' : '50%',
+                    background: activeCategoryDot === dotIdx ? '#51847D' : '#cbd5e1',
+                    border: 'none',
+                    padding: 0,
+                    cursor: 'pointer',
+                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  }}
+                  aria-label={`Go to slide ${dotIdx + 1}`}
+                />
+              ))}
+            </div>
+
+
           </div>
         </div>
       </section>
@@ -1343,12 +1415,12 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                 <button
                   onClick={() => onOpenQuoteModal()}
                   className="btn btn-accent"
-                  style={{ width: '100%', padding: '10px 14px', fontSize: '0.8rem', borderRadius: '10px', marginBottom: filteredCatalog.length > 9 ? '10px' : '0' }}
+                  style={{ width: '100%', padding: '10px 14px', fontSize: '0.8rem', borderRadius: '10px', marginBottom: filteredCatalog.length > initialProductsLimit ? '10px' : '0' }}
                 >
                   Custom Spec Inquiry
                 </button>
 
-                {filteredCatalog.length > 9 && (
+                {filteredCatalog.length > initialProductsLimit && (
                   <button
                     onClick={() => setShowAllProducts(!showAllProducts)}
                     style={{
@@ -1363,7 +1435,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                       cursor: 'pointer',
                     }}
                   >
-                    {showAllProducts ? 'Show Max 3 Lines' : `See All (${filteredCatalog.length} Items)`}
+                    {showAllProducts ? 'Show Less' : `See All (${filteredCatalog.length} Items)`}
                   </button>
                 )}
               </div>
@@ -1387,14 +1459,14 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
               ) : (
                 <>
                   <div className="products-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '24px', alignItems: 'stretch' }}>
-                    {(showAllProducts ? filteredCatalog : filteredCatalog.slice(0, 9)).map((prod) => (
+                    {(showAllProducts ? filteredCatalog : filteredCatalog.slice(0, initialProductsLimit)).map((prod) => (
                       <div
                         key={prod.id}
                         className="product-card"
                         style={{
                           background: '#ffffff',
                           border: '1px solid #e2e8f0',
-                          borderRadius: '16px',
+                          borderRadius: '0px',
                           display: 'flex',
                           flexDirection: 'column',
                           height: '100%',
@@ -1428,7 +1500,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                                 fontSize: '0.72rem',
                                 fontWeight: 700,
                                 padding: '4px 10px',
-                                borderRadius: '20px',
+                                borderRadius: '0px',
                               }}
                             >
                               {spec}
@@ -1445,11 +1517,11 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                             Get Quote
                           </button>
                           <button
-                            onClick={() => onNavigate('products')}
+                            onClick={() => onNavigate(`product-detail?id=${encodeURIComponent(prod.id)}`)}
                             style={{
                               background: 'none',
                               border: 'none',
-                              color: '#51847D',
+                              color: '#588078',
                               fontWeight: 700,
                               fontSize: '0.82rem',
                               cursor: 'pointer',
@@ -1466,15 +1538,15 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                   ))}
                 </div>
 
-                {filteredCatalog.length > 9 && (
+                {filteredCatalog.length > initialProductsLimit && (
                     <div style={{ textAlign: 'center', marginTop: '36px' }}>
                       <button
                         onClick={() => setShowAllProducts(!showAllProducts)}
                         className="btn btn-accent"
-                        style={{ padding: '12px 32px', fontSize: '0.9rem', borderRadius: '10px' }}
+                        style={{ padding: '12px 32px', fontSize: '0.9rem', borderRadius: '0px' }}
                       >
                         {showAllProducts
-                          ? 'Show Max 3 Lines'
+                          ? 'Show Less'
                           : `See All ${activeCatalogTab !== 'all' ? activeCatalogTab : ''} Products (${filteredCatalog.length} Total Items)`}
                       </button>
                     </div>

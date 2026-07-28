@@ -3,7 +3,6 @@ import { motion } from 'motion/react';
 import {
   ArrowRight,
   ArrowUpRight,
-  Factory,
   Flame,
   Cpu,
   Layers,
@@ -33,7 +32,6 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
   const countedRef = useRef(false);
 
   const [activeGalleryIdx, setActiveGalleryIdx] = useState<number>(-1);
-  const [activeProcessIdx, setActiveProcessIdx] = useState<number>(0);
 
   const heroTitle = 'A 120,000 m² Integrated Manufacturing Hub';
 
@@ -242,30 +240,29 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
         <div className="infra-sheen-layer" />
 
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <div style={{ maxWidth: '850px', margin: '0 auto', textAlign: 'center' }}>
+          <div style={{ maxWidth: '920px', margin: '0 auto', textAlign: 'center' }}>
             <span className="small-label infra-reveal is-visible" style={{ color: '#77b8b0' }}>
               OUR FOUNDRY &amp; PLANT INFRASTRUCTURE
             </span>
-            <h1 className="hero-title" style={{ color: '#ffffff', marginBottom: '24px', marginTop: '10px' }}>
+            <h1 className="hero-title" style={{ fontSize: '3.7rem', color: '#ffffff', marginBottom: '24px', marginTop: '10px', lineHeight: 1.08 }}>
               {heroTitle.split(' ').map((word, i) => (
                 <span key={`${word}-${i}`} className="infra-word" style={{ transitionDelay: `${i * 65}ms`, marginRight: '0.28em' }}>
                   {word}
                 </span>
               ))}
             </h1>
-            <p className="infra-reveal is-visible" style={{ fontSize: '1.15rem', color: '#cbd5e1', lineHeight: 1.7, marginBottom: '36px', maxWidth: '680px', marginLeft: 'auto', marginRight: 'auto', transitionDelay: '350ms' }}>
+            <p className="infra-reveal is-visible" style={{ fontSize: '1.15rem', color: '#cbd5e1', lineHeight: 1.7, marginBottom: '32px', maxWidth: '760px', marginLeft: 'auto', marginRight: 'auto', transitionDelay: '350ms' }}>
               Vacuum arc melting, continuous casting, hot &amp; cold rolling and multi-axis CNC machining under one
               roof — full heat-lot traceability from raw charge to finished component.
-            </p>
-            <div className="infra-reveal is-visible" style={{ display: 'flex', justifyContent: 'center', gap: '16px', transitionDelay: '420ms' }}>
+            </p>            <div className="infra-reveal is-visible" style={{ display: 'flex', justifyContent: 'center', gap: '16px', transitionDelay: '420ms', marginTop: '28px' }}>
               <button
                 onClick={onOpenQuoteModal}
                 className="btn btn-accent"
                 style={{
-                  padding: '16px 36px',
+                  padding: '16px 38px',
                   fontSize: '1rem',
-                  background: '#51847D',
-                  borderColor: '#51847D',
+                  borderRadius: '12px',
+                  boxShadow: '0 8px 24px rgba(81, 132, 125, 0.4)',
                 }}
               >
                 Schedule a Plant Visit <ArrowRight size={18} />
@@ -303,36 +300,10 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
                 through rolling, forging and precision machining into a single vertically-integrated campus
                 eliminating supply-chain hand-offs and guaranteeing uninterrupted heat-lot traceability.
               </p>
-              <p style={{ fontSize: '1.05rem', color: '#475569', lineHeight: 1.7, marginBottom: '32px' }}>
-                Real time process telemetry feeds a centralized MES, letting our metallurgists fine tune
-                heat-treatment schedules and rolling parameters against your exact CAD files before a single
-                component ships.
-              </p>
-
-              <div className="grid-responsive-2col" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
-                <div style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderLeft: '4px solid #51847D', borderRadius: '16px', padding: '24px', boxShadow: '0 6px 20px rgba(0,0,0,0.03)' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '10px' }}>
-                    <Factory size={26} color="#51847D" style={{ flexShrink: 0 }} />
-                    <h4 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#0f172a', margin: 0 }}>Vertically Integrated</h4>
-                  </div>
-                  <p style={{ fontSize: '0.88rem', color: '#64748b', margin: 0, lineHeight: 1.5 }}>
-                    Melt, cast, roll and machine, all controlled in-house with zero external hand-offs.
-                  </p>
-                </div>
-                <div style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderLeft: '4px solid #51847D', borderRadius: '16px', padding: '24px', boxShadow: '0 6px 20px rgba(0,0,0,0.03)' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '10px' }}>
-                    <Gauge size={26} color="#51847D" style={{ flexShrink: 0 }} />
-                    <h4 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#0f172a', margin: 0 }}>850k+ Tons / Year</h4>
-                  </div>
-                  <p style={{ fontSize: '0.88rem', color: '#64748b', margin: 0, lineHeight: 1.5 }}>
-                    Sustained annual throughput backed by 24/7 continuous casting operations.
-                  </p>
-                </div>
-              </div>
             </div>
 
             <div className="infra-reveal" style={{ transitionDelay: '120ms' }}>
-              <div className="about-arch-frame-reversed" style={{ overflow: 'hidden', boxShadow: '0 20px 45px rgba(0,0,0,0.14)', background: '#061221' }}>
+              <div className="about-arch-frame-reversed" style={{ borderRadius: '20px', overflow: 'hidden', boxShadow: '0 20px 45px rgba(0,0,0,0.14)', background: '#061221' }}>
                 <img src="/images/jm1.jpg" alt="Jyoti Metal India integrated manufacturing hub" style={{ width: '100%', height: '460px', objectFit: 'cover', display: 'block' }} />
               </div>
             </div>
@@ -389,14 +360,6 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
               msOverflowStyle: 'none',
             }}
             className="hide-scrollbar"
-            onScroll={(e) => {
-              const el = e.currentTarget;
-              const first = el.firstElementChild as HTMLElement | null;
-              if (!first) return;
-              const step = first.offsetWidth + 32;
-              const idx = Math.round(el.scrollLeft / step);
-              setActiveProcessIdx(Math.min(processCards.length - 1, Math.max(0, idx)));
-            }}
           >
             {processCards.map((step, idx) => (
               <motion.div
@@ -444,7 +407,7 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
                     height: '460px',
                     background: '#ffffff',
                     border: '1px solid #cbd5e1',
-                    borderRadius: '18px',
+                    borderRadius: '0px',
                     overflow: 'hidden',
                     boxShadow: '0 8px 24px rgba(0,0,0,0.06)',
                     transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
@@ -468,8 +431,10 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
                         width: '100%',
                         height: '100%',
                         objectFit: 'cover',
+                        filter: 'grayscale(100%)',
+                        transition: 'transform 0.5s ease-out',
                       }}
-                      className="infra-process-img group-hover:scale-105"
+                      className="group-hover:scale-105"
                     />
                   </div>
 
@@ -506,45 +471,6 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
               </motion.div>
             ))}
           </div>
-
-          {/* Carousel Pagination Dots */}
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              gap: '10px',
-              marginTop: '32px',
-            }}
-          >
-            {processCards.map((step, idx) => {
-              const isActive = idx === activeProcessIdx;
-              return (
-                <button
-                  key={`dot-${step.number}`}
-                  type="button"
-                  aria-label={`Go to step ${step.number}: ${step.title}`}
-                  aria-current={isActive}
-                  onClick={() => {
-                    const el = processTrackRef.current;
-                    const first = el?.firstElementChild as HTMLElement | null;
-                    if (!el || !first) return;
-                    el.scrollTo({ left: idx * (first.offsetWidth + 32), behavior: 'smooth' });
-                  }}
-                  style={{
-                    width: isActive ? '28px' : '10px',
-                    height: '10px',
-                    padding: 0,
-                    border: 'none',
-                    borderRadius: '999px',
-                    cursor: 'pointer',
-                    background: isActive ? '#51847D' : '#cbd5e1',
-                    transition: 'width 0.3s ease, background-color 0.3s ease',
-                  }}
-                />
-              );
-            })}
-          </div>
         </div>
       </section>
 
@@ -573,7 +499,7 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
                       height: '420px',
                       background: '#061221',
                       border: '1px solid rgba(119, 184, 176, 0.4)',
-                      borderRadius: '18px',
+                      borderRadius: '0px',
                       boxShadow: '0 8px 30px rgba(6, 18, 33, 0.2)',
                       cursor: 'pointer',
                       overflow: 'hidden',
@@ -595,12 +521,12 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
                     }}
                   >
                     {/* Inner Frame */}
-                    <div style={{ position: 'absolute', inset: '16px', border: '1px solid rgba(255, 255, 255, 0.12)', borderRadius: '10px', pointerEvents: 'none' }} />
+                    <div style={{ position: 'absolute', inset: '16px', border: '1px solid rgba(255, 255, 255, 0.12)', borderRadius: '0px', pointerEvents: 'none' }} />
                     
                     <span style={{ fontSize: '0.78rem', color: '#77b8b0', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: '8px' }}>
                       Click for more
                     </span>
-                    <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: '#51847D', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '16px 0' }}>
+                    <div style={{ width: '48px', height: '48px', borderRadius: '0px', background: '#51847D', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '16px 0' }}>
                       <ArrowRight size={22} />
                     </div>
                     <h3 style={{ fontSize: '1.5rem', fontWeight: 900, color: '#ffffff', margin: '4px 0 8px', letterSpacing: '-0.01em' }}>
@@ -622,7 +548,7 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
                     height: '420px',
                     background: '#061221',
                     border: '1px solid #1e293b',
-                    borderRadius: '18px',
+                    borderRadius: '0px',
                     overflow: 'hidden',
                     cursor: 'pointer',
                     boxShadow: '0 8px 30px rgba(0,0,0,0.12)',
@@ -690,13 +616,13 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
       {/* 6. Plant Capacity — Minimalist Counter Strip (Matching Image 1 Architecture) */}
       <section style={{ background: '#ffffff', padding: '75px 0', borderTop: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0' }}>
         <div className="container" style={{ maxWidth: '1300px' }}>
-          <div ref={capacityRef} className="infra-capacity-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '32px', textAlign: 'center' }}>
+          <div ref={capacityRef} className="infra-capacity-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '16px', textAlign: 'center', alignItems: 'center' }}>
             {capacityStats.map((stat, idx) => (
-              <div key={stat.label} style={{ padding: '12px 8px' }}>
-                <div style={{ fontFamily: 'var(--font-heading)', fontSize: '3.2rem', fontWeight: 600, color: '#0f172a', lineHeight: 1, letterSpacing: '-0.02em' }}>
+              <div key={stat.label} style={{ padding: '12px 4px' }}>
+                <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2.8rem', fontWeight: 700, color: '#0f172a', lineHeight: 1, letterSpacing: '-0.02em', whiteSpace: 'nowrap' }}>
                   {renderCapacityValue(stat, idx)}
                 </div>
-                <div style={{ fontSize: '0.74rem', fontWeight: 700, color: '#64748b', letterSpacing: '0.14em', textTransform: 'uppercase', marginTop: '12px' }}>
+                <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#64748b', letterSpacing: '0.06em', textTransform: 'uppercase', marginTop: '12px', whiteSpace: 'nowrap' }}>
                   {stat.label}
                 </div>
               </div>
@@ -787,7 +713,7 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
                     background: '#061221',
                     color: '#ffffff',
                     border: 'none',
-                    borderRadius: '10px',
+                    borderRadius: '0px',
                     cursor: 'pointer',
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -801,16 +727,21 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
               </div>
             </div>
 
-            {/* Right Column: Arch Frame with User-Uploaded Furnace Image */}
+            {/* Right Column: Asymmetrical Arch Frame with User-Uploaded Furnace Image */}
             <div className="infra-reveal" style={{ transitionDelay: '100ms' }}>
               <div
-                className="about-arch-frame-reversed"
-                style={{ overflow: 'hidden', boxShadow: '0 20px 45px rgba(0,0,0,0.14)', background: '#061221' }}
+                style={{
+                  borderRadius: '0 90px 0 140px',
+                  overflow: 'hidden',
+                  boxShadow: '0 25px 60px rgba(6, 18, 33, 0.15)',
+                  background: '#061221',
+                  position: 'relative',
+                }}
               >
                 <img
                   src="/images/furnace_melt.jpg"
                   alt="Zero-carbon electric arc recycling furnace"
-                  style={{ width: '100%', height: '460px', objectFit: 'cover', display: 'block' }}
+                  style={{ width: '100%', height: '520px', objectFit: 'cover', display: 'block' }}
                 />
               </div>
             </div>

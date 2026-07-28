@@ -35,7 +35,7 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenQuoteModal }
         backgroundRepeat: 'no-repeat',
         color: '#cbd5e1',
         padding: '70px 0 30px',
-        borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+        borderTop: 'none',
         position: 'relative',
         overflow: 'hidden',
       }}

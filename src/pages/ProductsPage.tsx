@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Search, ChevronRight, ChevronDown, Check, Info } from 'lucide-react';
 import {
   catalogProducts,
@@ -16,20 +17,30 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
   initialCategory = 'Pipes & Tubes',
   onOpenQuoteModal,
 }) => {
-  const [selectedSubCat, setSelectedSubCat] = useState<string>('Stainless Steel Pipes & Tubes');
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const currentCategoryName = searchParams.get('category') || initialCategory || 'Pipes & Tubes';
+
+  const [selectedSubCat, setSelectedSubCat] = useState<string>(() =>
+    getFirstSubCategoryForCategory(currentCategoryName)
+  );
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [showAllProducts, setShowAllProducts] = useState<boolean>(false);
   const [isMainCatDropdownOpen, setIsMainCatDropdownOpen] = useState<boolean>(false);
   const [isSubCatDropdownOpen, setIsSubCatDropdownOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    if (initialCategory && initialCategory !== 'All') {
-      const defaultSub = getFirstSubCategoryForCategory(initialCategory);
-      setSelectedSubCat(defaultSub);
-    }
-  }, [initialCategory]);
+    const defaultSub = getFirstSubCategoryForCategory(currentCategoryName);
+    setSelectedSubCat(defaultSub);
+  }, [currentCategoryName]);
 
-  const currentCategoryName = initialCategory && initialCategory !== 'All' ? initialCategory : 'Pipes & Tubes';
+  const handleSelectMainCat = (catId: string) => {
+    setSearchParams({ category: catId });
+    const defaultSub = getFirstSubCategoryForCategory(catId);
+    setSelectedSubCat(defaultSub);
+    setShowAllProducts(false);
+    setIsMainCatDropdownOpen(false);
+  };
 
   const currentSubList = getSubCategoriesForCategory(currentCategoryName);
   const effectiveSubCat = currentSubList.some(
@@ -41,17 +52,23 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
     : selectedSubCat;
 
   const filteredProducts = catalogProducts.filter((prod) => {
+    let matchCat = true;
+    if (currentCategoryName && currentCategoryName !== 'All') {
+      const curLow = currentCategoryName.toLowerCase();
+      const prodCatLow = prod.category.toLowerCase();
+      matchCat = prodCatLow === curLow ||
+                 prodCatLow.includes(curLow) ||
+                 curLow.includes(prodCatLow);
+    }
+
     let matchSub = true;
-    if (effectiveSubCat && effectiveSubCat !== 'all' && effectiveSubCat !== 'All Sub-Categories') {
+    if (!showAllProducts && effectiveSubCat && effectiveSubCat !== 'all' && effectiveSubCat !== 'All Sub-Categories') {
       const subLow = effectiveSubCat.toLowerCase();
-      const catLow = prod.category.toLowerCase();
       const prodSubLow = prod.subCat.toLowerCase();
-      const prodTitleLow = prod.title.toLowerCase();
 
       matchSub = prodSubLow === subLow ||
                  prodSubLow.includes(subLow) ||
-                 prodTitleLow.includes(subLow) ||
-                 catLow.includes(subLow);
+                 subLow.includes(prodSubLow);
     }
 
     let matchSearch = true;
@@ -63,31 +80,42 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                     prod.specs.some(s => s.toLowerCase().includes(q));
     }
 
-    return matchSub && matchSearch;
+    return matchCat && matchSub && matchSearch;
   });
 
   return (
-    <div style={{ paddingTop: '110px', paddingBottom: '100px' }} className="bg-tint">
-      <div className="container">
-        
-        {/* Page Header (Category Title & 3 Detailed Informative Paragraphs) */}
-        <div style={{ textAlign: 'left', maxWidth: '960px', margin: '0 0 36px' }}>
-          <h1 className="section-title" style={{ fontSize: '2.7rem', color: '#0f172a', marginBottom: '18px', fontWeight: 900, textAlign: 'left' }}>
-            {currentCategoryName}
-          </h1>
-          
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', color: '#475569', fontSize: '0.98rem', lineHeight: 1.68, textAlign: 'left' }}>
-            <p style={{ margin: 0 }}>
-              Jyothi Metal (India) manufactures and distributes certified high-performance industrial <strong>{currentCategoryName.toLowerCase()}</strong> engineered to satisfy stringent international ISO 9001:2015, ASTM, ASME, EN, and DIN manufacturing standards. Our stock is maintained in solution-annealed and heat-treated metallurgical states to support high-temperature, high-pressure, and corrosive environments across aerospace, defense, marine, chemical refining, and nuclear energy installations.
-            </p>
-            <p style={{ margin: 0 }}>
-              Every component supplied from our facility carries authentic EN 10204 3.1 & 3.2 Mill Test Certificates (MTC), 100% Positive Material Identification (PMI), hydrostatic pressure testing, and ultrasonic flaw detection. Whether your project requires standard seamless schedules or precision CNC-milled custom tolerances, our engineering team ensures total compliance with your technical bill of materials.
-            </p>
-            <p style={{ margin: 0 }}>
-              With strategic inventory distribution centers across primary industrial trade corridors, we guarantee rapid dispatch and full shipment traceability. Select a sub-category from the left navigation panel or use the precision search bar below to filter specific alloy grades, chemical specifications, and mechanical yield criteria.
-            </p>
+    <div style={{ background: '#F8F8F8', minHeight: '100vh' }}>
+      {/* 1. Hero Section with Rich Photography */}
+      <section
+        style={{
+          backgroundImage: 'linear-gradient(135deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.85) 100%), url("/images/pexels-bence-szemerey-337043-6804265.jpg")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          color: '#FFFFFF',
+          padding: '80px 0 60px',
+          borderBottom: '3px solid #588078',
+          marginBottom: '40px',
+        }}
+      >
+        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
+          <div style={{ textAlign: 'left', maxWidth: '960px' }}>
+            <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#588078', letterSpacing: '0.8px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
+              CERTIFIED METALLURGICAL CATALOG
+            </span>
+            <h1 style={{ fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)', fontWeight: 700, color: '#FFFFFF', marginBottom: '18px', lineHeight: 1.15, letterSpacing: '0.6px' }}>
+              {currentCategoryName}
+            </h1>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', color: '#CBD5E1', fontSize: '1.02rem', lineHeight: 1.68 }}>
+              <p style={{ margin: 0 }}>
+                Jyoti Metal (India) manufactures and distributes certified high-performance industrial <strong>{currentCategoryName.toLowerCase()}</strong> engineered to satisfy stringent international ISO 9001:2015, ASTM, ASME, EN, and DIN manufacturing standards. Our stock is maintained in solution-annealed states across aerospace, defense, marine, and chemical refining installations.
+              </p>
+            </div>
           </div>
         </div>
+      </section>
+
+      <div className="container" style={{ paddingBottom: '100px' }}>
 
         {/* Search & Filter Action Bar */}
         <div style={{ margin: '32px 0 44px', maxWidth: '760px' }}>
@@ -201,12 +229,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                     <button
                       key={catId}
                       type="button"
-                      onClick={() => {
-                        const defaultSub = getFirstSubCategoryForCategory(catId);
-                        setSelectedSubCat(defaultSub);
-                        setShowAllProducts(false);
-                        setIsMainCatDropdownOpen(false);
-                      }}
+                      onClick={() => handleSelectMainCat(catId)}
                       className={`custom-mobile-dropdown-item ${isSelected ? 'is-selected' : ''}`}
                     >
                       <span>{catId}</span>
@@ -415,7 +438,8 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                             Get Quote
                           </button>
                           <button
-                            onClick={() => onOpenQuoteModal(prod.title)}
+                            type="button"
+                            onClick={() => navigate(`/product-detail?id=${encodeURIComponent(prod.id)}`)}
                             style={{
                               background: 'none',
                               border: 'none',

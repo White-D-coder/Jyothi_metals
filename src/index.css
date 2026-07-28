@@ -1,6 +1,4 @@
-/* ==========================================================================
-   Jyothi Metals - Professional Industrial B2B CSS (Sharp Corners Design System)
-   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&display=swap');
 
 /* Custom Font Registration */
 @font-face {
@@ -42,6 +40,33 @@
 
   /* Sharp Corners Principle - ZERO Border Radius */
   --radius-none: 0px;
+}
+
+/* STRICT GLOBAL DESIGN DIRECTIVE: ALL BUTTONS & INTERACTIVE ELEMENTS MUST HAVE ZERO BORDER RADIUS (SHARP CORNERS) */
+button,
+input,
+select,
+textarea,
+a.btn,
+.btn,
+.btn-primary,
+.btn-secondary,
+.btn-accent,
+.btn-outline,
+.btn-ghost-dark,
+.carousel-arrow-btn,
+.dropdown-item,
+.dropdown-menu,
+.nav-link-cta,
+.sharp-btn-primary,
+.sharp-btn-secondary,
+.sharp-btn-dark-outline,
+.capability-nav-row,
+.capability-nav-wrapper,
+.modal-content,
+.modal-close,
+.top-bar-item {
+  border-radius: 0 !important;
 }
 
 /* Reset & Base Styles */
@@ -865,7 +890,7 @@ h1, h2, h3, h4, h5, h6 {
 .category-arch-card {
   position: relative;
   overflow: hidden;
-  border-radius: 18px !important;
+  border-radius: 0px !important;
   border: 1px solid #e2e8f0;
   background: #061221;
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s ease, box-shadow 0.4s ease;
@@ -1867,3 +1892,314 @@ h1, h2, h3, h4, h5, h6 {
   .infra-timeline-node { flex-direction: row !important; text-align: left !important; gap: 16px !important; }
   .infra-timeline-node .infra-node-labels { align-items: flex-start !important; text-align: left !important; }
 }
+
+/* Blog Page Mobile Responsive Enhancements (< 768px) */
+@media (max-width: 768px) {
+  .blog-hero-section {
+    padding: 80px 0 50px !important;
+  }
+  
+  .blog-hero-title {
+    font-size: 2.5rem !important;
+    letter-spacing: 0.18em !important;
+  }
+
+  .blog-hero-subtitle {
+    letter-spacing: 0.18em !important;
+    font-size: 0.72rem !important;
+  }
+
+  .blog-legacy-section {
+    padding: 50px 0 35px !important;
+  }
+
+  .blog-legacy-grid {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+
+  .blog-legacy-img-wrap {
+    height: 220px !important;
+  }
+
+  .blog-carousel-section {
+    padding: 30px 0 60px !important;
+  }
+
+  .blog-carousel-header {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin-bottom: 20px !important;
+  }
+
+  .blog-carousel-card {
+    flex: 0 0 84% !important;
+    min-width: 260px !important;
+    height: 480px !important;
+  }
+
+  .blog-archive-section {
+    padding: 60px 0 !important;
+  }
+
+  .blog-archive-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+    margin-bottom: 30px !important;
+  }
+
+  .blog-pills-scroll {
+    display: flex !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    padding-bottom: 6px !important;
+    width: 100% !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .blog-pills-scroll::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .blog-articles-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  .blog-newsletter-section {
+    padding: 60px 0 !important;
+  }
+
+  .blog-newsletter-form {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  .blog-newsletter-input-wrap {
+    width: 100% !important;
+    flex: 1 1 100% !important;
+  }
+
+  .blog-newsletter-btn {
+    width: 100% !important;
+  }
+
+  .blog-cta-btn-group {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  .blog-cta-btn-group button {
+    width: 100% !important;
+  }
+}
+
+/* ==========================================================================
+   CAPABILITY & QUALITY SUB-PAGES DESIGN SYSTEM (Exact Design Spec)
+   ========================================================================== */
+
+/* Shared Sidebar Navigation List Component */
+.capability-nav-wrapper {
+  background: #F8F8F8;
+  border: 1px solid #E0E8E8;
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+}
+
+.capability-nav-header {
+  padding: 16px 20px;
+  background: #304050;
+  color: #FFFFFF;
+}
+
+.capability-nav-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  display: block;
+}
+
+.capability-nav-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.capability-nav-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background-color: #F8F8F8;
+  color: #304050;
+  border: none;
+  border-bottom: 1px solid #E0E8E8;
+  border-radius: 0 !important;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 200ms ease, color 200ms ease;
+  line-height: 1.35;
+}
+
+.capability-nav-row:last-child {
+  border-bottom: none;
+}
+
+.capability-nav-arrow {
+  opacity: 0.45;
+  transition: opacity 200ms ease, transform 200ms ease;
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+
+.capability-nav-row:hover,
+.capability-nav-row.active {
+  background-color: #51847D !important;
+  color: #FFFFFF !important;
+}
+
+.capability-nav-row:hover .capability-nav-arrow,
+.capability-nav-row.active .capability-nav-arrow {
+  opacity: 1;
+  color: #FFFFFF;
+  transform: translateX(3px);
+}
+
+/* Sharp Button System Specifications */
+.sharp-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background-color: #51847D;
+  color: #FFFFFF;
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid #51847D;
+  border-radius: 0 !important;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 200ms ease, border-color 200ms ease, transform 150ms ease;
+  box-shadow: none;
+}
+
+.sharp-btn-primary:hover {
+  background-color: #436e68;
+  border-color: #436e68;
+}
+
+.sharp-btn-primary:active {
+  transform: scale(0.98);
+}
+
+.sharp-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background-color: transparent;
+  color: #F8F8F8;
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1.5px solid #F8F8F8;
+  border-radius: 0 !important;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 200ms ease, color 200ms ease, transform 150ms ease;
+}
+
+.sharp-btn-secondary:hover {
+  background-color: rgba(248, 248, 248, 0.12);
+  color: #FFFFFF;
+}
+
+.sharp-btn-secondary:active {
+  transform: scale(0.98);
+}
+
+.sharp-btn-dark-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background-color: transparent;
+  color: #304050;
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1.5px solid #304050;
+  border-radius: 0 !important;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 200ms ease, color 200ms ease, transform 150ms ease;
+}
+
+.sharp-btn-dark-outline:hover {
+  background-color: #304050;
+  color: #FFFFFF;
+}
+
+/* Mobile Responsive Adjustments for Sub-Pages (< 768px) */
+@media (max-width: 768px) {
+  .capability-layout-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+
+  .capability-nav-wrapper {
+    margin-bottom: 24px;
+  }
+
+  .capability-nav-list {
+    flex-direction: row !important;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .capability-nav-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .capability-nav-row {
+    flex: 0 0 auto;
+    width: auto;
+    padding: 12px 18px;
+    border-bottom: none;
+    border-right: 1px solid #E0E8E8;
+    font-size: 0.82rem;
+  }
+
+  .capability-hero-cta {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  .capability-hero-cta button,
+  .capability-hero-cta a {
+    width: 100% !important;
+  }
+
+  .specifications-table-wrap {
+    overflow-x: auto;
+  }
+}
+

@@ -36,18 +36,44 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenQuoteModal }) =>
   };
 
   return (
-    <div style={{ paddingTop: '100px', paddingBottom: '100px' }} className="bg-tint">
-      <div className="container">
-        {/* Header */}
-        <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto 50px' }}>
-          <span className="small-label">24/7 Technical Support &amp; Quotes</span>
-          <h1 className="section-title" style={{ fontSize: '3rem' }}>
-            Get in Touch with Our Metallurgy Experts
-          </h1>
-          <p style={{ color: '#4a5568', fontSize: '1.1rem' }}>
-            Have technical questions about alloy tolerances, heat treatments, or custom enterprise contracts? Our engineering team responds within 2 business hours.
-          </p>
+    <div style={{ background: '#F8F8F8', minHeight: '100vh' }}>
+      {/* 1. Hero with Rich Background Photography */}
+      <section
+        style={{
+          backgroundImage: 'linear-gradient(135deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.85) 100%), url("/images/pexels-eugeniofr-30005294.jpg")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          color: '#FFFFFF',
+          padding: '80px 0 60px',
+          borderBottom: '3px solid #588078',
+          marginBottom: '50px',
+        }}
+      >
+        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
+          <div style={{ textAlign: 'center', maxWidth: '850px', margin: '0 auto' }}>
+            <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#588078', letterSpacing: '0.8px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
+              24/7 TECHNICAL SUPPORT &amp; QUOTES
+            </span>
+            <h1
+              style={{
+                fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)',
+                fontWeight: 700,
+                color: '#FFFFFF',
+                lineHeight: 1.15,
+                marginBottom: '16px',
+                letterSpacing: '0.6px',
+              }}
+            >
+              Get in Touch with Our Metallurgy Experts
+            </h1>
+            <p style={{ fontSize: '1.08rem', color: '#CBD5E1', lineHeight: 1.65, margin: 0, letterSpacing: '0.3px' }}>
+              Have technical questions about alloy tolerances, heat treatments, or custom enterprise contracts? Our engineering team responds within 2 business hours.
+            </p>
+          </div>
         </div>
+      </section>
+
+      <div className="container" style={{ paddingBottom: '80px' }}>
 
         {/* 2 Column Layout: Interactive Metal Calculator & Contact Form */}
         <div className="grid-responsive-2col" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px', marginBottom: '60px' }}>

@@ -20,8 +20,9 @@ export const Navbar: React.FC<NavbarProps> = ({
   const handleNavClick = (id: string, category?: string) => {
     if (category && onSelectCategory) {
       onSelectCategory(category);
+    } else {
+      setActiveTab(id);
     }
-    setActiveTab(id);
     setActiveDropdown(null);
     setMobileMenuOpen(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -189,21 +190,21 @@ export const Navbar: React.FC<NavbarProps> = ({
                   Foundry Infrastructure
                 </a>
                 <a
-                  href="#quality"
+                  href="#quality-policy"
                   className="dropdown-item"
                   onClick={(e) => {
                     e.preventDefault();
-                    handleNavClick('quality');
+                    handleNavClick('quality-policy');
                   }}
                 >
                   Quality Policy &amp; ISO Standards
                 </a>
                 <a
-                  href="#quality"
+                  href="#certifications"
                   className="dropdown-item"
                   onClick={(e) => {
                     e.preventDefault();
-                    handleNavClick('quality');
+                    handleNavClick('certifications');
                   }}
                 >
                   Certifications &amp; Compliance
@@ -253,7 +254,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <a
                 href="#services"
-                className={`nav-menu-link ${activeTab === 'services' ? 'active' : ''}`}
+                className={`nav-menu-link ${activeTab === 'services' || activeTab.startsWith('services/') ? 'active' : ''}`}
                 onClick={(e) => {
                   e.preventDefault();
                   handleDropdownClick('services');
@@ -263,31 +264,31 @@ export const Navbar: React.FC<NavbarProps> = ({
               </a>
               <div className={`dropdown-menu ${activeDropdown === 'services' ? 'is-open' : ''}`}>
                 <a
-                  href="#services"
+                  href="#services/laser-cutting"
                   className="dropdown-item"
                   onClick={(e) => {
                     e.preventDefault();
-                    handleNavClick('services');
+                    handleNavClick('services/laser-cutting');
                   }}
                 >
                   Custom Laser Cutting &amp; Milling
                 </a>
                 <a
-                  href="#services"
+                  href="#services/arc-casting"
                   className="dropdown-item"
                   onClick={(e) => {
                     e.preventDefault();
-                    handleNavClick('services');
+                    handleNavClick('services/arc-casting');
                   }}
                 >
                   Continuous Electric Arc Casting
                 </a>
                 <a
-                  href="#services"
+                  href="#services/weld-inspection"
                   className="dropdown-item"
                   onClick={(e) => {
                     e.preventDefault();
-                    handleNavClick('services');
+                    handleNavClick('services/weld-inspection');
                   }}
                 >
                   Ultrasonic Weld Inspection
@@ -407,8 +408,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               <a href="#home" className="dropdown-item" onClick={() => handleNavClick('home')} style={{ padding: '12px 16px', fontWeight: 700 }}>Home</a>
               <a href="#about" className="dropdown-item" onClick={() => handleNavClick('about')} style={{ padding: '12px 16px', fontWeight: 700 }}>About Us &amp; Heritage</a>
               <a href="#infrastructure" className="dropdown-item" onClick={() => handleNavClick('infrastructure')} style={{ padding: '12px 16px', fontWeight: 700 }}>Foundry Infrastructure</a>
-              <a href="#quality" className="dropdown-item" onClick={() => handleNavClick('quality')} style={{ padding: '12px 16px', fontWeight: 700 }}>Quality &amp; Certifications</a>
-              <a href="#services" className="dropdown-item" onClick={() => handleNavClick('services')} style={{ padding: '12px 16px', fontWeight: 700 }}>Services</a>
+              <a href="#quality-policy" className="dropdown-item" onClick={() => handleNavClick('quality-policy')} style={{ padding: '12px 16px', fontWeight: 700 }}>Quality Policy &amp; ISO Standards</a>
+              <a href="#certifications" className="dropdown-item" onClick={() => handleNavClick('certifications')} style={{ padding: '12px 16px', fontWeight: 700 }}>Certifications &amp; Compliance</a>
+              <a href="#services/laser-cutting" className="dropdown-item" onClick={() => handleNavClick('services/laser-cutting')} style={{ padding: '12px 16px', fontWeight: 700 }}>Custom Laser Cutting &amp; Milling</a>
+              <a href="#services/arc-casting" className="dropdown-item" onClick={() => handleNavClick('services/arc-casting')} style={{ padding: '12px 16px', fontWeight: 700 }}>Continuous Electric Arc Casting</a>
+              <a href="#services/weld-inspection" className="dropdown-item" onClick={() => handleNavClick('services/weld-inspection')} style={{ padding: '12px 16px', fontWeight: 700 }}>Ultrasonic Weld Inspection</a>
               <a href="#products" className="dropdown-item" onClick={() => handleNavClick('products')} style={{ padding: '12px 16px', fontWeight: 700 }}>Products Catalog</a>
               <a href="#blog" className="dropdown-item" onClick={() => handleNavClick('blog')} style={{ padding: '12px 16px', fontWeight: 700 }}>Blog</a>
               <a href="#careers" className="dropdown-item" onClick={() => handleNavClick('careers')} style={{ padding: '12px 16px', fontWeight: 700 }}>Careers</a>

@@ -13,6 +13,12 @@ import { QualityPage } from './pages/QualityPage';
 import { BlogPage } from './pages/BlogPage';
 import { CareersPage } from './pages/CareersPage';
 import { FaqPage } from './pages/FaqPage';
+import { LaserCuttingPage } from './pages/LaserCuttingPage';
+import { ArcCastingPage } from './pages/ArcCastingPage';
+import { WeldInspectionPage } from './pages/WeldInspectionPage';
+import { QualityPolicyPage } from './pages/QualityPolicyPage';
+import { CertificationsPage } from './pages/CertificationsPage';
+import { ProductDetailPage } from './pages/ProductDetailPage';
 
 // Map a legacy "tab" id (used across Navbar/Footer/pages) to its real URL path.
 const tabToPath = (tab: string): string => (tab === 'home' ? '/' : `/${tab}`);
@@ -109,6 +115,30 @@ export function App() {
           <Route
             path="/faq"
             element={<FaqPage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
+          />
+          <Route
+            path="/services/laser-cutting"
+            element={<LaserCuttingPage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
+          />
+          <Route
+            path="/services/arc-casting"
+            element={<ArcCastingPage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
+          />
+          <Route
+            path="/services/weld-inspection"
+            element={<WeldInspectionPage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
+          />
+          <Route
+            path="/quality-policy"
+            element={<QualityPolicyPage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
+          />
+          <Route
+            path="/certifications"
+            element={<CertificationsPage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
+          />
+          <Route
+            path="/product-detail"
+            element={<ProductDetailPage onOpenQuoteModal={handleOpenQuoteModal} />}
           />
           {/* Unknown paths fall back to Home */}
           <Route
