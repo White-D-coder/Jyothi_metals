@@ -84,31 +84,28 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
   });
 
   return (
-    <div style={{ background: '#F8F8F8', minHeight: '100vh' }}>
-      {/* 1. Hero Section with Rich Photography */}
+    <div style={{ background: '#FFFFFF', minHeight: '100vh' }}>
+      {/* 1. Hero Section — Plain White, Clean Editorial */}
       <section
         style={{
-          backgroundImage: 'linear-gradient(135deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.85) 100%), url("/images/pexels-bence-szemerey-337043-6804265.jpg")',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          color: '#FFFFFF',
-          padding: '80px 0 60px',
-          borderBottom: '3px solid #588078',
-          marginBottom: '40px',
+          background: '#FFFFFF',
+          padding: '56px 0 48px',
         }}
       >
         <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
-          <div style={{ textAlign: 'left', maxWidth: '960px' }}>
-            <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#588078', letterSpacing: '0.8px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
-              CERTIFIED METALLURGICAL CATALOG
-            </span>
-            <h1 style={{ fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)', fontWeight: 700, color: '#FFFFFF', marginBottom: '18px', lineHeight: 1.15, letterSpacing: '0.6px' }}>
+          <div style={{ maxWidth: '1100px' }}>
+            <h1 style={{ fontSize: '2.8rem', fontWeight: 800, color: '#0D1B2A', marginBottom: '22px', lineHeight: 1.2, letterSpacing: '-0.2px' }}>
               {currentCategoryName}
             </h1>
-            
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', color: '#CBD5E1', fontSize: '1.02rem', lineHeight: 1.68 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', color: '#374151', fontSize: '1.1rem', lineHeight: 1.78 }}>
               <p style={{ margin: 0 }}>
-                Jyoti Metal (India) manufactures and distributes certified high-performance industrial <strong>{currentCategoryName.toLowerCase()}</strong> engineered to satisfy stringent international ISO 9001:2015, ASTM, ASME, EN, and DIN manufacturing standards. Our stock is maintained in solution-annealed states across aerospace, defense, marine, and chemical refining installations.
+                Jyoti Metal (India) manufactures and distributes certified high-performance industrial <strong style={{ color: '#0D1B2A' }}>{currentCategoryName.toLowerCase()}</strong> engineered to satisfy stringent international ISO 9001:2015, ASTM, ASME, EN, and DIN manufacturing standards. Our stock is maintained in solution-annealed and heat-treated metallurgical states to support high-temperature, high-pressure, and corrosive environments across aerospace, defense, marine, chemical refining, and nuclear energy installations.
+              </p>
+              <p style={{ margin: 0 }}>
+                Every component supplied from our facility carries authentic EN 10204 3.1 &amp; 3.2 Mill Test Certificates (MTC), 100% Positive Material Identification (PMI), hydrostatic pressure testing, and ultrasonic flaw detection. Whether your project requires standard seamless schedules or precision CNC-milled custom tolerances, our engineering team ensures total compliance with your technical bill of materials.
+              </p>
+              <p style={{ margin: 0 }}>
+                With strategic inventory distribution centers across primary industrial trade corridors, we guarantee rapid dispatch and full shipment traceability. Select a sub-category from the left navigation panel or use the precision search bar below to filter specific alloy grades, chemical specifications, and mechanical yield criteria.
               </p>
             </div>
           </div>
@@ -142,7 +139,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                 margin: 0,
                 background: '#ffffff',
                 border: '1.5px solid #cbd5e1',
-                borderRadius: '12px',
+                borderRadius: 0,
                 fontSize: '16px', // Prevents iOS Safari auto-zoom
                 color: '#0f172a',
                 outline: 'none',
@@ -199,7 +196,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                 setIsSubCatDropdownOpen(false);
               }}
               className="custom-mobile-dropdown-btn"
-              style={{ borderRadius: '12px' }}
+              style={{ borderRadius: 0 }}
             >
               <span>{currentCategoryName}</span>
               <ChevronDown
@@ -213,7 +210,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
             </button>
 
             {isMainCatDropdownOpen && (
-              <div className="custom-mobile-dropdown-menu" style={{ borderRadius: '12px' }}>
+              <div className="custom-mobile-dropdown-menu" style={{ borderRadius: 0 }}>
                 {[
                   'Pipes & Tubes',
                   'Plates & Sheets',
@@ -250,7 +247,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                 setIsMainCatDropdownOpen(false);
               }}
               className="custom-mobile-dropdown-btn"
-              style={{ borderRadius: '12px' }}
+              style={{ borderRadius: 0 }}
             >
               <span>
                 {getSubCategoriesForCategory(currentCategoryName).find((s) => s.id === effectiveSubCat)?.label || effectiveSubCat}
@@ -266,7 +263,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
             </button>
 
             {isSubCatDropdownOpen && (
-              <div className="custom-mobile-dropdown-menu" style={{ borderRadius: '12px' }}>
+              <div className="custom-mobile-dropdown-menu" style={{ borderRadius: 0 }}>
                 {getSubCategoriesForCategory(currentCategoryName).map((sub) => {
                   const isSelected = effectiveSubCat === sub.id;
                   return (
@@ -336,7 +333,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
               <button
                 onClick={() => onOpenQuoteModal()}
                 className="btn btn-accent"
-                style={{ width: '100%', padding: '10px 14px', fontSize: '0.8rem', borderRadius: '10px', marginBottom: filteredProducts.length > 9 ? '10px' : '0' }}
+                style={{ width: '100%', padding: '10px 14px', fontSize: '0.8rem', borderRadius: 0, marginBottom: filteredProducts.length > 9 ? '10px' : '0' }}
               >
                 Custom Spec Inquiry
               </button>
@@ -352,7 +349,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                     color: '#51847D',
                     background: '#edf5f4',
                     border: '1px solid #77b8b0',
-                    borderRadius: '10px',
+                    borderRadius: 0,
                     cursor: 'pointer',
                   }}
                 >
@@ -365,14 +362,14 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
           {/* Right Column: Product Cards Grid (Max 3 Lines / 9 Boxes Initially) */}
           <div style={{ flex: 1 }}>
             {filteredProducts.length === 0 ? (
-              <div style={{ background: '#ffffff', padding: '60px', textAlign: 'center', border: '1px solid #e2e8f0', borderRadius: '16px' }}>
+              <div style={{ background: '#ffffff', padding: '60px', textAlign: 'center', border: '1px solid #e2e8f0', borderRadius: 0 }}>
                 <Info size={40} color="#51847D" style={{ marginBottom: '12px' }} />
                 <h3 style={{ color: '#0f172a', marginBottom: '8px' }}>No products match your search query</h3>
                 <p style={{ color: '#64748b', fontSize: '0.9rem', marginBottom: '20px' }}>Try clearing your search term or selecting another sub-category.</p>
                 <button
                   onClick={() => { setSearchQuery(''); setSelectedSubCat(getFirstSubCategoryForCategory(currentCategoryName)); }}
                   className="btn btn-accent"
-                  style={{ padding: '10px 24px', borderRadius: '10px' }}
+                  style={{ padding: '10px 24px', borderRadius: 0 }}
                 >
                   Reset Filters
                 </button>
@@ -387,7 +384,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                       style={{
                         background: '#ffffff',
                         border: '1px solid #e2e8f0',
-                        borderRadius: '16px',
+                        borderRadius: 0,
                         display: 'flex',
                         flexDirection: 'column',
                         height: '100%',
@@ -421,7 +418,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                                 fontSize: '0.72rem',
                                 fontWeight: 700,
                                 padding: '4px 10px',
-                                borderRadius: '20px',
+                                borderRadius: 0,
                               }}
                             >
                               {spec}
@@ -465,7 +462,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                     <button
                       onClick={() => setShowAllProducts(!showAllProducts)}
                       className="btn btn-accent"
-                      style={{ padding: '12px 32px', fontSize: '0.9rem', borderRadius: '10px' }}
+                      style={{ padding: '12px 32px', fontSize: '0.9rem', borderRadius: 0 }}
                     >
                       {showAllProducts
                         ? 'Show Max 3 Lines'

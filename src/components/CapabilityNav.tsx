@@ -58,8 +58,8 @@ export const CapabilityNav: React.FC<CapabilityNavProps> = ({ currentPath }) => 
         top: '72px',
         zIndex: 900,
         background: '#FFFFFF',
-        borderBottom: '2px solid #588078',
-        boxShadow: '0 2px 10px rgba(0, 0, 0, 0.05)',
+        borderBottom: '1px solid #E2E8F0',
+        boxShadow: '0 2px 10px rgba(0, 0, 0, 0.04)',
       }}
     >
       <style>{`
@@ -70,7 +70,7 @@ export const CapabilityNav: React.FC<CapabilityNavProps> = ({ currentPath }) => 
           font-size: 0.84rem;
           font-weight: 600;
           cursor: pointer;
-          padding: 14px 16px;
+          padding: 14px 18px;
           position: relative;
           transition: color 150ms ease;
           white-space: nowrap;
@@ -99,24 +99,23 @@ export const CapabilityNav: React.FC<CapabilityNavProps> = ({ currentPath }) => 
           transform: scaleX(1);
         }
         .slash-divider {
-          color: #588078;
-          opacity: 0.45;
+          color: #94a3b8;
+          opacity: 0.6;
           font-size: 1.1rem;
           font-weight: 300;
           font-style: italic;
           user-select: none;
           transform: skewX(-18deg);
           display: inline-block;
-          margin: 0 4px;
+          margin: 0 2px;
         }
       `}</style>
 
       <div
-        className="container"
         style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
+          width: '100%',
           padding: '0 20px',
+          boxSizing: 'border-box',
         }}
       >
         <div
@@ -124,11 +123,8 @@ export const CapabilityNav: React.FC<CapabilityNavProps> = ({ currentPath }) => 
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            flexWrap: 'nowrap',
-            overflowX: 'auto',
-            whiteSpace: 'nowrap',
-            scrollbarWidth: 'none',
-            msOverflowStyle: 'none',
+            flexWrap: 'wrap',
+            gap: '0 2px',
           }}
         >
           {CAPABILITY_NAV_ITEMS.map((item, index) => {

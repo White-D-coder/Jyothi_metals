@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   ArrowRight,
   Download,
-  ChevronDown,
-  FileCheck,
 } from 'lucide-react';
 import { CapabilityNav } from '../components/CapabilityNav';
 
@@ -94,7 +92,6 @@ const auditTimeline = [
 
 export const CertificationsPage: React.FC<CertificationsPageProps> = ({ onOpenQuoteModal }) => {
   const navigate = useNavigate();
-  const [isAuditOpen, setIsAuditOpen] = useState<boolean>(true);
 
   return (
     <div className="cert-page-root" style={{ background: COLORS.bg, minHeight: '100vh', color: COLORS.text }}>
@@ -364,31 +361,9 @@ export const CertificationsPage: React.FC<CertificationsPageProps> = ({ onOpenQu
               />
 
               <div style={{ position: 'absolute', top: '28px', left: '24px', right: '24px', zIndex: 2 }}>
-                <span style={{ fontSize: '0.72rem', fontWeight: 700, color: COLORS.accent, background: 'rgba(255, 255, 255, 0.15)', padding: '3px 8px', textTransform: 'uppercase', display: 'inline-block', marginBottom: '8px' }}>
-                  {cert.code}
-                </span>
-                <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#FFFFFF', lineHeight: 1.25, margin: 0, textTransform: 'uppercase', letterSpacing: '0.6px' }}>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#FFFFFF', lineHeight: 1.25, margin: 0, textTransform: 'uppercase', letterSpacing: '0.6px' }}>
                   {cert.title}
                 </h3>
-              </div>
-
-              <div
-                style={{
-                  position: 'absolute',
-                  bottom: '32px',
-                  left: '24px',
-                  zIndex: 2,
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '10px',
-                  writingMode: 'vertical-rl',
-                  transform: 'rotate(180deg)',
-                }}
-              >
-                <div style={{ width: '2px', height: '24px', background: COLORS.accent }} />
-                <span style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.8px', color: '#A8B4BE', textTransform: 'uppercase' }}>
-                  {cert.verticalTag}
-                </span>
               </div>
 
               <div
@@ -428,8 +403,8 @@ export const CertificationsPage: React.FC<CertificationsPageProps> = ({ onOpenQu
       </section>
 
       {/* 4. Section 2: Single Master Accordion for 4-Stage Audit Process (Crisp Light Theme Redesign) */}
-      <section style={{ padding: '80px 0', background: '#F8FAF9', borderTop: `1px solid ${COLORS.divider}`, borderBottom: `1px solid ${COLORS.divider}` }}>
-        <div className="container" style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 20px' }}>
+      <section style={{ padding: '80px 0', background: '#ffffffff'}}>
+        <div className="container" style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 20px' }}>
           <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 40px' }}>
             <span style={{ fontSize: '0.78rem', fontWeight: 700, color: COLORS.accent, letterSpacing: '0.8px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
               VERIFICATION LIFECYCLE
@@ -438,117 +413,89 @@ export const CertificationsPage: React.FC<CertificationsPageProps> = ({ onOpenQu
               4-Stage Certification &amp; Audit Process
             </h2>
             <p style={{ color: '#475569', fontSize: '1.02rem', lineHeight: 1.65, margin: 0 }}>
-              Click the master accordion below to inspect all 4 stages of our rigorous metallurgical verification workflow.
+              Inspect all 4 stages of our rigorous metallurgical verification workflow.
             </p>
           </div>
 
-          <div className="single-accordion-wrapper" style={{ boxShadow: '0 10px 30px rgba(0,0,0,0.06)' }}>
-            <div className="single-accordion-layer-2" style={{ background: '#F1F5F9', border: '1px solid #E2E8F0' }} />
-            <div className="single-accordion-layer-1" style={{ background: '#F8FAF9', border: '1px solid #E2E8F0' }} />
-
-            <div className="single-accordion-main" style={{ border: '1px solid #588078', background: '#FFFFFF' }}>
-              {/* Accordion Header Strip */}
-              <div
-                onClick={() => setIsAuditOpen(!isAuditOpen)}
-                style={{
-                  padding: '28px 36px',
-                  background: '#FFFFFF',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  gap: '20px',
-                  transition: 'background-color 200ms ease',
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-                  <div style={{ width: '48px', height: '48px', background: '#EDF5F4', color: COLORS.accent, border: `1px solid ${COLORS.accent}`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <FileCheck size={24} />
-                  </div>
-                  <div>
-                    <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#0F172A', margin: 0, letterSpacing: '0.6px' }}>
-                      COMPLETE 4-STAGE METALLURGICAL AUDIT WORKFLOW
-                    </h3>
-                    <p style={{ fontSize: '0.88rem', color: '#64748B', margin: '4px 0 0 0' }}>
-                      {isAuditOpen ? 'Click to collapse audit stages' : 'Click to expand all 4 verification stages'}
-                    </p>
-                  </div>
-                </div>
-
+          {/* Horizontal Timeline — Spaced Grid Cards */}
+          <div>
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+                gap: '24px',
+              }}
+            >
+              {auditTimeline.map((item) => (
                 <div
+                  key={item.step}
                   style={{
-                    width: '40px',
-                    height: '40px',
-                    borderRadius: 0,
-                    background: '#F4F6F8',
+                    background: '#FFFFFF',
                     border: '1px solid #E2E8F0',
+                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.03)',
                     display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#0F172A',
-                    transform: isAuditOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                    transition: 'transform 200ms ease',
-                    flexShrink: 0,
+                    flexDirection: 'column',
+                    overflow: 'hidden',
                   }}
                 >
-                  <ChevronDown size={22} />
-                </div>
-              </div>
+                  {/* Top: huge number rotated -90deg */}
+                  <div style={{ padding: '30px 20px 10px', height: '130px', display: 'flex', alignItems: 'flex-start' }}>
+                    <div
+                      style={{
+                        fontSize: '5.5rem',
+                        fontWeight: 900,
+                        color: '#588078',
+                        lineHeight: 1,
+                        transform: 'rotate(-90deg)',
+                        transformOrigin: 'center center',
+                        letterSpacing: '-2px',
+                        fontFamily: "'Inter', sans-serif",
+                        userSelect: 'none',
+                      }}
+                    >
+                      {item.step}
+                    </div>
+                  </div>
 
-              {/* Accordion Expanded Body */}
-              {isAuditOpen && (
-                <div style={{ borderTop: '1px solid #E2E8F0', background: '#FFFFFF' }}>
-                  <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    {auditTimeline.map((item) => (
-                      <div
-                        key={item.step}
-                        className="audit-row-item"
-                        style={{
-                          display: 'grid',
-                          gridTemplateColumns: '130px 1fr 220px',
-                          gap: '24px',
-                          padding: '28px 36px',
-                          alignItems: 'center',
-                          borderBottom: '1px solid #F1F5F9',
-                          background: '#FFFFFF',
-                          transition: 'background 200ms ease',
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.background = '#F8FAF9';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.background = '#FFFFFF';
-                        }}
-                      >
-                        <div style={{ fontSize: '1.4rem', fontWeight: 900, color: COLORS.accent, letterSpacing: '1px', textTransform: 'uppercase', borderLeft: `3px solid ${COLORS.accent}`, paddingLeft: '14px' }}>
-                          STAGE {item.step}
-                        </div>
+                  {/* Middle: title + desc text */}
+                  <div style={{ padding: '20px 24px 30px', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
+                    <p
+                      style={{
+                        fontSize: '0.88rem',
+                        color: '#1e293b',
+                        lineHeight: 1.7,
+                        margin: 0,
+                      }}
+                    >
+                      <strong style={{ display: 'block', marginBottom: '8px', fontSize: '0.95rem', color: '#0F172A' }}>{item.title}</strong>
+                      {item.desc}
+                    </p>
+                  </div>
 
-                        <div>
-                          <h4 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#0F172A', marginBottom: '8px', lineHeight: 1.3, letterSpacing: '0.4px' }}>
-                            {item.title}
-                          </h4>
-                          <p style={{ fontSize: '0.92rem', color: '#475569', lineHeight: 1.65, margin: 0 }}>
-                            {item.desc}
-                          </p>
-                        </div>
-
-                        <div className="audit-img-frame" style={{ height: '130px', overflow: 'hidden', border: '1px solid #E2E8F0' }}>
-                          <img
-                            src={item.image}
-                            alt={item.title}
-                            style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 300ms ease' }}
-                          />
-                        </div>
-                      </div>
-                    ))}
+                  {/* Bottom: image */}
+                  <div style={{ overflow: 'hidden', height: '300px' }}>
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        display: 'block',
+                        transition: 'transform 400ms ease',
+                      }}
+                      onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.05)'; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; }}
+                    />
                   </div>
                 </div>
-              )}
+              ))}
             </div>
           </div>
         </div>
       </section>
+
+
 
       {/* 5. Light Theme Closing CTA */}
       <section
@@ -556,7 +503,6 @@ export const CertificationsPage: React.FC<CertificationsPageProps> = ({ onOpenQu
           background: '#FFFFFF',
           color: COLORS.text,
           padding: '70px 0',
-          borderTop: `3px solid ${COLORS.accent}`,
           textAlign: 'center',
         }}
       >

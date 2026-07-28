@@ -1,31 +1,13 @@
 import React, { useState } from 'react';
-import { Phone, MapPin, Clock, Send, Calculator, CheckCircle2 } from 'lucide-react';
+import { Phone, MapPin, Clock, Send, CheckCircle2 } from 'lucide-react';
 
 interface ContactPageProps {
   onOpenQuoteModal: (productName?: string) => void;
 }
 
-export const ContactPage: React.FC<ContactPageProps> = ({ onOpenQuoteModal }) => {
+export const ContactPage: React.FC<ContactPageProps> = () => {
   const [formCategory, setFormCategory] = useState('Enterprise Quote');
   const [submitted, setSubmitted] = useState(false);
-
-  // Weight & Density Calculator State
-  const [calcAlloy, setCalcAlloy] = useState('Stainless 316L (8.00 g/cm³)');
-  const [calcLength, setCalcLength] = useState<number>(1000); // mm
-  const [calcWidth, setCalcWidth] = useState<number>(500); // mm
-  const [calcThickness, setCalcThickness] = useState<number>(10); // mm
-
-  const densityMap: Record<string, number> = {
-    'Stainless 316L (8.00 g/cm³)': 8.0,
-    'Titanium Ti-6Al-4V (4.43 g/cm³)': 4.43,
-    'Structural Steel A36 (7.85 g/cm³)': 7.85,
-    'Aluminum 6061-T6 (2.70 g/cm³)': 2.7,
-  };
-
-  const currentDensity = densityMap[calcAlloy] || 8.0;
-  // Volume in cm³ = (L_mm / 10) * (W_mm / 10) * (T_mm / 10)
-  const volumeCm3 = (calcLength / 10) * (calcWidth / 10) * (calcThickness / 10);
-  const calculatedWeightKg = (volumeCm3 * currentDensity) / 1000;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,7 +18,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenQuoteModal }) =>
   };
 
   return (
-    <div style={{ background: '#F8F8F8', minHeight: '100vh' }}>
+    <div style={{ background: '#FFFFFF', minHeight: '100vh' }}>
       {/* 1. Hero with Rich Background Photography */}
       <section
         style={{
@@ -75,14 +57,13 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenQuoteModal }) =>
 
       <div className="container" style={{ paddingBottom: '80px' }}>
 
-        {/* 2 Column Layout: Interactive Metal Calculator & Contact Form */}
-        <div className="grid-responsive-2col" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px', marginBottom: '60px' }}>
-          {/* Column 1: Contact Form */}
-          <div style={{ background: '#ffffff', padding: '32px', borderRadius: '16px', border: '1px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0, 0, 0, 0.04)' }}>
-            <h3 className="card-title" style={{ fontSize: '1.5rem', marginBottom: '8px', color: '#0f3b5e' }}>
+        {/* Contact Form — Clean White Page Integration (No Boxed Card) */}
+        <div style={{ maxWidth: '640px', margin: '0 auto 60px' }}>
+          <div>
+            <h3 className="card-title" style={{ fontSize: '1.75rem', marginBottom: '8px', color: '#0f3b5e' }}>
               Send an Inquiry
             </h3>
-            <p style={{ color: '#4a5568', fontSize: '0.9rem', marginBottom: '24px' }}>
+            <p style={{ color: '#4a5568', fontSize: '0.95rem', marginBottom: '28px' }}>
               Fill out the form below and an assigned metallurgical engineer will contact you promptly.
             </p>
 
@@ -144,96 +125,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenQuoteModal }) =>
               </form>
             )}
           </div>
-
-          {/* Column 2: Interactive Alloy Weight Estimator Tool */}
-          <div style={{ background: '#ffffff', padding: '32px', borderRadius: '16px', border: '1px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0, 0, 0, 0.04)', display: 'flex', flexDirection: 'column' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-              <div style={{ background: 'rgba(81, 132, 125, 0.15)', padding: '8px', borderRadius: '10px', color: '#51847D' }}>
-                <Calculator size={22} />
-              </div>
-              <span className="small-label" style={{ margin: 0, color: '#51847D' }}>Interactive Metallurgy Calculator</span>
-            </div>
-
-            <h3 className="card-title" style={{ fontSize: '1.5rem', marginBottom: '8px', color: '#0f3b5e' }}>
-              Sheet &amp; Plate Weight Estimator
-            </h3>
-            <p style={{ color: '#4a5568', fontSize: '0.9rem', marginBottom: '24px' }}>
-              Instantly calculate theoretical shipping weight for metal plates based on dimensions and alloy density.
-            </p>
-
-            <div className="form-group">
-              <label htmlFor="calc-alloy-select" className="form-label">Select Metal Alloy Density</label>
-              <select
-                id="calc-alloy-select"
-                className="form-select"
-                value={calcAlloy}
-                onChange={(e) => setCalcAlloy(e.target.value)}
-              >
-                <option value="Stainless 316L (8.00 g/cm³)">Stainless Steel 316L (8.00 g/cm³)</option>
-                <option value="Titanium Ti-6Al-4V (4.43 g/cm³)">Titanium Ti-6Al-4V (4.43 g/cm³)</option>
-                <option value="Structural Steel A36 (7.85 g/cm³)">Structural Carbon Steel (7.85 g/cm³)</option>
-                <option value="Aluminum 6061-T6 (2.70 g/cm³)">Aluminum 6061-T6 (2.70 g/cm³)</option>
-              </select>
-            </div>
-
-            <div className="grid-responsive-calc" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(90px, 1fr))', gap: '12px' }}>
-              <div className="form-group">
-                <label htmlFor="calc-length" className="form-label">Length (mm)</label>
-                <input
-                  id="calc-length"
-                  type="number"
-                  min="1"
-                  className="form-input"
-                  value={calcLength}
-                  onChange={(e) => setCalcLength(Math.max(1, parseInt(e.target.value) || 1))}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="calc-width" className="form-label">Width (mm)</label>
-                <input
-                  id="calc-width"
-                  type="number"
-                  min="1"
-                  className="form-input"
-                  value={calcWidth}
-                  onChange={(e) => setCalcWidth(Math.max(1, parseInt(e.target.value) || 1))}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="calc-thickness" className="form-label">Thickness (mm)</label>
-                <input
-                  id="calc-thickness"
-                  type="number"
-                  min="1"
-                  className="form-input"
-                  value={calcThickness}
-                  onChange={(e) => setCalcThickness(Math.max(1, parseInt(e.target.value) || 1))}
-                />
-              </div>
-            </div>
-
-            {/* Calculated Weight Result Card (Crisp Light Theme Redesign) */}
-            <div style={{ background: '#EDF5F4', color: '#0F172A', border: '1px solid #588078', borderRadius: '12px', padding: '24px', marginTop: 'auto', textAlign: 'center', boxShadow: '0 4px 16px rgba(88, 128, 120, 0.08)' }}>
-              <div style={{ fontSize: '0.78rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.8px', color: '#588078' }}>
-                Theoretical Unit Weight
-              </div>
-              <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#0F172A', margin: '6px 0' }}>
-                {calculatedWeightKg.toFixed(2)} <span style={{ fontSize: '1.2rem', color: '#588078', fontWeight: 800 }}>kg</span>
-              </div>
-              <div style={{ fontSize: '0.86rem', color: '#475569', fontWeight: 600 }}>
-                (~{(calculatedWeightKg * 2.20462).toFixed(2)} lbs per sheet)
-              </div>
-              <button
-                type="button"
-                onClick={() => onOpenQuoteModal('Calculated Sheet Weight Quote')}
-                className="btn btn-primary"
-                style={{ width: '100%', marginTop: '18px', padding: '14px', minHeight: '46px', justifyContent: 'center', background: '#588078', borderColor: '#588078' }}
-              >
-                Request Quote with calculated dimensions
-              </button>
-            </div>
-          </div>
         </div>
+
 
         {/* Global Support SLAs & Direct Contacts */}
         <div className="grid-responsive-3col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>

@@ -8,7 +8,6 @@ import {
   Clock,
   CheckCircle2,
   Mail,
-  FileText,
 } from 'lucide-react';
 
 interface BlogPageProps {
@@ -161,7 +160,9 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal }) => {
   const featuredLead = articles[0];
   const bentoSides = articles.slice(1, 3);
   const zigZagItems = articles.slice(3, 5);
-  const gridArticles = filteredArticles.length > 0 ? filteredArticles : articles.slice(2);
+  const gridArticles = filteredArticles.length >= 3
+    ? filteredArticles
+    : [...filteredArticles, ...articles.filter((a) => !filteredArticles.some((f) => f.id === a.id)).slice(0, 3 - filteredArticles.length)];
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -231,10 +232,10 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal }) => {
         .btn-primary:hover { background: #4D716A; }
         .btn-secondary {
           background: #FFFFFF;
-          color: #0F172A;
+          color: #588078;
           border: 1px solid #E2E8F0;
         }
-        .btn-secondary:hover { background: #F8FAF9; border-color: #0F172A; }
+        .btn-secondary:hover { background: #F8FAF9; border-color: #588078; }
 
         .bento-hero-grid {
           display: grid;
@@ -259,7 +260,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal }) => {
       {/* 1. Hero Header Section */}
       <section
         style={{
-          backgroundImage: 'linear-gradient(135deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.88) 100%), url("/images/pexels-bence-szemerey-337043-6804265.jpg")',
+          backgroundImage: 'linear-gradient(120deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.58) 100%), url("/images/pexels-bence-szemerey-337043-6804265.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           color: '#FFFFFF',
@@ -298,7 +299,6 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal }) => {
           top: '72px',
           zIndex: 900,
           background: '#FFFFFF',
-          borderBottom: '2px solid #588078',
           boxShadow: '0 2px 10px rgba(0, 0, 0, 0.05)',
         }}
       >
@@ -349,7 +349,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal }) => {
       </nav>
 
       {/* 3. Section 1: FEATURED BENTO MAGAZINE GRID */}
-      <section style={{ padding: '60px 0 70px', background: '#FFFFFF', borderBottom: '1px solid #E2E8F0' }}>
+      <section style={{ padding: '60px 0 70px', background: '#FFFFFF'}}>
         <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '28px' }}>
             <div>
@@ -523,7 +523,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal }) => {
       </section>
 
       {/* 4. Section 2: ZIG-ZAG EDITORIAL DEEP DIVES */}
-      <section style={{ padding: '80px 0', background: '#F8FAF9', borderBottom: '1px solid #E2E8F0' }}>
+      <section style={{ padding: '80px 0', background: '#ffffff' }}>
         <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
           <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 50px' }}>
             <span style={{ fontSize: '0.78rem', fontWeight: 800, color: '#588078', letterSpacing: '0.8px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
@@ -645,8 +645,8 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal }) => {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '28px',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
+              gap: '32px',
             }}
           >
             {gridArticles.map((article) => (
@@ -655,30 +655,30 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal }) => {
                 style={{
                   background: '#FFFFFF',
                   border: '1px solid #E2E8F0',
-                  boxShadow: '0 4px 14px rgba(0, 0, 0, 0.04)',
+                  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.03)',
                   overflow: 'hidden',
                   cursor: 'pointer',
                   display: 'flex',
                   flexDirection: 'column',
-                  transition: 'border-color 200ms ease, transform 200ms ease, box-shadow 200ms ease',
+                  transition: 'border-color 250ms ease, transform 250ms ease, box-shadow 250ms ease',
                 }}
                 onClick={() => onOpenQuoteModal(article.title)}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = '#588078';
                   e.currentTarget.style.transform = 'translateY(-4px)';
-                  e.currentTarget.style.boxShadow = '0 12px 30px rgba(88, 128, 120, 0.12)';
+                  e.currentTarget.style.boxShadow = '0 14px 32px rgba(88, 128, 120, 0.14)';
                   const img = e.currentTarget.querySelector('img');
-                  if (img) img.style.transform = 'scale(1.06)';
+                  if (img) img.style.transform = 'scale(1.05)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.borderColor = '#E2E8F0';
                   e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 4px 14px rgba(0, 0, 0, 0.04)';
+                  e.currentTarget.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.03)';
                   const img = e.currentTarget.querySelector('img');
                   if (img) img.style.transform = 'scale(1)';
                 }}
               >
-                <div style={{ height: '210px', overflow: 'hidden', position: 'relative' }}>
+                <div style={{ height: '220px', overflow: 'hidden', position: 'relative' }}>
                   <img
                     src={article.image}
                     alt={article.title}
@@ -686,7 +686,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal }) => {
                       width: '100%',
                       height: '100%',
                       objectFit: 'cover',
-                      transition: 'transform 350ms ease',
+                      transition: 'transform 400ms ease',
                     }}
                   />
                   <span
@@ -698,7 +698,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal }) => {
                       color: '#FFFFFF',
                       fontSize: '0.72rem',
                       fontWeight: 800,
-                      padding: '4px 10px',
+                      padding: '5px 12px',
                       letterSpacing: '0.6px',
                       textTransform: 'uppercase',
                     }}
@@ -707,36 +707,39 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal }) => {
                   </span>
                 </div>
 
-                <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px', fontSize: '0.78rem', color: '#64748B', marginBottom: '10px' }}>
-                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                      <Calendar size={13} color="#588078" /> {article.date}
+                <div style={{ padding: '26px', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '0.8rem', color: '#64748B', marginBottom: '12px' }}>
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+                      <Calendar size={14} color="#588078" /> {article.date}
                     </span>
                     <span>&bull;</span>
-                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                      <User size={13} color="#588078" /> {article.author}
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+                      <User size={14} color="#588078" /> {article.author}
                     </span>
                   </div>
 
                   <h3
                     style={{
-                      fontSize: '1.15rem',
-                      fontWeight: 700,
+                      fontSize: '1.18rem',
+                      fontWeight: 800,
                       color: '#0F172A',
                       lineHeight: 1.35,
-                      marginBottom: '10px',
+                      marginBottom: '12px',
+                      letterSpacing: '0.3px',
                     }}
                   >
                     {article.title}
                   </h3>
 
-                  <p style={{ fontSize: '0.88rem', color: '#475569', lineHeight: 1.6, marginBottom: '20px', flex: 1 }}>
+                  <p style={{ fontSize: '0.88rem', color: '#475569', lineHeight: 1.65, marginBottom: '24px', flex: 1 }}>
                     {article.excerpt}
                   </p>
 
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: '16px', borderTop: '1px solid #E2E8F0', fontSize: '0.8rem', color: '#64748B' }}>
-                    <span style={{ fontWeight: 600 }}>{article.readTime}</span>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#588078', fontWeight: 700 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: '18px', borderTop: '1px solid #F1F5F9', fontSize: '0.82rem', color: '#64748B' }}>
+                    <span style={{ fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                      <Clock size={14} color="#588078" /> {article.readTime}
+                    </span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#588078', fontWeight: 800, fontSize: '0.86rem' }}>
                       Read Article <ArrowUpRight size={16} />
                     </div>
                   </div>
@@ -750,10 +753,9 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal }) => {
       {/* 6. Section 4: EXECUTIVE NEWSLETTER & SPEC CTA BANNER */}
       <section
         style={{
-          background: '#F8FAF9',
+          background: '#ffffffff',
           color: '#0F172A',
           padding: '80px 0',
-          borderTop: '3px solid #588078',
           textAlign: 'center',
         }}
       >
@@ -814,17 +816,6 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal }) => {
               </button>
             </form>
           )}
-
-          <div style={{ marginTop: '24px' }}>
-            <button
-              type="button"
-              onClick={() => onOpenQuoteModal('Custom Technical Specs Request')}
-              className="btn btn-secondary"
-              style={{ padding: '14px 28px', fontSize: '0.88rem' }}
-            >
-              <FileText size={16} color="#588078" /> Request Custom Technical Specs
-            </button>
-          </div>
         </div>
       </section>
     </div>

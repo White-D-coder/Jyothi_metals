@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import {
   ArrowRight,
-  ChevronDown,
   Award,
-  Calendar,
   Cpu,
   ShieldCheck,
   Zap,
@@ -15,7 +13,7 @@ interface AboutPageProps {
 }
 
 export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
-  const [isTimelineOpen, setIsTimelineOpen] = useState<boolean>(true);
+  const [isTimelineOpen, setIsTimelineOpen] = useState<boolean>(false);
 
   const executivePillars = [
     {
@@ -132,7 +130,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
           right: 14px;
           height: 16px;
           background: #FFFFFF;
-          border: 1px solid #E0E8E8;
+          border: 5px solid #E0E8E8;
           z-index: 1;
         }
         .single-accordion-layer-1 {
@@ -150,19 +148,18 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
           z-index: 3;
           background: #FFFFFF;
           border: 1px solid #E0E8E8;
-          border-left: 5px solid #588078;
           border-radius: 0;
           overflow: hidden;
         }
 
         .timeline-row-item {
           display: grid;
-          grid-template-columns: 110px 1fr 220px;
+          grid-template-columns: 120px 1fr 220px;
           gap: 28px;
           align-items: center;
           padding: 24px 28px;
           transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
-          background: #FFFFFF;
+          background: #ffffffff;
           border-left: 3px solid transparent;
           cursor: pointer;
         }
@@ -349,7 +346,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
       </section>
 
       {/* 3. Refined Master Accordion Card (With Smooth Hover Effects & Fine Touches) */}
-      <section style={{ padding: '70px 0', background: '#F8F8F8' }}>
+      <section style={{ padding: '70px 0', background: '#ffffffff' }}>
         <div className="container" style={{ maxWidth: '1050px', margin: '0 auto', padding: '0 20px' }}>
           <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 32px' }}>
             <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#588078', letterSpacing: '0.6px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
@@ -372,7 +369,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
               <div
                 onClick={() => setIsTimelineOpen(!isTimelineOpen)}
                 style={{
-                  padding: '24px 32px',
+                  padding: '38px 44px',
                   background: '#FFFFFF',
                   cursor: 'pointer',
                   display: 'flex',
@@ -381,37 +378,13 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                   gap: '20px',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                  <div style={{ width: '42px', height: '42px', background: '#EDF5F4', color: '#588078', border: '1px solid #588078', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <Calendar size={22} />
-                  </div>
-                  <div>
-                    <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#304050', margin: 0, letterSpacing: '0.5px' }}>
-                      COMPLETE METALLURGICAL TIMELINE (1991 – 2026)
-                    </h3>
-                    <p style={{ fontSize: '0.84rem', color: '#7C8894', margin: '3px 0 0 0' }}>
-                      {isTimelineOpen ? 'Click to collapse complete timeline' : 'Click to expand 6 major engineering milestones'}
-                    </p>
-                  </div>
-                </div>
-
-                <div
-                  style={{
-                    width: '36px',
-                    height: '36px',
-                    borderRadius: 0,
-                    background: '#F4F6F8',
-                    border: '1px solid #E0E8E8',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#304050',
-                    transform: isTimelineOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                    transition: 'transform 200ms ease',
-                    flexShrink: 0,
-                  }}
-                >
-                  <ChevronDown size={20} />
+                <div>
+                  <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#304050', margin: 0, letterSpacing: '0.6px' }}>
+                    COMPLETE METALLURGICAL TIMELINE (1991 – 2026)
+                  </h3>
+                  <p style={{ fontSize: '0.92rem', color: '#7C8894', margin: '6px 0 0 0' }}>
+                    {isTimelineOpen ? 'Click to collapse complete timeline' : 'Click to expand 6 major engineering milestones'}
+                  </p>
                 </div>
               </div>
 

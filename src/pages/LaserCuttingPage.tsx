@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   ArrowRight,
+  ArrowUpRight,
   Cpu,
   Layers,
   Zap,
@@ -50,12 +51,12 @@ const processHighlights = [
 ];
 
 const specifications = [
-  { label: 'Cutting Tolerance', value: '±0.01mm (Sub-micron optical alignment)' },
-  { label: 'Bed Dimensions', value: 'Up to 4000mm x 2000mm full plate bed' },
-  { label: 'Material Range', value: 'Stainless Steel (304, 316L, 317L, 321, 310S), Titanium Gr 2/5, Inconel 625/718, Monel 400, Duplex 2205/2507' },
-  { label: 'Thickness Capability', value: '0.5mm to 60mm high-density plate profile cutting' },
-  { label: 'Machine Capacity', value: '6kW High-Power Fiber Laser Cells & 5-Axis CNC Milling Centers' },
-  { label: 'Edge Finish', value: 'Dross-free nitrogen assist edge finish, ready for immediate welding' },
+  { step: '(01)', label: 'Cutting Tolerance', value: '±0.01mm (Sub-micron optical alignment)', image: '/images/precision_parts.png' },
+  { step: '(02)', label: 'Bed Dimensions', value: 'Up to 4000mm x 2000mm full plate bed', image: '/images/titanium_plates.png' },
+  { step: '(03)', label: 'Material Range', value: 'Stainless Steel (304, 316L, 317L, 321, 310S), Titanium, Inconel, Monel, Duplex', image: '/images/stainless_pipes.png' },
+  { step: '(04)', label: 'Thickness Capability', value: '0.5mm to 60mm high-density plate profile cutting', image: '/images/heavy_rolling_mill.jpg' },
+  { step: '(05)', label: 'Machine Capacity', value: '6kW High-Power Fiber Laser Cells & 5-Axis CNC Milling Centers', image: '/images/cnc_laser_blue.jpg' },
+  { step: '(06)', label: 'Edge Finish', value: 'Dross-free nitrogen assist edge finish, ready for immediate welding', image: '/images/flanges_industrial.png' },
 ];
 
 const equipmentList = [
@@ -110,6 +111,121 @@ const Reveal: React.FC<{ children: React.ReactNode; delay?: number }> = ({ child
       }}
     >
       {children}
+    </div>
+  );
+};
+
+  const SpecHoverList: React.FC<{ items: typeof specifications }> = ({ items }) => {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(0);
+
+  return (
+    <div style={{ borderTop: '1px solid #E2E8F0', borderBottom: '1px solid #E2E8F0' }}>
+      {items.map((spec, index) => {
+        const isHovered = hoveredIndex === index;
+        return (
+          <div
+            key={spec.label}
+            onMouseEnter={() => setHoveredIndex(index)}
+            style={{
+              padding: isHovered ? '22px 0' : '16px 0',
+              borderBottom: index < items.length - 1 ? '1px solid #E2E8F0' : 'none',
+              display: 'flex',
+              alignItems: 'center',
+              cursor: 'pointer',
+              transition: 'all 250ms ease',
+            }}
+          >
+            {/* Image Thumbnail (Reveals/Expands on Hover) */}
+            <div
+              style={{
+                width: isHovered ? '130px' : '0px',
+                height: '80px',
+                marginRight: isHovered ? '20px' : '0px',
+                opacity: isHovered ? 1 : 0,
+                overflow: 'hidden',
+                borderRadius: '8px',
+                flexShrink: 0,
+                transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+              }}
+            >
+              <img
+                src={spec.image}
+                alt={spec.label}
+                style={{
+                  width: '130px',
+                  height: '80px',
+                  objectFit: 'cover',
+                  display: 'block',
+                }}
+              />
+            </div>
+
+            {/* Step Number (01) */}
+            <div
+              style={{
+                fontSize: '0.85rem',
+                fontWeight: 600,
+                color: isHovered ? '#588078' : '#94A3B8',
+                width: '45px',
+                flexShrink: 0,
+                transition: 'color 200ms ease',
+              }}
+            >
+              {spec.step}
+            </div>
+
+            {/* Title / Label (BOLD UPPERCASE) */}
+            <div
+              style={{
+                fontSize: '1.2rem',
+                fontWeight: 800,
+                letterSpacing: '0.4px',
+                textTransform: 'uppercase',
+                color: isHovered ? '#0F172A' : '#475569',
+                flex: 1,
+                paddingRight: '20px',
+                transition: 'color 200ms ease',
+              }}
+            >
+              {spec.label}
+            </div>
+
+            {/* Description Value */}
+            <div
+              style={{
+                fontSize: '0.88rem',
+                color: isHovered ? '#1E293B' : '#64748B',
+                lineHeight: 1.5,
+                maxWidth: '420px',
+                paddingRight: '24px',
+                transition: 'color 200ms ease',
+              }}
+            >
+              {spec.value}
+            </div>
+
+            {/* Arrow Circle */}
+            <div
+              style={{
+                width: '36px',
+                height: '36px',
+                borderRadius: '50%',
+                border: isHovered ? '1px solid #588078' : '1px solid #CBD5E1',
+                background: isHovered ? '#588078' : 'transparent',
+                color: isHovered ? '#FFFFFF' : '#64748B',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+                transition: 'all 250ms ease',
+                transform: isHovered ? 'translate(2px, -2px)' : 'none',
+              }}
+            >
+              <ArrowUpRight size={18} />
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };
@@ -178,8 +294,18 @@ export const LaserCuttingPage: React.FC<LaserCuttingPageProps> = ({ onOpenQuoteM
         .spec-table-row {
           display: grid;
           grid-template-columns: 240px 1fr;
-          padding: 18px 0;
+          padding: 18px 24px;
+          margin: 0 -32px;
           border-bottom: 1px solid ${COLORS.divider};
+          transition: background-color 200ms ease, padding-left 200ms ease;
+          cursor: pointer;
+        }
+        .spec-table-row:hover {
+          background-color: #EDF5F4;
+          padding-left: 32px;
+        }
+        .spec-table-row:hover > div:first-child {
+          color: ${COLORS.accent};
         }
         .spec-table-row:last-child { border-bottom: none; }
 
@@ -370,14 +496,7 @@ export const LaserCuttingPage: React.FC<LaserCuttingPageProps> = ({ onOpenQuoteM
               </p>
             </div>
 
-            <div style={{ border: `1px solid ${COLORS.divider}`, padding: '0 32px', background: COLORS.panel }}>
-              {specifications.map((spec) => (
-                <div key={spec.label} className="spec-table-row">
-                  <div style={{ fontWeight: 700, color: COLORS.text, fontSize: '0.94rem' }}>{spec.label}</div>
-                  <div style={{ color: COLORS.textMuted, fontSize: '0.94rem', lineHeight: 1.55 }}>{spec.value}</div>
-                </div>
-              ))}
-            </div>
+            <SpecHoverList items={specifications} />
           </Reveal>
         </div>
       </section>
