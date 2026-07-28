@@ -1492,11 +1492,71 @@ h1, h2, h3, h4, h5, h6 {
 
 
 /* ==========================================================================
+   Inner Pages — Shared Theme Normalization
+   (About / Services / Infrastructure / Quality / Blog / Careers / FAQ)
+
+   Every inner page inherits ONE hero scale and ONE corner-radius scale, both
+   taken from the Home page design language. Scoped under .inner-page so the
+   Home page itself is never touched.
+   ========================================================================== */
+:root {
+  /* Corner radius scale used across the inner pages.
+     Mirrors Home: cards 14–16px, media frames / panels 18–20px, pills 50px. */
+  --radius-card: 16px;
+  --radius-media: 18px;
+  --radius-inner: 12px;
+  --radius-pill: 50px;
+}
+
+/* --- 1. Unified hero band -------------------------------------------------
+   Same height, same padding and same title scale on every inner page, so no
+   single page (Infrastructure) reads as dramatically taller than the rest. */
+.inner-page .page-hero {
+  min-height: 620px;
+  padding: 120px 0 90px !important;
+  display: flex;
+  align-items: center;
+  border-bottom: 3px solid #51847D;
+}
+
+.inner-page .page-hero > .container {
+  width: 100%;
+}
+
+.inner-page .page-hero .hero-title {
+  font-size: clamp(2.2rem, 4.3vw, 3.4rem) !important;
+  line-height: 1.12 !important;
+}
+
+.inner-page .page-hero p {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --- 2. Cards ------------------------------------------------------------- */
+/* .feature-card is shared with Home (14px there); inner pages use the 16px
+   card radius so every box on the page matches, Home stays untouched. */
+.inner-page .feature-card {
+  border-radius: var(--radius-card) !important;
+}
+
+/* --- 3. Media frames ------------------------------------------------------ */
+/* Infrastructure gallery mosaic — match Home's .category-arch-card (18px) */
+.infra-gallery-card {
+  border-radius: var(--radius-media);
+}
+
+/* ==========================================================================
    Inner Pages — Mobile/Responsive Polish
    (Services / Infrastructure / Quality / Blog / Careers / FAQ)
    Scoped under .inner-page so the original pages are never affected.
    ========================================================================== */
 @media (max-width: 768px) {
+  /* Hero shrinks to its content on small screens — no fixed desktop height */
+  .inner-page .page-hero {
+    min-height: 0 !important;
+  }
   /* Section headings carry inline desktop sizes (2.3–2.7rem); scale them down */
   .inner-page .section-title {
     font-size: clamp(1.6rem, 5.2vw, 2.1rem) !important;
@@ -1643,6 +1703,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 @media (max-width: 900px) {
   .infra-backdrop-word { display: none; }
+}
+
+/* Process carousel images — grayscale at rest, full colour on card hover */
+.infra-process-img {
+  filter: grayscale(100%);
+  transition: filter 0.45s ease, transform 0.5s ease-out;
+}
+.group:hover .infra-process-img {
+  filter: grayscale(0%);
 }
 
 /* Infrastructure gallery — Home-style dark arch cards (self-contained, grid-safe) */

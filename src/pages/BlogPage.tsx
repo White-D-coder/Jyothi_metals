@@ -195,6 +195,8 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal, onNavigate
               gap: '0',
               alignItems: 'stretch',
               border: '1px solid #e2e8f0',
+              borderRadius: '18px',
+              overflow: 'hidden',
               boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
               marginBottom: '70px',
             }}
@@ -234,6 +236,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal, onNavigate
                     letterSpacing: '0.08em',
                     textTransform: 'uppercase',
                     padding: '6px 14px',
+                    borderRadius: '50px',
                   }}
                 >
                   {featured.category}
@@ -318,7 +321,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal, onNavigate
                       fontWeight: 700,
                       letterSpacing: '0.02em',
                       cursor: 'pointer',
-                      borderRadius: 0,
+                      borderRadius: '50px',
                       background: isActive ? '#51847D' : isHovered ? '#f8fafc' : '#ffffff',
                       color: isActive ? '#ffffff' : '#334155',
                       border: `1px solid ${isActive || isHovered ? '#51847D' : '#cbd5e1'}`,
@@ -347,6 +350,8 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal, onNavigate
                   style={{
                     background: '#ffffff',
                     border: `1px solid ${isHovered ? '#51847D' : '#e2e8f0'}`,
+                    borderRadius: '16px',
+                    overflow: 'hidden',
                     boxShadow: isHovered
                       ? '0 14px 32px rgba(0,0,0,0.10)'
                       : '0 6px 20px rgba(0,0,0,0.04)',
@@ -379,6 +384,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal, onNavigate
                         letterSpacing: '0.06em',
                         textTransform: 'uppercase',
                         padding: '5px 12px',
+                        borderRadius: '50px',
                       }}
                     >
                       {article.category}
@@ -523,6 +529,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal, onNavigate
                   gap: '10px',
                   background: '#1e293b',
                   border: '1px solid #51847D',
+                  borderRadius: '16px',
                   color: '#ffffff',
                   padding: '18px 28px',
                   fontSize: '1rem',
@@ -564,7 +571,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal, onNavigate
                       color: '#ffffff',
                       background: '#1e293b',
                       border: '1px solid #334155',
-                      borderRadius: 0,
+                      borderRadius: '10px',
                       outline: 'none',
                       boxSizing: 'border-box',
                     }}

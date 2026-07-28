@@ -239,6 +239,7 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onOpenQuoteModal, onNavigate }
                 margin: '0 auto',
                 textAlign: 'center',
                 border: '1px solid #e2e8f0',
+                borderRadius: '16px',
                 background: '#f8fafc',
                 padding: '60px 30px',
               }}
@@ -288,6 +289,7 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onOpenQuoteModal, onNavigate }
                         width: '40px',
                         height: '40px',
                         background: 'rgba(81, 132, 125, 0.12)',
+                        borderRadius: '12px',
                         flexShrink: 0,
                       }}
                     >
@@ -319,6 +321,7 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onOpenQuoteModal, onNavigate }
                           style={{
                             border: '1px solid #cbd5e1',
                             borderLeft: isOpen ? '4px solid #51847D' : '1px solid #cbd5e1',
+                            borderRadius: '16px',
                             background: isOpen ? '#f8fafc' : '#ffffff',
                             boxShadow: isOpen
                               ? '0 8px 24px rgba(81, 132, 125, 0.10)'

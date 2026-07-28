@@ -190,6 +190,7 @@ export const QualityPage: React.FC<QualityPageProps> = ({ onOpenQuoteModal, onNa
             style={{
               background: '#f8fafc',
               borderLeft: '6px solid #51847D',
+              borderRadius: '16px',
               padding: '40px 44px',
               margin: '0 auto 56px',
               maxWidth: '1000px',
@@ -227,6 +228,7 @@ export const QualityPage: React.FC<QualityPageProps> = ({ onOpenQuoteModal, onNa
                   background: '#ffffff',
                   border: '1px solid #cbd5e1',
                   borderLeft: '4px solid #51847D',
+                  borderRadius: '16px',
                   padding: '30px 26px',
                   boxShadow: '0 6px 20px rgba(0,0,0,0.04)',
                 }}
@@ -271,6 +273,7 @@ export const QualityPage: React.FC<QualityPageProps> = ({ onOpenQuoteModal, onNa
                   background: '#ffffff',
                   border: '1px solid #cbd5e1',
                   borderTop: '4px solid #51847D',
+                  borderRadius: '16px',
                   padding: '32px 24px',
                   textAlign: 'center',
                   boxShadow: '0 6px 20px rgba(0,0,0,0.04)',
@@ -321,6 +324,7 @@ export const QualityPage: React.FC<QualityPageProps> = ({ onOpenQuoteModal, onNa
                   background: '#ffffff',
                   border: '1px solid #cbd5e1',
                   borderLeft: '4px solid #51847D',
+                  borderRadius: '16px',
                   padding: '28px 26px',
                   boxShadow: '0 6px 20px rgba(0,0,0,0.04)',
                   display: 'flex',
@@ -351,11 +355,14 @@ export const QualityPage: React.FC<QualityPageProps> = ({ onOpenQuoteModal, onNa
             style={{ display: 'grid', gridTemplateColumns: '1fr 1.1fr', gap: '60px', alignItems: 'center' }}
           >
             {/* Image side */}
-            <div style={{ border: '2px solid #0f172a', background: '#061221' }}>
+            <div
+              className="about-arch-frame-reversed"
+              style={{ overflow: 'hidden', boxShadow: '0 20px 45px rgba(0,0,0,0.14)', background: '#061221' }}
+            >
               <img
                 src="/images/precision_parts.png"
                 alt="Mill Test Certificate documentation and precision alloy components"
-                style={{ width: '100%', height: '440px', objectFit: 'cover', display: 'block' }}
+                style={{ width: '100%', height: '460px', objectFit: 'cover', display: 'block' }}
               />
             </div>
 

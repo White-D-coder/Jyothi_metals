@@ -108,9 +108,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
   ];
 
   return (
-    <div style={{ background: '#ffffff', minHeight: '100vh' }}>
+    <div className="inner-page" style={{ background: '#ffffff', minHeight: '100vh' }}>
       {/* 1. Dark Industrial Hero Header */}
       <section
+        className="page-hero"
         style={{
           backgroundImage:
             'linear-gradient(135deg, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.92) 100%), url("/images/pexels-sergey-sergeev-2153675005-32845683.jpg")',
@@ -185,7 +186,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                       background: '#ffffff',
                       border: '1px solid #e2e8f0',
                       borderLeft: '4px solid #51847D',
-                      borderRadius: '14px',
+                      borderRadius: '16px',
                       padding: '24px',
                       boxShadow: '0 6px 20px rgba(0,0,0,0.03)',
                     }}
@@ -207,7 +208,6 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
               <div
                 className="about-arch-frame-reversed"
                 style={{
-                  borderRadius: '20px',
                   overflow: 'hidden',
                   boxShadow: '0 20px 45px rgba(0,0,0,0.14)',
                   background: '#061221',
@@ -308,7 +308,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                 style={{
                   position: 'relative',
                   height: '400px',
-                  borderRadius: '20px',
+                  borderRadius: '18px',
                   boxShadow: '0 20px 45px rgba(0,0,0,0.14)',
                   overflow: 'hidden',
                   background: '#061221',

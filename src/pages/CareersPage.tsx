@@ -161,6 +161,7 @@ export const CareersPage: React.FC<CareersPageProps> = ({ onOpenQuoteModal, onNa
     color: '#475569',
     background: '#f8fafc',
     border: '1px solid #e2e8f0',
+    borderRadius: '50px',
     padding: '5px 12px',
     letterSpacing: '0.02em',
   };
@@ -262,6 +263,7 @@ export const CareersPage: React.FC<CareersPageProps> = ({ onOpenQuoteModal, onNa
                   background: '#ffffff',
                   border: '1px solid #cbd5e1',
                   borderTop: '4px solid #51847D',
+                  borderRadius: '16px',
                   padding: '30px 24px',
                   boxShadow: '0 6px 20px rgba(0,0,0,0.04)',
                 }}
@@ -310,6 +312,7 @@ export const CareersPage: React.FC<CareersPageProps> = ({ onOpenQuoteModal, onNa
                   background: '#ffffff',
                   border: '1px solid #cbd5e1',
                   borderLeft: '4px solid #51847D',
+                  borderRadius: '16px',
                   padding: '24px 28px',
                   display: 'flex',
                   alignItems: 'center',
@@ -323,6 +326,7 @@ export const CareersPage: React.FC<CareersPageProps> = ({ onOpenQuoteModal, onNa
                     height: '46px',
                     background: '#f8fafc',
                     border: '1px solid #e2e8f0',
+                    borderRadius: '12px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -375,6 +379,8 @@ export const CareersPage: React.FC<CareersPageProps> = ({ onOpenQuoteModal, onNa
                     background: '#ffffff',
                     border: '1px solid #cbd5e1',
                     borderLeft: '4px solid #51847D',
+                    borderRadius: '16px',
+                    overflow: 'hidden',
                     boxShadow: isOpen ? '0 12px 30px rgba(81, 132, 125, 0.12)' : '0 4px 16px rgba(0,0,0,0.03)',
                     transition: 'box-shadow 0.3s ease',
                   }}

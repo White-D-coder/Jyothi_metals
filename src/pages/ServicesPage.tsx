@@ -199,6 +199,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenQuoteModal, on
                     background: '#ffffff',
                     border: '1px solid #cbd5e1',
                     borderTop: '4px solid #51847D',
+                    borderRadius: '16px',
                     padding: '30px 24px',
                     boxShadow: isActive
                       ? '0 14px 34px rgba(81, 132, 125, 0.16)'
@@ -273,6 +274,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenQuoteModal, on
                   background: '#ffffff',
                   border: '1px solid #cbd5e1',
                   borderLeft: '4px solid #51847D',
+                  borderRadius: '16px',
                   padding: '32px 28px',
                   boxShadow: '0 6px 20px rgba(0,0,0,0.04)',
                 }}
@@ -338,6 +340,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenQuoteModal, on
                   background: 'rgba(255,255,255,0.03)',
                   border: '1px solid rgba(119, 184, 176, 0.25)',
                   borderTop: '4px solid #51847D',
+                  borderRadius: '16px',
                   padding: '32px 24px',
                   textAlign: 'center',
                 }}
@@ -380,7 +383,10 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenQuoteModal, on
             style={{ display: 'grid', gridTemplateColumns: '1fr 1.1fr', gap: '60px', alignItems: 'center' }}
           >
             {/* Image */}
-            <div style={{ border: '2px solid #0f172a', background: '#061221' }}>
+            <div
+              className="about-arch-frame-reversed"
+              style={{ overflow: 'hidden', boxShadow: '0 20px 45px rgba(0,0,0,0.14)', background: '#061221' }}
+            >
               <img
                 src="/images/precision_parts.png"
                 alt="In-house precision machining and inspection cell"

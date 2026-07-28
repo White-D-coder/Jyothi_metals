@@ -187,7 +187,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenQuoteModal }) =>
             </div>
 
             {/* Calculated Weight Result Card */}
-            <div style={{ background: '#061221', color: '#ffffff', borderRadius: '14px', padding: '24px', marginTop: 'auto', textAlign: 'center', borderTop: '3px solid #51847D' }}>
+            <div style={{ background: '#061221', color: '#ffffff', borderRadius: '16px', padding: '24px', marginTop: 'auto', textAlign: 'center', borderTop: '3px solid #51847D' }}>
               <div style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em', opacity: 0.9, color: '#77b8b0' }}>
                 Theoretical Unit Weight
               </div>
