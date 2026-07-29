@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   ArrowRight,
   Cpu,
@@ -13,6 +13,27 @@ interface AboutPageProps {
 
 export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
   const [isTimelineOpen, setIsTimelineOpen] = useState<boolean>(false);
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const hasAutoOpened = useRef<boolean>(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting && !hasAutoOpened.current) {
+          hasAutoOpened.current = true;
+          setIsTimelineOpen(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (timelineRef.current) {
+      observer.observe(timelineRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const executivePillars = [
     {
@@ -375,7 +396,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
             </p>
           </div>
 
-          <div className="single-accordion-wrapper">
+          <div className="single-accordion-wrapper" ref={timelineRef}>
             <div className="single-accordion-layer-2" />
             <div className="single-accordion-layer-1" />
 
@@ -403,47 +424,54 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                 </div>
               </div>
 
-              {/* Accordion Expanded Body */}
-              {isTimelineOpen && (
-                <div style={{ borderTop: '1px solid #E0E8E8', background: '#FFFFFF' }}>
-                  <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    {timelineMilestones.map((item, idx) => (
-                      <div
-                        key={item.year}
-                        className="timeline-row-item"
-                        style={{
-                          borderBottom: idx < timelineMilestones.length - 1 ? '1px solid #E0E8E8' : 'none',
-                        }}
-                      >
-                        {/* Year Typography */}
-                        <div>
-                          <span className="timeline-year-text" style={{ fontSize: '2.2rem', fontWeight: 800, color: '#304050', lineHeight: 1, letterSpacing: '0.6px', transition: 'color 200ms ease' }}>
-                            {item.year}
-                          </span>
-                        </div>
-
-                        {/* Title & Description (No Boxed Checkmark Tags!) */}
-                        <div>
-                          <h4 style={{ fontSize: '1.12rem', fontWeight: 700, color: '#304050', marginBottom: '8px', lineHeight: 1.3, letterSpacing: '0.4px' }}>
-                            {item.title}
-                          </h4>
-                          <p style={{ fontSize: '0.9rem', color: '#7C8894', lineHeight: 1.65, margin: 0 }}>
-                            {item.desc}
-                          </p>
-                        </div>
-
-                        {/* Photo with smooth zoom on hover */}
-                        <div className="timeline-img-frame">
-                          <img
-                            src={item.image}
-                            alt={item.title}
-                          />
-                        </div>
+              {/* Accordion Expanded Body with Smooth CSS Height & Opacity Animation */}
+              <div
+                style={{
+                  maxHeight: isTimelineOpen ? '2600px' : '0px',
+                  opacity: isTimelineOpen ? 1 : 0,
+                  overflow: 'hidden',
+                  transition: 'max-height 750ms cubic-bezier(0.4, 0, 0.2, 1), opacity 500ms ease',
+                  borderTop: isTimelineOpen ? '1px solid #E0E8E8' : '1px solid transparent',
+                  background: '#FFFFFF',
+                }}
+              >
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  {timelineMilestones.map((item, idx) => (
+                    <div
+                      key={item.year}
+                      className="timeline-row-item"
+                      style={{
+                        borderBottom: idx < timelineMilestones.length - 1 ? '1px solid #E0E8E8' : 'none',
+                      }}
+                    >
+                      {/* Year Typography */}
+                      <div>
+                        <span className="timeline-year-text" style={{ fontSize: '2.2rem', fontWeight: 800, color: '#304050', lineHeight: 1, letterSpacing: '0.6px', transition: 'color 200ms ease' }}>
+                          {item.year}
+                        </span>
                       </div>
-                    ))}
-                  </div>
+
+                      {/* Title & Description */}
+                      <div>
+                        <h4 style={{ fontSize: '1.12rem', fontWeight: 700, color: '#304050', marginBottom: '8px', lineHeight: 1.3, letterSpacing: '0.4px' }}>
+                          {item.title}
+                        </h4>
+                        <p style={{ fontSize: '0.9rem', color: '#7C8894', lineHeight: 1.65, margin: 0 }}>
+                          {item.desc}
+                        </p>
+                      </div>
+
+                      {/* Photo with smooth zoom on hover */}
+                      <div className="timeline-img-frame">
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                        />
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              )}
+              </div>
             </div>
           </div>
         </div>
