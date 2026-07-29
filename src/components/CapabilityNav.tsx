@@ -67,15 +67,16 @@ export const CapabilityNav: React.FC<CapabilityNavProps> = ({ currentPath }) => 
           background: transparent;
           border: none;
           color: #475569;
-          font-size: 0.84rem;
+          font-size: 0.78rem;
           font-weight: 600;
           cursor: pointer;
-          padding: 14px 18px;
+          padding: 14px 12px;
           position: relative;
           transition: color 150ms ease;
           white-space: nowrap;
-          letter-spacing: 0.5px;
+          letter-spacing: 0.4px;
           text-transform: uppercase;
+          flex-shrink: 0;
         }
         .slash-nav-btn:hover,
         .slash-nav-btn.active {
@@ -86,8 +87,8 @@ export const CapabilityNav: React.FC<CapabilityNavProps> = ({ currentPath }) => 
           content: '';
           position: absolute;
           bottom: 0;
-          left: 12px;
-          right: 12px;
+          left: 8px;
+          right: 8px;
           height: 3px;
           background: #588078;
           transform: scaleX(0);
@@ -101,21 +102,29 @@ export const CapabilityNav: React.FC<CapabilityNavProps> = ({ currentPath }) => 
         .slash-divider {
           color: #94a3b8;
           opacity: 0.6;
-          font-size: 1.1rem;
+          font-size: 1.0rem;
           font-weight: 300;
           font-style: italic;
           user-select: none;
           transform: skewX(-18deg);
           display: inline-block;
           margin: 0 2px;
+          flex-shrink: 0;
+        }
+        .capability-nav-container::-webkit-scrollbar {
+          display: none;
         }
       `}</style>
 
       <div
+        className="capability-nav-container"
         style={{
           width: '100%',
-          padding: '0 20px',
+          padding: '0 16px',
           boxSizing: 'border-box',
+          overflowX: 'auto',
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
         }}
       >
         <div
@@ -123,8 +132,10 @@ export const CapabilityNav: React.FC<CapabilityNavProps> = ({ currentPath }) => 
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            flexWrap: 'wrap',
-            gap: '0 2px',
+            flexWrap: 'nowrap',
+            width: 'max-content',
+            margin: '0 auto',
+            minWidth: '100%',
           }}
         >
           {CAPABILITY_NAV_ITEMS.map((item, index) => {
