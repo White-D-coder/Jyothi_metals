@@ -357,9 +357,6 @@ export const QualityPolicyPage: React.FC<QualityPolicyPageProps> = ({ onOpenQuot
               />
 
               <div style={{ position: 'absolute', top: '28px', left: '24px', right: '24px', zIndex: 2 }}>
-                <span style={{ fontSize: '0.72rem', fontWeight: 700, color: COLORS.accent, background: 'rgba(255, 255, 255, 0.15)', padding: '3px 8px', textTransform: 'uppercase', display: 'inline-block', marginBottom: '8px' }}>
-                  {std.validity}
-                </span>
                 <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#FFFFFF', lineHeight: 1.25, margin: 0, textTransform: 'uppercase', letterSpacing: '0.6px' }}>
                   {std.code} — {std.title}
                 </h3>

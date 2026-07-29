@@ -127,7 +127,7 @@ const SpecHoverList: React.FC<{ items: typeof specifications }> = ({ items }) =>
             key={spec.label}
             onMouseEnter={() => setHoveredIndex(index)}
             style={{
-              padding: isHovered ? '22px 0' : '16px 0',
+              padding: isHovered ? '26px 0' : '20px 0',
               borderBottom: index < items.length - 1 ? '1px solid #E2E8F0' : 'none',
               display: 'flex',
               alignItems: 'center',
@@ -138,9 +138,9 @@ const SpecHoverList: React.FC<{ items: typeof specifications }> = ({ items }) =>
             {/* Image Thumbnail (Reveals/Expands on Hover) */}
             <div
               style={{
-                width: isHovered ? '130px' : '0px',
-                height: '80px',
-                marginRight: isHovered ? '20px' : '0px',
+                width: isHovered ? '150px' : '0px',
+                height: '92px',
+                marginRight: isHovered ? '24px' : '0px',
                 opacity: isHovered ? 1 : 0,
                 overflow: 'hidden',
                 borderRadius: '8px',
@@ -152,8 +152,8 @@ const SpecHoverList: React.FC<{ items: typeof specifications }> = ({ items }) =>
                 src={spec.image}
                 alt={spec.label}
                 style={{
-                  width: '130px',
-                  height: '80px',
+                  width: '150px',
+                  height: '92px',
                   objectFit: 'cover',
                   display: 'block',
                 }}
@@ -163,10 +163,10 @@ const SpecHoverList: React.FC<{ items: typeof specifications }> = ({ items }) =>
             {/* Step Number (01) */}
             <div
               style={{
-                fontSize: '0.85rem',
-                fontWeight: 600,
+                fontSize: '1.05rem',
+                fontWeight: 700,
                 color: isHovered ? '#588078' : '#94A3B8',
-                width: '45px',
+                width: '55px',
                 flexShrink: 0,
                 transition: 'color 200ms ease',
               }}
@@ -177,13 +177,13 @@ const SpecHoverList: React.FC<{ items: typeof specifications }> = ({ items }) =>
             {/* Title / Label (BOLD UPPERCASE) */}
             <div
               style={{
-                fontSize: '1.2rem',
+                fontSize: '1.8rem',
                 fontWeight: 800,
                 letterSpacing: '0.4px',
                 textTransform: 'uppercase',
-                color: isHovered ? '#0F172A' : '#475569',
+                color: isHovered ? '#0F172A' : '#334155',
                 flex: 1,
-                paddingRight: '20px',
+                paddingRight: '24px',
                 transition: 'color 200ms ease',
               }}
             >
@@ -193,11 +193,12 @@ const SpecHoverList: React.FC<{ items: typeof specifications }> = ({ items }) =>
             {/* Description Value */}
             <div
               style={{
-                fontSize: '0.88rem',
-                color: isHovered ? '#1E293B' : '#64748B',
-                lineHeight: 1.5,
-                maxWidth: '420px',
-                paddingRight: '24px',
+                fontSize: '1.02rem',
+                fontWeight: 500,
+                color: isHovered ? '#0F172A' : '#64748B',
+                lineHeight: 1.55,
+                maxWidth: '450px',
+                paddingRight: '28px',
                 transition: 'color 200ms ease',
               }}
             >
@@ -207,8 +208,8 @@ const SpecHoverList: React.FC<{ items: typeof specifications }> = ({ items }) =>
             {/* Arrow Circle */}
             <div
               style={{
-                width: '36px',
-                height: '36px',
+                width: '42px',
+                height: '42px',
                 borderRadius: '50%',
                 border: isHovered ? '1px solid #588078' : '1px solid #CBD5E1',
                 background: isHovered ? '#588078' : 'transparent',
@@ -221,7 +222,7 @@ const SpecHoverList: React.FC<{ items: typeof specifications }> = ({ items }) =>
                 transform: isHovered ? 'translate(2px, -2px)' : 'none',
               }}
             >
-              <ArrowUpRight size={18} />
+              <ArrowUpRight size={22} />
             </div>
           </div>
         );

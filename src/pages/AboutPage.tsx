@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
   ArrowRight,
-  Award,
   Cpu,
   ShieldCheck,
   Zap,
@@ -17,7 +16,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
 
   const executivePillars = [
     {
-      num: '01',
+      num: 'I',
       title: 'PRIMARY MELT & SPECTROGRAPHIC CONTROL',
       desc: 'Dual-shell Electric Arc Furnaces (EAF) paired with AOD secondary decarburization vessels to achieve sub-ppm gas purity and 100% spectral chemistry verification.',
       image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
@@ -25,7 +24,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
       tag: 'EAF & AOD REFINING',
     },
     {
-      num: '02',
+      num: 'II',
       title: 'SUB-MICRON CNC LASER FABRICATION',
       desc: 'High-power fiber optic CNC laser cutting lines and automated cold rolling mills guaranteeing sub-micron kerf edge tolerances for defense assemblies.',
       image: '/images/pexels-bence-szemerey-337043-6804265.jpg',
@@ -33,7 +32,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
       tag: 'CNC LASER CELL',
     },
     {
-      num: '03',
+      num: 'III',
       title: 'AS9100D AEROSPACE & DEFENSE QA',
       desc: 'Phased-array ultrasonic volumetric scanning, high-energy X-ray radiography, and EN 10204 3.2 third-party witnessed mill test certificates.',
       image: '/images/pexels-willians-huerta-2157111846-36397988.jpg',
@@ -41,7 +40,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
       tag: 'AS9100D ACCREDITED',
     },
     {
-      num: '04',
+      num: 'IV',
       title: '48H GLOBAL LOGISTICS & TRACEABILITY',
       desc: 'Strategic port stock hubs in Asia, Europe, and North America guaranteeing 48-hour container dispatch with QR-etched heat-lot tracking.',
       image: '/images/pexels-jakubzerdzicki-33813584.jpg',
@@ -94,21 +93,25 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
       code: 'ISO 9001:2015',
       title: 'Quality Management Systems',
       desc: 'Complete process control across raw melt, rolling, machining, and dispatch.',
+      image: '/images/pexels-tokuo-nobuhiro-79378678-20472153.jpg',
     },
     {
       code: 'AS9100D / EN 9100',
       title: 'Aerospace & Defense Quality',
       desc: 'Sub-micron tolerance airframe and turbine components for defense contractors.',
+      image: '/images/pexels-willians-huerta-2157111846-36397988.jpg',
     },
     {
       code: 'PED 2014/68/EU',
       title: 'Pressure Equipment Directive',
       desc: 'Certified manufacturing for high-pressure oil, gas, and nuclear pipelines.',
+      image: '/images/pexels-eugeniofr-30005294.jpg',
     },
     {
       code: 'ISO 14001:2015',
       title: 'Environmental Management',
       desc: 'Zero-discharge melt shop operations and circular alloy scrap recycling.',
+      image: '/images/pexels-jakubzerdzicki-33813584.jpg',
     },
   ];
 
@@ -266,77 +269,89 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
       </section>
 
       {/* 2. Executive 4-Pillar Metallurgical Architecture Layout */}
-      <section style={{ padding: '70px 0', background: '#FFFFFF', borderBottom: '1px solid #E0E8E8' }}>
-        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
-          <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 48px' }}>
-            <span style={{ color: '#588078', fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.6px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
+      <section style={{ padding: '80px 0 90px', background: '#FFFFFF', borderBottom: '1px solid #E0E8E8' }}>
+        <div className="container" style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 20px' }}>
+          <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 56px' }}>
+            <span style={{ color: '#588078', fontSize: '0.8rem', fontWeight: 800, letterSpacing: '0.8px', textTransform: 'uppercase', display: 'block', marginBottom: '10px' }}>
               OPERATIONAL CORE
             </span>
-            <h2 style={{ fontSize: 'clamp(1.7rem, 3.2vw, 2.3rem)', fontWeight: 700, color: '#304050', marginBottom: '12px', lineHeight: 1.25, letterSpacing: '0.6px' }}>
+            <h2 style={{ fontSize: 'clamp(1.9rem, 3.4vw, 2.5rem)', fontWeight: 800, color: '#304050', marginBottom: '14px', lineHeight: 1.25, letterSpacing: '0.6px' }}>
               Four Pillars of Metallurgical Excellence
             </h2>
-            <p style={{ fontSize: '0.98rem', color: '#7C8894', lineHeight: 1.6, margin: 0 }}>
+            <p style={{ fontSize: '1.02rem', color: '#7C8894', lineHeight: 1.65, margin: 0 }}>
               Vertically integrated foundry capabilities, precision laser fabrication, and audit-certified quality systems.
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))', gap: '24px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '28px' }}>
             {executivePillars.map((pillar) => {
-              const Icon = pillar.icon;
               return (
                 <div
                   key={pillar.num}
                   style={{
-                    background: '#FFFFFF',
-                    border: '1px solid #E0E8E8',
-                    borderTop: '4px solid #588078',
-                    borderRadius: 0,
-                    overflow: 'hidden',
+                    position: 'relative',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
+                    minHeight: '520px',
+                    background: '#FFFFFF',
+                    border: '1px solid #CBD5E1',
+                    borderRadius: '0px',
+                    overflow: 'hidden',
+                    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.05)',
+                    transition: 'border-color 300ms ease, box-shadow 300ms ease, transform 300ms ease',
+                    cursor: 'pointer',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = '#588078';
+                    e.currentTarget.style.transform = 'translateY(-6px)';
+                    e.currentTarget.style.boxShadow = '0 16px 36px rgba(88, 128, 120, 0.14)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = '#CBD5E1';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.05)';
                   }}
                 >
-                  <div>
-                    <div style={{ height: '180px', overflow: 'hidden', position: 'relative' }}>
-                      <img
-                        src={pillar.image}
-                        alt={pillar.title}
-                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                      />
-                      <div
-                        style={{
-                          position: 'absolute',
-                          top: '14px',
-                          left: '14px',
-                          background: '#588078',
-                          color: '#FFFFFF',
-                          fontSize: '0.72rem',
-                          fontWeight: 700,
-                          padding: '4px 10px',
-                          letterSpacing: '0.6px',
-                        }}
-                      >
-                        {pillar.tag}
-                      </div>
+                  {/* Top Text & Straightened Roman Numeral Panel */}
+                  <div style={{ padding: '40px 32px 28px', position: 'relative', zIndex: 2 }}>
+                    {/* Straightened Giant Roman Numeral */}
+                    <div
+                      style={{
+                        fontSize: '120px',
+                        fontWeight: 900,
+                        color: '#588078',
+                        lineHeight: 0.85,
+                        letterSpacing: '-0.04em',
+                        marginBottom: '24px',
+                        userSelect: 'none',
+                        fontFamily: "'Inter', sans-serif",
+                      }}
+                    >
+                      {pillar.num}
                     </div>
 
-                    <div style={{ padding: '24px' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
-                        <span style={{ fontSize: '1.5rem', fontWeight: 800, color: '#588078', lineHeight: 1 }}>
-                          {pillar.num}
-                        </span>
-                        <Icon size={20} color="#588078" />
-                      </div>
+                    <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#304050', marginBottom: '12px', lineHeight: 1.35, letterSpacing: '0.3px' }}>
+                      {pillar.title}
+                    </h3>
 
-                      <h3 style={{ fontSize: '1.02rem', fontWeight: 700, color: '#304050', marginBottom: '10px', lineHeight: 1.3, letterSpacing: '0.5px' }}>
-                        {pillar.title}
-                      </h3>
+                    <p style={{ fontSize: '0.9rem', color: '#64748B', lineHeight: 1.65, margin: 0 }}>
+                      {pillar.desc}
+                    </p>
+                  </div>
 
-                      <p style={{ fontSize: '0.88rem', color: '#7C8894', lineHeight: 1.6, margin: 0 }}>
-                        {pillar.desc}
-                      </p>
-                    </div>
+                  {/* Bottom Image Container */}
+                  <div style={{ height: '240px', overflow: 'hidden', width: '100%', position: 'relative' }}>
+                    <img
+                      src={pillar.image}
+                      alt={pillar.title}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        display: 'block',
+                      }}
+                    />
                   </div>
                 </div>
               );
@@ -435,42 +450,112 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
       </section>
 
       {/* 4. Certifications Grid */}
-      <section style={{ padding: '70px 0', background: '#FFFFFF', borderTop: '1px solid #E0E8E8' }}>
-        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
-          <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 48px' }}>
-            <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#588078', letterSpacing: '0.6px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
+      <section style={{ padding: '80px 0 90px', background: '#FFFFFF', borderTop: '1px solid #E0E8E8' }}>
+        <div className="container" style={{ maxWidth: '1350px', margin: '0 auto', padding: '0 24px' }}>
+          <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 56px' }}>
+            <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#588078', letterSpacing: '0.8px', textTransform: 'uppercase', display: 'block', marginBottom: '10px' }}>
               GLOBAL ACCREDITATION
             </span>
-            <h2 style={{ fontSize: 'clamp(1.7rem, 3.2vw, 2.3rem)', fontWeight: 700, color: '#304050', marginBottom: '12px', letterSpacing: '0.6px' }}>
+            <h2 style={{ fontSize: 'clamp(1.9rem, 3.4vw, 2.5rem)', fontWeight: 800, color: '#304050', marginBottom: '14px', letterSpacing: '0.6px' }}>
               International Metallurgical Certifications
             </h2>
-            <p style={{ color: '#7C8894', fontSize: '0.98rem', lineHeight: 1.6 }}>
+            <p style={{ color: '#7C8894', fontSize: '1.02rem', lineHeight: 1.65, margin: 0 }}>
               Every alloy consignment carries official Mill Test Certificates (MTC) compliant with EN 10204 3.1 &amp; 3.2 standards.
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: '28px',
+            }}
+          >
             {certifications.map((cert) => (
               <div
                 key={cert.code}
                 style={{
-                  background: '#FFFFFF',
+                  position: 'relative',
+                  height: '420px',
+                  overflow: 'hidden',
+                  borderRadius: '0px',
+                  boxShadow: '0 8px 24px rgba(0, 0, 0, 0.06)',
+                  cursor: 'pointer',
                   border: '1px solid #E0E8E8',
-                  borderTop: '3px solid #588078',
-                  borderRadius: 0,
-                  padding: '28px 24px',
-                  textAlign: 'center',
+                  transition: 'transform 300ms ease, box-shadow 300ms ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-6px)';
+                  e.currentTarget.style.boxShadow = '0 16px 36px rgba(0, 0, 0, 0.16)';
+                  const img = e.currentTarget.querySelector('img');
+                  if (img) img.style.transform = 'scale(1.08)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.06)';
+                  const img = e.currentTarget.querySelector('img');
+                  if (img) img.style.transform = 'scale(1)';
                 }}
               >
-                <Award size={32} color="#588078" style={{ margin: '0 auto 14px' }} />
-                <div style={{ fontSize: '1.15rem', fontWeight: 700, color: '#304050', marginBottom: '6px', letterSpacing: '0.4px' }}>
-                  {cert.code}
-                </div>
-                <div style={{ fontSize: '0.86rem', fontWeight: 700, color: '#588078', marginBottom: '10px' }}>
-                  {cert.title}
-                </div>
-                <div style={{ fontSize: '0.84rem', color: '#7C8894', lineHeight: 1.55 }}>
-                  {cert.desc}
+                {/* Background Image */}
+                <img
+                  src={cert.image}
+                  alt={cert.title}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    display: 'block',
+                    transition: 'transform 400ms cubic-bezier(0.4, 0, 0.2, 1)',
+                  }}
+                />
+
+                {/* Dark Gradient Overlay for Readability */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background: 'linear-gradient(180deg, rgba(0,0,0,0) 25%, rgba(15, 23, 42, 0.88) 100%)',
+                    zIndex: 1,
+                  }}
+                />
+
+                {/* Bottom Content Panel (Heading & Subheading Only) */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    padding: '32px 28px',
+                    zIndex: 2,
+                    color: '#FFFFFF',
+                  }}
+                >
+                  <h3
+                    style={{
+                      fontSize: '1.45rem',
+                      fontWeight: 800,
+                      color: '#FFFFFF',
+                      lineHeight: 1.25,
+                      marginBottom: '8px',
+                      letterSpacing: '0.4px',
+                    }}
+                  >
+                    {cert.code}
+                  </h3>
+
+                  <div
+                    style={{
+                      fontSize: '0.88rem',
+                      fontWeight: 700,
+                      color: '#CBD5E1',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.6px',
+                    }}
+                  >
+                    {cert.title}
+                  </div>
                 </div>
               </div>
             ))}
@@ -484,7 +569,6 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
           background: '#FFFFFF',
           color: '#304050',
           padding: '70px 0',
-          borderTop: '3px solid #588078',
           textAlign: 'center',
         }}
       >

@@ -152,7 +152,7 @@ const articles: Article[] = [
 ];
 
 export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal }) => {
-  const [selectedCategory, setSelectedCategory] = useState<string>(categories[0]);
+  const [selectedCategory] = useState<string>(categories[0]);
   const [emailInput, setEmailInput] = useState<string>('');
   const [subscribed, setSubscribed] = useState<boolean>(false);
 
@@ -293,7 +293,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal }) => {
       </section>
 
       {/* 2. Top Horizontal Sticky Sub-Navigation Slash Bar */}
-      <nav
+      {/* <nav
         style={{
           position: 'sticky',
           top: '72px',
@@ -346,7 +346,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal }) => {
             })}
           </div>
         </div>
-      </nav>
+      </nav> */}
 
       {/* 3. Section 1: FEATURED BENTO MAGAZINE GRID */}
       <section style={{ padding: '60px 0 70px', background: '#FFFFFF'}}>
@@ -469,7 +469,6 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal }) => {
                   style={{
                     background: '#FFFFFF',
                     border: '1px solid #E2E8F0',
-                    boxShadow: '0 4px 16px rgba(0, 0, 0, 0.04)',
                     padding: '24px',
                     flex: 1,
                     display: 'flex',
@@ -482,7 +481,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal }) => {
                   onMouseEnter={(e) => {
                     e.currentTarget.style.borderColor = '#588078';
                     e.currentTarget.style.transform = 'translateY(-3px)';
-                    e.currentTarget.style.boxShadow = '0 8px 24px rgba(88, 128, 120, 0.12)';
+                    // e.currentTarget.style.boxShadow = '0 8px 24px rgba(88, 128, 120, 0.12)';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.borderColor = '#E2E8F0';
