@@ -441,7 +441,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenQuoteModal, on
           backgroundPosition: 'center',
           color: '#ffffff',
           padding: '100px 0',
-          borderTop: '3px solid #51847D',
         }}
       >
         <div className="container">

@@ -542,8 +542,6 @@ export const LaserCuttingPage: React.FC<LaserCuttingPageProps> = ({ onOpenQuoteM
           background: '#FFFFFF',
           color: COLORS.text,
           padding: '70px 0',
-          borderTop: `3px solid ${COLORS.accent}`,
-          borderBottom: `1px solid ${COLORS.divider}`,
           textAlign: 'center',
         }}
       >

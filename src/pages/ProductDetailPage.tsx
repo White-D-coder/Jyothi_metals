@@ -210,8 +210,8 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
         <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
           <div className="grid-responsive-about" style={{ display: 'grid', gridTemplateColumns: '1fr 1.1fr', gap: '48px', alignItems: 'start' }}>
             
-            {/* Left: Product Image Gallery */}
-            <div>
+            {/* Left: Product Image Gallery (Sticky on scroll until right column finishes) */}
+            <div style={{ position: 'sticky', top: '100px', alignSelf: 'flex-start' }}>
               <div
                 style={{
                   height: '460px',
