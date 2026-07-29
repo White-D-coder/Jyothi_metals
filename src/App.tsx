@@ -1,24 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { Routes, Route, useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { QuoteModal } from './components/QuoteModal';
-import { Home } from './pages/Home';
-import { ProductsPage } from './pages/ProductsPage';
-import { AboutPage } from './pages/AboutPage';
-import { ContactPage } from './pages/ContactPage';
-import { ServicesPage } from './pages/ServicesPage';
-import { InfrastructurePage } from './pages/InfrastructurePage';
-import { QualityPage } from './pages/QualityPage';
-import { BlogPage } from './pages/BlogPage';
-import { CareersPage } from './pages/CareersPage';
-import { FaqPage } from './pages/FaqPage';
-import { LaserCuttingPage } from './pages/LaserCuttingPage';
-import { ArcCastingPage } from './pages/ArcCastingPage';
-import { WeldInspectionPage } from './pages/WeldInspectionPage';
-import { QualityPolicyPage } from './pages/QualityPolicyPage';
-import { CertificationsPage } from './pages/CertificationsPage';
-import { ProductDetailPage } from './pages/ProductDetailPage';
+import { PageLoader } from './components/PageLoader';
+
+// Lazy-loaded Page Components for fast code-splitting and smooth transition loading
+const Home = lazy(() => import('./pages/Home').then(m => ({ default: m.Home })));
+const ProductsPage = lazy(() => import('./pages/ProductsPage').then(m => ({ default: m.ProductsPage })));
+const AboutPage = lazy(() => import('./pages/AboutPage').then(m => ({ default: m.AboutPage })));
+const ContactPage = lazy(() => import('./pages/ContactPage').then(m => ({ default: m.ContactPage })));
+const ServicesPage = lazy(() => import('./pages/ServicesPage').then(m => ({ default: m.ServicesPage })));
+const InfrastructurePage = lazy(() => import('./pages/InfrastructurePage').then(m => ({ default: m.InfrastructurePage })));
+const QualityPage = lazy(() => import('./pages/QualityPage').then(m => ({ default: m.QualityPage })));
+const BlogPage = lazy(() => import('./pages/BlogPage').then(m => ({ default: m.BlogPage })));
+const CareersPage = lazy(() => import('./pages/CareersPage').then(m => ({ default: m.CareersPage })));
+const FaqPage = lazy(() => import('./pages/FaqPage').then(m => ({ default: m.FaqPage })));
+const LaserCuttingPage = lazy(() => import('./pages/LaserCuttingPage').then(m => ({ default: m.LaserCuttingPage })));
+const ArcCastingPage = lazy(() => import('./pages/ArcCastingPage').then(m => ({ default: m.ArcCastingPage })));
+const WeldInspectionPage = lazy(() => import('./pages/WeldInspectionPage').then(m => ({ default: m.WeldInspectionPage })));
+const QualityPolicyPage = lazy(() => import('./pages/QualityPolicyPage').then(m => ({ default: m.QualityPolicyPage })));
+const CertificationsPage = lazy(() => import('./pages/CertificationsPage').then(m => ({ default: m.CertificationsPage })));
+const ProductDetailPage = lazy(() => import('./pages/ProductDetailPage').then(m => ({ default: m.ProductDetailPage })));
 
 // Map a legacy "tab" id (used across Navbar/Footer/pages) to its real URL path.
 const tabToPath = (tab: string): string => (tab === 'home' ? '/' : `/${tab}`);
@@ -79,73 +82,75 @@ export function App() {
         onSelectCategory={handleSelectCategory}
       />
 
-      {/* Main Page View — real URL routing */}
+      {/* Main Page View — real URL routing with Lazy Suspense Fallback */}
       <main style={{ flexGrow: 1 }}>
-        <Routes>
-          <Route
-            path="/"
-            element={<Home onNavigate={navigateTab} onOpenQuoteModal={handleOpenQuoteModal} />}
-          />
-          <Route
-            path="/products"
-            element={<ProductsRoute onOpenQuoteModal={handleOpenQuoteModal} />}
-          />
-          <Route path="/about" element={<AboutPage onOpenQuoteModal={() => handleOpenQuoteModal()} />} />
-          <Route path="/contact" element={<ContactPage onOpenQuoteModal={() => handleOpenQuoteModal()} />} />
-          <Route
-            path="/services"
-            element={<ServicesPage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
-          />
-          <Route
-            path="/infrastructure"
-            element={<InfrastructurePage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
-          />
-          <Route
-            path="/quality"
-            element={<QualityPage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
-          />
-          <Route
-            path="/blog"
-            element={<BlogPage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
-          />
-          <Route
-            path="/careers"
-            element={<CareersPage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
-          />
-          <Route
-            path="/faq"
-            element={<FaqPage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
-          />
-          <Route
-            path="/services/laser-cutting"
-            element={<LaserCuttingPage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
-          />
-          <Route
-            path="/services/arc-casting"
-            element={<ArcCastingPage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
-          />
-          <Route
-            path="/services/weld-inspection"
-            element={<WeldInspectionPage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
-          />
-          <Route
-            path="/quality-policy"
-            element={<QualityPolicyPage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
-          />
-          <Route
-            path="/certifications"
-            element={<CertificationsPage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
-          />
-          <Route
-            path="/product-detail"
-            element={<ProductDetailPage onOpenQuoteModal={handleOpenQuoteModal} />}
-          />
-          {/* Unknown paths fall back to Home */}
-          <Route
-            path="*"
-            element={<Home onNavigate={navigateTab} onOpenQuoteModal={handleOpenQuoteModal} />}
-          />
-        </Routes>
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            <Route
+              path="/"
+              element={<Home onNavigate={navigateTab} onOpenQuoteModal={handleOpenQuoteModal} />}
+            />
+            <Route
+              path="/products"
+              element={<ProductsRoute onOpenQuoteModal={handleOpenQuoteModal} />}
+            />
+            <Route path="/about" element={<AboutPage onOpenQuoteModal={() => handleOpenQuoteModal()} />} />
+            <Route path="/contact" element={<ContactPage onOpenQuoteModal={() => handleOpenQuoteModal()} />} />
+            <Route
+              path="/services"
+              element={<ServicesPage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
+            />
+            <Route
+              path="/infrastructure"
+              element={<InfrastructurePage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
+            />
+            <Route
+              path="/quality"
+              element={<QualityPage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
+            />
+            <Route
+              path="/blog"
+              element={<BlogPage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
+            />
+            <Route
+              path="/careers"
+              element={<CareersPage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
+            />
+            <Route
+              path="/faq"
+              element={<FaqPage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
+            />
+            <Route
+              path="/services/laser-cutting"
+              element={<LaserCuttingPage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
+            />
+            <Route
+              path="/services/arc-casting"
+              element={<ArcCastingPage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
+            />
+            <Route
+              path="/services/weld-inspection"
+              element={<WeldInspectionPage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
+            />
+            <Route
+              path="/quality-policy"
+              element={<QualityPolicyPage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
+            />
+            <Route
+              path="/certifications"
+              element={<CertificationsPage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
+            />
+            <Route
+              path="/product-detail"
+              element={<ProductDetailPage onOpenQuoteModal={handleOpenQuoteModal} />}
+            />
+            {/* Unknown paths fall back to Home */}
+            <Route
+              path="*"
+              element={<Home onNavigate={navigateTab} onOpenQuoteModal={handleOpenQuoteModal} />}
+            />
+          </Routes>
+        </Suspense>
       </main>
 
       {/* Site Footer */}

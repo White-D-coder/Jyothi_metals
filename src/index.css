@@ -412,7 +412,6 @@ h1, h2, h3, h4, h5, h6 {
   min-width: 240px;
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-top: 3px solid #51847D;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   padding: 8px 0;
   display: none;
@@ -624,7 +623,7 @@ h1, h2, h3, h4, h5, h6 {
 .stats-card-white {
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 18px;
+  border-radius: 0 !important;
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
   padding: 24px 30px;
 }
