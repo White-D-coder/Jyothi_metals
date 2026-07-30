@@ -89,7 +89,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
       <section
         style={{
           background: '#FFFFFF',
-          padding: '56px 0 48px',
+          padding: '40px 0 24px',
         }}
       >
         <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
@@ -112,7 +112,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
         </div>
       </section>
 
-      <div className="container" style={{ paddingBottom: '100px' }}>
+      <div className="container" style={{ paddingBottom: '48px' }}>
 
         {/* Search & Filter Action Bar */}
         <div style={{ margin: '32px 0 44px', maxWidth: '760px' }}>
@@ -219,6 +219,8 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                   'Forged Fittings',
                   'Buttweld Fittings',
                   'Fasteners',
+                  'Gasketing Solutions',
+                  'Structural Steel',
                   'Specialized Product',
                 ].map((catId) => {
                   const isSelected = currentCategoryName === catId;
@@ -381,6 +383,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                     <div
                       key={prod.id}
                       className="product-card"
+                      onClick={() => navigate(`/product-detail?id=${encodeURIComponent(prod.id)}`)}
                       style={{
                         background: '#ffffff',
                         border: '1px solid #e2e8f0',
@@ -388,6 +391,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                         display: 'flex',
                         flexDirection: 'column',
                         height: '100%',
+                        cursor: 'pointer',
                         transition: 'transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease',
                       }}
                     >
@@ -428,7 +432,10 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
 
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '16px', marginTop: 'auto', borderTop: '1px solid #f1f5f9' }}>
                           <button
-                            onClick={() => onOpenQuoteModal(prod.title)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onOpenQuoteModal(prod.title);
+                            }}
                             className="btn btn-accent"
                             style={{ padding: '8px 16px', fontSize: '0.82rem', fontWeight: 700 }}
                           >
@@ -436,7 +443,10 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                           </button>
                           <button
                             type="button"
-                            onClick={() => navigate(`/product-detail?id=${encodeURIComponent(prod.id)}`)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              navigate(`/product-detail?id=${encodeURIComponent(prod.id)}`);
+                            }}
                             style={{
                               background: 'none',
                               border: 'none',

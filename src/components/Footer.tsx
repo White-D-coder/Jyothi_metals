@@ -54,7 +54,14 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenQuoteModal }
             <img
               src="/images/jmi_logo.png"
               alt="JMI - Jyoti Metal (India)"
-              style={{ height: '76px', width: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.3))' }}
+              style={{
+                height: '92px',
+                width: 'auto',
+                objectFit: 'contain',
+                transform: 'scale(1.15)',
+                transformOrigin: 'center left',
+                filter: 'drop-shadow(0 3px 10px rgba(0,0,0,0.4))',
+              }}
             />
             <div>
               <span className="footer-brand-title" style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 900, fontSize: '1.45rem', color: '#ffffff', lineHeight: 1.1, letterSpacing: '0.02em', display: 'block' }}>
@@ -318,7 +325,7 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenQuoteModal }
             </h4>
             <p style={{ color: '#cbd5e1', fontSize: '0.85rem', lineHeight: 1.5, marginBottom: '14px' }}>
               102, Praveen House, 4th Kumbharwada Lane, Mumbai-400004.<br />
-              <span style={{ color: '#94a3b8' }}>Tel: (022) 2380 2758 / 2382 5068</span>
+              <span style={{ color: '#94a3b8' }}>Tel: 022-66363385 / 66595923 / 66595771</span>
             </p>
 
             <h4 style={{ color: '#ffffff', fontSize: '1.05rem', fontWeight: 800, marginBottom: '10px' }}>
@@ -329,10 +336,10 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenQuoteModal }
             </p>
 
             <h4 style={{ color: '#ffffff', fontSize: '1.05rem', fontWeight: 800, marginBottom: '10px' }}>
-              Plant Address
+              Plant Address (Rajasthan)
             </h4>
             <p style={{ color: '#cbd5e1', fontSize: '0.85rem', lineHeight: 1.5, margin: 0 }}>
-              <span style={{ color: '#77b8b0', fontWeight: 700 }}>Awaiting Rajasthan address</span>
+              Plot No. E-41 (G-1) RIICO Industrial Area, Alwar - 301019, Rajasthan, India
             </p>
           </div>
 
@@ -342,10 +349,16 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenQuoteModal }
               <h4 style={{ color: '#ffffff', fontSize: '1.05rem', fontWeight: 800, marginBottom: '10px' }}>
                 Leadership &amp; Sales
               </h4>
-              <p style={{ color: '#cbd5e1', fontSize: '0.85rem', lineHeight: 1.6, marginBottom: '16px' }}>
-                <strong style={{ color: '#ffffff' }}>Dhawal Choudhary</strong> &amp; <strong style={{ color: '#ffffff' }}>Dinesh Choudhary</strong><br />
-                <a href="tel:+919322281549" style={{ color: '#77b8b0', textDecoration: 'none', fontWeight: 700 }}>+91 9322281549</a>
-              </p>
+              <div style={{ color: '#cbd5e1', fontSize: '0.84rem', lineHeight: 1.6, marginBottom: '16px' }}>
+                <div style={{ marginBottom: '8px' }}>
+                  <strong style={{ color: '#ffffff' }}>Dhawal Choudhary:</strong><br />
+                  <a href="tel:+919322281549" style={{ color: '#77b8b0', textDecoration: 'none', fontWeight: 700 }}>+91 9322281549</a> / <a href="tel:+919137880994" style={{ color: '#77b8b0', textDecoration: 'none', fontWeight: 700 }}>+91 9137880994</a>
+                </div>
+                <div>
+                  <strong style={{ color: '#ffffff' }}>Dinesh Choudhary:</strong><br />
+                  <a href="tel:+919769388813" style={{ color: '#77b8b0', textDecoration: 'none', fontWeight: 700 }}>+91 9769388813</a> / <a href="tel:+919082886991" style={{ color: '#77b8b0', textDecoration: 'none', fontWeight: 700 }}>+91 9082886991</a>
+                </div>
+              </div>
             </div>
 
             <div>

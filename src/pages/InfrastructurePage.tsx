@@ -223,7 +223,7 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
         style={{
           background: '#061221',
           color: '#ffffff',
-          padding: '128px 0 96px',
+          padding: '60px 0 40px',
           borderBottom: '3px solid #51847D',
           position: 'relative',
           overflow: 'hidden',
@@ -273,7 +273,7 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
       </section>
 
       {/* 2. Capabilities Marquee Ticker */}
-      <section style={{ background: '#0b1b2e', borderBottom: '1px solid rgba(119,184,176,0.2)', padding: '18px 0' }}>
+      <section style={{ background: '#0b1b2e', padding: '18px 0' }}>
         <div className="marquee-container">
           <div className="marquee-track">
             {[...marqueeItems, ...marqueeItems].map((item, i) => (
@@ -287,7 +287,7 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
       </section>
 
       {/* 3. Overview Split */}
-      <section className="section bg-white" style={{ padding: '100px 0 80px' }}>
+      <section className="section bg-white" style={{ padding: '48px 0 36px' }}>
         <div className="container">
           <div className="grid-responsive-about" style={{ display: 'grid', gridTemplateColumns: '1fr 1.1fr', gap: '60px', alignItems: 'center' }}>
             <div className="infra-reveal">
@@ -315,7 +315,7 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
       <section
         className="section bg-tint relative overflow-hidden"
         style={{
-          padding: '100px 0',
+          padding: '48px 0',
           background: '#F2F3F5',
           borderTop: '1px solid #e2e8f0',
           position: 'relative',
@@ -475,7 +475,7 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
       </section>
 
       {/* 5. Equipment — Full-Bleed Overlay Card Architecture (Matching User Reference Image) */}
-      <section className="section bg-white" style={{ padding: '100px 0', borderTop: '1px solid #e2e8f0' }}>
+      <section className="section bg-white" style={{ padding: '48px 0', borderTop: '1px solid #e2e8f0' }}>
         <div className="container" style={{ maxWidth: '1440px', width: '95%' }}>
           <div className="infra-reveal" style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 60px' }}>
             <span className="small-label">EQUIPMENT &amp; MACHINERY</span>
@@ -632,7 +632,7 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
       </section>
 
       {/* 7. Facility Gallery — Mosaic */}
-      <section className="section bg-white" style={{ padding: '90px 0', borderTop: '1px solid #e2e8f0', position: 'relative', overflow: 'hidden' }}>
+      <section className="section bg-white" style={{ padding: '48px 0', borderTop: '1px solid #e2e8f0', position: 'relative', overflow: 'hidden' }}>
         <div className="infra-backdrop-word" style={{ left: '-18px', right: 'auto' }}>GALLERY</div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div className="infra-reveal" style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 60px' }}>
@@ -678,7 +678,7 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
       </section>
 
       {/* 8. Sustainability Split (Matching Image 1 Architecture) */}
-      <section className="section bg-tint" style={{ padding: '100px 0', background: '#ffffff', borderTop: '1px solid #e2e8f0' }}>
+      <section className="section bg-tint" style={{ padding: '48px 0', background: '#ffffff' }}>
         <div className="container">
           <div className="grid-responsive-about" style={{ display: 'grid', gridTemplateColumns: '1fr 1.1fr', gap: '60px', alignItems: 'center' }}>
             {/* Left Column: Headline, Paragraph, Phone Widget & Pill CTA (Matching Image 1 Left Side) */}

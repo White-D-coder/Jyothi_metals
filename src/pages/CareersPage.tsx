@@ -178,7 +178,7 @@ export const CareersPage: React.FC<CareersPageProps> = ({ onOpenQuoteModal, onNa
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           color: '#ffffff',
-          padding: '120px 0 90px',
+          padding: '60px 0 40px',
           borderBottom: '3px solid #51847D',
           position: 'relative',
           overflow: 'hidden',
@@ -238,7 +238,7 @@ export const CareersPage: React.FC<CareersPageProps> = ({ onOpenQuoteModal, onNa
       </section>
 
       {/* 2. Why Work With Us — Culture */}
-      <section className="section bg-white" style={{ padding: '90px 0' }}>
+      <section className="section bg-white" style={{ padding: '48px 0' }}>
         <div className="container">
           <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 60px' }}>
             <span className="small-label">WHY WORK WITH US</span>
@@ -287,7 +287,7 @@ export const CareersPage: React.FC<CareersPageProps> = ({ onOpenQuoteModal, onNa
       {/* 3. Benefits Strip */}
       <section
         className="section bg-tint"
-        style={{ padding: '90px 0', background: '#f8fafc', borderTop: '1px solid #e2e8f0' }}
+        style={{ padding: '48px 0', background: '#f8fafc', borderTop: '1px solid #e2e8f0' }}
       >
         <div className="container">
           <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 60px' }}>
@@ -348,7 +348,7 @@ export const CareersPage: React.FC<CareersPageProps> = ({ onOpenQuoteModal, onNa
       <section
         id="open-roles"
         className="section bg-white"
-        style={{ padding: '90px 0', borderTop: '1px solid #e2e8f0' }}
+        style={{ padding: '48px 0', borderTop: '1px solid #e2e8f0' }}
       >
         <div className="container">
           <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 60px' }}>
@@ -499,7 +499,7 @@ export const CareersPage: React.FC<CareersPageProps> = ({ onOpenQuoteModal, onNa
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           color: '#ffffff',
-          padding: '100px 0',
+          padding: '52px 0',
           borderTop: '3px solid #51847D',
         }}
       >

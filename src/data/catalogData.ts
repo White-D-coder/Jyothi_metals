@@ -119,6 +119,23 @@ export const allSubCategoriesList = [
   { id: 'Boiler Steel', label: 'Boiler Steel' },
   { id: 'Manganese Steel', label: 'Manganese Steel' },
   { id: 'Tiscral Sailhard Plates', label: 'Tiscral Sailhard Plates' },
+
+  // Gasketing Solutions Sub-Categories
+  { id: 'Asbestos Free (AF) Fibre Jointing Sheets', label: 'Asbestos Free (AF) Fibre Jointing Sheets' },
+  { id: 'Compressed Fibre (CAF) Jointing Sheets', label: 'Compressed Fibre (CAF) Jointing Sheets' },
+  { id: 'Spiral Wound Gaskets', label: 'Spiral Wound Gaskets' },
+  { id: 'Pre Cut Gaskets', label: 'Pre Cut Gaskets' },
+
+  // Structural Steel Sub-Categories
+  { id: 'Mild Steel Angles', label: 'Mild Steel Angles' },
+  { id: 'Mild Steel Beams', label: 'Mild Steel Beams' },
+  { id: 'Mild Steel Channels', label: 'Mild Steel Channels' },
+  { id: 'Narrow Parallel Flange Beam', label: 'Narrow Parallel Flange Beam' },
+  { id: 'Universal Beam', label: 'Universal Beam' },
+  { id: 'Universal Column', label: 'Universal Column' },
+  { id: 'Wide Parallel Flange Beam', label: 'Wide Parallel Flange Beam' },
+  { id: 'IU Rails', label: 'IU Rails' },
+  { id: 'Crane Rails', label: 'Crane Rails' },
 ];
 
 export const getSubCategoriesForCategory = (mainCat: string) => {
@@ -143,6 +160,21 @@ export const getSubCategoriesForCategory = (mainCat: string) => {
   }
   if (mainCat === 'Fasteners') {
     return allSubCategoriesList.filter(s => s.id.includes('Fasteners'));
+  }
+  if (mainCat === 'Gasketing Solutions' || mainCat === 'Gasketing' || mainCat === 'Gasketing & Sealing') {
+    return allSubCategoriesList.filter(s =>
+      s.id.includes('Jointing Sheets') ||
+      s.id.includes('Spiral Wound Gaskets') ||
+      s.id.includes('Pre Cut Gaskets')
+    );
+  }
+  if (mainCat === 'Structural Steel' || mainCat === 'Structural Steel Products') {
+    return allSubCategoriesList.filter(s =>
+      s.id.includes('Mild Steel') ||
+      s.id.includes('Flange Beam') ||
+      s.id.includes('Universal') ||
+      s.id.includes('Rails')
+    );
   }
   if (mainCat === 'Specialized Product' || mainCat === 'Specialized Products') {
     return allSubCategoriesList.filter(s =>
@@ -177,6 +209,9 @@ export const getFirstSubCategoryForCategory = (mainCat: string) => {
   }
   if (mainCat === 'Fasteners') {
     return 'Stainless Steel Fasteners';
+  }
+  if (mainCat === 'Gasketing Solutions' || mainCat === 'Gasketing') {
+    return 'Asbestos Free (AF) Fibre Jointing Sheets';
   }
   if (mainCat === 'Specialized Product' || mainCat === 'Specialized Products') {
     return 'Abrasion Resistant Plates';
@@ -1614,4 +1649,219 @@ export const catalogProducts: CatalogProduct[] = [
 
   // 10. Tiscral Sailhard Plates
   { id: 'tiscral-sailhard-plates', title: 'Tiscral Sailhard Plates', category: 'Specialized Product', subCat: 'Tiscral Sailhard Plates', image: '/images/sheets_plates.png', specs: ['SAIL SAILHARD Wear Plate', 'TISCRAL High Abrasion Resistance', 'Mining & Earthmoving Steel'] },
+
+  // GASKETING SOLUTIONS PRODUCTS
+  // 1. Asbestos Free (AF) Fibre Jointing Sheets
+  {
+    id: 'af-fibre-sheet-standard',
+    title: 'Asbestos Free (AF) Fibre Jointing Sheets (Non-Asbestos)',
+    category: 'Gasketing Solutions',
+    subCat: 'Asbestos Free (AF) Fibre Jointing Sheets',
+    image: '/images/flanges_industrial.png',
+    specs: ['BS 7531 Grade Y / Grade X', 'Max Temp: 400°C', 'Eco-Friendly Non-Asbestos'],
+  },
+  {
+    id: 'af-fibre-sheet-ht',
+    title: 'High Temp Synthetic Fibre AF Jointing Sheet',
+    category: 'Gasketing Solutions',
+    subCat: 'Asbestos Free (AF) Fibre Jointing Sheets',
+    image: '/images/flanges_industrial.png',
+    specs: ['NBR / Aramid Fibre Binder', 'Pressure: Up to 100 Bar', 'Oil & Fuel Resistant'],
+  },
+  {
+    id: 'af-fibre-sheet-reinforced',
+    title: 'Wire Reinforced Asbestos Free (AF) Jointing Sheet',
+    category: 'Gasketing Solutions',
+    subCat: 'Asbestos Free (AF) Fibre Jointing Sheets',
+    image: '/images/flanges_industrial.png',
+    specs: ['Steel Wire Mesh Insert', 'High Pressure Flange Gasketing', 'Steam & Gas Seals'],
+  },
+
+  // 2. Compressed Fibre (CAF) Jointing Sheets
+  {
+    id: 'caf-jointing-sheet-std',
+    title: 'Compressed Fibre (CAF) Jointing Sheets',
+    category: 'Gasketing Solutions',
+    subCat: 'Compressed Fibre (CAF) Jointing Sheets',
+    image: '/images/flanges_industrial.png',
+    specs: ['IS 2712 Grade W/1 & W/2', 'Max Temp: 450°C', 'High Tensile Jointing'],
+  },
+  {
+    id: 'caf-jointing-sheet-acid',
+    title: 'Acid & Chemical Resistant CAF Jointing Sheet',
+    category: 'Gasketing Solutions',
+    subCat: 'Compressed Fibre (CAF) Jointing Sheets',
+    image: '/images/flanges_industrial.png',
+    specs: ['IS 2712 Grade A/1 Acid Resistant', 'Chemical Pipeline Seals', 'Thickness: 0.5mm - 5mm'],
+  },
+  {
+    id: 'caf-jointing-sheet-metallic',
+    title: 'Metallic Wire Mesh Reinforced CAF Sheet',
+    category: 'Gasketing Solutions',
+    subCat: 'Compressed Fibre (CAF) Jointing Sheets',
+    image: '/images/flanges_industrial.png',
+    specs: ['IS 2712 Grade M/1 Metallic', 'Exhaust & Boiler Flanges', 'Extreme Pressure Rating'],
+  },
+
+  // 3. Spiral Wound Gaskets
+  {
+    id: 'spiral-wound-gasket-ss304',
+    title: 'SS304 / SS316 Spiral Wound Gasket (Inner & Outer Ring)',
+    category: 'Gasketing Solutions',
+    subCat: 'Spiral Wound Gaskets',
+    image: '/images/flanges_industrial.png',
+    specs: ['ASME B16.20 / ANSI B16.5', 'Class 150# - 2500#', 'Graphite / PTFE Filler'],
+  },
+  {
+    id: 'spiral-wound-gasket-ss316l',
+    title: 'SS316L High Pressure Graphite Spiral Wound Gasket',
+    category: 'Gasketing Solutions',
+    subCat: 'Spiral Wound Gaskets',
+    image: '/images/flanges_industrial.png',
+    specs: ['ASME B16.20 API 605', 'High Pressure Steam & Heat Exchangers', 'Zero Leak Seal'],
+  },
+  {
+    id: 'spiral-wound-gasket-inconel',
+    title: 'Inconel 600 / Monel 400 Spiral Wound Gasket',
+    category: 'Gasketing Solutions',
+    subCat: 'Spiral Wound Gaskets',
+    image: '/images/flanges_industrial.png',
+    specs: ['NACE MR0175 Compliant', 'Severe Corrosive Service', 'Refinery Grade'],
+  },
+
+  // 4. Pre Cut Gaskets
+  {
+    id: 'pre-cut-flange-gasket-fullface',
+    title: 'Precision Pre Cut Full Face Flange Gaskets',
+    category: 'Gasketing Solutions',
+    subCat: 'Pre Cut Gaskets',
+    image: '/images/flanges_industrial.png',
+    specs: ['ASME B16.21 Standard', 'Full Face Bolt Hole Pattern', 'Custom CNC Cut'],
+  },
+  {
+    id: 'pre-cut-flange-gasket-ring',
+    title: 'Pre Cut IBC Ring Type Flange Gaskets',
+    category: 'Gasketing Solutions',
+    subCat: 'Pre Cut Gaskets',
+    image: '/images/flanges_industrial.png',
+    specs: ['Inside Bolt Circle (IBC)', 'Non-Asbestos / CAF Material', '1/2" to 24" NB Sizes'],
+  },
+  {
+    id: 'pre-cut-gasket-metal-jacketed',
+    title: 'Metal Jacketed Pre Cut Heat Exchanger Gaskets',
+    category: 'Gasketing Solutions',
+    subCat: 'Pre Cut Gaskets',
+    image: '/images/flanges_industrial.png',
+    specs: ['Double Jacketed SS316 with Soft Filler', 'Heat Exchanger Shells', 'ASME Section VIII'],
+  },
+
+  // Structural Steel Products
+  {
+    id: 'mild-steel-angles',
+    title: 'Mild Steel Angles',
+    category: 'Structural Steel',
+    subCat: 'Mild Steel Angles',
+    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    specs: [
+      'ISA L-shaped steel section for construction & frameworks',
+      'Sizes: 25 mm x 25 mm to 250 mm x 250 mm',
+      'ISMB / ISA Standard Compliant',
+    ],
+  },
+  {
+    id: 'mild-steel-beams',
+    title: 'Mild Steel Beams',
+    category: 'Structural Steel',
+    subCat: 'Mild Steel Beams',
+    image: '/images/pexels-bence-szemerey-337043-6804265.jpg',
+    specs: [
+      'MS Beams / ISMB horizontal load-bearing members',
+      'Sizes: 100 mm x 50 mm to 600 mm x 210 mm',
+      'ISMB Standard Compliant',
+    ],
+  },
+  {
+    id: 'mild-steel-channels',
+    title: 'Mild Steel Channels',
+    category: 'Structural Steel',
+    subCat: 'Mild Steel Channels',
+    image: '/images/pexels-pppsdavid-5851494.jpg',
+    specs: [
+      'MS Channels U-shaped structural framing & bracing sections',
+      'Sizes: 75 mm x 40 mm to 400 mm x 100 mm',
+      'ISMC Standard Compliant',
+    ],
+  },
+  {
+    id: 'narrow-parallel-flange-beam',
+    title: 'Narrow Parallel Flange Beam',
+    category: 'Structural Steel',
+    subCat: 'Narrow Parallel Flange Beam',
+    image: '/images/pexels-jakubzerdzicki-33813584.jpg',
+    specs: [
+      'NPB specialized steel beam with narrow flange for lightweight strength',
+      'Sizes: 200 mm x 100 mm to 600 mm x 220 mm',
+      'NPB Series Specification',
+    ],
+  },
+  {
+    id: 'universal-beam',
+    title: 'Universal Beam',
+    category: 'Structural Steel',
+    subCat: 'Universal Beam',
+    image: '/images/pexels-eugeniofr-30005294.jpg',
+    specs: [
+      'UB versatile wide-flange beam for heavy bridges & buildings',
+      'Sizes: 203 mm x 133 mm to 610 mm x 229 mm',
+      'UB Series Standard',
+    ],
+  },
+  {
+    id: 'universal-column',
+    title: 'Universal Column',
+    category: 'Structural Steel',
+    subCat: 'Universal Column',
+    image: '/images/pexels-tokuo-nobuhiro-79378678-20472153.jpg',
+    specs: [
+      'UC vertical load-bearing column section for frameworks & supports',
+      'Sizes: 203 mm x 203 mm to 356 mm x 368 mm / 356 mm x 406 mm',
+      'UC Series Standard',
+    ],
+  },
+  {
+    id: 'wide-parallel-flange-beam',
+    title: 'Wide Parallel Flange Beam',
+    category: 'Structural Steel',
+    subCat: 'Wide Parallel Flange Beam',
+    image: '/images/pexels-willians-huerta-2157111846-36397988.jpg',
+    specs: [
+      'WPB heavy-duty beam with wide plates for high-rise & plant infrastructure',
+      'Sizes: 160 mm x 160 mm to 900 mm x 300 mm',
+      'WPB Heavy Duty Specification',
+    ],
+  },
+  {
+    id: 'iu-rails',
+    title: 'IU Rails',
+    category: 'Structural Steel',
+    subCat: 'IU Rails',
+    image: '/images/pexels-tokuo-nobuhiro-79378678-20472153.jpg',
+    specs: [
+      'Track sections for railways, industrial tracks & crane runways',
+      'Weight Range: 24 kg/m to 60 kg/m',
+      'Industrial Rail Grade Specification',
+    ],
+  },
+  {
+    id: 'crane-rails',
+    title: 'Crane Rails',
+    category: 'Structural Steel',
+    subCat: 'Crane Rails',
+    image: '/images/pexels-jakubzerdzicki-33813584.jpg',
+    specs: [
+      'Heavy-duty rails for overhead cranes & gantry systems',
+      'Sizes: CR 50 to CR 175',
+      'CR Standard High-Duty Specification',
+    ],
+  },
 ];

@@ -114,7 +114,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
     {
       id: 1,
       quote:
-        'Jyothi Metals provided 316L seamless pipes that exceeded our mill test certificates with sub-micron wall thickness precision and rapid dispatch.',
+        'Jyoti Metals provided 316L seamless pipes that exceeded our mill test certificates with sub-micron wall thickness precision and rapid dispatch.',
       author: 'Ethan Morales',
       handle: '@ethanmorales',
       role: 'Procurement Specialist, PetroChem',
@@ -186,7 +186,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
     {
       id: 9,
       quote:
-        'Extremely high strength-to-weight ratio titanium alloy plates. The team at Jyothi Metals ensures zero defects across every production batch.',
+        'Extremely high strength-to-weight ratio titanium alloy plates. The team at Jyoti Metals ensures zero defects across every production batch.',
       author: 'Sarah Jenkins',
       handle: '@sarahjenkins',
       role: 'Quality Audit Specialist, Defense Corp',
@@ -433,7 +433,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
           alignItems: 'center',
           overflow: 'hidden',
           color: '#ffffff',
-          padding: '100px 0 90px',
+          padding: '64px 0 52px',
         }}
       >
         {/* Full-Bleed Animated Sliding Background Images Stack */}
@@ -554,7 +554,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
       <section
         style={{
           background: '#ffffff',
-          padding: '90px 0',
+          padding: '48px 0',
           position: 'relative',
           overflow: 'hidden',
         }}
@@ -685,7 +685,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
               <iframe
                 style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }}
                 src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
-                title="Jyothi Metals Industrial Foundry Showcase"
+                title="Jyoti Metals Industrial Foundry Showcase"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />
@@ -718,7 +718,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
       <section
         style={{
           position: 'relative',
-          padding: '100px 0',
+          padding: '52px 0',
           backgroundImage: 'linear-gradient(rgba(6, 18, 33, 0.7), rgba(6, 18, 33, 0.8)), url("/images/pexels-alex-60339926-9878853.jpg")',
           backgroundAttachment: 'fixed',
           backgroundPosition: 'center',
@@ -797,8 +797,8 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
         </div>
       </section>
 
-      {/* Why Industry Leaders Trust Jyothi Metals (Interactive Hover Animated 01-04 Layout) */}
-      <section className="section bg-white" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden', borderBottom: '1px solid #e2e8f0' }}>
+      {/* Why Industry Leaders Trust Jyoti Metals (Interactive Hover Animated 01-04 Layout) */}
+      <section className="section bg-white" style={{ padding: '48px 0', position: 'relative', overflow: 'hidden', borderBottom: '1px solid #e2e8f0' }}>
         {/* Far Right Vertical Rotated Backdrop Typography */}
         <div
           className="rotated-backdrop-text"
@@ -836,7 +836,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                   marginTop: 0,
                 }}
               >
-                Why Industry Leaders Trust Jyothi Metals
+                Why Industry Leaders Trust Jyoti Metals
               </h2>
 
               {/* Dynamic Crossfading Visual Frame responding to activeBenefitIdx */}
@@ -1183,11 +1183,11 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
       </section>
 
 
-      {/* 5. Interactive Industrial Product Catalog (Image 3 Style Catalog Browser with Image 2 Content) */}
-      <section id="catalog-browser" className="section bg-tint" style={{ paddingTop: '90px', paddingBottom: '100px' }}>
+      {/* 5. Interactive Industrial Product Catalog */}
+      <section id="catalog-browser" className="section bg-tint" style={{ paddingTop: '48px', paddingBottom: '32px' }}>
         <div className="container">
           {/* Section Header */}
-          <div style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto 40px' }} className="reveal">
+          <div style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto 30px' }} className="reveal">
             <span className="small-label" style={{ color: '#51847D', fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
               ENTERPRISE METALLURGY CATALOG
             </span>
@@ -1339,6 +1339,8 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
               { id: 'Forged Fittings', label: 'Forged Fittings' },
               { id: 'Buttweld Fittings', label: 'Buttweld Fittings' },
               { id: 'Fasteners', label: 'Fasteners' },
+              { id: 'Gasketing Solutions', label: 'Gasketing Solutions' },
+              { id: 'Structural Steel', label: 'Structural Steel' },
               { id: 'Specialized Product', label: 'Specialized Product' },
             ].map((tab) => (
               <button
@@ -1463,6 +1465,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                       <div
                         key={prod.id}
                         className="product-card"
+                        onClick={() => onNavigate(`product-detail?id=${encodeURIComponent(prod.id)}`)}
                         style={{
                           background: '#ffffff',
                           border: '1px solid #e2e8f0',
@@ -1470,6 +1473,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                           display: 'flex',
                           flexDirection: 'column',
                           height: '100%',
+                          cursor: 'pointer',
                           transition: 'transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease',
                         }}
                       >
@@ -1510,14 +1514,20 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
 
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '16px', marginTop: 'auto', borderTop: '1px solid #f1f5f9' }}>
                           <button
-                            onClick={() => onOpenQuoteModal(prod.title)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onOpenQuoteModal(prod.title);
+                            }}
                             className="btn btn-accent"
                             style={{ padding: '8px 16px', fontSize: '0.82rem', fontWeight: 700 }}
                           >
                             Get Quote
                           </button>
                           <button
-                            onClick={() => onNavigate(`product-detail?id=${encodeURIComponent(prod.id)}`)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onNavigate(`product-detail?id=${encodeURIComponent(prod.id)}`);
+                            }}
                             style={{
                               background: 'none',
                               border: 'none',
@@ -1557,11 +1567,11 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
 
           </div>
 
-          <div style={{ textAlign: 'center', marginTop: '50px' }}>
+          <div style={{ textAlign: 'center', marginTop: '24px' }}>
             <button
               onClick={() => onNavigate('products')}
               className="btn btn-outline"
-              style={{ padding: '14px 36px' }}
+              style={{ padding: '12px 32px' }}
             >
               Browse Full Product Catalog Specs <ArrowRight size={18} />
             </button>
@@ -1569,18 +1579,18 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
         </div>
       </section>
 
-      {/* 7. Client Testimonials 3-Column Vertical Infinite Marquee Section (Image 1 Style) */}
+      {/* 7. Client Testimonials 3-Column Vertical Infinite Marquee Section */}
       <section
         className="section bg-white"
         style={{
-          padding: '95px 0 100px',
+          padding: '44px 0 48px',
           position: 'relative',
           overflow: 'hidden',
         }}
       >
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           {/* Header Title */}
-          <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 50px' }} className="reveal">
+          <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 24px' }} className="reveal">
             <h2 className="section-title" style={{ fontSize: '2.7rem', color: '#0f172a', marginBottom: '14px', fontWeight: 900 }}>
               What our users are saying
             </h2>

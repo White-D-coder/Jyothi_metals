@@ -120,7 +120,7 @@ export const QualityPage: React.FC<QualityPageProps> = ({ onOpenQuoteModal, onNa
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           color: '#ffffff',
-          padding: '120px 0 90px',
+          padding: '60px 0 40px',
           borderBottom: '3px solid #51847D',
           position: 'relative',
           overflow: 'hidden',
@@ -171,7 +171,7 @@ export const QualityPage: React.FC<QualityPageProps> = ({ onOpenQuoteModal, onNa
       </section>
 
       {/* 2. Quality Policy Statement + Pillars */}
-      <section className="section bg-white" style={{ padding: '100px 0' }}>
+      <section className="section bg-white" style={{ padding: '48px 0' }}>
         <div className="container">
           <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 48px' }}>
             <span className="small-label" style={{ color: '#51847D' }}>Our Quality Policy</span>
@@ -249,7 +249,7 @@ export const QualityPage: React.FC<QualityPageProps> = ({ onOpenQuoteModal, onNa
       </section>
 
       {/* 3. Certifications Grid */}
-      <section className="section bg-tint" style={{ padding: '90px 0', background: '#f8fafc', borderTop: '1px solid #e2e8f0' }}>
+      <section className="section bg-tint" style={{ padding: '48px 0', background: '#f8fafc', borderTop: '1px solid #e2e8f0' }}>
         <div className="container">
           <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 60px' }}>
             <span className="small-label" style={{ color: '#51847D' }}>Accreditations</span>
@@ -300,7 +300,7 @@ export const QualityPage: React.FC<QualityPageProps> = ({ onOpenQuoteModal, onNa
       </section>
 
       {/* 4. Testing & Inspection Capabilities */}
-      <section className="section bg-white" style={{ padding: '100px 0', borderTop: '1px solid #e2e8f0' }}>
+      <section className="section bg-white" style={{ padding: '48px 0', borderTop: '1px solid #e2e8f0' }}>
         <div className="container">
           <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 60px' }}>
             <span className="small-label" style={{ color: '#51847D' }}>In-House Laboratory</span>
@@ -348,7 +348,7 @@ export const QualityPage: React.FC<QualityPageProps> = ({ onOpenQuoteModal, onNa
       </section>
 
       {/* 5. Mill Test Certificate (MTC) Explainer */}
-      <section className="section bg-tint" style={{ padding: '100px 0', background: '#f8fafc', borderTop: '1px solid #e2e8f0' }}>
+      <section className="section bg-tint" style={{ padding: '48px 0', background: '#f8fafc', borderTop: '1px solid #e2e8f0' }}>
         <div className="container">
           <div
             className="grid-responsive-about"
@@ -402,7 +402,7 @@ export const QualityPage: React.FC<QualityPageProps> = ({ onOpenQuoteModal, onNa
       <section
         style={{
           background: '#061221',
-          padding: '90px 0',
+          padding: '48px 0',
           borderTop: '3px solid #51847D',
           color: '#ffffff',
         }}

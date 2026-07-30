@@ -169,13 +169,13 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
 
                 <div className="form-group">
                   <label htmlFor="modal-email" className="form-label" style={{ letterSpacing: '0.6px', fontSize: '0.8rem', fontWeight: 700, color: '#304050', textTransform: 'uppercase', marginBottom: '6px', display: 'block' }}>
-                    Corporate Email *
+                    Email *
                   </label>
                   <input
                     id="modal-email"
                     type="email"
                     required
-                    placeholder="r.sharma@lnttech.com"
+                    placeholder="rsharma@example.com"
                     className="form-input"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}

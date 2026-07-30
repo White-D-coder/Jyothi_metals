@@ -44,6 +44,8 @@ export const Navbar: React.FC<NavbarProps> = ({
     'Forged Fittings',
     'Buttweld Fittings',
     'Fasteners',
+    'Gasketing Solutions',
+    'Structural Steel',
     'Specialized Product',
   ];
 
@@ -129,7 +131,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             <img
               src="/images/jmi_logo.png"
               alt="JMI - Jyoti Metal (India) Logo"
-              style={{ height: '64px', width: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.15))' }}
+              style={{
+                height: '76px',
+                width: 'auto',
+                objectFit: 'contain',
+                transform: 'scale(1.12)',
+                transformOrigin: 'center left',
+                filter: 'drop-shadow(0 3px 8px rgba(0,0,0,0.18))',
+              }}
             />
             <div className="brand-text-full">
               <span className="brand-title-text">JYOTI METAL (INDIA)</span>

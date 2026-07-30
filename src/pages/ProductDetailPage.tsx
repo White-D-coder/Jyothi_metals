@@ -294,7 +294,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
               </p>
 
               {/* Key Bullet Highlights */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '28px', paddingBottom: '24px', borderBottom: '1px solid #E0E8E8' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '28px', paddingBottom: '24px'}}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.86rem', color: '#304050', fontWeight: 600 }}>
                   <ShieldCheck size={16} color="#588078" /> 100% Spectral chemistry verification &amp; heat-lot tracking
                 </div>
@@ -307,17 +307,17 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
               </div>
 
               {/* Price Row */}
-              <div style={{ marginBottom: '24px' }}>
+              {/* <div style={{ marginBottom: '24px' }}>
                 <div style={{ fontSize: '1.6rem', fontWeight: 800, color: '#588078', letterSpacing: '0.5px' }}>
                   &#8377;{pricePerKg} <span style={{ fontSize: '0.9rem', fontWeight: 600, color: '#7C8894' }}>INR / Kg</span>
                 </div>
                 <div style={{ fontSize: '0.78rem', color: '#7C8894', marginTop: '2px' }}>
                   Bulk tonnage pricing calculated upon formal RFQ submission.
                 </div>
-              </div>
+              </div> */}
 
               {/* Quantity Counter */}
-              <div style={{ marginBottom: '24px' }}>
+              {/* <div style={{ marginBottom: '24px' }}>
                 <label style={{ fontSize: '0.78rem', fontWeight: 700, color: '#304050', textTransform: 'uppercase', letterSpacing: '0.6px', display: 'block', marginBottom: '8px' }}>
                   Required Quantity (Kgs)
                 </label>
@@ -343,7 +343,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
                     <Plus size={16} />
                   </button>
                 </div>
-              </div>
+              </div> */}
 
               {/* Action Buttons */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '24px' }}>
@@ -355,20 +355,12 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
                 >
                   Request Formal Quote <Send size={16} />
                 </button>
-                <button
-                  type="button"
-                  onClick={() => onOpenQuoteModal(`MTC Sample Request (${currentProduct.title})`)}
-                  className="btn btn-secondary"
-                  style={{ padding: '14px', fontSize: '0.88rem', letterSpacing: '0.4px' }}
-                >
-                  Download Mill Test Certificate (MTC) <Download size={16} />
-                </button>
               </div>
 
               {/* Fast Dispatch Badge */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.82rem', color: '#7C8894', background: '#F8F8F8', padding: '12px 16px', border: '1px solid #E0E8E8' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.82rem'}}>
                 <Truck size={18} color="#588078" />
-                <span>100% Heat-Lot Traceability &bull; Fast Container Dispatch in 24/48h</span>
+                <span>100% Heat-Lot Traceability Fast Container Dispatch</span>
               </div>
             </div>
           </div>

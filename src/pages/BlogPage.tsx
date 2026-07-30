@@ -522,7 +522,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal }) => {
       </section>
 
       {/* 4. Section 2: ZIG-ZAG EDITORIAL DEEP DIVES */}
-      <section style={{ padding: '80px 0', background: '#ffffff' }}>
+      <section style={{ padding: '40px 0', background: '#ffffff' }}>
         <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
           <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 50px' }}>
             <span style={{ fontSize: '0.78rem', fontWeight: 800, color: '#588078', letterSpacing: '0.8px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
@@ -630,7 +630,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal }) => {
       </section>
 
       {/* 5. Section 3: CURATED MAGAZINE ARTICLE GRID */}
-      <section style={{ padding: '70px 0 80px', background: '#FFFFFF', borderBottom: '1px solid #E2E8F0' }}>
+      <section style={{ padding: '70px 0 30px', background: '#FFFFFF'}}>
         <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px 40px', textAlign: 'center' }}>
           <span style={{ fontSize: '0.78rem', fontWeight: 800, color: '#588078', letterSpacing: '0.8px', textTransform: 'uppercase', display: 'block', marginBottom: '6px' }}>
             DIRECTORY CATALOG
@@ -754,7 +754,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal }) => {
         style={{
           background: '#ffffffff',
           color: '#0F172A',
-          padding: '80px 0',
+          padding: '50px 0',
           textAlign: 'center',
         }}
       >
@@ -772,7 +772,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal }) => {
           {subscribed ? (
             <div
               style={{
-                background: '#EDF5F4',
+                background: '#ffffffff',
                 border: '1px solid #588078',
                 color: '#588078',
                 padding: '16px 24px',

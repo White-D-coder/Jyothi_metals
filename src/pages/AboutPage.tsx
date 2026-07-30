@@ -5,6 +5,7 @@ import {
   ShieldCheck,
   Zap,
   Globe2,
+  ChevronDown,
 } from 'lucide-react';
 
 interface AboutPageProps {
@@ -252,8 +253,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           color: '#FFFFFF',
-          padding: '80px 0 60px',
-          borderBottom: '3px solid #588078',
+          padding: '50px 0 36px',
+
         }}
       >
         <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
@@ -289,196 +290,274 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
         </div>
       </section>
 
-      {/* 2. Executive 4-Pillar Metallurgical Architecture Layout */}
-      <section style={{ padding: '80px 0 90px', background: '#FFFFFF', borderBottom: '1px solid #E0E8E8' }}>
-        <div className="container" style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 20px' }}>
-          <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 56px' }}>
-            <span style={{ color: '#588078', fontSize: '0.8rem', fontWeight: 800, letterSpacing: '0.8px', textTransform: 'uppercase', display: 'block', marginBottom: '10px' }}>
-              OPERATIONAL CORE
+      {/* 1.5. About Us Overview Paragraphs & Mission / Vision Section */}
+      <section style={{ padding: '48px 0 40px', background: '#F8FAFC', borderBottom: '1px solid #E0E8E8' }}>
+        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
+          {/* Paragraphs Overview */}
+          <div style={{ maxWidth: '960px', margin: '0 auto 40px', textAlign: 'center' }}>
+            <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#588078', letterSpacing: '0.8px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
+              OUR METALLURGICAL LEGACY
             </span>
-            <h2 style={{ fontSize: 'clamp(1.9rem, 3.4vw, 2.5rem)', fontWeight: 800, color: '#304050', marginBottom: '14px', lineHeight: 1.25, letterSpacing: '0.6px' }}>
-              Four Pillars of Metallurgical Excellence
+            <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 800, color: '#304050', marginBottom: '18px', lineHeight: 1.25 }}>
+              Engineering Trust &amp; Metallurgical Excellence Since 1991
             </h2>
-            <p style={{ fontSize: '1.02rem', color: '#7C8894', lineHeight: 1.65, margin: 0 }}>
-              Vertically integrated foundry capabilities, precision laser fabrication, and audit-certified quality systems.
+            <p style={{ fontSize: '1.02rem', color: '#475569', lineHeight: 1.7, marginBottom: '14px' }}>
+              Founded in 1991, <strong>Jyoti Metal India</strong> has evolved into one of the country's most reliable manufacturers, stockists, and global exporters of high-grade Stainless Steel, Nickel Alloys, Titanium, Duplex, Carbon Steel, Gasketing Solutions, and Structural Steel products.
+            </p>
+            <p style={{ fontSize: '0.98rem', color: '#64748B', lineHeight: 1.7, margin: 0 }}>
+              Operating advanced continuous casting foundries and CNC laser fabrication units certified under ISO 9001:2015, we maintain 100% heat-lot chemistry traceability to serve critical defense, aerospace, nuclear power, oil &amp; gas, and heavy infrastructure sectors worldwide.
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '28px' }}>
-            {executivePillars.map((pillar) => {
-              return (
-                <div
-                  key={pillar.num}
-                  style={{
-                    position: 'relative',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between',
-                    minHeight: '520px',
-                    background: '#FFFFFF',
-                    border: '1px solid #CBD5E1',
-                    borderRadius: '0px',
-                    overflow: 'hidden',
-                    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.05)',
-                    transition: 'border-color 300ms ease, box-shadow 300ms ease, transform 300ms ease',
-                    cursor: 'pointer',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = '#588078';
-                    e.currentTarget.style.transform = 'translateY(-6px)';
-                    e.currentTarget.style.boxShadow = '0 16px 36px rgba(88, 128, 120, 0.14)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = '#CBD5E1';
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.05)';
-                  }}
-                >
-                  {/* Top Text & Straightened Roman Numeral Panel */}
-                  <div style={{ padding: '40px 32px 28px', position: 'relative', zIndex: 2 }}>
-                    {/* Straightened Giant Roman Numeral */}
-                    <div
-                      style={{
-                        fontSize: '120px',
-                        fontWeight: 900,
-                        color: '#588078',
-                        lineHeight: 0.85,
-                        letterSpacing: '-0.04em',
-                        marginBottom: '24px',
-                        userSelect: 'none',
-                        fontFamily: "'Inter', sans-serif",
-                      }}
-                    >
-                      {pillar.num}
-                    </div>
+          {/* Mission, Vision & Values Cards */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
+            <div
+              style={{
+                background: '#FFFFFF',
+                border: '1px solid #CBD5E1',
+                borderTop: '4px solid #588078',
+                padding: '28px 24px',
+                boxShadow: '0 4px 14px rgba(0, 0, 0, 0.03)',
+              }}
+            >
+              <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#588078', letterSpacing: '0.6px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
+                PURPOSE
+              </span>
+              <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#304050', marginBottom: '10px' }}>
+                Our Mission
+              </h3>
+              <p style={{ fontSize: '0.88rem', color: '#64748B', lineHeight: 1.6, margin: 0 }}>
+                To deliver certified zero-defect metallurgical products with complete chemical traceability, competitive lead times, and uncompromised technical integrity across global markets.
+              </p>
+            </div>
 
-                    <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#304050', marginBottom: '12px', lineHeight: 1.35, letterSpacing: '0.3px' }}>
-                      {pillar.title}
-                    </h3>
+            <div
+              style={{
+                background: '#FFFFFF',
+                border: '1px solid #CBD5E1',
+                borderTop: '4px solid #588078',
+                padding: '28px 24px',
+                boxShadow: '0 4px 14px rgba(0, 0, 0, 0.03)',
+              }}
+            >
+              <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#588078', letterSpacing: '0.6px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
+                ASPIRATION
+              </span>
+              <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#304050', marginBottom: '10px' }}>
+                Our Vision
+              </h3>
+              <p style={{ fontSize: '0.88rem', color: '#64748B', lineHeight: 1.6, margin: 0 }}>
+                To be the world's most trusted partner for high-performance alloy stockholding, advanced structural steel supply, and custom engineering fabrication.
+              </p>
+            </div>
 
-                    <p style={{ fontSize: '0.9rem', color: '#64748B', lineHeight: 1.65, margin: 0 }}>
-                      {pillar.desc}
-                    </p>
-                  </div>
-
-                  {/* Bottom Image Container */}
-                  <div style={{ height: '240px', overflow: 'hidden', width: '100%', position: 'relative' }}>
-                    <img
-                      src={pillar.image}
-                      alt={pillar.title}
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        display: 'block',
-                      }}
-                    />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* 3. Refined Master Accordion Card (With Smooth Hover Effects & Fine Touches) */}
-      <section style={{ padding: '70px 0', background: '#ffffffff' }}>
-        <div className="container" style={{ maxWidth: '1050px', margin: '0 auto', padding: '0 20px' }}>
-          <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 32px' }}>
-            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#588078', letterSpacing: '0.6px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
-              HERITAGE &amp; EVOLUTION
-            </span>
-            <h2 style={{ fontSize: 'clamp(1.7rem, 3.2vw, 2.3rem)', fontWeight: 700, color: '#304050', marginBottom: '10px', letterSpacing: '0.6px' }}>
-              Our Growth &amp; Engineering Timeline
-            </h2>
-            <p style={{ color: '#7C8894', fontSize: '0.96rem', lineHeight: 1.6 }}>
-              Click the accordion card below to reveal our 35-year metallurgical journey from 1991 to present day.
-            </p>
-          </div>
-
-          <div className="single-accordion-wrapper" ref={timelineRef}>
-            <div className="single-accordion-layer-2" />
-            <div className="single-accordion-layer-1" />
-
-            <div className="single-accordion-main">
-              {/* Accordion Header Strip */}
-              <div
-                onClick={() => setIsTimelineOpen(!isTimelineOpen)}
-                style={{
-                  padding: '38px 44px',
-                  background: '#FFFFFF',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  gap: '20px',
-                }}
-              >
-                <div>
-                  <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#304050', margin: 0, letterSpacing: '0.6px' }}>
-                    COMPLETE METALLURGICAL TIMELINE (1991 – 2026)
-                  </h3>
-                  <p style={{ fontSize: '0.92rem', color: '#7C8894', margin: '6px 0 0 0' }}>
-                    {isTimelineOpen ? 'Click to collapse complete timeline' : 'Click to expand 6 major engineering milestones'}
-                  </p>
-                </div>
-              </div>
-
-              {/* Accordion Expanded Body with Smooth CSS Height & Opacity Animation */}
-              <div
-                style={{
-                  maxHeight: isTimelineOpen ? '2600px' : '0px',
-                  opacity: isTimelineOpen ? 1 : 0,
-                  overflow: 'hidden',
-                  transition: 'max-height 750ms cubic-bezier(0.4, 0, 0.2, 1), opacity 500ms ease',
-                  borderTop: isTimelineOpen ? '1px solid #E0E8E8' : '1px solid transparent',
-                  background: '#FFFFFF',
-                }}
-              >
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
-                  {timelineMilestones.map((item, idx) => (
-                    <div
-                      key={item.year}
-                      className="timeline-row-item"
-                      style={{
-                        borderBottom: idx < timelineMilestones.length - 1 ? '1px solid #E0E8E8' : 'none',
-                      }}
-                    >
-                      {/* Year Typography */}
-                      <div>
-                        <span className="timeline-year-text" style={{ fontSize: '2.2rem', fontWeight: 800, color: '#304050', lineHeight: 1, letterSpacing: '0.6px', transition: 'color 200ms ease' }}>
-                          {item.year}
-                        </span>
-                      </div>
-
-                      {/* Title & Description */}
-                      <div>
-                        <h4 style={{ fontSize: '1.12rem', fontWeight: 700, color: '#304050', marginBottom: '8px', lineHeight: 1.3, letterSpacing: '0.4px' }}>
-                          {item.title}
-                        </h4>
-                        <p style={{ fontSize: '0.9rem', color: '#7C8894', lineHeight: 1.65, margin: 0 }}>
-                          {item.desc}
-                        </p>
-                      </div>
-
-                      {/* Photo with smooth zoom on hover */}
-                      <div className="timeline-img-frame">
-                        <img
-                          src={item.image}
-                          alt={item.title}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+            <div
+              style={{
+                background: '#FFFFFF',
+                border: '1px solid #CBD5E1',
+                borderTop: '4px solid #588078',
+                padding: '28px 24px',
+                boxShadow: '0 4px 14px rgba(0, 0, 0, 0.03)',
+              }}
+            >
+              <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#588078', letterSpacing: '0.6px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
+                PRINCIPLES
+              </span>
+              <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#304050', marginBottom: '10px' }}>
+                Core Values
+              </h3>
+              <p style={{ fontSize: '0.88rem', color: '#64748B', lineHeight: 1.6, margin: 0 }}>
+                Absolute Spectral Purity, EN 10204 3.1/3.2 Certification, Customer-Centric SLA Execution, and Sustainable Electric Arc Furnace Melting.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
+      {/* 2. Side-by-Side Section: Timeline Accordion (Left) & 4-Pillars 2x2 Grid (Right) */}
+      <section style={{ padding: '52px 0', background: '#FFFFFF', borderBottom: '1px solid #E0E8E8' }}>
+        <div className="container" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 20px' }}>
+          <div className="grid-responsive-about" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(420px, 1fr))', gap: '36px', alignItems: 'start' }}>
+            
+            {/* LEFT COLUMN: Timeline Accordion (Compact when collapsed, scrollable when open) */}
+            <div>
+              <div style={{ marginBottom: '24px' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#588078', letterSpacing: '0.8px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
+                  HERITAGE &amp; EVOLUTION
+                </span>
+                <h2 style={{ fontSize: 'clamp(1.5rem, 2.4vw, 2.1rem)', fontWeight: 800, color: '#304050', marginBottom: '8px', lineHeight: 1.25 }}>
+                  Our Growth &amp; Engineering Timeline
+                </h2>
+                <p style={{ color: '#7C8894', fontSize: '0.92rem', margin: 0 }}>
+                  Click or scroll down to expand our 35-year metallurgical milestones (1991 – 2026).
+                </p>
+              </div>
+
+              {/* Master Accordion Card */}
+              <div className="single-accordion-wrapper" ref={timelineRef}>
+                <div className="single-accordion-layer-2" />
+                <div className="single-accordion-layer-1" />
+
+                <div className="single-accordion-main">
+                  {/* Accordion Header Strip */}
+                  <div
+                    onClick={() => setIsTimelineOpen(!isTimelineOpen)}
+                    style={{
+                      padding: '22px 26px',
+                      background: '#FFFFFF',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      gap: '16px',
+                    }}
+                  >
+                    <div>
+                      <h3 style={{ fontSize: '1.08rem', fontWeight: 800, color: '#304050', margin: 0, letterSpacing: '0.4px' }}>
+                        COMPLETE METALLURGICAL TIMELINE (1991 – 2026)
+                      </h3>
+                      <p style={{ fontSize: '0.84rem', color: '#7C8894', margin: '4px 0 0 0' }}>
+                        {isTimelineOpen ? 'Click to collapse timeline' : 'Click to expand 6 engineering milestones'}
+                      </p>
+                    </div>
+                    <ChevronDown
+                      size={22}
+                      color="#588078"
+                      style={{
+                        transform: isTimelineOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                        transition: 'transform 300ms ease',
+                      }}
+                    />
+                  </div>
+
+                  {/* Accordion Expanded Body */}
+                  <div
+                    style={{
+                      maxHeight: isTimelineOpen ? '380px' : '0px',
+                      opacity: isTimelineOpen ? 1 : 0,
+                      overflowY: isTimelineOpen ? 'auto' : 'hidden',
+                      transition: 'max-height 450ms ease, opacity 350ms ease',
+                      borderTop: isTimelineOpen ? '1px solid #E0E8E8' : '1px solid transparent',
+                      background: '#FFFFFF',
+                    }}
+                  >
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                      {timelineMilestones.map((item, idx) => (
+                        <div
+                          key={item.year}
+                          className="timeline-row-item"
+                          style={{
+                            padding: '14px 18px',
+                            borderBottom: idx < timelineMilestones.length - 1 ? '1px solid #E0E8E8' : 'none',
+                            display: 'grid',
+                            gridTemplateColumns: '60px 1fr 95px',
+                            gap: '12px',
+                            alignItems: 'center',
+                          }}
+                        >
+                          <div>
+                            <span className="timeline-year-text" style={{ fontSize: '1.45rem', fontWeight: 800, color: '#304050', lineHeight: 1 }}>
+                              {item.year}
+                            </span>
+                          </div>
+                          <div>
+                            <h4 style={{ fontSize: '0.94rem', fontWeight: 700, color: '#304050', marginBottom: '3px', lineHeight: 1.28 }}>
+                              {item.title}
+                            </h4>
+                            <p style={{ fontSize: '0.82rem', color: '#7C8894', lineHeight: 1.45, margin: 0 }}>
+                              {item.desc}
+                            </p>
+                          </div>
+                          <div style={{ width: '95px', height: '64px', borderRadius: '4px', overflow: 'hidden', border: '1px solid #CBD5E1', flexShrink: 0 }}>
+                            <img
+                              src={item.image}
+                              alt={item.title}
+                              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* RIGHT COLUMN: Four Pillars of Metallurgical Excellence (2x2 Grid, Title beside Number, No Images) */}
+            <div>
+              <div style={{ marginBottom: '24px' }}>
+                <span style={{ color: '#588078', fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.8px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
+                  OPERATIONAL CORE
+                </span>
+                <h2 style={{ fontSize: 'clamp(1.5rem, 2.4vw, 2.1rem)', fontWeight: 800, color: '#304050', marginBottom: '8px', lineHeight: 1.25 }}>
+                  Four Pillars of Metallurgical Excellence
+                </h2>
+                <p style={{ fontSize: '0.92rem', color: '#7C8894', margin: 0 }}>
+                  Vertically integrated foundry capabilities and certified quality systems.
+                </p>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px', flex: 1 }}>
+                {executivePillars.map((pillar) => (
+                  <div
+                    key={pillar.num}
+                    style={{
+                      background: '#FFFFFF',
+                      border: '1px solid #CBD5E1',
+                      borderTop: '5px solid #588078',
+                      padding: '24px 20px',
+                      boxShadow: '0 4px 16px rgba(0, 0, 0, 0.04)',
+                      transition: 'border-color 250ms ease, box-shadow 250ms ease, transform 250ms ease',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'flex-start',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = '#588078';
+                      e.currentTarget.style.transform = 'translateY(-4px)';
+                      e.currentTarget.style.boxShadow = '0 10px 24px rgba(88, 128, 120, 0.12)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = '#CBD5E1';
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.04)';
+                    }}
+                  >
+                    {/* Header: Roman Numeral + Title Inline */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '10px' }}>
+                      <span
+                        style={{
+                          fontSize: '3.4rem',
+                          fontWeight: 900,
+                          color: '#588078',
+                          lineHeight: 0.9,
+                          fontFamily: "'Inter', sans-serif",
+                          letterSpacing: '-0.04em',
+                          minWidth: '55px',
+                        }}
+                      >
+                        {pillar.num}
+                      </span>
+                      <h3 style={{ fontSize: '1.12rem', fontWeight: 800, color: '#304050', margin: 0, lineHeight: 1.3, letterSpacing: '0.2px' }}>
+                        {pillar.title}
+                      </h3>
+                    </div>
+
+                    <p style={{ fontSize: '0.86rem', color: '#64748B', lineHeight: 1.58, margin: 0 }}>
+                      {pillar.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
       {/* 4. Certifications Grid */}
-      <section style={{ padding: '80px 0 90px', background: '#FFFFFF', borderTop: '1px solid #E0E8E8' }}>
+      <section style={{ padding: '48px 0', background: '#FFFFFF', borderTop: '1px solid #E0E8E8' }}>
         <div className="container" style={{ maxWidth: '1350px', margin: '0 auto', padding: '0 24px' }}>
           <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 56px' }}>
             <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#588078', letterSpacing: '0.8px', textTransform: 'uppercase', display: 'block', marginBottom: '10px' }}>
@@ -592,7 +671,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
       </section>
 
       {/* 5. Executive Leadership & Direction */}
-      <section style={{ padding: '80px 0', background: '#F4F6F8', borderTop: '1px solid #E0E8E8' }}>
+      <section style={{ padding: '48px 0', background: '#ffffff', borderTop: '1px solid #E0E8E8' }}>
         <div className="container" style={{ maxWidth: '1050px', margin: '0 auto', padding: '0 20px' }}>
           <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 40px' }}>
             <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#588078', letterSpacing: '0.8px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
@@ -608,11 +687,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
             <div style={{ background: '#FFFFFF', padding: '32px', border: '1px solid #CBD5E1', borderTop: '4px solid #588078', boxShadow: '0 4px 16px rgba(0,0,0,0.03)' }}>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#304050', marginBottom: '6px' }}>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#304050', marginBottom: '4px' }}>
                 Dhawal Choudhary
               </h3>
-              <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#588078', letterSpacing: '0.06em', marginBottom: '14px', textTransform: 'uppercase' }}>
+              <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#588078', letterSpacing: '0.06em', marginBottom: '10px', textTransform: 'uppercase' }}>
                 Director &amp; Operations Head
+              </div>
+              <div style={{ fontSize: '0.86rem', fontWeight: 700, color: '#304050', marginBottom: '12px' }}>
+                Mob: <a href="tel:+919322281549" style={{ color: '#588078', textDecoration: 'none' }}>+91 9322281549</a> / <a href="tel:+919137880994" style={{ color: '#588078', textDecoration: 'none' }}>+91 9137880994</a>
               </div>
               <p style={{ fontSize: '0.92rem', color: '#64748B', lineHeight: 1.65, margin: 0 }}>
                 Spearheading enterprise supply logistics, international client relations, and quality management systems across aerospace and energy sectors.
@@ -620,14 +702,17 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
             </div>
 
             <div style={{ background: '#FFFFFF', padding: '32px', border: '1px solid #CBD5E1', borderTop: '4px solid #588078', boxShadow: '0 4px 16px rgba(0,0,0,0.03)' }}>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#304050', marginBottom: '6px' }}>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#304050', marginBottom: '4px' }}>
                 Dinesh Choudhary
               </h3>
-              <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#588078', letterSpacing: '0.06em', marginBottom: '14px', textTransform: 'uppercase' }}>
+              <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#588078', letterSpacing: '0.06em', marginBottom: '10px', textTransform: 'uppercase' }}>
                 Executive Director
               </div>
+              <div style={{ fontSize: '0.86rem', fontWeight: 700, color: '#304050', marginBottom: '12px' }}>
+                Mob: <a href="tel:+919769388813" style={{ color: '#588078', textDecoration: 'none' }}>+91 9769388813</a> / <a href="tel:+919082886991" style={{ color: '#588078', textDecoration: 'none' }}>+91 9082886991</a>
+              </div>
               <p style={{ fontSize: '0.92rem', color: '#64748B', lineHeight: 1.65, margin: 0 }}>
-                Directing metallurgical R&amp;D, continuous arc furnace infrastructure, and strategic manufacturing expansion (including our upcoming Rajasthan plant facility).
+                Directing metallurgical R&amp;D, continuous arc furnace infrastructure, and strategic manufacturing expansion (including our Alwar Rajasthan plant facility).
               </p>
             </div>
           </div>
@@ -639,7 +724,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
         style={{
           background: '#FFFFFF',
           color: '#304050',
-          padding: '70px 0',
+          padding: '20px  0 30px',
           textAlign: 'center',
         }}
       >

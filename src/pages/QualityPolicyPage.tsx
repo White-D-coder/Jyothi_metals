@@ -5,7 +5,6 @@ import {
   Download,
   CheckCircle2,
 } from 'lucide-react';
-import { CapabilityNav } from '../components/CapabilityNav';
 
 interface QualityPolicyPageProps {
   onOpenQuoteModal: (productName?: string) => void;
@@ -234,10 +233,10 @@ export const QualityPolicyPage: React.FC<QualityPolicyPageProps> = ({ onOpenQuot
         </div>
       </section>
 
-      <CapabilityNav currentPath="/quality-policy" />
+      {/* <CapabilityNav currentPath="/quality-policy" /> */}
 
       {/* 3. Section 1: Policy Statement Split (Crisp Light Theme Redesign) */}
-      <section style={{ padding: '80px 0', background: '#FFFFFF', borderBottom: '1px solid #E2E8F0' }}>
+      <section style={{ padding: '50px 0', background: '#FFFFFF'}}>
         <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
           <div className="feature-split-grid">
             <div>
@@ -305,7 +304,7 @@ export const QualityPolicyPage: React.FC<QualityPolicyPageProps> = ({ onOpenQuot
       </section>
 
       {/* 4. Section 2: ISO Standards Directory Deck (Centered) */}
-      <section style={{ padding: '60px 0 70px', background: '#FFFFFF', borderBottom: `1px solid ${COLORS.divider}` }}>
+      <section style={{ padding: '60px 0 40px', background: '#FFFFFF'}}>
         <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px 32px', textAlign: 'center' }}>
           <span style={{ fontSize: '0.75rem', fontWeight: 700, color: COLORS.accent, letterSpacing: '0.6px', textTransform: 'uppercase', display: 'block', marginBottom: '6px' }}>
             INTERNATIONAL ACCREDITATIONS
@@ -420,9 +419,9 @@ export const QualityPolicyPage: React.FC<QualityPolicyPageProps> = ({ onOpenQuot
       {/* 5. Closing CTA (Crisp Light Theme Redesign) */}
       <section
         style={{
-          background: '#F8FAF9',
+          background: '#ffffffff',
           color: '#0F172A',
-          padding: '80px 0',
+          padding: '50px 0',
           // borderTop: `3px solid ${COLORS.accent}`,
           textAlign: 'center',
         }}

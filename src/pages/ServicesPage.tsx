@@ -121,7 +121,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenQuoteModal, on
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           color: '#ffffff',
-          padding: '120px 0 90px',
+          padding: '60px 0 40px',
           borderBottom: '3px solid #51847D',
           position: 'relative',
           overflow: 'hidden',
@@ -171,7 +171,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenQuoteModal, on
       </section>
 
       {/* 2. Core Services Grid */}
-      <section className="section bg-white" style={{ padding: '100px 0' }}>
+      <section className="section bg-white" style={{ padding: '48px 0' }}>
         <div className="container">
           <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 60px' }}>
             <span className="small-label">OUR CAPABILITIES</span>
@@ -249,7 +249,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenQuoteModal, on
       {/* 3. How We Work — Process Steps */}
       <section
         className="section bg-tint"
-        style={{ padding: '100px 0', background: '#f8fafc', borderTop: '1px solid #e2e8f0' }}
+        style={{ padding: '48px 0', background: '#f8fafc', borderTop: '1px solid #e2e8f0' }}
       >
         <div className="container">
           <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 60px' }}>
@@ -315,7 +315,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenQuoteModal, on
       </section>
 
       {/* 4. Capabilities / Stats Strip (Dark) */}
-      <section style={{ padding: '80px 0', background: '#061221', borderTop: '3px solid #51847D' }}>
+      <section style={{ padding: '48px 0', background: '#061221', borderTop: '3px solid #51847D' }}>
         <div className="container">
           <div style={{ textAlign: 'center', maxWidth: '640px', margin: '0 auto 48px' }}>
             <span className="small-label" style={{ color: '#77b8b0' }}>
@@ -376,7 +376,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenQuoteModal, on
       </section>
 
       {/* 5. Image + Text Split — In-house Capability */}
-      <section className="section bg-white" style={{ padding: '100px 0', borderTop: '1px solid #e2e8f0' }}>
+      <section className="section bg-white" style={{ padding: '48px 0', borderTop: '1px solid #e2e8f0' }}>
         <div className="container">
           <div
             className="grid-responsive-about"
@@ -440,7 +440,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenQuoteModal, on
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           color: '#ffffff',
-          padding: '100px 0',
+          padding: '48px 0',
         }}
       >
         <div className="container">
