@@ -4,11 +4,9 @@ import {
   Star,
   ShieldCheck,
   CheckCircle2,
-  Download,
   Send,
   Truck,
   Plus,
-  Minus,
   Layers,
   FileCheck,
   ArrowRight,
@@ -72,11 +70,6 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
     return match || catalogProducts[0];
   }, [rawId]);
 
-  const pricePerKg = useMemo(
-    () => getAlloyPricePerKg(currentProduct.title),
-    [currentProduct]
-  );
-
   const composition = useMemo(
     () => getAlloyComposition(currentProduct.title),
     [currentProduct]
@@ -97,7 +90,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
   }, [currentProduct]);
 
   const [activeImage, setActiveImage] = useState<string>(galleryImages[0]);
-  const [quantityKgs, setQuantityKgs] = useState<number>(500);
+  const [quantityKgs] = useState<number>(500);
   const [activeTab, setActiveTab] = useState<'desc' | 'specs' | 'comp' | 'apps'>('desc');
 
   // Related products from same category
