@@ -201,7 +201,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
       {/* 2. Top Main E-Commerce Product Layout */}
       <section style={{ padding: '40px 0 60px' }}>
         <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
-          <div className="grid-responsive-about" style={{ display: 'grid', gridTemplateColumns: '1fr 1.1fr', gap: '48px', alignItems: 'start' }}>
+          <div className="grid-responsive-about" style={{ display: 'grid', gridTemplateColumns: '1fr 1.1fr', gap: '48px', alignItems: 'stretch' }}>
             
             {/* Left: Product Image Gallery (Sticky on scroll until right column finishes) */}
             <div style={{ position: 'sticky', top: '100px', alignSelf: 'flex-start' }}>
@@ -256,104 +256,80 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
               </div>
             </div>
 
-            {/* Right: Product Details Panel */}
-            <div style={{ background: '#FFFFFF', border: '1px solid #E0E8E8', padding: '36px 40px' }}>
-              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#588078', letterSpacing: '0.8px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
-                {currentProduct.category} &bull; {currentProduct.subCat}
-              </span>
+            {/* Right: Product Details Panel (Stretched to match Left height & aligned at bottom) */}
+            <div
+              style={{
+                background: '#FFFFFF',
+                border: '1px solid #E0E8E8',
+                padding: '36px 40px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                height: '100%',
+              }}
+            >
+              <div>
+                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#588078', letterSpacing: '0.8px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
+                  {currentProduct.category} &bull; {currentProduct.subCat}
+                </span>
 
-              <h1 style={{ fontSize: '1.9rem', fontWeight: 700, color: '#304050', marginBottom: '12px', lineHeight: 1.25, letterSpacing: '0.5px' }}>
-                {currentProduct.title}
-              </h1>
+                <h1 style={{ fontSize: '1.9rem', fontWeight: 700, color: '#304050', marginBottom: '12px', lineHeight: 1.25, letterSpacing: '0.5px' }}>
+                  {currentProduct.title}
+                </h1>
 
-              {/* Rating Star Row */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '20px' }}>
-                <div style={{ display: 'flex', color: '#D97706', gap: '2px' }}>
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={15} fill="#D97706" />
-                  ))}
+                {/* Rating Star Row */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '20px' }}>
+                  <div style={{ display: 'flex', color: '#D97706', gap: '2px' }}>
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={15} fill="#D97706" />
+                    ))}
+                  </div>
+                  <span style={{ fontSize: '0.84rem', fontWeight: 700, color: '#304050' }}>
+                    4.9 / 5.0
+                  </span>
+                  <span style={{ fontSize: '0.82rem', color: '#7C8894' }}>
+                    (Certified ISO 9001:2015 &amp; ASME Audit Compliant)
+                  </span>
                 </div>
-                <span style={{ fontSize: '0.84rem', fontWeight: 700, color: '#304050' }}>
-                  4.9 / 5.0
-                </span>
-                <span style={{ fontSize: '0.82rem', color: '#7C8894' }}>
-                  (Certified ISO 9001:2015 &amp; ASME Audit Compliant)
-                </span>
+
+                {/* Short Description */}
+                <p style={{ fontSize: '0.92rem', color: '#7C8894', lineHeight: 1.65, marginBottom: '24px' }}>
+                  Manufactured and stocked by Jyoti Metal (India) to stringent ASTM, ASME, and EN standards. Fully solution annealed and tested for high-pressure, severe corrosion environments.
+                </p>
+
+                {/* Key Bullet Highlights */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.86rem', color: '#304050', fontWeight: 600 }}>
+                    <ShieldCheck size={16} color="#588078" /> 100% Spectral chemistry verification &amp; heat-lot tracking
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.86rem', color: '#304050', fontWeight: 600 }}>
+                    <Layers size={16} color="#588078" /> Hydrostatic pressure tested &amp; ultrasonic flaw scanned
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.86rem', color: '#304050', fontWeight: 600 }}>
+                    <FileCheck size={16} color="#588078" /> EN 10204 3.1 &amp; 3.2 Mill Test Certificate included
+                  </div>
+                </div>
               </div>
 
-              {/* Short Description */}
-              <p style={{ fontSize: '0.92rem', color: '#7C8894', lineHeight: 1.65, marginBottom: '24px' }}>
-                Manufactured and stocked by Jyoti Metal (India) to stringent ASTM, ASME, and EN standards. Fully solution annealed and tested for high-pressure, severe corrosion environments.
-              </p>
-
-              {/* Key Bullet Highlights */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '28px', paddingBottom: '24px'}}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.86rem', color: '#304050', fontWeight: 600 }}>
-                  <ShieldCheck size={16} color="#588078" /> 100% Spectral chemistry verification &amp; heat-lot tracking
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.86rem', color: '#304050', fontWeight: 600 }}>
-                  <Layers size={16} color="#588078" /> Hydrostatic pressure tested &amp; ultrasonic flaw scanned
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.86rem', color: '#304050', fontWeight: 600 }}>
-                  <FileCheck size={16} color="#588078" /> EN 10204 3.1 &amp; 3.2 Mill Test Certificate included
-                </div>
-              </div>
-
-              {/* Price Row */}
-              {/* <div style={{ marginBottom: '24px' }}>
-                <div style={{ fontSize: '1.6rem', fontWeight: 800, color: '#588078', letterSpacing: '0.5px' }}>
-                  &#8377;{pricePerKg} <span style={{ fontSize: '0.9rem', fontWeight: 600, color: '#7C8894' }}>INR / Kg</span>
-                </div>
-                <div style={{ fontSize: '0.78rem', color: '#7C8894', marginTop: '2px' }}>
-                  Bulk tonnage pricing calculated upon formal RFQ submission.
-                </div>
-              </div> */}
-
-              {/* Quantity Counter */}
-              {/* <div style={{ marginBottom: '24px' }}>
-                <label style={{ fontSize: '0.78rem', fontWeight: 700, color: '#304050', textTransform: 'uppercase', letterSpacing: '0.6px', display: 'block', marginBottom: '8px' }}>
-                  Required Quantity (Kgs)
-                </label>
-                <div style={{ display: 'inline-flex', alignItems: 'center', border: '1px solid #E0E8E8' }}>
+              {/* Bottom Action Area */}
+              <div>
+                {/* Action Buttons */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '18px' }}>
                   <button
                     type="button"
-                    onClick={() => setQuantityKgs(Math.max(50, quantityKgs - 50))}
-                    style={{ width: '40px', height: '40px', background: '#F4F6F8', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                    onClick={() => onOpenQuoteModal(`${currentProduct.title} (${quantityKgs} Kgs)`)}
+                    className="btn btn-primary"
+                    style={{ padding: '16px', fontSize: '0.92rem', letterSpacing: '0.6px', textTransform: 'uppercase' }}
                   >
-                    <Minus size={16} />
-                  </button>
-                  <input
-                    type="number"
-                    value={quantityKgs}
-                    onChange={(e) => setQuantityKgs(Math.max(1, parseInt(e.target.value) || 1))}
-                    style={{ width: '90px', height: '40px', border: 'none', textAlign: 'center', fontSize: '0.95rem', fontWeight: 700, color: '#304050' }}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setQuantityKgs(quantityKgs + 50)}
-                    style={{ width: '40px', height: '40px', background: '#F4F6F8', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                  >
-                    <Plus size={16} />
+                    Request Formal Quote <Send size={16} />
                   </button>
                 </div>
-              </div> */}
 
-              {/* Action Buttons */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '24px' }}>
-                <button
-                  type="button"
-                  onClick={() => onOpenQuoteModal(`${currentProduct.title} (${quantityKgs} Kgs)`)}
-                  className="btn btn-primary"
-                  style={{ padding: '16px', fontSize: '0.92rem', letterSpacing: '0.6px', textTransform: 'uppercase' }}
-                >
-                  Request Formal Quote <Send size={16} />
-                </button>
-              </div>
-
-              {/* Fast Dispatch Badge */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.82rem'}}>
-                <Truck size={18} color="#588078" />
-                <span>100% Heat-Lot Traceability Fast Container Dispatch</span>
+                {/* Fast Dispatch Badge */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.82rem', color: '#7C8894' }}>
+                  <Truck size={18} color="#588078" />
+                  <span>100% Heat-Lot Traceability Fast Container Dispatch</span>
+                </div>
               </div>
             </div>
           </div>
