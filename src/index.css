@@ -1566,9 +1566,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* --- 3. Media frames ------------------------------------------------------ */
-/* Infrastructure gallery mosaic — match Home's .category-arch-card (18px) */
+/* Infrastructure gallery mosaic — sharp corners */
 .infra-gallery-card {
-  border-radius: var(--radius-media);
+  border-radius: 0 !important;
 }
 
 /* ==========================================================================
@@ -1741,6 +1741,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Infrastructure gallery — Home-style dark arch cards (self-contained, grid-safe) */
 .infra-gallery-card {
   position: relative;
+  border-radius: 0 !important;
   overflow: hidden;
   border: 1px solid #e2e8f0;
   background: #061221;

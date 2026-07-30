@@ -303,7 +303,7 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
             </div>
 
             <div className="infra-reveal" style={{ transitionDelay: '120ms' }}>
-              <div className="about-arch-frame-reversed" style={{ borderRadius: '20px', overflow: 'hidden', boxShadow: '0 20px 45px rgba(0,0,0,0.14)', background: '#061221' }}>
+              <div className="about-arch-frame-reversed" style={{ borderRadius: '0px', overflow: 'hidden', boxShadow: '0 20px 45px rgba(0,0,0,0.14)', background: '#061221' }}>
                 <img src="/images/jm1.jpg" alt="Jyoti Metal India integrated manufacturing hub" style={{ width: '100%', height: '460px', objectFit: 'cover', display: 'block' }} />
               </div>
             </div>
