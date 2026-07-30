@@ -245,14 +245,6 @@ export const catalogProducts: CatalogProduct[] = [
     specs: ['Martensitic SS', 'ASTM A268', 'UNS S41000'],
   },
   {
-    id: 'ss-446-pipe',
-    title: 'SS 446 Pipes & Tubes',
-    category: 'Pipes & Tubes',
-    subCat: 'Stainless Steel Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
-    specs: ['Ferritic Heat Resistant', 'ASTM A268', 'UNS S44600'],
-  },
-  {
     id: 'ss-904l-pipe',
     title: 'SS 904L Pipes & Tubes',
     category: 'Pipes & Tubes',
@@ -553,6 +545,22 @@ export const catalogProducts: CatalogProduct[] = [
 
   // SHEETS & PLATES PRODUCTS
   // 1. Stainless Steel Sheets & Plates
+  {
+    id: 'ss-409l-sheet',
+    title: '409L Sheets & Plates in Stainless Steel',
+    category: 'Plates & Sheets',
+    subCat: 'Stainless Steel Sheets & Plates',
+    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    specs: ['UNS S40903', 'Low Carbon Automotive Exhaust Sheet', 'Prioritised SS Grade'],
+  },
+  {
+    id: 'ss-409m-sheet',
+    title: '409M Sheets & Plates in Stainless Steel',
+    category: 'Plates & Sheets',
+    subCat: 'Stainless Steel Sheets & Plates',
+    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    specs: ['Modified 12% Cr Stainless Steel', 'Corrosion Resistant Structural Sheet', 'ASTM A240'],
+  },
   {
     id: 'ss-253ma-sheet',
     title: 'SS 253MA Sheets & Plates',
@@ -936,22 +944,6 @@ export const catalogProducts: CatalogProduct[] = [
     subCat: 'Other Sheets & Plates',
     image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
     specs: ['UNS N08282', 'High Phosphoric Acid Service'],
-  },
-  {
-    id: 'ss-409l-sheet',
-    title: '409L Sheets & Plates',
-    category: 'Plates & Sheets',
-    subCat: 'Other Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
-    specs: ['UNS S40903', 'Low Carbon Automotive Exhaust Sheet'],
-  },
-  {
-    id: 'ss-409m-sheet',
-    title: '409M Sheets & Plates',
-    category: 'Plates & Sheets',
-    subCat: 'Other Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
-    specs: ['Modified 12% Cr', 'Corrosion Resistant Structural Sheet'],
   },
 
   // ROUND BARS PRODUCTS

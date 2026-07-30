@@ -591,7 +591,50 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
         </div>
       </section>
 
-      {/* 5. Light Theme Closing CTA */}
+      {/* 5. Executive Leadership & Direction */}
+      <section style={{ padding: '80px 0', background: '#F4F6F8', borderTop: '1px solid #E0E8E8' }}>
+        <div className="container" style={{ maxWidth: '1050px', margin: '0 auto', padding: '0 20px' }}>
+          <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 40px' }}>
+            <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#588078', letterSpacing: '0.8px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
+              EXECUTIVE LEADERSHIP
+            </span>
+            <h2 style={{ fontSize: 'clamp(1.8rem, 3.2vw, 2.3rem)', fontWeight: 800, color: '#304050', marginBottom: '12px' }}>
+              Guided by Decades of Metallurgical Vision
+            </h2>
+            <p style={{ color: '#7C8894', fontSize: '1rem', lineHeight: 1.6 }}>
+              Under the strategic leadership of Dhawal Choudhary &amp; Dinesh Choudhary, Jyoti Metal (India) has expanded from a regional foundry to a premier global supplier of high-precision stainless steel and specialty alloys.
+            </p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
+            <div style={{ background: '#FFFFFF', padding: '32px', border: '1px solid #CBD5E1', borderTop: '4px solid #588078', boxShadow: '0 4px 16px rgba(0,0,0,0.03)' }}>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#304050', marginBottom: '6px' }}>
+                Dhawal Choudhary
+              </h3>
+              <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#588078', letterSpacing: '0.06em', marginBottom: '14px', textTransform: 'uppercase' }}>
+                Director &amp; Operations Head
+              </div>
+              <p style={{ fontSize: '0.92rem', color: '#64748B', lineHeight: 1.65, margin: 0 }}>
+                Spearheading enterprise supply logistics, international client relations, and quality management systems across aerospace and energy sectors.
+              </p>
+            </div>
+
+            <div style={{ background: '#FFFFFF', padding: '32px', border: '1px solid #CBD5E1', borderTop: '4px solid #588078', boxShadow: '0 4px 16px rgba(0,0,0,0.03)' }}>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#304050', marginBottom: '6px' }}>
+                Dinesh Choudhary
+              </h3>
+              <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#588078', letterSpacing: '0.06em', marginBottom: '14px', textTransform: 'uppercase' }}>
+                Executive Director
+              </div>
+              <p style={{ fontSize: '0.92rem', color: '#64748B', lineHeight: 1.65, margin: 0 }}>
+                Directing metallurgical R&amp;D, continuous arc furnace infrastructure, and strategic manufacturing expansion (including our upcoming Rajasthan plant facility).
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Light Theme Closing CTA */}
       <section
         style={{
           background: '#FFFFFF',

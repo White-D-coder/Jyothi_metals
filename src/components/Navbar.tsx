@@ -129,7 +129,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <img
               src="/images/jmi_logo.png"
               alt="JMI - Jyoti Metal (India) Logo"
-              style={{ height: '48px', width: 'auto', objectFit: 'contain' }}
+              style={{ height: '64px', width: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.15))' }}
             />
             <div className="brand-text-full">
               <span className="brand-title-text">JYOTI METAL (INDIA)</span>

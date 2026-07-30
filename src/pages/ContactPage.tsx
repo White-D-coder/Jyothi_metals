@@ -128,13 +128,13 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
         </div>
 
 
-        {/* Global Support SLAs & Direct Contacts */}
-        <div className="grid-responsive-3col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
+        {/* 2. Global Support SLAs & Direct Contacts */}
+        <div className="grid-responsive-3col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px', marginBottom: '48px' }}>
           <div style={{ background: '#ffffff', padding: '24px', border: '1px solid #e2e8f0', borderRadius: '16px', boxShadow: '0 6px 20px rgba(0,0,0,0.03)', display: 'flex', gap: '16px', alignItems: 'center' }}>
             <Clock size={32} color="#51847D" />
             <div>
-              <div style={{ fontWeight: 800, color: '#0f172a' }}>2-Hour Response SLA</div>
-              <div style={{ fontSize: '0.85rem', color: '#475569' }}>Dhawal Choudhary: +91 9322281549</div>
+              <div style={{ fontWeight: 800, color: '#0f172a' }}>Leadership Contacts</div>
+              <div style={{ fontSize: '0.85rem', color: '#475569' }}>Dhawal Choudhary &amp; Dinesh Choudhary: +91 9322281549</div>
             </div>
           </div>
           <div style={{ background: '#ffffff', padding: '24px', border: '1px solid #e2e8f0', borderRadius: '16px', boxShadow: '0 6px 20px rgba(0,0,0,0.03)', display: 'flex', gap: '16px', alignItems: 'center' }}>
@@ -148,7 +148,52 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
             <MapPin size={32} color="#51847D" />
             <div>
               <div style={{ fontWeight: 800, color: '#0f172a' }}>Key Locations</div>
-              <div style={{ fontSize: '0.85rem', color: '#475569' }}>Mumbai &amp; Delhi Branch</div>
+              <div style={{ fontSize: '0.85rem', color: '#475569' }}>Mumbai Regd. &amp; Delhi Branch</div>
+            </div>
+          </div>
+        </div>
+
+        {/* 3. Office & Plant Addresses Cards */}
+        <div style={{ background: '#f8fafc', border: '1px solid #cbd5e1', borderRadius: '16px', padding: '36px', marginTop: '20px' }}>
+          <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#0f172a', marginBottom: '24px', textAlign: 'center' }}>
+            Our Offices &amp; Manufacturing Hubs
+          </h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
+            <div style={{ background: '#ffffff', padding: '24px', border: '1px solid #e2e8f0', borderRadius: '12px' }}>
+              <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#51847D', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '8px' }}>
+                Headquarters
+              </div>
+              <h4 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0f172a', marginBottom: '8px' }}>
+                Regd. Office (Mumbai)
+              </h4>
+              <p style={{ color: '#475569', fontSize: '0.9rem', lineHeight: 1.6, margin: 0 }}>
+                102, Praveen House, 4th Kumbharwada Lane, Mumbai-400004.<br />
+                <span style={{ color: '#0f172a', fontWeight: 600 }}>Tel: (022) 2380 2758 / 2382 5068</span>
+              </p>
+            </div>
+
+            <div style={{ background: '#ffffff', padding: '24px', border: '1px solid #e2e8f0', borderRadius: '12px' }}>
+              <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#51847D', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '8px' }}>
+                North Branch (Address Only)
+              </div>
+              <h4 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0f172a', marginBottom: '8px' }}>
+                Branch Office (Delhi)
+              </h4>
+              <p style={{ color: '#475569', fontSize: '0.9rem', lineHeight: 1.6, margin: 0 }}>
+                302, Indra Prastha Tower, 6th Community Centre, Wazirpur, DELHI - 110 052.
+              </p>
+            </div>
+
+            <div style={{ background: '#ffffff', padding: '24px', border: '1px solid #e2e8f0', borderRadius: '12px' }}>
+              <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#51847D', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '8px' }}>
+                Manufacturing Facility
+              </div>
+              <h4 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0f172a', marginBottom: '8px' }}>
+                Plant Address
+              </h4>
+              <p style={{ color: '#51847D', fontSize: '0.95rem', fontWeight: 700, lineHeight: 1.6, margin: 0 }}>
+                Awaiting Rajasthan address
+              </p>
             </div>
           </div>
         </div>

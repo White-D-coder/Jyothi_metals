@@ -443,7 +443,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
             style={{
               position: 'absolute',
               inset: 0,
-              backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.65) 100%), url("${slide.url}")`,
+              backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.45) 100%), url("${slide.url}")`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',

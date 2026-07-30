@@ -50,11 +50,11 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenQuoteModal }
             marginBottom: '50px',
           }}
         >
-          <div className="footer-logo-brand" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <div className="footer-logo-brand" style={{ display: 'flex', alignItems: 'center', gap: '18px' }}>
             <img
               src="/images/jmi_logo.png"
               alt="JMI - Jyoti Metal (India)"
-              style={{ height: '56px', width: 'auto', objectFit: 'contain' }}
+              style={{ height: '76px', width: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.3))' }}
             />
             <div>
               <span className="footer-brand-title" style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 900, fontSize: '1.45rem', color: '#ffffff', lineHeight: 1.1, letterSpacing: '0.02em', display: 'block' }}>
@@ -313,31 +313,37 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenQuoteModal }
 
           {/* Column 3: Office Addresses */}
           <div>
-            <h4 style={{ color: '#ffffff', fontSize: '1.05rem', fontWeight: 800, marginBottom: '12px' }}>
+            <h4 style={{ color: '#ffffff', fontSize: '1.05rem', fontWeight: 800, marginBottom: '10px' }}>
               Regd. Office (Mumbai)
             </h4>
-            <p style={{ color: '#cbd5e1', fontSize: '0.85rem', lineHeight: 1.5, marginBottom: '16px' }}>
+            <p style={{ color: '#cbd5e1', fontSize: '0.85rem', lineHeight: 1.5, marginBottom: '14px' }}>
               102, Praveen House, 4th Kumbharwada Lane, Mumbai-400004.<br />
               <span style={{ color: '#94a3b8' }}>Tel: (022) 2380 2758 / 2382 5068</span>
             </p>
 
-            <h4 style={{ color: '#ffffff', fontSize: '1.05rem', fontWeight: 800, marginBottom: '12px' }}>
+            <h4 style={{ color: '#ffffff', fontSize: '1.05rem', fontWeight: 800, marginBottom: '10px' }}>
               Branch Office (Delhi)
             </h4>
+            <p style={{ color: '#cbd5e1', fontSize: '0.85rem', lineHeight: 1.5, marginBottom: '14px' }}>
+              302, Indra Prastha Tower, 6th Community Centre, Wazirpur, DELHI - 110 052.
+            </p>
+
+            <h4 style={{ color: '#ffffff', fontSize: '1.05rem', fontWeight: 800, marginBottom: '10px' }}>
+              Plant Address
+            </h4>
             <p style={{ color: '#cbd5e1', fontSize: '0.85rem', lineHeight: 1.5, margin: 0 }}>
-              302, Indra Prastha Tower, 6th Community Centre, Wazirpur, DELHI - 110 052.<br />
-              <span style={{ color: '#94a3b8' }}>Tel: +91-11-2737 6358</span>
+              <span style={{ color: '#77b8b0', fontWeight: 700 }}>Awaiting Rajasthan address</span>
             </p>
           </div>
 
-          {/* Column 4: Contact Person & Emails */}
+          {/* Column 4: Contact Persons & Emails */}
           <div className="footer-contact-group">
             <div>
               <h4 style={{ color: '#ffffff', fontSize: '1.05rem', fontWeight: 800, marginBottom: '10px' }}>
-                Sales & Inquiry
+                Leadership &amp; Sales
               </h4>
               <p style={{ color: '#cbd5e1', fontSize: '0.85rem', lineHeight: 1.6, marginBottom: '16px' }}>
-                <strong style={{ color: '#ffffff' }}>Dhawal Choudhary</strong><br />
+                <strong style={{ color: '#ffffff' }}>Dhawal Choudhary</strong> &amp; <strong style={{ color: '#ffffff' }}>Dinesh Choudhary</strong><br />
                 <a href="tel:+919322281549" style={{ color: '#77b8b0', textDecoration: 'none', fontWeight: 700 }}>+91 9322281549</a>
               </p>
             </div>
@@ -348,8 +354,7 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenQuoteModal }
               </h4>
               <p style={{ color: '#cbd5e1', fontSize: '0.82rem', margin: 0, lineHeight: 1.6 }}>
                 info@jyotimetal.co.in<br />
-                dinu1301@gmail.com<br />
-                jyotimetal2000@gmail.com
+                dinu1301@gmail.com
               </p>
             </div>
           </div>
