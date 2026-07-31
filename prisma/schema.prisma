@@ -1,0 +1,91 @@
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Product {
+  id                  String   @id @default(uuid())
+  slug                String   @unique
+  name                String
+  category            String
+  subCategory         String?
+  shortDescription    String?
+  fullDescription     String?
+  mainImage           String?
+  galleryImages       String   // JSON stringified array of image URLs
+  metaTitle           String?
+  metaDescription     String?
+  standards           String?  // JSON stringified array or text
+  equivalentGrades    String?  // JSON stringified array or text
+  dimensions          String?  // JSON stringified array or text
+  manufacturingProcess String?
+  deliveryConditions  String?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  chemicalCompositions ChemicalComposition[]
+  mechanicalProperties MechanicalProperty[]
+  physicalProperties   PhysicalProperty[]
+  applications         Application[]
+  tables               SpecificationTable[]
+  relatedProducts      RelatedProduct[]       @relation("SourceProduct")
+  referencedIn         RelatedProduct[]       @relation("TargetProduct")
+}
+
+model ChemicalComposition {
+  id        String  @id @default(uuid())
+  productId String
+  grade     String?
+  element   String
+  value     String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model MechanicalProperty {
+  id              String  @id @default(uuid())
+  productId       String
+  grade           String?
+  tensileStrength String?
+  yieldStrength   String?
+  elongation      String?
+  hardnessBrinell String?
+  hardnessRockwell String?
+  product         Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model PhysicalProperty {
+  id           String  @id @default(uuid())
+  productId    String
+  propertyName String
+  value        String
+  product      Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model Application {
+  id           String  @id @default(uuid())
+  productId    String
+  industryName String
+  product      Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model SpecificationTable {
+  id        String  @id @default(uuid())
+  productId String
+  title     String
+  columns   String  // JSON stringified array of column names
+  rows      String  // JSON stringified array of row objects
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model RelatedProduct {
+  id               String  @id @default(uuid())
+  productId        String
+  relatedProductId String
+  product          Product @relation("SourceProduct", fields: [productId], references: [id], onDelete: Cascade)
+  relatedProduct   Product @relation("TargetProduct", fields: [relatedProductId], references: [id], onDelete: Cascade)
+}

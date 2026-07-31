@@ -56,6 +56,276 @@ const getAlloyComposition = (title: string): Record<string, string> => {
   return { Chromium: '18.0 - 20.0%', Nickel: '8.0 - 10.5%', Manganese: '2.0% Max', Silicon: '0.75% Max', Iron: 'Balance' };
 };
 
+// Mechanical Properties generator by alloy type
+const getMechanicalProperties = (title: string): Record<string, string> => {
+  const t = title.toLowerCase();
+  if (t.includes('titanium')) {
+    return {
+      'Tensile Strength (MPa)': '880 MPa Min',
+      'Yield Strength 0.2% Proof (MPa)': '830 MPa Min',
+      'Elongation in 50mm (%)': '14% Min',
+      'Hardness (Rockwell C)': '36 HRC Max',
+      'Impact Strength (Charpy V-Notch)': '42 J Min at -20°C',
+    };
+  }
+  if (t.includes('inconel') || t.includes('hastelloy')) {
+    return {
+      'Tensile Strength (MPa)': '830 MPa Min',
+      'Yield Strength 0.2% Proof (MPa)': '415 MPa Min',
+      'Elongation in 50mm (%)': '30% Min',
+      'Hardness (Brinell HB)': '220 HB Max',
+      'Impact Strength (Charpy V-Notch)': '60 J Min at RT',
+    };
+  }
+  if (t.includes('duplex') || t.includes('2205')) {
+    return {
+      'Tensile Strength (MPa)': '655 - 880 MPa',
+      'Yield Strength 0.2% Proof (MPa)': '450 MPa Min',
+      'Elongation in 50mm (%)': '25% Min',
+      'Hardness (Brinell HB)': '290 HB Max',
+      'Pitting Resistance (PREN)': '34.5 Min',
+    };
+  }
+  if (t.includes('316')) {
+    return {
+      'Tensile Strength (MPa)': '515 MPa Min',
+      'Yield Strength 0.2% Proof (MPa)': '205 MPa Min',
+      'Elongation in 50mm (%)': '40% Min',
+      'Hardness (Brinell HB)': '217 HB Max',
+      'Hardness (Rockwell B)': '95 HRB Max',
+    };
+  }
+  // Default Stainless 304 / Alloy mechanical properties
+  return {
+    'Tensile Strength (MPa)': '515 MPa Min',
+    'Yield Strength 0.2% Proof (MPa)': '205 MPa Min',
+    'Elongation in 50mm (%)': '40% Min',
+    'Hardness (Brinell HB)': '201 HB Max',
+    'Hardness (Rockwell B)': '92 HRB Max',
+  };
+};
+
+// Physical Properties generator by alloy type
+const getPhysicalProperties = (title: string): Record<string, string> => {
+  const t = title.toLowerCase();
+  if (t.includes('titanium')) {
+    return {
+      Density: '4.43 g/cm³',
+      'Melting Range': '1604 - 1660 °C',
+      'Modulus of Elasticity': '114 GPa',
+      'Thermal Conductivity': '6.7 W/m·K at 20°C',
+      'Electrical Resistivity': '1.78 µΩ·m',
+      'Specific Heat': '526 J/kg·K',
+    };
+  }
+  if (t.includes('inconel') || t.includes('625')) {
+    return {
+      Density: '8.44 g/cm³',
+      'Melting Range': '1290 - 1350 °C',
+      'Modulus of Elasticity': '205 GPa',
+      'Thermal Conductivity': '9.8 W/m·K at 100°C',
+      'Electrical Resistivity': '1.29 µΩ·m',
+      'Specific Heat': '427 J/kg·K',
+    };
+  }
+  if (t.includes('duplex') || t.includes('2205')) {
+    return {
+      Density: '7.80 g/cm³',
+      'Melting Range': '1380 - 1440 °C',
+      'Modulus of Elasticity': '200 GPa',
+      'Thermal Conductivity': '19.0 W/m·K at 100°C',
+      'Electrical Resistivity': '0.85 µΩ·m',
+      'Specific Heat': '500 J/kg·K',
+    };
+  }
+  return {
+    Density: '8.00 g/cm³',
+    'Melting Range': '1400 - 1450 °C',
+    'Modulus of Elasticity': '193 GPa',
+    'Thermal Conductivity': '16.2 W/m·K at 100°C',
+    'Electrical Resistivity': '0.72 µΩ·m',
+    'Specific Heat': '500 J/kg·K',
+  };
+};
+
+// Certified Applications generator
+const getCertifiedApplications = (title: string): string[] => {
+  const t = title.toLowerCase();
+  if (t.includes('titanium') || t.includes('aerospace')) {
+    return [
+      'Aerospace Structural Airframes & Jet Engine Components',
+      'Offshore Subsea Wellheads & Marine Propulsion Hardware',
+      'High-Concentration Nitric & Organic Acid Synthesis',
+      'Medical Implant Assemblies & Surgical Grade Tubing',
+      'Desalination Plant Evaporators & Brine Heaters',
+    ];
+  }
+  if (t.includes('inconel') || t.includes('hastelloy')) {
+    return [
+      'Chemical Process Vessels & Sour Gas Flare Stacks',
+      'Gas Turbine Exhaust Systems & Afterburners',
+      'Nuclear Reactor Core Components & Control Rods',
+      'High-Temperature Furnace Retorts & Radiant Tubes',
+      'Offshore Oilfield Downhole Valve Assemblies',
+    ];
+  }
+  return [
+    'Petrochemical & Oil & Gas Hydrocarbon Pipelines',
+    'Chemical Processing Plants & High-Pressure Vessels',
+    'Power Generation Steam Lines & Condenser Units',
+    'Defense & Naval Submarine Hull Assemblies',
+    'Food Processing & High-Purity Pharmaceutical Lines',
+  ];
+};
+
+// Manufacturing Standards generator
+const getManufacturingStandards = (title: string): string[] => {
+  const t = title.toLowerCase();
+  if (t.includes('titanium')) {
+    return ['ASTM B338', 'ASTM B861', 'AMS 4928', 'DIN 17861', 'ISO 5832-3'];
+  }
+  if (t.includes('inconel')) {
+    return ['ASTM B444', 'ASTM B705', 'AMS 5581', 'ASME SB444', 'EN 10216-5'];
+  }
+  return ['ASTM A312', 'ASTM A213', 'ASME SA312', 'EN 10216-5', 'DIN 17458'];
+};
+
+// International Equivalent Grades generator
+const getEquivalentGrades = (title: string): string[] => {
+  const t = title.toLowerCase();
+  if (t.includes('titanium')) {
+    return ['UNS R56400', 'W.Nr. 3.7165', 'Grade 5 / Ti-6Al-4V', 'JIS Class 60'];
+  }
+  if (t.includes('inconel')) {
+    return ['UNS N06625', 'W.Nr. 2.4856', 'NC22DNb', 'NA 21 / Inconel 625'];
+  }
+  if (t.includes('duplex')) {
+    return ['UNS S31803 / S32205', 'W.Nr. 1.4462', 'AFNOR Z3 CND 22-05', 'BS 318S13'];
+  }
+  if (t.includes('316')) {
+    return ['UNS S31603', 'W.Nr. 1.4404', 'AFNOR Z3 CND 17-11-02', 'JIS SUS 316L'];
+  }
+  return ['UNS S30400 / S30403', 'W.Nr. 1.4301 / 1.4307', 'AFNOR Z7 CN 18-09', 'BS 304S31'];
+};
+
+interface ScrapedGradeTableData {
+  chemHeaders: string[];
+  chemRows: string[][];
+  mechHeaders: string[];
+  mechRows: string[][];
+}
+
+const getScrapedGradeTableData = (title: string): ScrapedGradeTableData => {
+  const t = title.toLowerCase();
+
+  if (t.includes('409') || t.includes('410') || t.includes('430')) {
+    return {
+      chemHeaders: ['Grade', 'C', 'Mn', 'Si', 'P', 'S', 'Cr', 'Ni', 'Other Elements'],
+      chemRows: [
+        ['409', '0.08max', '1.0max', '1.0max', '0.040max', '0.03max', 'min: 10.5 max: 11.7', '0.5 max', 'Ti=6X(C+N)Min'],
+        ['409L', '0.03max', '1.0max', '1.0max', '0.040max', '0.03max', 'min: 10.5 max: 11.7', '1.5 max', 'Ti=6X(C+N)Min., 0.75Max'],
+        ['410', '0.15max', '1.0max', '1.0max', '0.040max', '0.03max', 'min: 11.5 max: 13.5', '0.75 max', '-'],
+        ['430', '0.12max', '1.0max', '1.0max', '0.040max', '0.03max', 'min: 16.0 max: 18.0', '0.75 max', '-'],
+      ],
+      mechHeaders: ['Grade', 'Tensile Strength ksi (min)', 'Yield Strength 0.2% ksi (min)', 'Elongation %', 'Hardness (Brinell) MAX', 'Hardness (Rockwell B) MAX'],
+      mechRows: [
+        ['409', '55', '25', '20', '175', '88'],
+        ['409L', '55', '25', '20', '175', '88'],
+        ['410', '65', '35', '20', '210', '96'],
+        ['430', '65', '30', '22', '183', '89'],
+      ],
+    };
+  }
+
+  if (t.includes('316')) {
+    return {
+      chemHeaders: ['Grade', 'C', 'Mn', 'Si', 'P', 'S', 'Cr', 'Ni', 'Mo', 'N'],
+      chemRows: [
+        ['316', '0.08max', '2.0max', '0.75max', '0.045max', '0.03max', 'min: 16.0 max: 18.0', 'min: 10.0 max: 14.0', 'min: 2.0 max: 3.0', '—'],
+        ['316L', '0.03max', '2.0max', '0.75max', '0.045max', '0.03max', 'min: 16.0 max: 18.0', 'min: 10.0 max: 14.0', 'min: 2.0 max: 3.0', '0.10 max'],
+        ['316H', 'min: 0.04 max: 0.10', '2.0max', '0.75max', '0.045max', '0.03max', 'min: 16.0 max: 18.0', 'min: 10.0 max: 14.0', 'min: 2.0 max: 3.0', '—'],
+        ['316Ti', '0.08max', '2.0max', '0.75max', '0.045max', '0.03max', 'min: 16.0 max: 18.0', 'min: 10.0 max: 14.0', 'min: 2.0 max: 3.0', 'Ti=5x(C+N)'],
+      ],
+      mechHeaders: ['Grade', 'Tensile Strength ksi (min)', 'Yield Strength 0.2% ksi (min)', 'Elongation %', 'Hardness (Brinell) MAX', 'Hardness (Rockwell B) MAX'],
+      mechRows: [
+        ['316', '75', '30', '40', '217', '95'],
+        ['316L', '70', '25', '40', '217', '95'],
+        ['316H', '75', '30', '40', '217', '95'],
+        ['316Ti', '75', '30', '40', '217', '95'],
+      ],
+    };
+  }
+
+  if (t.includes('2205') || t.includes('duplex')) {
+    return {
+      chemHeaders: ['Grade', 'UNS', 'C', 'Cr', 'Ni', 'Mo', 'N', 'Cu', 'PREN'],
+      chemRows: [
+        ['2205', 'S31803 / S32205', '0.03max', 'min: 22.0 max: 23.0', 'min: 4.5 max: 6.5', 'min: 3.0 max: 3.5', 'min: 0.14 max: 0.20', '—', '≥ 34.5'],
+        ['2507', 'S32750', '0.03max', 'min: 24.0 max: 26.0', 'min: 6.0 max: 8.0', 'min: 3.0 max: 5.0', 'min: 0.24 max: 0.32', '0.50', '≥ 42.0'],
+        ['2101', 'S32101', '0.04max', 'min: 21.0 max: 22.0', 'min: 1.35 max: 1.70', 'min: 0.10 max: 0.80', 'min: 0.20 max: 0.25', '0.80 max', '≥ 26.0'],
+      ],
+      mechHeaders: ['Grade', 'Tensile Strength ksi (min)', 'Yield Strength 0.2% ksi (min)', 'Elongation %', 'Hardness (Brinell) MAX', 'Hardness (Rockwell C) MAX'],
+      mechRows: [
+        ['2205', '95', '65', '25', '290', '31'],
+        ['2507', '116', '80', '15', '310', '32'],
+        ['2101', '101', '65', '30', '290', '29'],
+      ],
+    };
+  }
+
+  if (t.includes('titanium')) {
+    return {
+      chemHeaders: ['Grade', 'UNS', 'Ti', 'Al', 'V', 'Fe', 'O', 'C', 'N'],
+      chemRows: [
+        ['Ti Gr 1', 'R50250', 'Balance', '—', '—', '0.20max', '0.18max', '0.08max', '0.03max'],
+        ['Ti Gr 2', 'R50400', 'Balance', '—', '—', '0.30max', '0.25max', '0.08max', '0.03max'],
+        ['Ti Gr 5', 'R56400', 'Balance', 'min: 5.5 max: 6.75', 'min: 3.5 max: 4.5', '0.40max', '0.20max', '0.08max', '0.05max'],
+      ],
+      mechHeaders: ['Grade', 'Tensile Strength ksi (min)', 'Yield Strength 0.2% ksi (min)', 'Elongation %', 'Hardness (Brinell) MAX', 'Hardness (Rockwell C) MAX'],
+      mechRows: [
+        ['Ti Gr 1', '35', '25', '24', '120', '15'],
+        ['Ti Gr 2', '50', '40', '20', '160', '20'],
+        ['Ti Gr 5', '130', '120', '14', '330', '36'],
+      ],
+    };
+  }
+
+  if (t.includes('inconel') || t.includes('625') || t.includes('hastelloy')) {
+    return {
+      chemHeaders: ['Grade', 'UNS', 'Ni', 'Cr', 'Mo', 'Nb + Ta', 'Fe', 'C', 'Cu'],
+      chemRows: [
+        ['Inconel 600', 'N06600', 'min: 72.0', 'min: 14.0 max: 17.0', '—', '—', 'min: 6.0 max: 10.0', '0.15max', '0.50max'],
+        ['Inconel 625', 'N06625', 'min: 58.0', 'min: 20.0 max: 23.0', 'min: 8.0 max: 10.0', 'min: 3.15 max: 4.15', '5.0max', '0.10max', '—'],
+        ['Incoloy 825', 'N08825', 'min: 38.0 max: 46.0', 'min: 19.5 max: 23.5', 'min: 2.5 max: 3.5', '—', 'min: 22.0', '0.05max', 'min: 1.5 max: 3.0'],
+        ['Hastelloy C276', 'N10276', 'Balance (~57%)', 'min: 14.5 max: 16.5', 'min: 15.0 max: 17.0', '—', 'min: 4.0 max: 7.0', '0.01max', '—'],
+      ],
+      mechHeaders: ['Grade', 'Tensile Strength ksi (min)', 'Yield Strength 0.2% ksi (min)', 'Elongation %', 'Hardness (Brinell) MAX', 'Hardness (Rockwell B) MAX'],
+      mechRows: [
+        ['Inconel 600', '80', '35', '30', '180', '90'],
+        ['Inconel 625', '120', '60', '30', '220', '98'],
+        ['Incoloy 825', '85', '35', '30', '180', '90'],
+        ['Hastelloy C276', '100', '41', '40', '220', '98'],
+      ],
+    };
+  }
+
+  // Default SS 304 / 304L / 304H Series (Exact Champak Steel Screenshot format)
+  return {
+    chemHeaders: ['Grade', 'C', 'Mn', 'Si', 'P', 'S', 'Cr', 'Ni', 'N'],
+    chemRows: [
+      ['304', '0.07max', '2.0max', '0.75max', '0.045max', '0.03max', 'min: 18.0 max: 20.0', 'min: 8.0 max: 10.5', '—'],
+      ['304L', '0.03max', '2.0max', '0.75max', '0.045max', '0.03max', 'min: 18.0 max: 20.0', 'min: 8.0 max: 12.0', '0.10 max'],
+      ['304H', 'min: 0.04 max: 0.10', '2.0max', '0.75max', '0.045max', '0.03max', 'min: 18.0 max: 20.0', 'min: 8.0 max: 10.5', '0.10 max'],
+    ],
+    mechHeaders: ['Grade', 'Tensile Strength ksi (min)', 'Yield Strength 0.2% ksi (min)', 'Elongation %', 'Hardness (Brinell) MAX', 'Hardness (Rockwell B) MAX'],
+    mechRows: [
+      ['304', '75', '30', '40', '201', '92'],
+      ['304L', '70', '25', '40', '201', '92'],
+      ['304H', '75', '30', '40', '201', '92'],
+    ],
+  };
+};
+
 export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuoteModal }) => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -72,6 +342,36 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
 
   const composition = useMemo(
     () => getAlloyComposition(currentProduct.title),
+    [currentProduct]
+  );
+
+  const mechanicalProps = useMemo(
+    () => getMechanicalProperties(currentProduct.title),
+    [currentProduct]
+  );
+
+  const physicalProps = useMemo(
+    () => getPhysicalProperties(currentProduct.title),
+    [currentProduct]
+  );
+
+  const scrapedTable = useMemo(
+    () => getScrapedGradeTableData(currentProduct.title),
+    [currentProduct]
+  );
+
+  const appList = useMemo(
+    () => getCertifiedApplications(currentProduct.title),
+    [currentProduct]
+  );
+
+  const stdList = useMemo(
+    () => getManufacturingStandards(currentProduct.title),
+    [currentProduct]
+  );
+
+  const eqList = useMemo(
+    () => getEquivalentGrades(currentProduct.title),
     [currentProduct]
   );
 
@@ -116,7 +416,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
           margin-top: 14px;
         }
         .thumb-item {
-          height: 90px;
+          height: 84px;
           border: 1px solid #E0E8E8;
           cursor: pointer;
           overflow: hidden;
@@ -193,7 +493,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
             <span>/</span>
             <span>{currentProduct.category}</span>
             <span>/</span>
-            <span style={{ color: '#588078', fontWeight: 700 }}>{currentProduct.title}</span>
+            <span style={{ color: '#304050', fontWeight: 600 }}>{currentProduct.title}</span>
           </div>
         </div>
       </section>
@@ -201,13 +501,13 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
       {/* 2. Top Main E-Commerce Product Layout */}
       <section style={{ padding: '40px 0 60px' }}>
         <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
-          <div className="grid-responsive-about" style={{ display: 'grid', gridTemplateColumns: '1fr 1.1fr', gap: '48px', alignItems: 'stretch' }}>
+          <div className="grid-responsive-about" style={{ display: 'grid', gridTemplateColumns: '1fr 1.1fr', gap: '48px', alignItems: 'start' }}>
             
             {/* Left: Product Image Gallery (Sticky on scroll until right column finishes) */}
-            <div style={{ position: 'sticky', top: '100px', alignSelf: 'flex-start' }}>
+            <div style={{ position: 'sticky', top: '96px', alignSelf: 'start' }}>
               <div
                 style={{
-                  height: '460px',
+                  height: '410px',
                   background: '#FFFFFF',
                   border: '1px solid #E0E8E8',
                   position: 'relative',
@@ -265,7 +565,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                height: '100%',
+                minHeight: '508px',
               }}
             >
               <div>
@@ -340,22 +640,8 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
       <section style={{ background: '#FFFFFF', borderTop: '1px solid #E0E8E8', borderBottom: '1px solid #E0E8E8', padding: '40px 0 60px' }}>
         <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
           
-          {/* Horizontal Tab Navigation */}
+          {/* Horizontal Tab Navigation (Renamed per Database Scraping Mandate) */}
           <div style={{ display: 'flex', borderBottom: '1px solid #E0E8E8', marginBottom: '32px', overflowX: 'auto' }}>
-            <button
-              type="button"
-              className={`tab-btn ${activeTab === 'desc' ? 'active' : ''}`}
-              onClick={() => setActiveTab('desc')}
-            >
-              TECHNICAL DESCRIPTION
-            </button>
-            <button
-              type="button"
-              className={`tab-btn ${activeTab === 'specs' ? 'active' : ''}`}
-              onClick={() => setActiveTab('specs')}
-            >
-              DIMENSIONAL SPECS
-            </button>
             <button
               type="button"
               className={`tab-btn ${activeTab === 'comp' ? 'active' : ''}`}
@@ -365,66 +651,72 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
             </button>
             <button
               type="button"
+              className={`tab-btn ${activeTab === 'specs' ? 'active' : ''}`}
+              onClick={() => setActiveTab('specs')}
+            >
+              MECHANICAL PROPERTIES
+            </button>
+            <button
+              type="button"
+              className={`tab-btn ${activeTab === 'desc' ? 'active' : ''}`}
+              onClick={() => setActiveTab('desc')}
+            >
+              PHYSICAL PROPERTIES
+            </button>
+            <button
+              type="button"
               className={`tab-btn ${activeTab === 'apps' ? 'active' : ''}`}
               onClick={() => setActiveTab('apps')}
             >
-              APPLICATIONS
+              APPLICATION INDUSTRIES
             </button>
           </div>
 
-          {/* Active Tab Content */}
-          <div className="grid-responsive-about" style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '40px', alignItems: 'center' }}>
+          {/* Active Tab Content (Full Width Layout) */}
+          <div style={{ width: '100%' }}>
             <div>
-              {activeTab === 'desc' && (
-                <div>
-                  <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#304050', marginBottom: '14px' }}>
-                    Process Engineering &amp; Metallurgical Integrity
-                  </h3>
-                  <p style={{ fontSize: '0.94rem', color: '#7C8894', lineHeight: 1.7, marginBottom: '16px' }}>
-                    Manufactured through continuous casting and precision rolling lines at Jyoti Metal India. Every batch of <strong>{currentProduct.title}</strong> is refined to minimize non-metallic inclusions and achieve uniform microstructural grain distribution.
-                  </p>
-                  <p style={{ fontSize: '0.94rem', color: '#7C8894', lineHeight: 1.7, margin: 0 }}>
-                    Certified for severe duty service in oil refineries, chemical processing plants, defense assemblies, and high-pressure steam lines.
-                  </p>
-                </div>
-              )}
-
-              {activeTab === 'specs' && (
-                <div>
-                  <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#304050', marginBottom: '16px' }}>
-                    Standard Specifications &amp; Tolerances
-                  </h3>
-                  <div style={{ border: '1px solid #E0E8E8' }}>
-                    {currentProduct.specs.map((s, i) => {
-                      const parts = s.split(':');
-                      const key = parts[0] || `Spec ${i + 1}`;
-                      const val = parts.slice(1).join(':') || s;
-                      return (
-                        <div
-                          key={i}
-                          style={{
-                            display: 'grid',
-                            gridTemplateColumns: '200px 1fr',
-                            padding: '12px 18px',
-                            background: i % 2 === 0 ? '#FFFFFF' : '#F8F8F8',
-                            borderBottom: i < currentProduct.specs.length - 1 ? '1px solid #E0E8E8' : 'none',
-                            fontSize: '0.88rem',
-                          }}
-                        >
-                          <span style={{ fontWeight: 700, color: '#304050' }}>{key}</span>
-                          <span style={{ color: '#7C8894' }}>{val}</span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
-
+              {/* Section 1: Chemical Composition (Exact Champak Steel Scraped HTML Table Layout) */}
               {activeTab === 'comp' && (
                 <div>
-                  <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#304050', marginBottom: '16px' }}>
-                    Elemental Chemical Heat Composition
+                  <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#304050', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.4px' }}>
+                    CHEMICAL COMPOSITION OF STAINLESS STEEL {currentProduct.title.toUpperCase()}
                   </h3>
+                  <div style={{ overflowX: 'auto', border: '1px solid #588078', marginBottom: '24px' }}>
+                    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem', textAlign: 'center' }}>
+                      <thead>
+                        <tr style={{ background: '#588078', color: '#FFFFFF', fontWeight: 700 }}>
+                          {scrapedTable.chemHeaders.map((h, i) => (
+                            <th key={i} style={{ padding: '12px 10px', borderRight: i < scrapedTable.chemHeaders.length - 1 ? '1px solid rgba(255,255,255,0.25)' : 'none', whiteSpace: 'nowrap' }}>
+                              {h}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {scrapedTable.chemRows.map((row, rIdx) => (
+                          <tr key={rIdx} style={{ background: rIdx % 2 === 0 ? '#FFFFFF' : '#F8F8F8', borderBottom: rIdx < scrapedTable.chemRows.length - 1 ? '1px solid #E0E8E8' : 'none' }}>
+                            {row.map((val, i) => (
+                              <td
+                                key={i}
+                                style={{
+                                  padding: '12px 10px',
+                                  borderRight: i < row.length - 1 ? (i === 0 ? '1px solid rgba(255,255,255,0.3)' : '1px solid #E0E8E8') : 'none',
+                                  fontWeight: i === 0 ? 800 : 600,
+                                  background: i === 0 ? '#588078' : 'transparent',
+                                  color: i === 0 ? '#FFFFFF' : '#304050',
+                                  whiteSpace: 'nowrap',
+                                }}
+                              >
+                                {val}
+                              </td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  {/* Vertical Breakdown List */}
                   <div style={{ border: '1px solid #E0E8E8' }}>
                     {Object.entries(composition).map(([element, range], i) => (
                       <div
@@ -432,10 +724,10 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
                         style={{
                           display: 'grid',
                           gridTemplateColumns: '180px 1fr',
-                          padding: '12px 18px',
+                          padding: '10px 16px',
                           background: i % 2 === 0 ? '#FFFFFF' : '#F8F8F8',
                           borderBottom: i < Object.keys(composition).length - 1 ? '1px solid #E0E8E8' : 'none',
-                          fontSize: '0.88rem',
+                          fontSize: '0.86rem',
                         }}
                       >
                         <span style={{ fontWeight: 700, color: '#304050' }}>{element}</span>
@@ -446,18 +738,104 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
                 </div>
               )}
 
+              {/* Section 2: Mechanical Properties (Exact Champak Steel Scraped HTML Table Layout) */}
+              {activeTab === 'specs' && (
+                <div>
+                  <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#304050', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.4px' }}>
+                    MECHANICAL PROPERTIES OF STAINLESS STEEL {currentProduct.title.toUpperCase()}
+                  </h3>
+                  <div style={{ overflowX: 'auto', border: '1px solid #588078', marginBottom: '24px' }}>
+                    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem', textAlign: 'center' }}>
+                      <thead>
+                        <tr style={{ background: '#588078', color: '#FFFFFF', fontWeight: 700 }}>
+                          {scrapedTable.mechHeaders.map((h, i) => (
+                            <th key={i} style={{ padding: '12px 10px', borderRight: i < scrapedTable.mechHeaders.length - 1 ? '1px solid rgba(255,255,255,0.25)' : 'none', whiteSpace: 'nowrap' }}>
+                              {h}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {scrapedTable.mechRows.map((row, rIdx) => (
+                          <tr key={rIdx} style={{ background: rIdx % 2 === 0 ? '#FFFFFF' : '#F8F8F8', borderBottom: rIdx < scrapedTable.mechRows.length - 1 ? '1px solid #E0E8E8' : 'none' }}>
+                            {row.map((val, i) => (
+                              <td
+                                key={i}
+                                style={{
+                                  padding: '12px 10px',
+                                  borderRight: i < row.length - 1 ? (i === 0 ? '1px solid rgba(255,255,255,0.3)' : '1px solid #E0E8E8') : 'none',
+                                  fontWeight: i === 0 ? 800 : 600,
+                                  background: i === 0 ? '#588078' : 'transparent',
+                                  color: i === 0 ? '#FFFFFF' : '#304050',
+                                  whiteSpace: 'nowrap',
+                                }}
+                              >
+                                {val}
+                              </td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  {/* Vertical Breakdown List */}
+                  <div style={{ border: '1px solid #E0E8E8' }}>
+                    {Object.entries(mechanicalProps).map(([propKey, propVal], i) => (
+                      <div
+                        key={propKey}
+                        style={{
+                          display: 'grid',
+                          gridTemplateColumns: '220px 1fr',
+                          padding: '10px 16px',
+                          background: i % 2 === 0 ? '#FFFFFF' : '#F8F8F8',
+                          borderBottom: i < Object.keys(mechanicalProps).length - 1 ? '1px solid #E0E8E8' : 'none',
+                          fontSize: '0.86rem',
+                        }}
+                      >
+                        <span style={{ fontWeight: 700, color: '#304050' }}>{propKey}</span>
+                        <span style={{ color: '#588078', fontWeight: 700 }}>{propVal}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Section 3: Physical Properties */}
+              {activeTab === 'desc' && (
+                <div>
+                  <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#304050', marginBottom: '14px' }}>
+                    Physical &amp; Thermal Properties
+                  </h3>
+                  <div style={{ border: '1px solid #E0E8E8' }}>
+                    {Object.entries(physicalProps).map(([pKey, pVal], i) => (
+                      <div
+                        key={pKey}
+                        style={{
+                          display: 'grid',
+                          gridTemplateColumns: '200px 1fr',
+                          padding: '12px 18px',
+                          background: i % 2 === 0 ? '#FFFFFF' : '#F8F8F8',
+                          borderBottom: i < Object.keys(physicalProps).length - 1 ? '1px solid #E0E8E8' : 'none',
+                          fontSize: '0.88rem',
+                        }}
+                      >
+                        <span style={{ fontWeight: 700, color: '#304050' }}>{pKey}</span>
+                        <span style={{ color: '#588078', fontWeight: 700 }}>{pVal}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Section 4: Application Industries */}
               {activeTab === 'apps' && (
                 <div>
                   <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#304050', marginBottom: '16px' }}>
-                    Certified Field Applications
+                    Certified Application Industries
                   </h3>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                    {[
-                      'Offshore Oil & Gas Subsea Manifolds & Piping',
-                      'High-Purity Chemical & Petrochemical Refining',
-                      'Aerospace & Defense Structural Components',
-                      'High-Pressure Steam & Nuclear Power Installations',
-                    ].map((app) => (
+                    {appList.map((app) => (
                       <div
                         key={app}
                         style={{
@@ -479,14 +857,39 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
                 </div>
               )}
             </div>
+          </div>
 
-            {/* Right Showcase Visual */}
-            <div style={{ height: '320px', border: '1px solid #E0E8E8', overflow: 'hidden' }}>
-              <img
-                src={activeImage || currentProduct.image}
-                alt={currentProduct.title}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              />
+          {/* 5. Supplementary Scraped Database Sections (Standards, Equivalent Grades, Dimensions) */}
+          <div style={{ marginTop: '48px', paddingTop: '36px', borderTop: '1px solid #E0E8E8' }}>
+            <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#304050', marginBottom: '20px' }}>
+              Manufacturing Standards, Dimensions &amp; Equivalent Grades
+            </h3>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
+              <div style={{ background: '#F8F8F8', border: '1px solid #E0E8E8', padding: '20px' }}>
+                <h4 style={{ fontSize: '0.92rem', fontWeight: 700, color: '#588078', marginBottom: '12px', textTransform: 'uppercase' }}>
+                  Manufacturing Standards
+                </h4>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                  {stdList.map((std) => (
+                    <span key={std} style={{ background: '#FFFFFF', border: '1px solid #CBD5E1', padding: '6px 12px', fontSize: '0.82rem', fontWeight: 700, color: '#304050' }}>
+                      {std}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div style={{ background: '#F8F8F8', border: '1px solid #E0E8E8', padding: '20px' }}>
+                <h4 style={{ fontSize: '0.92rem', fontWeight: 700, color: '#588078', marginBottom: '12px', textTransform: 'uppercase' }}>
+                  International Equivalent Grades
+                </h4>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                  {eqList.map((eq) => (
+                    <span key={eq} style={{ background: '#FFFFFF', border: '1px solid #CBD5E1', padding: '6px 12px', fontSize: '0.82rem', fontWeight: 700, color: '#304050' }}>
+                      {eq}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
