@@ -1,22 +1,26 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
   Star,
   ShieldCheck,
   CheckCircle2,
   Send,
-  Truck,
   Plus,
   Layers,
   FileCheck,
   ArrowRight,
   ZoomIn,
+  ChevronDown,
 } from 'lucide-react';
 import { catalogProducts, type CatalogProduct } from '../data/catalogData';
+import { champakSpecs, type SpecTable } from '../data/champakSpecs';
 
 interface ProductDetailPageProps {
   onOpenQuoteModal: (productName?: string) => void;
 }
+
+// Application industries shown before the list collapses behind "View More".
+const APPS_PREVIEW_COUNT = 4;
 
 // Price generator by alloy type
 const getAlloyPricePerKg = (title: string): number => {
@@ -326,6 +330,97 @@ const getScrapedGradeTableData = (title: string): ScrapedGradeTableData => {
   };
 };
 
+// Renders a scraped specification table exactly as published, including the
+// grouped headers (colspan/rowspan) and single-cell section divider rows.
+const SpecTableView: React.FC<{ table: SpecTable }> = ({ table }) => {
+  // Some sections are published as prose rather than a table.
+  if (!table.rows.length && table.note) {
+    return (
+      <div
+        style={{
+          border: '1px solid #E0E8E8',
+          background: '#F8F8F8',
+          padding: '18px 20px',
+          fontSize: '0.9rem',
+          lineHeight: 1.7,
+          color: '#304050',
+          marginBottom: '24px',
+        }}
+      >
+        {table.note}
+      </div>
+    );
+  }
+
+  const widest = table.rows.reduce(
+    (max, row) => Math.max(max, row.reduce((n, c) => n + (c.cs ?? 1), 0)),
+    0
+  );
+
+  return (
+    <div style={{ overflowX: 'auto', border: '1px solid #588078', marginBottom: '24px' }}>
+      <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem', textAlign: 'center' }}>
+        <tbody>
+          {table.rows.map((row, rIdx) => {
+            const span = row.reduce((n, c) => n + (c.cs ?? 1), 0);
+            // A lone full-width cell is a section divider (e.g. "SS 304H").
+            const isDivider = row.length === 1 && (widest === 0 || span >= widest || row.length < widest);
+            const isHeader = rIdx === 0 || isDivider || row.every((c) => c.h);
+
+            return (
+              <tr
+                key={rIdx}
+                style={{
+                  background: isHeader ? '#588078' : rIdx % 2 === 0 ? '#FFFFFF' : '#F8F8F8',
+                  borderBottom: '1px solid #E0E8E8',
+                }}
+              >
+                {row.map((c, i) => {
+                  const Tag = isHeader || c.h ? 'th' : 'td';
+                  return (
+                    <Tag
+                      key={i}
+                      colSpan={c.cs}
+                      rowSpan={c.rs}
+                      style={{
+                        padding: '11px 12px',
+                        borderRight: '1px solid ' + (isHeader ? 'rgba(255,255,255,0.25)' : '#E0E8E8'),
+                        background: isHeader ? '#588078' : 'transparent',
+                        color: isHeader ? '#FFFFFF' : '#304050',
+                        fontWeight: isHeader ? 700 : 600,
+                        textAlign: isDivider ? 'left' : 'center',
+                        verticalAlign: 'middle',
+                        minWidth: '68px',
+                      }}
+                    >
+                      {c.t}
+                    </Tag>
+                  );
+                })}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+const SpecHeading: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <h3
+    style={{
+      fontSize: '1.05rem',
+      fontWeight: 800,
+      color: '#304050',
+      marginBottom: '16px',
+      textTransform: 'uppercase',
+      letterSpacing: '0.4px',
+    }}
+  >
+    {children}
+  </h3>
+);
+
 export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuoteModal }) => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -339,6 +434,9 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
     );
     return match || catalogProducts[0];
   }, [rawId]);
+
+  // Published spec tables for this exact product, when we carry them.
+  const spec = useMemo(() => champakSpecs[currentProduct.id], [currentProduct]);
 
   const composition = useMemo(
     () => getAlloyComposition(currentProduct.title),
@@ -391,7 +489,20 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
 
   const [activeImage, setActiveImage] = useState<string>(galleryImages[0]);
   const [quantityKgs] = useState<number>(500);
-  const [activeTab, setActiveTab] = useState<'desc' | 'specs' | 'comp' | 'apps'>('desc');
+  type TabKey = 'equiv' | 'comp' | 'specs' | 'desc' | 'apps';
+  // Equivalent Grades leads when we have it, matching the published running order.
+  const [activeTab, setActiveTab] = useState<TabKey>(spec?.equivalent ? 'equiv' : 'comp');
+
+  const [appsExpanded, setAppsExpanded] = useState(false);
+
+  // Product changes (related-product links reuse this page) must reset the tab.
+  useEffect(() => {
+    setActiveTab(champakSpecs[currentProduct.id]?.equivalent ? 'equiv' : 'comp');
+    setAppsExpanded(false);
+  }, [currentProduct.id]);
+
+  const allApps = spec?.applications ?? appList;
+  const visibleApps = appsExpanded ? allApps : allApps.slice(0, APPS_PREVIEW_COUNT);
 
   // Related products from same category
   const relatedProducts = useMemo(() => {
@@ -624,12 +735,6 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
                     Request Formal Quote <Send size={16} />
                   </button>
                 </div>
-
-                {/* Fast Dispatch Badge */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.82rem', color: '#7C8894' }}>
-                  <Truck size={18} color="#588078" />
-                  <span>100% Heat-Lot Traceability Fast Container Dispatch</span>
-                </div>
               </div>
             </div>
           </div>
@@ -642,6 +747,15 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
           
           {/* Horizontal Tab Navigation (Renamed per Database Scraping Mandate) */}
           <div style={{ display: 'flex', borderBottom: '1px solid #E0E8E8', marginBottom: '32px', overflowX: 'auto' }}>
+            {spec?.equivalent && (
+              <button
+                type="button"
+                className={`tab-btn ${activeTab === 'equiv' ? 'active' : ''}`}
+                onClick={() => setActiveTab('equiv')}
+              >
+                EQUIVALENT GRADES
+              </button>
+            )}
             <button
               type="button"
               className={`tab-btn ${activeTab === 'comp' ? 'active' : ''}`}
@@ -675,8 +789,23 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
           {/* Active Tab Content (Full Width Layout) */}
           <div style={{ width: '100%' }}>
             <div>
-              {/* Section 1: Chemical Composition (Exact Champak Steel Scraped HTML Table Layout) */}
-              {activeTab === 'comp' && (
+              {/* Section 0: Equivalent Grades */}
+              {activeTab === 'equiv' && spec?.equivalent && (
+                <div>
+                  <SpecHeading>{spec.equivalent.heading}</SpecHeading>
+                  <SpecTableView table={spec.equivalent} />
+                </div>
+              )}
+
+              {/* Section 1: Chemical Composition */}
+              {activeTab === 'comp' && spec?.chemical && (
+                <div>
+                  <SpecHeading>{spec.chemical.heading}</SpecHeading>
+                  <SpecTableView table={spec.chemical} />
+                </div>
+              )}
+
+              {activeTab === 'comp' && !spec?.chemical && (
                 <div>
                   <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#304050', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.4px' }}>
                     CHEMICAL COMPOSITION OF STAINLESS STEEL {currentProduct.title.toUpperCase()}
@@ -738,8 +867,15 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
                 </div>
               )}
 
-              {/* Section 2: Mechanical Properties (Exact Champak Steel Scraped HTML Table Layout) */}
-              {activeTab === 'specs' && (
+              {/* Section 2: Mechanical Properties */}
+              {activeTab === 'specs' && spec?.mechanical && (
+                <div>
+                  <SpecHeading>{spec.mechanical.heading}</SpecHeading>
+                  <SpecTableView table={spec.mechanical} />
+                </div>
+              )}
+
+              {activeTab === 'specs' && !spec?.mechanical && (
                 <div>
                   <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#304050', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.4px' }}>
                     MECHANICAL PROPERTIES OF STAINLESS STEEL {currentProduct.title.toUpperCase()}
@@ -802,7 +938,14 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
               )}
 
               {/* Section 3: Physical Properties */}
-              {activeTab === 'desc' && (
+              {activeTab === 'desc' && spec?.physical && (
+                <div>
+                  <SpecHeading>{spec.physical.heading}</SpecHeading>
+                  <SpecTableView table={spec.physical} />
+                </div>
+              )}
+
+              {activeTab === 'desc' && !spec?.physical && (
                 <div>
                   <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#304050', marginBottom: '14px' }}>
                     Physical &amp; Thermal Properties
@@ -835,7 +978,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
                     Certified Application Industries
                   </h3>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                    {appList.map((app) => (
+                    {visibleApps.map((app) => (
                       <div
                         key={app}
                         style={{
@@ -853,6 +996,41 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
                         <CheckCircle2 size={18} color="#588078" /> {app}
                       </div>
                     ))}
+
+                    {/* Beyond four, the rest collapse behind this row. */}
+                    {allApps.length > APPS_PREVIEW_COUNT && (
+                      <button
+                        type="button"
+                        onClick={() => setAppsExpanded((v) => !v)}
+                        aria-expanded={appsExpanded}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '8px',
+                          width: '100%',
+                          padding: '14px 18px',
+                          background: '#FFFFFF',
+                          border: '1px dashed #588078',
+                          fontSize: '0.9rem',
+                          fontWeight: 700,
+                          color: '#588078',
+                          cursor: 'pointer',
+                          fontFamily: 'inherit',
+                        }}
+                      >
+                        {appsExpanded
+                          ? 'View Less'
+                          : `View More (${allApps.length - APPS_PREVIEW_COUNT} more)`}
+                        <ChevronDown
+                          size={16}
+                          style={{
+                            transition: 'transform 200ms ease',
+                            transform: appsExpanded ? 'rotate(180deg)' : 'none',
+                          }}
+                        />
+                      </button>
+                    )}
                   </div>
                 </div>
               )}
@@ -878,18 +1056,21 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
                 </div>
               </div>
 
-              <div style={{ background: '#F8F8F8', border: '1px solid #E0E8E8', padding: '20px' }}>
-                <h4 style={{ fontSize: '0.92rem', fontWeight: 700, color: '#588078', marginBottom: '12px', textTransform: 'uppercase' }}>
-                  International Equivalent Grades
-                </h4>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                  {eqList.map((eq) => (
-                    <span key={eq} style={{ background: '#FFFFFF', border: '1px solid #CBD5E1', padding: '6px 12px', fontSize: '0.82rem', fontWeight: 700, color: '#304050' }}>
-                      {eq}
-                    </span>
-                  ))}
+              {/* Superseded by the Equivalent Grades tab wherever we hold the real table. */}
+              {!spec?.equivalent && (
+                <div style={{ background: '#F8F8F8', border: '1px solid #E0E8E8', padding: '20px' }}>
+                  <h4 style={{ fontSize: '0.92rem', fontWeight: 700, color: '#588078', marginBottom: '12px', textTransform: 'uppercase' }}>
+                    International Equivalent Grades
+                  </h4>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                    {eqList.map((eq) => (
+                      <span key={eq} style={{ background: '#FFFFFF', border: '1px solid #CBD5E1', padding: '6px 12px', fontSize: '0.82rem', fontWeight: 700, color: '#304050' }}>
+                        {eq}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
