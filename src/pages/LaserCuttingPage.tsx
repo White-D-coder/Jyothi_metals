@@ -51,12 +51,12 @@ const processHighlights = [
 ];
 
 const specifications = [
-  { step: '(01)', label: 'Cutting Tolerance', value: '±0.01mm (Sub-micron optical alignment)', image: '/images/precision_parts.png' },
-  { step: '(02)', label: 'Bed Dimensions', value: 'Up to 4000mm x 2000mm full plate bed', image: '/images/titanium_plates.png' },
-  { step: '(03)', label: 'Material Range', value: 'Stainless Steel (304, 316L, 317L, 321, 310S), Titanium, Inconel, Monel, Duplex', image: '/images/stainless_pipes.png' },
-  { step: '(04)', label: 'Thickness Capability', value: '0.5mm to 60mm high-density plate profile cutting', image: '/images/heavy_rolling_mill.jpg' },
-  { step: '(05)', label: 'Machine Capacity', value: '6kW High-Power Fiber Laser Cells & 5-Axis CNC Milling Centers', image: '/images/cnc_laser_blue.jpg' },
-  { step: '(06)', label: 'Edge Finish', value: 'Dross-free nitrogen assist edge finish, ready for immediate welding', image: '/images/flanges_industrial.png' },
+  { step: 'I', label: 'Cutting Tolerance', value: '±0.01mm (Sub-micron optical alignment)', image: '/images/precision_parts.png' },
+  { step: 'II', label: 'Bed Dimensions', value: 'Up to 4000mm x 2000mm full plate bed', image: '/images/titanium_plates.png' },
+  { step: 'III', label: 'Material Range', value: 'Stainless Steel (304, 316L, 317L, 321, 310S), Titanium, Inconel, Monel, Duplex', image: '/images/stainless_pipes.png' },
+  { step: 'IV', label: 'Thickness Capability', value: '0.5mm to 60mm high-density plate profile cutting', image: '/images/heavy_rolling_mill.jpg' },
+  { step: 'V', label: 'Machine Capacity', value: '6kW High-Power Fiber Laser Cells & 5-Axis CNC Milling Centers', image: '/images/cnc_laser_blue.jpg' },
+  { step: 'VI', label: 'Edge Finish', value: 'Dross-free nitrogen assist edge finish, ready for immediate welding', image: '/images/flanges_industrial.png' },
 ];
 
 const equipmentList = [
@@ -127,12 +127,14 @@ const Reveal: React.FC<{ children: React.ReactNode; delay?: number }> = ({ child
             key={spec.label}
             onMouseEnter={() => setHoveredIndex(index)}
             style={{
+              position: 'relative',
               padding: isHovered ? '26px 0' : '20px 0',
               borderBottom: index < items.length - 1 ? '1px solid #E2E8F0' : 'none',
               display: 'flex',
               alignItems: 'center',
               cursor: 'pointer',
               transition: 'all 250ms ease',
+              overflow: 'hidden',
             }}
           >
             {/* Image Thumbnail (Reveals/Expands on Hover) */}
@@ -146,6 +148,8 @@ const Reveal: React.FC<{ children: React.ReactNode; delay?: number }> = ({ child
                 borderRadius: '8px',
                 flexShrink: 0,
                 transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+                position: 'relative',
+                zIndex: 2,
               }}
             >
               <img
@@ -160,15 +164,22 @@ const Reveal: React.FC<{ children: React.ReactNode; delay?: number }> = ({ child
               />
             </div>
 
-            {/* Step Number (01) */}
+            {/* Low Opacity Background Watermark Roman Numeral Behind Title */}
             <div
               style={{
-                fontSize: '1.05rem',
-                fontWeight: 700,
+                position: 'absolute',
+                left: isHovered ? '170px' : '10px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                fontSize: '4.5rem',
+                fontWeight: 900,
+                fontFamily: 'Outfit, serif',
                 color: isHovered ? '#588078' : '#94A3B8',
-                width: '55px',
-                flexShrink: 0,
-                transition: 'color 200ms ease',
+                opacity: isHovered ? 0.18 : 0.10,
+                userSelect: 'none',
+                pointerEvents: 'none',
+                zIndex: 0,
+                transition: 'all 300ms ease',
               }}
             >
               {spec.step}
@@ -184,6 +195,8 @@ const Reveal: React.FC<{ children: React.ReactNode; delay?: number }> = ({ child
                 color: isHovered ? '#0F172A' : '#334155',
                 flex: 1,
                 paddingRight: '24px',
+                position: 'relative',
+                zIndex: 1,
                 transition: 'color 200ms ease',
               }}
             >

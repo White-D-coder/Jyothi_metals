@@ -502,6 +502,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                   <div
                     key={pillar.num}
                     style={{
+                      position: 'relative',
                       background: '#FFFFFF',
                       border: '1px solid #CBD5E1',
                       borderTop: '5px solid #588078',
@@ -512,6 +513,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                       display: 'flex',
                       flexDirection: 'column',
                       justifyContent: 'flex-start',
+                      overflow: 'hidden',
+                      minHeight: '170px',
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.borderColor = '#588078';
@@ -524,29 +527,37 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                       e.currentTarget.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.04)';
                     }}
                   >
-                    {/* Header: Roman Numeral + Title Inline */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '10px' }}>
-                      <span
-                        style={{
-                          fontSize: '3.4rem',
-                          fontWeight: 900,
-                          color: '#588078',
-                          lineHeight: 0.9,
-                          fontFamily: "'Inter', sans-serif",
-                          letterSpacing: '-0.04em',
-                          minWidth: '55px',
-                        }}
-                      >
-                        {pillar.num}
-                      </span>
-                      <h3 style={{ fontSize: '1.12rem', fontWeight: 800, color: '#304050', margin: 0, lineHeight: 1.3, letterSpacing: '0.2px' }}>
+                    {/* Low Opacity Background Watermark Roman Numeral Behind Title */}
+                    <span
+                      style={{
+                        position: 'absolute',
+                        right: '12px',
+                        top: '12px',
+                        fontSize: '4.8rem',
+                        fontWeight: 900,
+                        color: '#588078',
+                        opacity: 0.3,
+                        lineHeight: 0.9,
+                        fontFamily: "'Inter', sans-serif",
+                        letterSpacing: '-0.04em',
+                        userSelect: 'none',
+                        pointerEvents: 'none',
+                        zIndex: 0,
+                        transition: 'opacity 250ms ease, transform 250ms ease',
+                      }}
+                    >
+                      {pillar.num}
+                    </span>
+
+                    {/* Card Content sitting cleanly in front */}
+                    <div style={{ position: 'relative', zIndex: 1 }}>
+                      <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#304050', marginTop: 0, marginBottom: '10px', lineHeight: 1.3, letterSpacing: '0.2px', textTransform: 'uppercase' }}>
                         {pillar.title}
                       </h3>
+                      <p style={{ fontSize: '0.86rem', color: '#64748B', lineHeight: 1.58, margin: 0 }}>
+                        {pillar.desc}
+                      </p>
                     </div>
-
-                    <p style={{ fontSize: '0.86rem', color: '#64748B', lineHeight: 1.58, margin: 0 }}>
-                      {pillar.desc}
-                    </p>
                   </div>
                 ))}
               </div>

@@ -51,12 +51,12 @@ const processHighlights = [
 ];
 
 const specifications = [
-  { step: '(01)', label: 'Furnace Type', value: 'Double-shell Electric Arc Furnace (EAF) & Ladle Refining Furnace (LRF)', image: '/images/furnace_melt.jpg' },
-  { step: '(02)', label: 'Annual Melt Capacity', value: '50,000 Metric Tons of certified alloy billets, blooms & slabs', image: '/images/heavy_rolling_mill.jpg' },
-  { step: '(03)', label: 'Refining Process', value: 'Vacuum Oxygen Decarburization (VOD) & Argon Oxygen Decarburization (AOD)', image: '/images/quality_lab.jpg' },
-  { step: '(04)', label: 'Billet & Slab Range', value: 'Square Billets 100mm to 300mm | Slabs up to 1500mm width x 250mm thickness', image: '/images/titanium_plates.png' },
-  { step: '(05)', label: 'Alloy Grade Coverage', value: '200+ certified grades: Stainless Steel, Super Alloys, Titanium', image: '/images/round_bars.png' },
-  { step: '(06)', label: 'Melt Purity Standard', value: 'Sub-ppm gas analysis with 100% Optical Emission Spectrometry per heat lot', image: '/images/pexels-tokuo-nobuhiro-79378678-20472153.jpg' },
+  { step: 'I', label: 'Furnace Type', value: 'Double-shell Electric Arc Furnace (EAF) & Ladle Refining Furnace (LRF)', image: '/images/furnace_melt.jpg' },
+  { step: 'II', label: 'Annual Melt Capacity', value: '50,000 Metric Tons of certified alloy billets, blooms & slabs', image: '/images/heavy_rolling_mill.jpg' },
+  { step: 'III', label: 'Refining Process', value: 'Vacuum Oxygen Decarburization (VOD) & Argon Oxygen Decarburization (AOD)', image: '/images/quality_lab.jpg' },
+  { step: 'IV', label: 'Billet & Slab Range', value: 'Square Billets 100mm to 300mm | Slabs up to 1500mm width x 250mm thickness', image: '/images/titanium_plates.png' },
+  { step: 'V', label: 'Alloy Grade Coverage', value: '200+ certified grades: Stainless Steel, Super Alloys, Titanium', image: '/images/round_bars.png' },
+  { step: 'VI', label: 'Melt Purity Standard', value: 'Sub-ppm gas analysis with 100% Optical Emission Spectrometry per heat lot', image: '/images/pexels-tokuo-nobuhiro-79378678-20472153.jpg' },
 ];
 
 const equipmentList = [
@@ -127,12 +127,14 @@ const SpecHoverList: React.FC<{ items: typeof specifications }> = ({ items }) =>
             key={spec.label}
             onMouseEnter={() => setHoveredIndex(index)}
             style={{
+              position: 'relative',
               padding: isHovered ? '26px 0' : '20px 0',
               borderBottom: index < items.length - 1 ? '1px solid #E2E8F0' : 'none',
               display: 'flex',
               alignItems: 'center',
               cursor: 'pointer',
               transition: 'all 250ms ease',
+              overflow: 'hidden',
             }}
           >
             {/* Image Thumbnail (Reveals/Expands on Hover) */}
@@ -146,6 +148,8 @@ const SpecHoverList: React.FC<{ items: typeof specifications }> = ({ items }) =>
                 borderRadius: '8px',
                 flexShrink: 0,
                 transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+                position: 'relative',
+                zIndex: 2,
               }}
             >
               <img
@@ -160,15 +164,22 @@ const SpecHoverList: React.FC<{ items: typeof specifications }> = ({ items }) =>
               />
             </div>
 
-            {/* Step Number (01) */}
+            {/* Low Opacity Background Watermark Roman Numeral Behind Title */}
             <div
               style={{
-                fontSize: '1.05rem',
-                fontWeight: 700,
+                position: 'absolute',
+                left: isHovered ? '170px' : '10px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                fontSize: '4.5rem',
+                fontWeight: 900,
+                fontFamily: 'Outfit, serif',
                 color: isHovered ? '#588078' : '#94A3B8',
-                width: '55px',
-                flexShrink: 0,
-                transition: 'color 200ms ease',
+                opacity: isHovered ? 0.18 : 0.10,
+                userSelect: 'none',
+                pointerEvents: 'none',
+                zIndex: 0,
+                transition: 'all 300ms ease',
               }}
             >
               {spec.step}
@@ -184,6 +195,8 @@ const SpecHoverList: React.FC<{ items: typeof specifications }> = ({ items }) =>
                 color: isHovered ? '#0F172A' : '#334155',
                 flex: 1,
                 paddingRight: '24px',
+                position: 'relative',
+                zIndex: 1,
                 transition: 'color 200ms ease',
               }}
             >

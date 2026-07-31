@@ -51,12 +51,12 @@ const processHighlights = [
 ];
 
 const specifications = [
-  { step: '(01)', label: 'NDT Standard Compliance', value: 'ASME Sec V, EN ISO 17640, ASTM A388, API 1104, BS EN 10228', image: '/images/quality_lab.jpg' },
-  { step: '(02)', label: 'Defect Detection Threshold', value: 'Sub-surface inclusions & weld laminations down to 0.1mm', image: '/images/pexels-pppsdavid-5851494.jpg' },
-  { step: '(03)', label: 'Probe Technology', value: 'Phased-Array Ultrasonic (PAUT) 1MHz – 15MHz multi-element transducers', image: '/images/pexels-willians-huerta-2157111846-36397988.jpg' },
-  { step: '(04)', label: 'Complementary NDT Methods', value: 'Radiographic (X-Ray), Dye Penetrant (DPT), Magnetic Particle (MPI)', image: '/images/stainless_pipes.png' },
-  { step: '(05)', label: 'Inspector Certification', value: '100% in-house inspection conducted by ASNT Level II & III certified personnel', image: '/images/pexels-bence-szemerey-337043-6804265.jpg' },
-  { step: '(06)', label: 'Documentation Output', value: 'EN 10204 3.1 / 3.2 NDT Inspection Certificate + Digital Scan Records', image: '/images/pexels-jakubzerdzicki-33813584.jpg' },
+  { step: 'I', label: 'NDT Standard Compliance', value: 'ASME Sec V, EN ISO 17640, ASTM A388, API 1104, BS EN 10228', image: '/images/quality_lab.jpg' },
+  { step: 'II', label: 'Defect Detection Threshold', value: 'Sub-surface inclusions & weld laminations down to 0.1mm', image: '/images/pexels-pppsdavid-5851494.jpg' },
+  { step: 'III', label: 'Probe Technology', value: 'Phased-Array Ultrasonic (PAUT) 1MHz – 15MHz multi-element transducers', image: '/images/pexels-willians-huerta-2157111846-36397988.jpg' },
+  { step: 'IV', label: 'Complementary NDT Methods', value: 'Radiographic (X-Ray), Dye Penetrant (DPT), Magnetic Particle (MPI)', image: '/images/stainless_pipes.png' },
+  { step: 'V', label: 'Inspector Certification', value: '100% in-house inspection conducted by ASNT Level II & III certified personnel', image: '/images/pexels-bence-szemerey-337043-6804265.jpg' },
+  { step: 'VI', label: 'Documentation Output', value: 'EN 10204 3.1 / 3.2 NDT Inspection Certificate + Digital Scan Records', image: '/images/pexels-jakubzerdzicki-33813584.jpg' },
 ];
 
 const equipmentList = [
@@ -127,12 +127,14 @@ const SpecHoverList: React.FC<{ items: typeof specifications }> = ({ items }) =>
             key={spec.label}
             onMouseEnter={() => setHoveredIndex(index)}
             style={{
+              position: 'relative',
               padding: isHovered ? '26px 0' : '20px 0',
               borderBottom: index < items.length - 1 ? '1px solid #E2E8F0' : 'none',
               display: 'flex',
               alignItems: 'center',
               cursor: 'pointer',
               transition: 'all 250ms ease',
+              overflow: 'hidden',
             }}
           >
             {/* Image Thumbnail (Reveals/Expands on Hover) */}
@@ -146,6 +148,8 @@ const SpecHoverList: React.FC<{ items: typeof specifications }> = ({ items }) =>
                 borderRadius: '8px',
                 flexShrink: 0,
                 transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+                position: 'relative',
+                zIndex: 2,
               }}
             >
               <img
@@ -160,15 +164,22 @@ const SpecHoverList: React.FC<{ items: typeof specifications }> = ({ items }) =>
               />
             </div>
 
-            {/* Step Number (01) */}
+            {/* Low Opacity Background Watermark Roman Numeral Behind Title */}
             <div
               style={{
-                fontSize: '1.05rem',
-                fontWeight: 700,
+                position: 'absolute',
+                left: isHovered ? '170px' : '10px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                fontSize: '4.5rem',
+                fontWeight: 900,
+                fontFamily: 'Outfit, serif',
                 color: isHovered ? '#588078' : '#94A3B8',
-                width: '55px',
-                flexShrink: 0,
-                transition: 'color 200ms ease',
+                opacity: isHovered ? 0.18 : 0.10,
+                userSelect: 'none',
+                pointerEvents: 'none',
+                zIndex: 0,
+                transition: 'all 300ms ease',
               }}
             >
               {spec.step}
@@ -184,6 +195,8 @@ const SpecHoverList: React.FC<{ items: typeof specifications }> = ({ items }) =>
                 color: isHovered ? '#0F172A' : '#334155',
                 flex: 1,
                 paddingRight: '24px',
+                position: 'relative',
+                zIndex: 1,
                 transition: 'color 200ms ease',
               }}
             >
