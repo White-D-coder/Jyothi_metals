@@ -434,7 +434,7 @@ export const WeldInspectionPage: React.FC<WeldInspectionPageProps> = ({ onOpenQu
       </section>
 
       {/* 2. Top Horizontal Sticky Sub-Navigation Bar */}
-      <CapabilityNav currentPath="/services/weld-inspection" />
+      <CapabilityNav currentPath="/services/weld-inspection" showQualityTabs={false} />
 
       {/* 3. Section 1: Feature Split Showcase */}
       <section style={{ padding: '60px 0' }}>

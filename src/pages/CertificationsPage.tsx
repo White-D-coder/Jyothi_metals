@@ -68,25 +68,21 @@ const auditTimeline = [
     step: '01',
     title: 'Melt Heat Sampling & Spectral Analysis',
     desc: 'Double-sample Optical Emission Spectrometry (OES) verifies exact elemental chemistry before ladle tapping, assigning 100% heat-lot numbers.',
-    image: '/images/pexels-tokuo-nobuhiro-79378678-20472153.jpg',
   },
   {
     step: '02',
     title: 'Mechanical Testing & NDT Volumetric Audit',
     desc: 'Tensile, impact toughness, 25,000 PSI hydrostatic pressure, and ASME Sec V ultrasonic scanning executed on test coupons.',
-    image: '/images/pexels-pppsdavid-5851494.jpg',
   },
   {
     step: '03',
     title: 'Third-Party Independent Agency Witnessing',
     desc: 'Independent inspector (DNV/Lloyds/TUV) reviews test results, performs physical coupon stamping, and signs EN 10204 3.2 certificates.',
-    image: '/images/pexels-willians-huerta-2157111846-36397988.jpg',
   },
   {
     step: '04',
     title: 'Sealed Dispatch & Digital Archiving',
     desc: 'Final material batch dispatched with QR-code laser-etched Mill Test Certificate archived in our secure database for 25 years.',
-    image: '/images/pexels-jakubzerdzicki-33813584.jpg',
   },
 ];
 
@@ -403,7 +399,7 @@ export const CertificationsPage: React.FC<CertificationsPageProps> = ({ onOpenQu
       </section>
 
       {/* 4. Section 2: Single Master Accordion for 4-Stage Audit Process (Crisp Light Theme Redesign) */}
-      <section style={{ padding: '80px 0', background: '#ffffffff'}}>
+      <section style={{ padding: '80px 0 40px', background: '#ffffffff'}}>
         <div className="container" style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 20px' }}>
           <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 40px' }}>
             <span style={{ fontSize: '0.78rem', fontWeight: 700, color: COLORS.accent, letterSpacing: '0.8px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
@@ -430,35 +426,50 @@ export const CertificationsPage: React.FC<CertificationsPageProps> = ({ onOpenQu
                 <div
                   key={item.step}
                   style={{
+                    position: 'relative',
                     background: '#FFFFFF',
                     border: '1px solid #E2E8F0',
+                    borderTop: '5px solid #588078',
                     boxShadow: '0 4px 20px rgba(0, 0, 0, 0.03)',
+                    padding: '28px 24px',
+                    minHeight: '210px',
                     display: 'flex',
                     flexDirection: 'column',
                     overflow: 'hidden',
+                    transition: 'border-color 250ms ease, box-shadow 250ms ease, transform 250ms ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-4px)';
+                    e.currentTarget.style.boxShadow = '0 10px 24px rgba(88, 128, 120, 0.12)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.03)';
                   }}
                 >
-                  {/* Top: huge number rotated -90deg */}
-                  <div style={{ padding: '30px 20px 10px', height: '130px', display: 'flex', alignItems: 'flex-start' }}>
-                    <div
-                      style={{
-                        fontSize: '5.5rem',
-                        fontWeight: 900,
-                        color: '#588078',
-                        lineHeight: 1,
-                        transform: 'rotate(-90deg)',
-                        transformOrigin: 'center center',
-                        letterSpacing: '-2px',
-                        fontFamily: "'Inter', sans-serif",
-                        userSelect: 'none',
-                      }}
-                    >
-                      {item.step}
-                    </div>
-                  </div>
+                  {/* Low opacity background watermark number at the right corner */}
+                  <span
+                    style={{
+                      position: 'absolute',
+                      right: '12px',
+                      top: '12px',
+                      fontSize: '4.8rem',
+                      fontWeight: 900,
+                      color: '#588078',
+                      opacity: 0.3,
+                      lineHeight: 0.9,
+                      fontFamily: "'Inter', sans-serif",
+                      letterSpacing: '-0.04em',
+                      userSelect: 'none',
+                      pointerEvents: 'none',
+                      zIndex: 0,
+                    }}
+                  >
+                    {item.step}
+                  </span>
 
-                  {/* Middle: title + desc text */}
-                  <div style={{ padding: '20px 24px 30px', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
+                  {/* Card content sitting cleanly in front */}
+                  <div style={{ position: 'relative', zIndex: 1 }}>
                     <p
                       style={{
                         fontSize: '0.88rem',
@@ -470,23 +481,6 @@ export const CertificationsPage: React.FC<CertificationsPageProps> = ({ onOpenQu
                       <strong style={{ display: 'block', marginBottom: '8px', fontSize: '0.95rem', color: '#0F172A' }}>{item.title}</strong>
                       {item.desc}
                     </p>
-                  </div>
-
-                  {/* Bottom: image */}
-                  <div style={{ overflow: 'hidden', height: '300px' }}>
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        display: 'block',
-                        transition: 'transform 400ms ease',
-                      }}
-                      onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.05)'; }}
-                      onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; }}
-                    />
                   </div>
                 </div>
               ))}
@@ -502,7 +496,7 @@ export const CertificationsPage: React.FC<CertificationsPageProps> = ({ onOpenQu
         style={{
           background: '#FFFFFF',
           color: COLORS.text,
-          padding: '70px 0',
+          padding: '30px 0 70px',
           textAlign: 'center',
         }}
       >

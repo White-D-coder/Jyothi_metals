@@ -43,12 +43,17 @@ export const CAPABILITY_NAV_ITEMS: NavItem[] = [
 
 interface CapabilityNavProps {
   currentPath: string;
+  /** Set to false on the service pages to hide the Quality Policy / Certifications tabs. */
+  showQualityTabs?: boolean;
 }
 
-export const CapabilityNav: React.FC<CapabilityNavProps> = ({ currentPath }) => {
+export const CapabilityNav: React.FC<CapabilityNavProps> = ({ currentPath, showQualityTabs = true }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const activePath = currentPath || location.pathname;
+  const navItems = showQualityTabs
+    ? CAPABILITY_NAV_ITEMS
+    : CAPABILITY_NAV_ITEMS.filter((item) => item.category === 'capability');
 
   return (
     <nav
@@ -138,7 +143,7 @@ export const CapabilityNav: React.FC<CapabilityNavProps> = ({ currentPath }) => 
             minWidth: '100%',
           }}
         >
-          {CAPABILITY_NAV_ITEMS.map((item, index) => {
+          {navItems.map((item, index) => {
             const isActive = activePath === item.path;
             return (
               <React.Fragment key={item.path}>

@@ -1,40 +1,156 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
   ArrowRight,
   Cpu,
   ShieldCheck,
   Zap,
   Globe2,
-  ChevronDown,
+  CheckCircle2,
 } from 'lucide-react';
 
 interface AboutPageProps {
   onOpenQuoteModal: (productName?: string) => void;
 }
 
+const timelineMilestones = [
+  {
+    year: '1991',
+    title: 'Foundation & Regional Foundry Hub',
+    desc: 'Established as a specialized regional foundry in India providing precision stainless steel castings to domestic oil refineries and chemical plants with 100% heat-lot chemistry tracking.',
+    image: '/images/pexels-bence-szemerey-337043-6804265.jpg',
+  },
+  {
+    year: '2004',
+    title: 'ISO 9001:2015 Quality Accreditation',
+    desc: 'Achieved full ISO accreditation and introduced computer-guided ultrasonic non-destructive testing vaults across all continuous casting production lines.',
+    image: '/images/pexels-tokuo-nobuhiro-79378678-20472153.jpg',
+  },
+  {
+    year: '2012',
+    title: 'Aerospace & Defense Titanium Expansion',
+    desc: 'Commissioned titanium and nickel superalloy vacuum arc remelting (VAR) furnaces, securing AS9100D aerospace certification for Tier-1 defense turbine contractors.',
+    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+  },
+  {
+    year: '2020',
+    title: '98% Circular Electric Arc Recycling',
+    desc: 'Transitioned melt shop operations to 98% circular scrap recycling and zero-discharge closed-loop water treatment systems with official EPD Environmental Declarations.',
+    image: '/images/pexels-jakubzerdzicki-33813584.jpg',
+  },
+  {
+    year: '2024',
+    title: 'Multi-Axis CNC Laser Cell Integration',
+    desc: 'Expanded fabrication floor area to 120,000 m² with 6kW & 12kW fiber optic CNC laser cutting lines for sub-micron kerf edge tolerance component manufacturing.',
+    image: '/images/pexels-pppsdavid-5851494.jpg',
+  },
+  {
+    year: '2026',
+    title: 'Global Aerospace Stock Warehouse Expansion',
+    desc: 'Established strategic stock holding hubs across Europe and North America guaranteeing 48-hour container dispatch on EN 10204 3.2 certified stock.',
+    image: '/images/pexels-eugeniofr-30005294.jpg',
+  },
+];
+
+const TIMELINE_STEPS = timelineMilestones.length;
+
 export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
-  const [isTimelineOpen, setIsTimelineOpen] = useState<boolean>(false);
-  const timelineRef = useRef<HTMLDivElement>(null);
-  const hasAutoOpened = useRef<boolean>(false);
+  const [activeMilestone, setActiveMilestone] = useState<number>(0);
+
+  /*
+   * Timeline scroll-pin.
+   *
+   * The section is made TIMELINE_STEPS steps tall and its contents stick to the
+   * viewport, so scrolling inside it advances the year instead of moving the
+   * page. Once the last year is reached the sticky child releases and the page
+   * scrolls on normally. Driven by native sticky + scroll position rather than
+   * by swallowing wheel events, so trackpad, keyboard and scrollbar all keep
+   * working and there is nothing to un-break if a listener ever misses.
+   *
+   * Pinning is skipped on narrow viewports, for reduced-motion users, and
+   * whenever the content does not actually fit the viewport — a pinned block
+   * taller than the screen would clip its own heading with no way to scroll to
+   * it. In those cases the rail stays plain click-to-select and no scroll is
+   * intercepted.
+   */
+  const timelinePinRef = useRef<HTMLElement>(null);
+  const timelineContentRef = useRef<HTMLDivElement>(null);
+  const [pinEnabled, setPinEnabled] = useState<boolean>(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (entry.isIntersecting && !hasAutoOpened.current) {
-          hasAutoOpened.current = true;
-          setIsTimelineOpen(true);
-        }
-      },
-      { threshold: 0.2 }
-    );
+    const wideEnough = window.matchMedia('(min-width: 1025px)');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-    if (timelineRef.current) {
-      observer.observe(timelineRef.current);
-    }
+    const sync = () => {
+      const content = timelineContentRef.current;
+      // Measured rather than guessed via a min-height media query, and with
+      // headroom so a viewport sitting exactly on the boundary cannot flap
+      // between pinned and unpinned as the layout changes under it.
+      const fits = !!content && content.offsetHeight + 48 <= window.innerHeight;
+      setPinEnabled(wideEnough.matches && !reduceMotion.matches && fits);
+    };
 
-    return () => observer.disconnect();
+    sync();
+    window.addEventListener('resize', sync);
+    wideEnough.addEventListener('change', sync);
+    reduceMotion.addEventListener('change', sync);
+    return () => {
+      window.removeEventListener('resize', sync);
+      wideEnough.removeEventListener('change', sync);
+      reduceMotion.removeEventListener('change', sync);
+    };
   }, []);
+
+  useEffect(() => {
+    if (!pinEnabled) return;
+
+    let frame = 0;
+    const readProgress = () => {
+      frame = 0;
+      const el = timelinePinRef.current;
+      if (!el) return;
+
+      const travel = el.offsetHeight - window.innerHeight;
+      if (travel <= 0) return;
+
+      const progress = Math.min(1, Math.max(0, -el.getBoundingClientRect().top / travel));
+      const idx = Math.round(progress * (TIMELINE_STEPS - 1));
+      setActiveMilestone((prev) => (prev === idx ? prev : idx));
+    };
+
+    const onScroll = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(readProgress);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    readProgress();
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, [pinEnabled]);
+
+  // Clicking a year has to move the page too, otherwise the next scroll tick
+  // would snap straight back to whatever the scroll position says.
+  const goToMilestone = useCallback(
+    (idx: number) => {
+      setActiveMilestone(idx);
+
+      const el = timelinePinRef.current;
+      if (!pinEnabled || !el) return;
+
+      const travel = el.offsetHeight - window.innerHeight;
+      if (travel <= 0) return;
+
+      const sectionTop = window.scrollY + el.getBoundingClientRect().top;
+      const target = sectionTop + (idx / (TIMELINE_STEPS - 1)) * travel;
+      window.scrollTo({ top: target, behavior: 'smooth' });
+    },
+    [pinEnabled]
+  );
 
   const executivePillars = [
     {
@@ -71,45 +187,6 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
     },
   ];
 
-  const timelineMilestones = [
-    {
-      year: '1991',
-      title: 'Foundation & Regional Foundry Hub',
-      desc: 'Established as a specialized regional foundry in India providing precision stainless steel castings to domestic oil refineries and chemical plants with 100% heat-lot chemistry tracking.',
-      image: '/images/pexels-bence-szemerey-337043-6804265.jpg',
-    },
-    {
-      year: '2004',
-      title: 'ISO 9001:2015 Quality Accreditation',
-      desc: 'Achieved full ISO accreditation and introduced computer-guided ultrasonic non-destructive testing vaults across all continuous casting production lines.',
-      image: '/images/pexels-tokuo-nobuhiro-79378678-20472153.jpg',
-    },
-    {
-      year: '2012',
-      title: 'Aerospace & Defense Titanium Expansion',
-      desc: 'Commissioned titanium and nickel superalloy vacuum arc remelting (VAR) furnaces, securing AS9100D aerospace certification for Tier-1 defense turbine contractors.',
-      image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
-    },
-    {
-      year: '2020',
-      title: '98% Circular Electric Arc Recycling',
-      desc: 'Transitioned melt shop operations to 98% circular scrap recycling and zero-discharge closed-loop water treatment systems with official EPD Environmental Declarations.',
-      image: '/images/pexels-jakubzerdzicki-33813584.jpg',
-    },
-    {
-      year: '2024',
-      title: 'Multi-Axis CNC Laser Cell Integration',
-      desc: 'Expanded fabrication floor area to 120,000 m² with 6kW & 12kW fiber optic CNC laser cutting lines for sub-micron kerf edge tolerance component manufacturing.',
-      image: '/images/pexels-pppsdavid-5851494.jpg',
-    },
-    {
-      year: '2026',
-      title: 'Global Aerospace Stock Warehouse Expansion',
-      desc: 'Established strategic stock holding hubs across Europe and North America guaranteeing 48-hour container dispatch on EN 10204 3.2 certified stock.',
-      image: '/images/pexels-eugeniofr-30005294.jpg',
-    },
-  ];
-
   const certifications = [
     {
       code: 'ISO 9001:2015',
@@ -137,6 +214,21 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
     },
   ];
 
+  const legacyPillars = [
+    {
+      title: 'Our Mission',
+      desc: 'To deliver certified zero-defect metallurgical products with complete chemical traceability, competitive lead times, and uncompromised technical integrity across global markets.',
+    },
+    {
+      title: 'Our Vision',
+      desc: "To be the world's most trusted partner for high-performance alloy stockholding, advanced structural steel supply, and custom engineering fabrication.",
+    },
+    {
+      title: 'Core Values',
+      desc: 'Absolute Spectral Purity, EN 10204 3.1/3.2 Certification, Customer-Centric SLA Execution, and Sustainable Electric Arc Furnace Melting.',
+    },
+  ];
+
   return (
     <div className="about-page-root" style={{ background: '#F8F8F8', minHeight: '100vh', color: '#304050' }}>
       <style>{`
@@ -144,82 +236,201 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
           font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
-        .single-accordion-wrapper {
-          position: relative;
-          margin-top: 20px;
-        }
-        .single-accordion-layer-2 {
-          position: absolute;
-          bottom: -8px;
-          left: 14px;
-          right: 14px;
-          height: 16px;
-          background: #FFFFFF;
-          border: 5px solid #E0E8E8;
-          z-index: 1;
-        }
-        .single-accordion-layer-1 {
-          position: absolute;
-          bottom: -4px;
-          left: 7px;
-          right: 7px;
-          height: 12px;
-          background: #F4F6F8;
-          border: 1px solid #E0E8E8;
-          z-index: 2;
-        }
-        .single-accordion-main {
-          position: relative;
-          z-index: 3;
-          background: #FFFFFF;
-          border: 1px solid #E0E8E8;
-          border-radius: 0;
-          overflow: hidden;
+        .feature-split-grid {
+          display: grid;
+          grid-template-columns: 1.1fr 0.9fr;
+          gap: 40px;
+          align-items: center;
         }
 
-        .timeline-row-item {
-          display: grid;
-          grid-template-columns: 120px 1fr 220px;
-          gap: 28px;
+        @media (max-width: 1024px) {
+          .feature-split-grid { grid-template-columns: 1fr; gap: 32px; }
+        }
+
+        /* Scroll-pinned timeline section.
+           Unpinned it is an ordinary section; pinned, the section box is made
+           several viewports tall (inline height) and the inner sticks. */
+        .timeline-pin-section {
+          padding: 52px 0;
+          background: #FFFFFF;
+          border-bottom: 1px solid #E0E8E8;
+        }
+        .timeline-pin-section.is-pinned {
+          padding: 0;
+          position: relative;
+        }
+        .timeline-pin-section.is-pinned .timeline-pin-inner {
+          position: sticky;
+          top: 0;
+          height: 100vh;
+          display: flex;
           align-items: center;
-          padding: 24px 28px;
-          transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
-          background: #ffffffff;
-          border-left: 3px solid transparent;
+          background: #FFFFFF;
+        }
+
+        /* The column stretches to the pillars grid beside it, and the chain
+           below passes that height down to the detail card so both columns
+           finish on the same line. */
+        .timeline-col {
+          display: flex;
+          flex-direction: column;
+        }
+
+        /* Timeline: year rail on the left, one milestone detail on the right */
+        .timeline-split {
+          flex: 1;
+          display: grid;
+          grid-template-columns: 92px 1fr;
+          gap: 24px;
+          align-items: stretch;
+        }
+
+        .timeline-rail {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          border-left: 2px solid #E0E8E8;
+          /* Kept at natural height so the progress fill stays aligned with
+             the year buttons rather than the stretched column. */
+          align-self: start;
+        }
+        .timeline-rail-progress {
+          position: absolute;
+          left: -2px;
+          top: 0;
+          width: 2px;
+          background: #588078;
+          transition: height 350ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .timeline-year-btn {
+          position: relative;
+          z-index: 1;
+          appearance: none;
+          background: none;
+          border: 0;
+          padding: 12px 0 12px 16px;
+          font-family: inherit;
+          font-size: 1.05rem;
+          font-weight: 800;
+          color: #A3AEB8;
+          text-align: left;
           cursor: pointer;
+          transition: color 200ms ease;
         }
-        .timeline-row-item:hover {
-          background: #F8FAF9;
-          border-left-color: #588078;
-        }
-        .timeline-row-item:hover .timeline-img-frame img {
-          transform: scale(1.06);
-        }
-        .timeline-row-item:hover .timeline-year-text {
+        .timeline-year-btn:hover {
           color: #588078;
         }
-
-        .timeline-img-frame {
-          height: 140px;
-          overflow: hidden;
-          border: 1px solid #E0E8E8;
-          position: relative;
+        .timeline-year-btn.is-active {
+          color: #304050;
         }
-        .timeline-img-frame img {
+        .timeline-year-btn:focus-visible {
+          outline: 2px solid #588078;
+          outline-offset: 2px;
+        }
+
+        .timeline-detail {
+          display: flex;
+          flex-direction: column;
+          background: #FFFFFF;
+          border: 1px solid #E0E8E8;
+          border-top: 4px solid #588078;
+          overflow: hidden;
+          animation: timelineFade 320ms ease;
+        }
+        @keyframes timelineFade {
+          from { opacity: 0; transform: translateY(6px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        /* Absorbs the spare height, so a taller column grows the photo
+           instead of leaving dead space under the description. */
+        .timeline-detail-img {
+          position: relative;
+          flex: 1;
+          min-height: 190px;
+          overflow: hidden;
+          border-bottom: 1px solid #E0E8E8;
+        }
+        /* Absolute so the photo contributes no intrinsic height: in a flex
+           column a percentage height resolves against an indefinite parent and
+           the browser falls back to the file's natural size, which would let
+           the image drive the column height instead of filling what is left. */
+        .timeline-detail-img img {
+          position: absolute;
+          inset: 0;
           width: 100%;
           height: 100%;
           object-fit: cover;
-          transition: transform 300ms ease;
+          display: block;
+        }
+        /* Fixed floor so the card does not resize as descriptions change
+           length — while pinned that would shift the whole layout. */
+        .timeline-detail-body {
+          flex: none;
+          padding: 22px 24px 26px;
+          min-height: 172px;
+        }
+        .timeline-detail-year {
+          display: block;
+          font-size: 0.75rem;
+          font-weight: 800;
+          color: #588078;
+          letter-spacing: 0.8px;
+          margin-bottom: 8px;
+        }
+        .timeline-detail-title {
+          font-size: 1.12rem;
+          font-weight: 800;
+          color: #304050;
+          line-height: 1.3;
+          text-transform: uppercase;
+          letter-spacing: 0.2px;
+          margin: 0 0 10px 0;
+        }
+        .timeline-detail-desc {
+          font-size: 0.88rem;
+          color: #64748B;
+          line-height: 1.6;
+          margin: 0;
         }
 
+        @media (prefers-reduced-motion: reduce) {
+          .timeline-detail { animation: none; }
+        }
+
+        /* Mobile: rail turns into a horizontal scrollable year strip */
         @media (max-width: 768px) {
-          .timeline-row-item {
+          .timeline-split {
             grid-template-columns: 1fr;
             gap: 16px;
-            padding: 20px;
           }
-          .timeline-img-frame {
-            height: 180px;
+          .timeline-rail {
+            flex-direction: row;
+            border-left: 0;
+            border-bottom: 2px solid #E0E8E8;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+          }
+          /* Vertical fill makes no sense on a horizontal strip; the active
+             button underline carries the state instead. */
+          .timeline-rail-progress {
+            display: none;
+          }
+          .timeline-year-btn {
+            padding: 10px 16px;
+            flex-shrink: 0;
+          }
+          .timeline-year-btn.is-active {
+            box-shadow: inset 0 -2px 0 #588078;
+          }
+          /* Single column on mobile, so there is no neighbour to match
+             heights with — the photo goes back to a fixed band. */
+          .timeline-detail-img {
+            flex: none;
+            height: 160px;
+            min-height: 0;
+          }
+          .timeline-detail-body {
+            min-height: 0;
           }
         }
 
@@ -291,96 +502,85 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
       </section>
 
       {/* 1.5. About Us Overview Paragraphs & Mission / Vision Section */}
-      <section style={{ padding: '48px 0 40px', background: '#F8FAFC', borderBottom: '1px solid #E0E8E8' }}>
+      <section style={{ padding: '50px 0', background: '#FFFFFF', borderBottom: '1px solid #E0E8E8' }}>
         <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
-          {/* Paragraphs Overview */}
-          <div style={{ maxWidth: '960px', margin: '0 auto 40px', textAlign: 'center' }}>
-            <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#588078', letterSpacing: '0.8px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
-              OUR METALLURGICAL LEGACY
-            </span>
-            <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 800, color: '#304050', marginBottom: '18px', lineHeight: 1.25 }}>
-              Engineering Trust &amp; Metallurgical Excellence Since 1991
-            </h2>
-            <p style={{ fontSize: '1.02rem', color: '#475569', lineHeight: 1.7, marginBottom: '14px' }}>
-              Founded in 1991, <strong>Jyoti Metal India</strong> has evolved into one of the country's most reliable manufacturers, stockists, and global exporters of high-grade Stainless Steel, Nickel Alloys, Titanium, Duplex, Carbon Steel, Gasketing Solutions, and Structural Steel products.
-            </p>
-            <p style={{ fontSize: '0.98rem', color: '#64748B', lineHeight: 1.7, margin: 0 }}>
-              Operating advanced continuous casting foundries and CNC laser fabrication units certified under ISO 9001:2015, we maintain 100% heat-lot chemistry traceability to serve critical defense, aerospace, nuclear power, oil &amp; gas, and heavy infrastructure sectors worldwide.
-            </p>
-          </div>
-
-          {/* Mission, Vision & Values Cards */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
-            <div
-              style={{
-                background: '#FFFFFF',
-                border: '1px solid #CBD5E1',
-                borderTop: '4px solid #588078',
-                padding: '28px 24px',
-                boxShadow: '0 4px 14px rgba(0, 0, 0, 0.03)',
-              }}
-            >
-              <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#588078', letterSpacing: '0.6px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
-                PURPOSE
+          <div className="feature-split-grid">
+            <div>
+              <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#588078', letterSpacing: '0.8px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
+                OUR METALLURGICAL LEGACY
               </span>
-              <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#304050', marginBottom: '10px' }}>
-                Our Mission
-              </h3>
-              <p style={{ fontSize: '0.88rem', color: '#64748B', lineHeight: 1.6, margin: 0 }}>
-                To deliver certified zero-defect metallurgical products with complete chemical traceability, competitive lead times, and uncompromised technical integrity across global markets.
+              <h2 style={{ fontSize: 'clamp(1.8rem, 2.8vw, 2.4rem)', fontWeight: 700, color: '#0F172A', marginBottom: '24px', lineHeight: 1.2 }}>
+                Engineering Trust &amp; Metallurgical Excellence Since 1991
+              </h2>
+
+              <blockquote
+                style={{
+                  background: '#F8FAF9',
+                  borderLeft: '4px solid #588078',
+                  border: '1px solid #E2E8F0',
+                  borderLeftWidth: '4px',
+                  padding: '28px 32px',
+                  marginBottom: '28px',
+                  boxShadow: '0 4px 16px rgba(0,0,0,0.03)',
+                }}
+              >
+                <p style={{ fontSize: '1.08rem', fontWeight: 700, color: '#0F172A', lineHeight: 1.6, margin: 0, letterSpacing: '0.3px' }}>
+                  Founded in 1991, Jyoti Metal India has evolved into one of the country&rsquo;s most reliable manufacturers, stockists, and global exporters of high-grade Stainless Steel, Nickel Alloys, Titanium, Duplex, Carbon Steel, Gasketing Solutions, and Structural Steel products.
+                </p>
+              </blockquote>
+
+              <p style={{ fontSize: '1.02rem', color: '#475569', lineHeight: 1.7, margin: 0 }}>
+                Operating advanced continuous casting foundries and CNC laser fabrication units certified under ISO 9001:2015, we maintain 100% heat-lot chemistry traceability to serve critical defense, aerospace, nuclear power, oil &amp; gas, and heavy infrastructure sectors worldwide.
               </p>
             </div>
 
-            <div
-              style={{
-                background: '#FFFFFF',
-                border: '1px solid #CBD5E1',
-                borderTop: '4px solid #588078',
-                padding: '28px 24px',
-                boxShadow: '0 4px 14px rgba(0, 0, 0, 0.03)',
-              }}
-            >
-              <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#588078', letterSpacing: '0.6px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
-                ASPIRATION
-              </span>
-              <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#304050', marginBottom: '10px' }}>
-                Our Vision
-              </h3>
-              <p style={{ fontSize: '0.88rem', color: '#64748B', lineHeight: 1.6, margin: 0 }}>
-                To be the world's most trusted partner for high-performance alloy stockholding, advanced structural steel supply, and custom engineering fabrication.
-              </p>
-            </div>
-
-            <div
-              style={{
-                background: '#FFFFFF',
-                border: '1px solid #CBD5E1',
-                borderTop: '4px solid #588078',
-                padding: '28px 24px',
-                boxShadow: '0 4px 14px rgba(0, 0, 0, 0.03)',
-              }}
-            >
-              <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#588078', letterSpacing: '0.6px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
-                PRINCIPLES
-              </span>
-              <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#304050', marginBottom: '10px' }}>
-                Core Values
-              </h3>
-              <p style={{ fontSize: '0.88rem', color: '#64748B', lineHeight: 1.6, margin: 0 }}>
-                Absolute Spectral Purity, EN 10204 3.1/3.2 Certification, Customer-Centric SLA Execution, and Sustainable Electric Arc Furnace Melting.
-              </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              {legacyPillars.map((pillar) => (
+                <div
+                  key={pillar.title}
+                  style={{
+                    background: '#FFFFFF',
+                    border: '1px solid #E2E8F0',
+                    padding: '24px 28px',
+                    boxShadow: '0 4px 14px rgba(0, 0, 0, 0.03)',
+                    transition: 'border-color 200ms ease, transform 200ms ease, box-shadow 200ms ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = '#588078';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = '0 8px 20px rgba(88, 128, 120, 0.12)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = '#E2E8F0';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = '0 4px 14px rgba(0, 0, 0, 0.03)';
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '1.05rem', fontWeight: 700, color: '#0F172A', marginBottom: '8px' }}>
+                    <CheckCircle2 size={20} color="#588078" /> {pillar.title}
+                  </div>
+                  <div style={{ fontSize: '0.9rem', color: '#64748B', lineHeight: 1.6, paddingLeft: '32px' }}>
+                    {pillar.desc}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2. Side-by-Side Section: Timeline Accordion (Left) & 4-Pillars 2x2 Grid (Right) */}
-      <section style={{ padding: '52px 0', background: '#FFFFFF', borderBottom: '1px solid #E0E8E8' }}>
-        <div className="container" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 20px' }}>
-          <div className="grid-responsive-about" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(420px, 1fr))', gap: '36px', alignItems: 'start' }}>
-            
-            {/* LEFT COLUMN: Timeline Accordion (Compact when collapsed, scrollable when open) */}
-            <div>
+      {/* 2. Scroll-pinned Section: Timeline (Left, advances on scroll) & 4-Pillars 2x2 Grid (Right, static) */}
+      <section
+        ref={timelinePinRef}
+        className={`timeline-pin-section${pinEnabled ? ' is-pinned' : ''}`}
+        style={pinEnabled ? { height: `${TIMELINE_STEPS * 65}vh` } : undefined}
+      >
+        <div className="timeline-pin-inner">
+        <div ref={timelineContentRef} className="container" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 20px', width: '100%' }}>
+          <div className="grid-responsive-about" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(420px, 1fr))', gap: '36px', alignItems: 'stretch' }}>
+
+            {/* LEFT COLUMN: Timeline (year rail + detail panel), stretched to match the pillars grid */}
+            <div className="timeline-col">
               <div style={{ marginBottom: '24px' }}>
                 <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#588078', letterSpacing: '0.8px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
                   HERITAGE &amp; EVOLUTION
@@ -389,95 +589,51 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                   Our Growth &amp; Engineering Timeline
                 </h2>
                 <p style={{ color: '#7C8894', fontSize: '0.92rem', margin: 0 }}>
-                  Click or scroll down to expand our 35-year metallurgical milestones (1991 – 2026).
+                  {pinEnabled
+                    ? 'Scroll to move through our 35-year metallurgical journey (1991 – 2026).'
+                    : 'Select a year to explore our 35-year metallurgical journey (1991 – 2026).'}
                 </p>
               </div>
 
-              {/* Master Accordion Card */}
-              <div className="single-accordion-wrapper" ref={timelineRef}>
-                <div className="single-accordion-layer-2" />
-                <div className="single-accordion-layer-1" />
+              {/* Year rail + single milestone detail panel */}
+              <div className="timeline-split">
+                {/* Year rail */}
+                <div className="timeline-rail">
+                  <span
+                    className="timeline-rail-progress"
+                    style={{ height: `${(activeMilestone / (TIMELINE_STEPS - 1)) * 100}%` }}
+                  />
+                  {timelineMilestones.map((item, idx) => (
+                    <button
+                      key={item.year}
+                      type="button"
+                      className={`timeline-year-btn${idx === activeMilestone ? ' is-active' : ''}`}
+                      onClick={() => goToMilestone(idx)}
+                      aria-pressed={idx === activeMilestone}
+                    >
+                      {item.year}
+                    </button>
+                  ))}
+                </div>
 
-                <div className="single-accordion-main">
-                  {/* Accordion Header Strip */}
-                  <div
-                    onClick={() => setIsTimelineOpen(!isTimelineOpen)}
-                    style={{
-                      padding: '22px 26px',
-                      background: '#FFFFFF',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      gap: '16px',
-                    }}
-                  >
-                    <div>
-                      <h3 style={{ fontSize: '1.08rem', fontWeight: 800, color: '#304050', margin: 0, letterSpacing: '0.4px' }}>
-                        COMPLETE METALLURGICAL TIMELINE (1991 – 2026)
-                      </h3>
-                      <p style={{ fontSize: '0.84rem', color: '#7C8894', margin: '4px 0 0 0' }}>
-                        {isTimelineOpen ? 'Click to collapse timeline' : 'Click to expand 6 engineering milestones'}
-                      </p>
-                    </div>
-                    <ChevronDown
-                      size={22}
-                      color="#588078"
-                      style={{
-                        transform: isTimelineOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                        transition: 'transform 300ms ease',
-                      }}
+                {/* Detail panel for the selected year */}
+                <div className="timeline-detail" key={timelineMilestones[activeMilestone].year}>
+                  <div className="timeline-detail-img">
+                    <img
+                      src={timelineMilestones[activeMilestone].image}
+                      alt={timelineMilestones[activeMilestone].title}
                     />
                   </div>
-
-                  {/* Accordion Expanded Body */}
-                  <div
-                    style={{
-                      maxHeight: isTimelineOpen ? '380px' : '0px',
-                      opacity: isTimelineOpen ? 1 : 0,
-                      overflowY: isTimelineOpen ? 'auto' : 'hidden',
-                      transition: 'max-height 450ms ease, opacity 350ms ease',
-                      borderTop: isTimelineOpen ? '1px solid #E0E8E8' : '1px solid transparent',
-                      background: '#FFFFFF',
-                    }}
-                  >
-                    <div style={{ display: 'flex', flexDirection: 'column' }}>
-                      {timelineMilestones.map((item, idx) => (
-                        <div
-                          key={item.year}
-                          className="timeline-row-item"
-                          style={{
-                            padding: '14px 18px',
-                            borderBottom: idx < timelineMilestones.length - 1 ? '1px solid #E0E8E8' : 'none',
-                            display: 'grid',
-                            gridTemplateColumns: '60px 1fr 95px',
-                            gap: '12px',
-                            alignItems: 'center',
-                          }}
-                        >
-                          <div>
-                            <span className="timeline-year-text" style={{ fontSize: '1.45rem', fontWeight: 800, color: '#304050', lineHeight: 1 }}>
-                              {item.year}
-                            </span>
-                          </div>
-                          <div>
-                            <h4 style={{ fontSize: '0.94rem', fontWeight: 700, color: '#304050', marginBottom: '3px', lineHeight: 1.28 }}>
-                              {item.title}
-                            </h4>
-                            <p style={{ fontSize: '0.82rem', color: '#7C8894', lineHeight: 1.45, margin: 0 }}>
-                              {item.desc}
-                            </p>
-                          </div>
-                          <div style={{ width: '95px', height: '64px', borderRadius: '4px', overflow: 'hidden', border: '1px solid #CBD5E1', flexShrink: 0 }}>
-                            <img
-                              src={item.image}
-                              alt={item.title}
-                              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                            />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
+                  <div className="timeline-detail-body">
+                    <span className="timeline-detail-year">
+                      {timelineMilestones[activeMilestone].year}
+                    </span>
+                    <h3 className="timeline-detail-title">
+                      {timelineMilestones[activeMilestone].title}
+                    </h3>
+                    <p className="timeline-detail-desc">
+                      {timelineMilestones[activeMilestone].desc}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -536,7 +692,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                         fontSize: '4.8rem',
                         fontWeight: 900,
                         color: '#588078',
-                        opacity: 0.3,
+                        opacity: 0.12,
                         lineHeight: 0.9,
                         fontFamily: "'Inter', sans-serif",
                         letterSpacing: '-0.04em',
@@ -564,6 +720,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
             </div>
 
           </div>
+        </div>
         </div>
       </section>
 

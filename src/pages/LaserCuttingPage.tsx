@@ -434,7 +434,7 @@ export const LaserCuttingPage: React.FC<LaserCuttingPageProps> = ({ onOpenQuoteM
       </section>
 
       {/* 2. Top Horizontal Sticky Sub-Navigation Bar */}
-      <CapabilityNav currentPath="/services/laser-cutting" />
+      <CapabilityNav currentPath="/services/laser-cutting" showQualityTabs={false} />
 
       {/* 3. Section 1: Feature Split Showcase */}
       <section style={{ padding: '60px 0' }}>

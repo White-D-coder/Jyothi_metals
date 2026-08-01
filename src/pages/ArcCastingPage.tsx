@@ -434,7 +434,7 @@ export const ArcCastingPage: React.FC<ArcCastingPageProps> = ({ onOpenQuoteModal
       </section>
 
       {/* 2. Top Horizontal Sticky Sub-Navigation Bar */}
-      <CapabilityNav currentPath="/services/arc-casting" />
+      <CapabilityNav currentPath="/services/arc-casting" showQualityTabs={false} />
 
       {/* 3. Section 1: Feature Split Showcase */}
       <section style={{ padding: '60px 0' }}>

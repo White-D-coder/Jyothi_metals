@@ -87,7 +87,12 @@ body {
   background-color: var(--bg);
   color: var(--text-secondary);
   line-height: 1.6;
+  /* `hidden` makes body a scroll container, which stops `position: sticky`
+     descendants (the pinned About timeline) from ever sticking. `clip`
+     suppresses the same horizontal overflow without creating one. The
+     `hidden` line stays as the fallback for browsers without `clip`. */
   overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* Typography Elements */
