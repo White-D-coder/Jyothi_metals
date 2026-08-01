@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState } from 'react';
 import {
   ArrowRight,
   Cpu,
@@ -57,100 +57,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
   const [activeMilestone, setActiveMilestone] = useState<number>(0);
 
   /*
-   * Timeline scroll-pin.
-   *
-   * The section is made TIMELINE_STEPS steps tall and its contents stick to the
-   * viewport, so scrolling inside it advances the year instead of moving the
-   * page. Once the last year is reached the sticky child releases and the page
-   * scrolls on normally. Driven by native sticky + scroll position rather than
-   * by swallowing wheel events, so trackpad, keyboard and scrollbar all keep
-   * working and there is nothing to un-break if a listener ever misses.
-   *
-   * Pinning is skipped on narrow viewports, for reduced-motion users, and
-   * whenever the content does not actually fit the viewport — a pinned block
-   * taller than the screen would clip its own heading with no way to scroll to
-   * it. In those cases the rail stays plain click-to-select and no scroll is
-   * intercepted.
+   * The year rail is a plain tab strip: clicking a year swaps the detail panel
+   * in place. The section stays one screen tall so the rest of the About page
+   * is reachable without scrolling through a milestone-per-viewport.
    */
-  const timelinePinRef = useRef<HTMLElement>(null);
-  const timelineContentRef = useRef<HTMLDivElement>(null);
-  const [pinEnabled, setPinEnabled] = useState<boolean>(false);
-
-  useEffect(() => {
-    const wideEnough = window.matchMedia('(min-width: 1025px)');
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-    const sync = () => {
-      const content = timelineContentRef.current;
-      // Measured rather than guessed via a min-height media query, and with
-      // headroom so a viewport sitting exactly on the boundary cannot flap
-      // between pinned and unpinned as the layout changes under it.
-      const fits = !!content && content.offsetHeight + 48 <= window.innerHeight;
-      setPinEnabled(wideEnough.matches && !reduceMotion.matches && fits);
-    };
-
-    sync();
-    window.addEventListener('resize', sync);
-    wideEnough.addEventListener('change', sync);
-    reduceMotion.addEventListener('change', sync);
-    return () => {
-      window.removeEventListener('resize', sync);
-      wideEnough.removeEventListener('change', sync);
-      reduceMotion.removeEventListener('change', sync);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!pinEnabled) return;
-
-    let frame = 0;
-    const readProgress = () => {
-      frame = 0;
-      const el = timelinePinRef.current;
-      if (!el) return;
-
-      const travel = el.offsetHeight - window.innerHeight;
-      if (travel <= 0) return;
-
-      const progress = Math.min(1, Math.max(0, -el.getBoundingClientRect().top / travel));
-      const idx = Math.round(progress * (TIMELINE_STEPS - 1));
-      setActiveMilestone((prev) => (prev === idx ? prev : idx));
-    };
-
-    const onScroll = () => {
-      if (frame) return;
-      frame = requestAnimationFrame(readProgress);
-    };
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    readProgress();
-
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
-      if (frame) cancelAnimationFrame(frame);
-    };
-  }, [pinEnabled]);
-
-  // Clicking a year has to move the page too, otherwise the next scroll tick
-  // would snap straight back to whatever the scroll position says.
-  const goToMilestone = useCallback(
-    (idx: number) => {
-      setActiveMilestone(idx);
-
-      const el = timelinePinRef.current;
-      if (!pinEnabled || !el) return;
-
-      const travel = el.offsetHeight - window.innerHeight;
-      if (travel <= 0) return;
-
-      const sectionTop = window.scrollY + el.getBoundingClientRect().top;
-      const target = sectionTop + (idx / (TIMELINE_STEPS - 1)) * travel;
-      window.scrollTo({ top: target, behavior: 'smooth' });
-    },
-    [pinEnabled]
-  );
 
   const executivePillars = [
     {
@@ -247,25 +157,12 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
           .feature-split-grid { grid-template-columns: 1fr; gap: 32px; }
         }
 
-        /* Scroll-pinned timeline section.
-           Unpinned it is an ordinary section; pinned, the section box is made
-           several viewports tall (inline height) and the inner sticks. */
+        /* Timeline section — ordinary flow height; the year rail switches the
+           detail panel in place rather than consuming page scroll. */
         .timeline-pin-section {
           padding: 52px 0;
           background: #FFFFFF;
           border-bottom: 1px solid #E0E8E8;
-        }
-        .timeline-pin-section.is-pinned {
-          padding: 0;
-          position: relative;
-        }
-        .timeline-pin-section.is-pinned .timeline-pin-inner {
-          position: sticky;
-          top: 0;
-          height: 100vh;
-          display: flex;
-          align-items: center;
-          background: #FFFFFF;
         }
 
         /* The column stretches to the pillars grid beside it, and the chain
@@ -363,7 +260,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
           display: block;
         }
         /* Fixed floor so the card does not resize as descriptions change
-           length — while pinned that would shift the whole layout. */
+           length as the reader tabs between years. */
         .timeline-detail-body {
           flex: none;
           padding: 22px 24px 26px;
@@ -513,21 +410,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                 Engineering Trust &amp; Metallurgical Excellence Since 1991
               </h2>
 
-              <blockquote
-                style={{
-                  background: '#F8FAF9',
-                  borderLeft: '4px solid #588078',
-                  border: '1px solid #E2E8F0',
-                  borderLeftWidth: '4px',
-                  padding: '28px 32px',
-                  marginBottom: '28px',
-                  boxShadow: '0 4px 16px rgba(0,0,0,0.03)',
-                }}
-              >
-                <p style={{ fontSize: '1.08rem', fontWeight: 700, color: '#0F172A', lineHeight: 1.6, margin: 0, letterSpacing: '0.3px' }}>
-                  Founded in 1991, Jyoti Metal India has evolved into one of the country&rsquo;s most reliable manufacturers, stockists, and global exporters of high-grade Stainless Steel, Nickel Alloys, Titanium, Duplex, Carbon Steel, Gasketing Solutions, and Structural Steel products.
-                </p>
-              </blockquote>
+              <p style={{ fontSize: '1.02rem', color: '#475569', lineHeight: 1.7, margin: '0 0 20px 0' }}>
+                Founded in 1991, Jyoti Metal India has evolved into one of the country&rsquo;s most reliable manufacturers, stockists, and global exporters of high-grade Stainless Steel, Nickel Alloys, Titanium, Duplex, Carbon Steel, Gasketing Solutions, and Structural Steel products.
+              </p>
 
               <p style={{ fontSize: '1.02rem', color: '#475569', lineHeight: 1.7, margin: 0 }}>
                 Operating advanced continuous casting foundries and CNC laser fabrication units certified under ISO 9001:2015, we maintain 100% heat-lot chemistry traceability to serve critical defense, aerospace, nuclear power, oil &amp; gas, and heavy infrastructure sectors worldwide.
@@ -569,14 +454,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
         </div>
       </section>
 
-      {/* 2. Scroll-pinned Section: Timeline (Left, advances on scroll) & 4-Pillars 2x2 Grid (Right, static) */}
-      <section
-        ref={timelinePinRef}
-        className={`timeline-pin-section${pinEnabled ? ' is-pinned' : ''}`}
-        style={pinEnabled ? { height: `${TIMELINE_STEPS * 65}vh` } : undefined}
-      >
-        <div className="timeline-pin-inner">
-        <div ref={timelineContentRef} className="container" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 20px', width: '100%' }}>
+      {/* 2. Timeline (Left, year tabs) & 4-Pillars 2x2 Grid (Right, static) */}
+      <section className="timeline-pin-section">
+        <div className="container" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 20px', width: '100%' }}>
           <div className="grid-responsive-about" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(420px, 1fr))', gap: '36px', alignItems: 'stretch' }}>
 
             {/* LEFT COLUMN: Timeline (year rail + detail panel), stretched to match the pillars grid */}
@@ -589,9 +469,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                   Our Growth &amp; Engineering Timeline
                 </h2>
                 <p style={{ color: '#7C8894', fontSize: '0.92rem', margin: 0 }}>
-                  {pinEnabled
-                    ? 'Scroll to move through our 35-year metallurgical journey (1991 – 2026).'
-                    : 'Select a year to explore our 35-year metallurgical journey (1991 – 2026).'}
+                  Select a year to explore our 35-year metallurgical journey (1991 – 2026).
                 </p>
               </div>
 
@@ -608,7 +486,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                       key={item.year}
                       type="button"
                       className={`timeline-year-btn${idx === activeMilestone ? ' is-active' : ''}`}
-                      onClick={() => goToMilestone(idx)}
+                      onClick={() => setActiveMilestone(idx)}
                       aria-pressed={idx === activeMilestone}
                     >
                       {item.year}
@@ -720,7 +598,6 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
             </div>
 
           </div>
-        </div>
         </div>
       </section>
 
