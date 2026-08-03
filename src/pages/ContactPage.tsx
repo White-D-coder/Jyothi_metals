@@ -186,7 +186,7 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
                 <CheckCircle2 size={48} color="#588078" style={{ margin: '0 auto 12px' }} />
                 <h4 style={{ color: '#304050', fontSize: '1.3rem', fontWeight: 800 }}>Inquiry Received!</h4>
                 <p style={{ color: '#64748B', fontSize: '0.92rem', marginTop: '8px', lineHeight: 1.6 }}>
-                  Thank you for contacting Jyoti Metals. Reference ticket #JYO-9942 has been dispatched to our support team.
+                  Thank you for contacting Jyoti Metal. Reference ticket #JYO-9942 has been dispatched to our support team.
                 </p>
               </div>
             ) : (
@@ -362,6 +362,60 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
                 <iframe
                   title="Delhi Branch Map"
                   src="https://maps.google.com/maps?q=Indra+Prastha+Tower+Wazirpur+Delhi+110052&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                  width="100%"
+                  height="100%"
+                  style={{
+                    border: 0,
+                    filter: 'grayscale(75%) contrast(1.06) brightness(1.04)',
+                  }}
+                  loading="lazy"
+                ></iframe>
+
+                {/* Center Company Color #588078 SVG Pointer */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -85%)',
+                    pointerEvents: 'none',
+                    zIndex: 3,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.25))',
+                  }}
+                >
+                  <svg width="36" height="44" viewBox="0 0 36 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M18 0C8.05887 0 0 8.05887 0 18C0 29.5 15.75 42.75 16.875 43.6875C17.5312 44.25 18.4688 44.25 19.125 43.6875C20.25 42.75 36 29.5 36 18C36 8.05887 27.9411 0 18 0ZM18 25.5C13.8579 25.5 10.5 22.1421 10.5 18C10.5 13.8579 13.8579 10.5 18 10.5C22.1421 10.5 25.5 13.8579 25.5 18C25.5 22.1421 22.1421 25.5 18 25.5Z"
+                      fill="#588078"
+                    />
+                    <circle cx="18" cy="18" r="6" fill="#FFFFFF" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 3: Plant / Works (Alwar, Rajasthan) */}
+            <div style={{ background: '#FFFFFF', border: '1px solid #CBD5E1', padding: '28px 24px 24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxShadow: '0 4px 14px rgba(0,0,0,0.02)' }}>
+              <div>
+                <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#588078', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '6px' }}>
+                  MANUFACTURING PLANT
+                </div>
+                <h4 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#304050', marginBottom: '8px' }}>
+                  Plant Address (Alwar)
+                </h4>
+                <p style={{ color: '#475569', fontSize: '0.92rem', lineHeight: 1.6, marginBottom: '20px' }}>
+                  Plot No. E-41 (G-1), RIICO Industrial Area, Alwar - 301019, Rajasthan, India.
+                </p>
+              </div>
+
+              {/* Light Silver Map Frame with Company Color #588078 SVG Pin Pointer */}
+              <div style={{ position: 'relative', height: '240px', width: '100%', overflow: 'hidden', border: '1px solid #CBD5E1' }}>
+                <iframe
+                  title="Alwar Plant Map"
+                  src="https://maps.google.com/maps?q=RIICO+Industrial+Area+Alwar+301019+Rajasthan&t=&z=14&ie=UTF8&iwloc=&output=embed"
                   width="100%"
                   height="100%"
                   style={{

@@ -14,7 +14,7 @@ interface AboutPageProps {
 
 const timelineMilestones = [
   {
-    year: '1991',
+    year: '1989',
     title: 'Foundation & Regional Foundry Hub',
     desc: 'Established as a specialized regional foundry in India providing precision stainless steel castings to domestic oil refineries and chemical plants with 100% heat-lot chemistry tracking.',
     image: '/images/pexels-bence-szemerey-337043-6804265.jpg',
@@ -381,7 +381,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
             </h1>
 
             <p style={{ fontSize: '1.08rem', color: '#CBD5E1', lineHeight: 1.65, marginBottom: '28px', letterSpacing: '0.3px' }}>
-              Three decades of metallurgical innovation, certified zero-defect alloy manufacturing, and high-yield continuous casting for global aerospace, defense, and nuclear contracts.
+              Over three decades of metallurgical innovation, certified zero-defect alloy manufacturing, and high-yield continuous casting for global aerospace, defense, and nuclear contracts.
             </p>
 
             <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
@@ -407,11 +407,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                 OUR METALLURGICAL LEGACY
               </span>
               <h2 style={{ fontSize: 'clamp(1.8rem, 2.8vw, 2.4rem)', fontWeight: 700, color: '#0F172A', marginBottom: '24px', lineHeight: 1.2 }}>
-                Engineering Trust &amp; Metallurgical Excellence Since 1991
+                Engineering Trust &amp; Metallurgical Excellence Since 1989
               </h2>
 
               <p style={{ fontSize: '1.02rem', color: '#475569', lineHeight: 1.7, margin: '0 0 20px 0' }}>
-                Founded in 1991, Jyoti Metal India has evolved into one of the country&rsquo;s most reliable manufacturers, stockists, and global exporters of high-grade Stainless Steel, Nickel Alloys, Titanium, Duplex, Carbon Steel, Gasketing Solutions, and Structural Steel products.
+                Founded in 1989, Jyoti Metal India has evolved into one of the country&rsquo;s most reliable manufacturers, stockists, and global exporters of high-grade Stainless Steel, Nickel Alloys, Titanium, Duplex, Carbon Steel, Gasketing Solutions, and Structural Steel products.
               </p>
 
               <p style={{ fontSize: '1.02rem', color: '#475569', lineHeight: 1.7, margin: 0 }}>
@@ -469,7 +469,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                   Our Growth &amp; Engineering Timeline
                 </h2>
                 <p style={{ color: '#7C8894', fontSize: '0.92rem', margin: 0 }}>
-                  Select a year to explore our 35-year metallurgical journey (1991 – 2026).
+                  Select a year to explore our 37-year metallurgical journey (1989 – 2026).
                 </p>
               </div>
 

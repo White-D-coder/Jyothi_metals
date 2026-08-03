@@ -154,7 +154,7 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenQuoteModal }
             </p>
             <div>
               <div style={{ color: '#77b8b0', fontSize: '1.5rem', fontWeight: 900, fontFamily: 'Outfit, sans-serif' }}>
-                Since 1991
+                Since 1989
               </div>
               <div style={{ color: '#64748b', fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.08em', marginTop: '2px', textTransform: 'uppercase' }}>
                 OVER 30+ YEARS EXPERIENCE

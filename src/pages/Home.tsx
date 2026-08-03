@@ -114,7 +114,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
     {
       id: 1,
       quote:
-        'Jyoti Metals provided 316L seamless pipes that exceeded our mill test certificates with sub-micron wall thickness precision and rapid dispatch.',
+        'Jyoti Metal provided 316L seamless pipes that exceeded our mill test certificates with sub-micron wall thickness precision and rapid dispatch.',
       author: 'Ethan Morales',
       handle: '@ethanmorales',
       role: 'Procurement Specialist, PetroChem',
@@ -186,7 +186,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
     {
       id: 9,
       quote:
-        'Extremely high strength-to-weight ratio titanium alloy plates. The team at Jyoti Metals ensures zero defects across every production batch.',
+        'Extremely high strength-to-weight ratio titanium alloy plates. The team at Jyoti Metal ensures zero defects across every production batch.',
       author: 'Sarah Jenkins',
       handle: '@sarahjenkins',
       role: 'Quality Audit Specialist, Defense Corp',
@@ -685,7 +685,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
               <iframe
                 style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }}
                 src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
-                title="Jyoti Metals Industrial Foundry Showcase"
+                title="Jyoti Metal Industrial Foundry Showcase"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />
@@ -797,7 +797,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
         </div>
       </section>
 
-      {/* Why Industry Leaders Trust Jyoti Metals (Interactive Hover Animated 01-04 Layout) */}
+      {/* Why Industry Leaders Trust Jyoti Metal (Interactive Hover Animated 01-04 Layout) */}
       <section className="section bg-white" style={{ padding: '48px 0', position: 'relative', overflow: 'hidden', borderBottom: '1px solid #e2e8f0' }}>
         {/* Far Right Vertical Rotated Backdrop Typography */}
         <div
@@ -836,7 +836,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                   marginTop: 0,
                 }}
               >
-                Why Industry Leaders Trust Jyoti Metals
+                Why Industry Leaders Trust Jyoti Metal
               </h2>
 
               {/* Dynamic Crossfading Visual Frame responding to activeBenefitIdx */}
