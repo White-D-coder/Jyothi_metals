@@ -192,6 +192,543 @@ export const getEquivalentGrades = (title: string): string[] => {
   return ['UNS S30400 / S30403', 'W.Nr. 1.4301 / 1.4307', 'AFNOR Z7 CN 18-09', 'BS 304S31'];
 };
 
+// ---------------------------------------------------------------------------
+// "Grades and Specification" summary box
+//
+// The stock summary a buyer scans before the detail tables: standard, dimension
+// standard, size envelope, finish, forms we carry. Which rows apply depends on
+// the product *form* (a pipe has a schedule, a flange has a pressure class), and
+// the governing standard depends on the *material*, so the two are resolved
+// separately and combined.
+// ---------------------------------------------------------------------------
+
+export interface GradeSpecRow {
+  label: string;
+  value: string;
+}
+
+export interface GradeSpecification {
+  heading: string;
+  rows: GradeSpecRow[];
+}
+
+export type ProductFormKey =
+  | 'pipe'
+  | 'plate'
+  | 'bar'
+  | 'flange'
+  | 'forged'
+  | 'buttweld'
+  | 'fastener'
+  | 'gasket'
+  | 'structural'
+  | 'specialized';
+
+type MaterialKey =
+  | 'stainless'
+  | 'duplex'
+  | 'nickel'
+  | 'monel'
+  | 'hastelloy'
+  | 'alloy20'
+  | 'titanium'
+  | 'cupronickel'
+  | 'aluminium'
+  | 'brass'
+  | 'tantalum'
+  | 'carbon'
+  | 'alloysteel';
+
+const FORM_BY_CATEGORY: Record<string, ProductFormKey> = {
+  'Pipes & Tubes': 'pipe',
+  'Plates & Sheets': 'plate',
+  'Round Bars': 'bar',
+  Flanges: 'flange',
+  'Forged Fittings': 'forged',
+  'Buttweld Fittings': 'buttweld',
+  Fasteners: 'fastener',
+  'Gasketing Solutions': 'gasket',
+  'Structural Steel': 'structural',
+  'Specialized Product': 'specialized',
+};
+
+const resolveFormKey = (category: string, subCat: string, title: string): ProductFormKey => {
+  const byCategory = FORM_BY_CATEGORY[category];
+  if (byCategory) return byCategory;
+
+  // Categories are stable, but fall back to the wording so a newly added
+  // category still renders a sensible row set instead of the plate default.
+  const t = `${subCat} ${title}`.toLowerCase();
+  if (t.includes('buttweld')) return 'buttweld';
+  if (t.includes('forged fitting')) return 'forged';
+  if (t.includes('flange')) return 'flange';
+  if (t.includes('bolt') || t.includes('nut') || t.includes('fastener') || t.includes('screw')) return 'fastener';
+  if (t.includes('gasket') || t.includes('jointing sheet')) return 'gasket';
+  if (t.includes('pipe') || t.includes('tube')) return 'pipe';
+  if (t.includes('bar') || t.includes('rod')) return 'bar';
+  if (t.includes('beam') || t.includes('channel') || t.includes('angle')) return 'structural';
+  return 'plate';
+};
+
+// Plenty of listings name more than one family ("Inconel 625 / 718 & Monel 400
+// Studs", "Hastelloy C276 / C22 & Alloy 20 Flanges"), so the family whose
+// keyword appears *earliest* wins — that is the grade the listing leads with.
+// Array order only breaks ties, which is why the narrower family (copper nickel,
+// alloy 20) is listed ahead of the broader one it contains.
+const MATERIAL_PATTERNS: Array<[MaterialKey, RegExp]> = [
+  ['duplex', /duplex|2205|2507|31803|32205|32750|32760/],
+  ['cupronickel', /copper\s*nickel|cupro\s*nickel|cupro|cu-?ni\b|90\/10|70\/30/],
+  ['alloy20', /alloy 20|carpenter 20|n08020/],
+  ['hastelloy', /hastelloy/],
+  ['monel', /monel/],
+  ['nickel', /inconel|incoloy|nickel/],
+  ['titanium', /titanium|ti-6al/],
+  ['tantalum', /tantalum/],
+  ['brass', /brass|bronze/],
+  ['aluminium', /alumini?um/],
+  ['stainless', /stainless|\bss\b/],
+  ['carbon', /carbon steel|mild steel|\bms\b/],
+  ['alloysteel', /alloy steel/],
+];
+
+const resolveMaterialKey = (subCat: string, title: string, fallback: MaterialKey): MaterialKey => {
+  // Title first: it carries the leading grade, the sub-category only qualifies it.
+  const t = `${title} ${subCat}`.toLowerCase();
+  let best: MaterialKey | null = null;
+  let bestAt = Number.POSITIVE_INFINITY;
+
+  for (const [key, pattern] of MATERIAL_PATTERNS) {
+    const at = t.search(pattern);
+    if (at >= 0 && at < bestAt) {
+      best = key;
+      bestAt = at;
+    }
+  }
+
+  return best ?? fallback;
+};
+
+const MATERIAL_LABELS: Record<MaterialKey, string> = {
+  stainless: 'Stainless Steel',
+  duplex: 'Duplex / Super Duplex Stainless Steel',
+  nickel: 'Nickel Alloy (Inconel / Incoloy)',
+  monel: 'Monel Nickel-Copper Alloy',
+  hastelloy: 'Hastelloy Nickel-Molybdenum Alloy',
+  alloy20: 'Alloy 20 (Carpenter 20)',
+  titanium: 'Titanium & Titanium Alloy',
+  cupronickel: 'Copper Nickel (Cu-Ni)',
+  aluminium: 'Aluminium Alloy',
+  brass: 'Brass / Bronze',
+  tantalum: 'Tantalum',
+  carbon: 'Carbon Steel',
+  alloysteel: 'Alloy Steel',
+};
+
+// Governing product standard, keyed by form then material. A form's `stainless`
+// entry doubles as the fallback for any material we have not spelled out.
+const STANDARDS: Record<ProductFormKey, Partial<Record<MaterialKey, string>>> = {
+  pipe: {
+    stainless: 'ASTM A312 / A213 / A269 · ASME SA312 / SA213',
+    duplex: 'ASTM A790 / A789 · ASME SA790 / SA789',
+    nickel: 'ASTM B444 / B161 / B167 · ASME SB444 / SB167',
+    monel: 'ASTM B165 / B163 · ASME SB165',
+    hastelloy: 'ASTM B622 / B619 / B626 · ASME SB622',
+    alloy20: 'ASTM B729 / B464 · ASME SB729',
+    titanium: 'ASTM B337 / B338 / B861 / B862',
+    cupronickel: 'ASTM B466 / B467 · ASME SB466',
+    aluminium: 'ASTM B210 / B221 / B241',
+    carbon: 'ASTM A106 Gr. B / A53 / API 5L · ASME SA106',
+    alloysteel: 'ASTM A335 / A213 · ASME SA335 (P1 – P91)',
+  },
+  plate: {
+    stainless: 'ASTM A240 / A480 · ASME SA240',
+    duplex: 'ASTM A240 / A480 · ASME SA240 (S31803 / S32205 / S32750)',
+    nickel: 'ASTM B168 / B443 / B424 · ASME SB168',
+    monel: 'ASTM B127 · ASME SB127',
+    hastelloy: 'ASTM B575 · ASME SB575',
+    alloy20: 'ASTM B463 · ASME SB463',
+    titanium: 'ASTM B265 · ASME SB265',
+    cupronickel: 'ASTM B171 / B122 · ASME SB171',
+    aluminium: 'ASTM B209 / B928',
+    brass: 'ASTM B36 / B121',
+    carbon: 'ASTM A36 / A283 / A516 · ASME SA516',
+    alloysteel: 'ASTM A387 / A204 · ASME SA387',
+  },
+  bar: {
+    stainless: 'ASTM A276 / A479 / A484 · ASME SA276',
+    duplex: 'ASTM A276 / A479 · ASME SA479 (S31803 / S32750)',
+    nickel: 'ASTM B160 / B166 / B446 · ASME SB166',
+    monel: 'ASTM B164 · ASME SB164',
+    hastelloy: 'ASTM B574 · ASME SB574',
+    alloy20: 'ASTM B473 · ASME SB473',
+    titanium: 'ASTM B348 / F136 · ASME SB348',
+    cupronickel: 'ASTM B151 / B21',
+    aluminium: 'ASTM B211 / B221',
+    brass: 'ASTM B16 / B124 / B453',
+    tantalum: 'ASTM B365 (UNS R05200 / R05400)',
+    carbon: 'ASTM A36 / A105 · IS 2062',
+    alloysteel: 'ASTM A322 / A182 · EN 10083',
+  },
+  flange: {
+    stainless: 'ASTM A182 · ASME SA182 (F304 / F316 / F321 / F347)',
+    duplex: 'ASTM A182 · ASME SA182 (F51 / F53 / F55 / F60)',
+    nickel: 'ASTM B564 · ASME SB564',
+    monel: 'ASTM B564 · ASME SB564 (UNS N04400)',
+    hastelloy: 'ASTM B564 · ASME SB564 (UNS N10276 / N06022)',
+    alloy20: 'ASTM B462 · ASME SB462',
+    titanium: 'ASTM B381 · ASME SB381',
+    cupronickel: 'ASTM B171 / B151',
+    carbon: 'ASTM A105 / A350 LF2 · ASME SA105',
+    alloysteel: 'ASTM A182 F5 / F9 / F11 / F22 / F91',
+  },
+  forged: {
+    stainless: 'ASTM A182 · ASME SA182 (F304 / F316)',
+    duplex: 'ASTM A182 · ASME SA182 (F51 / F53 / F55)',
+    nickel: 'ASTM B564 · ASME SB564',
+    monel: 'ASTM B564 (UNS N04400)',
+    hastelloy: 'ASTM B564 (UNS N10276)',
+    alloy20: 'ASTM B462 · ASME SB462',
+    titanium: 'ASTM B381 · ASME SB381',
+    carbon: 'ASTM A105 / A350 LF2 · ASME SA105',
+    alloysteel: 'ASTM A182 F11 / F22 / F91',
+  },
+  buttweld: {
+    stainless: 'ASTM A403 · ASME SA403 (WP304 / WP316)',
+    duplex: 'ASTM A815 · ASME SA815 (WP S31803 / S32750)',
+    nickel: 'ASTM B366 · ASME SB366',
+    monel: 'ASTM B366 (WPNC / UNS N04400)',
+    hastelloy: 'ASTM B366 (WPHC276)',
+    alloy20: 'ASTM B366 (WPN08020)',
+    titanium: 'ASTM B363 / B366',
+    cupronickel: 'ASTM B466 / B122 · MSS SP-43',
+    carbon: 'ASTM A234 WPB / WPC · ASME SA234',
+    alloysteel: 'ASTM A234 WP11 / WP22 / WP91',
+  },
+  fastener: {
+    stainless: 'ASTM A193 B8 / B8M · ASTM A194 Gr. 8 / 8M · ASME SA193',
+    duplex: 'ASTM A276 / A479 / F593 (S31803 / S32750)',
+    nickel: 'ASTM B166 / B637 · AMS 5662 / AMS 5663',
+    monel: 'ASTM B164 / F468 (UNS N04400)',
+    hastelloy: 'ASTM B574 / F468 (UNS N10276)',
+    titanium: 'ASTM F467 / F468 · AMS 4928',
+    carbon: 'ASTM A307 / A325 / A563 · IS 1367',
+    alloysteel: 'ASTM A193 B7 / B16 · ASTM A194 2H · ASTM A320 L7',
+  },
+  gasket: {
+    stainless: 'ASME B16.20 / B16.21 · API 601 · IS 2712 · BS 7531',
+  },
+  structural: {
+    stainless: 'ASTM A276 / A484 · EN 10088-4',
+    carbon: 'IS 2062 E250 / E350 · IS 808 · ASTM A36 · EN 10025 S275 / S355',
+  },
+  specialized: {
+    stainless: 'ASTM / ASME / EN / IS as applicable to grade',
+  },
+};
+
+// Specialized plates are grouped by mill programme rather than alloy family, so
+// their standard, hardness and material description come from the sub-category.
+interface SpecializedProgramme {
+  needle: string;
+  standard: string;
+  hardness: string;
+  material: string;
+}
+
+const SPECIALIZED_PROGRAMMES: SpecializedProgramme[] = [
+  {
+    needle: 'abrasion resistant',
+    standard: 'EN 10029 / EN 10025-6 · Mill standard (AR 400 / 450 / 500 / 600)',
+    hardness: '400, 450, 500 & 600 HBW (grade dependent)',
+    material: 'Quenched & tempered abrasion resistant steel',
+  },
+  {
+    needle: 'armour',
+    standard: 'MIL-DTL-46100 / MIL-DTL-12560 · EN 10025-6',
+    hardness: '480 – 640 HBW ballistic hardness',
+    material: 'Ballistic / armour grade alloy steel',
+  },
+  {
+    needle: 'boiler',
+    standard: 'ASTM A516 / A515 · ASME SA516 · EN 10028-2',
+    hardness: '≤ 200 HBW (normalised)',
+    material: 'Pressure vessel quality carbon steel',
+  },
+  {
+    needle: 'corten',
+    standard: 'ASTM A242 / A588 · IRSM 41-97 · EN 10025-5',
+    hardness: '≤ 220 HBW weathering steel',
+    material: 'Weathering (Corten) structural steel',
+  },
+  {
+    needle: 'manganese',
+    standard: 'ASTM A128 Gr. A / B2 / B3 · IS 276',
+    hardness: '200 – 230 HBW as supplied, work hardens to 550 HBW',
+    material: 'Austenitic manganese (Hadfield) steel',
+  },
+  {
+    needle: 'quenched',
+    standard: 'EN 10025-6 S690QL / S890QL · Mill standard',
+    hardness: '250 – 350 HBW · 690 – 890 MPa yield',
+    material: 'High yield quenched & tempered alloy steel',
+  },
+  {
+    needle: 'dsq',
+    standard: 'IS 2062 E250 / E350 · Deep drawing quality',
+    hardness: '≤ 180 HBW (deep drawing quality)',
+    material: 'Deep drawing quality (DSQ) carbon steel',
+  },
+  {
+    needle: '15mo3',
+    standard: 'DIN 17155 15Mo3 · EN 10028-2 16Mo3 · ASTM A204',
+    hardness: '≤ 190 HBW (normalised)',
+    material: 'Molybdenum alloy steel (Cr-Mo)',
+  },
+  {
+    needle: '16mo3',
+    standard: 'DIN 17155 15Mo3 · EN 10028-2 16Mo3 · ASTM A204',
+    hardness: '≤ 190 HBW (normalised)',
+    material: 'Molybdenum alloy steel (Cr-Mo)',
+  },
+  {
+    needle: 'tiscral',
+    standard: 'SAIL SAILHARD / TISCRAL mill standard · IS 3039',
+    hardness: '380 – 450 HBW abrasion resistant',
+    material: 'SAILHARD / TISCRAL abrasion resistant steel',
+  },
+];
+
+// Gasket material is the construction, not an alloy family.
+const GASKET_MATERIALS: Array<[string, string]> = [
+  ['asbestos free', 'Non-asbestos synthetic fibre (aramid / glass) with NBR, SBR or Neoprene binder'],
+  ['compressed fibre', 'Compressed fibre (CAF) with rubber binder, wire reinforced on request'],
+  ['spiral wound', 'SS 304 / 316L / 321, Monel & Inconel winding with graphite, PTFE or ceramic filler'],
+  ['pre cut', 'Non-metallic, semi-metallic & metallic, cut to flange profile'],
+];
+
+const CERTIFICATE_VALUE = 'EN 10204 3.1 / 3.2 mill test certificate, third-party & NABL lab reports';
+
+const buildRows = (form: ProductFormKey, material: MaterialKey, subCat: string): GradeSpecRow[] => {
+  const standard = STANDARDS[form][material] ?? STANDARDS[form].stainless ?? '';
+  const materialLabel = MATERIAL_LABELS[material];
+
+  switch (form) {
+    case 'pipe':
+      return [
+        { label: 'Pipe & Tube Standards', value: standard },
+        { label: 'Pipe & Tube Dimensions', value: 'ASTM, ASME, API, DIN, EN & JIS' },
+        { label: 'Material', value: materialLabel },
+        { label: 'Outside Diameter', value: '1/8" NB to 30" NB (6.00 mm – 762.00 mm), larger on request' },
+        { label: 'Wall Thickness', value: '0.3 mm to 50 mm · SCH 5S to SCH XXS' },
+        { label: 'Schedule', value: 'SCH 5S, 10S, 20, 40, 40S, 60, 80, 80S, 100, 120, 140, 160, XS & XXS' },
+        { label: 'Length', value: 'Single Random, Double Random & cut length' },
+        { label: 'Type', value: 'Seamless, ERW, EFW, Welded, Fabricated & LSAW' },
+        { label: 'Form', value: 'Round, Square, Rectangular, Hydraulic, Coil, "U" bend & hollow section' },
+        { label: 'End Finish', value: 'Plain end, bevelled end & threaded' },
+        { label: 'Test Certificate', value: CERTIFICATE_VALUE },
+      ];
+
+    case 'plate':
+      return [
+        { label: 'Sheet & Plate Standards', value: standard },
+        { label: 'Sheet & Plate Dimensions', value: 'ASTM, ASME, API, DIN, EN & JIS' },
+        { label: 'Material', value: materialLabel },
+        { label: 'Width', value: '1000 mm, 1219 mm, 1500 mm, 2000 mm, 2500 mm, 3000 mm & custom' },
+        { label: 'Thickness', value: 'Sheet 0.3 mm – 6.0 mm · Plate 3.0 mm – 100 mm (thicker on request)' },
+        { label: 'Length', value: '2000 mm, 2440 mm, 3000 mm, 5800 mm, 6000 mm & cut length' },
+        { label: 'Tolerance', value: 'acc. EN ISO 9445:2006, other on request' },
+        {
+          label: 'Surface Finish',
+          value:
+            '2B, 2D, BA, No.1, No.4, No.8, 8K, mirror, hairline, sand blast, brush, etching, hot rolled (HR), cold rolled (CR), satin (PVC coated) etc.',
+        },
+        { label: 'Hardness', value: 'Soft, hard, half hard, quarter hard, spring hard etc.' },
+        {
+          label: 'Form',
+          value: 'Sheet, plate, coil, foil, strip, shim sheet, perforated sheet, chequered plate, circle, ring & blank',
+        },
+        { label: 'Test Certificate', value: CERTIFICATE_VALUE },
+      ];
+
+    case 'bar':
+      return [
+        { label: 'Round Bar Standards', value: standard },
+        { label: 'Round Bar Dimensions', value: 'ASTM, ASME, API, DIN, EN & JIS' },
+        { label: 'Material', value: materialLabel },
+        { label: 'Diameter / Size', value: '3 mm to 500 mm (larger on request)' },
+        { label: 'Length', value: '100 mm to 6000 mm · Single Random, Double Random & cut length' },
+        { label: 'Tolerance', value: 'h8, h9, h10, h11, k12 & IT-9, other on request' },
+        { label: 'Surface Finish', value: 'Black, bright, polished, peeled, rough turned, centreless ground & cold drawn' },
+        { label: 'Condition', value: 'Annealed, solution annealed, hot rolled, forged, cold drawn, quenched & tempered' },
+        { label: 'Hardness', value: 'Soft, hard, half hard, quarter hard, spring hard etc.' },
+        { label: 'Form', value: 'Round bar, square bar, hex bar, flat bar, rod, billet, ingot, wire, forged bar & hollow bar' },
+        { label: 'Test Certificate', value: CERTIFICATE_VALUE },
+      ];
+
+    case 'flange':
+      return [
+        { label: 'Flange Standards', value: standard },
+        {
+          label: 'Flange Dimensions',
+          value: 'ANSI / ASME B16.5, B16.47 Series A & B, B16.48, BS 4504, BS 10, EN 1092, DIN, JIS & IS',
+        },
+        { label: 'Material', value: materialLabel },
+        { label: 'Size', value: '1/2" (15 NB) to 48" (1200 NB), larger on request' },
+        {
+          label: 'Class / Pressure Rating',
+          value: '150#, 300#, 600#, 900#, 1500#, 2500#, PN6, PN10, PN16, PN25, PN40 & PN64',
+        },
+        {
+          label: 'Flange Face Type',
+          value: 'Flat face (FF), raised face (RF), ring type joint (RTJ), tongue & groove, male & female',
+        },
+        { label: 'Standard', value: 'ANSI, ASME, BS, DIN, EN, JIS, GOST & IS flanges' },
+        {
+          label: 'Types',
+          value:
+            'Weld neck (WNRF), slip-on (SORF), blind, socket weld, lap joint, threaded / screwed, orifice, long weld neck, spectacle blind, reducing, plate & ring type joint flanges',
+        },
+        { label: 'Test Certificate', value: CERTIFICATE_VALUE },
+      ];
+
+    case 'forged':
+      return [
+        { label: 'Forged Fitting Standards', value: standard },
+        {
+          label: 'Forged Fitting Dimensions',
+          value: 'ASME B16.11, MSS SP-79, MSS SP-83, MSS SP-95, MSS SP-97 & BS 3799',
+        },
+        { label: 'Material', value: materialLabel },
+        { label: 'Size', value: '1/8" NB to 4" NB' },
+        { label: 'Class / Pressure Rating', value: '2000#, 3000#, 6000# & 9000#' },
+        { label: 'End Connection', value: 'Socket weld (SW) & screwed / threaded (NPT, BSP, BSPT)' },
+        {
+          label: 'Types',
+          value:
+            '90° & 45° elbow, equal & reducing tee, cross, full & half coupling, union, plug, bushing, cap, nipple, swage nipple, boss & adaptor',
+        },
+        { label: 'Test Certificate', value: CERTIFICATE_VALUE },
+      ];
+
+    case 'buttweld':
+      return [
+        { label: 'Buttweld Fitting Standards', value: standard },
+        {
+          label: 'Buttweld Fitting Dimensions',
+          value: 'ASME B16.9, ASME B16.28, MSS SP-43, MSS SP-75 & BS 1640',
+        },
+        { label: 'Material', value: materialLabel },
+        { label: 'Size', value: '1/2" NB to 48" NB, larger on request' },
+        { label: 'Thickness / Schedule', value: 'SCH 5S, 10S, 20, 40, 40S, 80, 80S, 120, 160, XS & XXS' },
+        { label: 'Bend Radius', value: 'R = 1D, 1.5D, 2D, 3D, 5D, 6D, 8D & 10D' },
+        { label: 'Type', value: 'Seamless, welded & fabricated' },
+        {
+          label: 'Types',
+          value:
+            '90°, 45° & 180° elbow, equal & reducing tee, concentric & eccentric reducer, cap, stub end, cross & pipe bend',
+        },
+        { label: 'Test Certificate', value: CERTIFICATE_VALUE },
+      ];
+
+    case 'fastener':
+      return [
+        { label: 'Fastener Standards', value: standard },
+        {
+          label: 'Fastener Dimensions',
+          value: 'ASME B18.2.1, B18.2.2, B18.22.1, DIN, ISO, JIS & IS 1367',
+        },
+        { label: 'Material', value: materialLabel },
+        { label: 'Size', value: 'M2 to M160 · 3 mm to 200 mm · 1/4" to 6"' },
+        { label: 'Length', value: '3 mm to 200 mm & custom lengths' },
+        { label: 'Thread', value: 'Metric coarse & fine, UNC, UNF, BSW, BSF, ACME, NPT & BSP' },
+        { label: 'Property Class / Grade', value: '4.6, 4.8, 8.8, 10.9, 12.9 · B7, B8, B8M, B16, 2H & 8M' },
+        {
+          label: 'Surface Finish',
+          value: 'Plain / black, zinc plated, hot dip galvanised, PTFE / Xylan coated, cadmium plated & passivated',
+        },
+        {
+          label: 'Types',
+          value:
+            'Hex bolts, stud bolts, threaded rods, hex & heavy hex nuts, washers, machine screws, anchor bolts, eye bolts & U-bolts',
+        },
+        { label: 'Test Certificate', value: CERTIFICATE_VALUE },
+      ];
+
+    case 'gasket': {
+      const gasketMaterial = GASKET_MATERIALS.find(([needle]) => subCat.toLowerCase().includes(needle));
+      return [
+        { label: 'Gasket Standards', value: standard },
+        { label: 'Gasket Dimensions', value: 'ASME B16.5, B16.47 Series A & B, EN 1514, DIN & JIS' },
+        { label: 'Material', value: gasketMaterial ? gasketMaterial[1] : 'Non-metallic, semi-metallic & metallic gasket materials' },
+        { label: 'Size', value: '1/2" (15 NB) to 48" (1200 NB) & custom profiles' },
+        { label: 'Sheet Size', value: '1500 × 1500 mm, 2000 × 1500 mm, 3000 × 1500 mm & roll form' },
+        { label: 'Thickness', value: '0.4 mm to 6.0 mm (sheet) · 3.2 mm to 6.4 mm (spiral wound)' },
+        { label: 'Class / Pressure Rating', value: '150#, 300#, 600#, 900#, 1500#, 2500# · PN6 to PN64' },
+        { label: 'Temperature Range', value: '−196 °C to +550 °C (grade dependent)' },
+        {
+          label: 'Types',
+          value:
+            'Spiral wound, ring type joint (RTJ), metal jacketed, kammprofile, corrugated, full face, inside bolt circle & cut sheet gaskets',
+        },
+        { label: 'Test Certificate', value: CERTIFICATE_VALUE },
+      ];
+    }
+
+    case 'structural':
+      return [
+        { label: 'Structural Steel Standards', value: STANDARDS.structural[material] ?? STANDARDS.structural.carbon ?? '' },
+        { label: 'Structural Dimensions', value: 'IS 808, IS 2062, ASTM A6, EN 10365 & JIS G3192' },
+        { label: 'Material', value: material === 'stainless' ? MATERIAL_LABELS.stainless : 'Mild / structural carbon steel' },
+        { label: 'Size', value: '25 × 25 mm to 600 × 210 mm (section dependent)' },
+        { label: 'Thickness', value: '3 mm to 50 mm' },
+        { label: 'Length', value: '6 m, 9 m, 12 m & cut length' },
+        { label: 'Grade', value: 'E250 (Fe 410), E350, E410, S235JR, S275JR, S355JR & ASTM A36' },
+        { label: 'Surface Finish', value: 'Hot rolled, black, shot blasted, primer coated & hot dip galvanised' },
+        {
+          label: 'Types',
+          value: 'Angles (ISA), beams (ISMB), channels (ISMC), columns (ISHB), parallel flange beams, tees & flats',
+        },
+        { label: 'Test Certificate', value: CERTIFICATE_VALUE },
+      ];
+
+    case 'specialized':
+    default: {
+      const key = subCat.toLowerCase();
+      const programme = SPECIALIZED_PROGRAMMES.find((p) => key.includes(p.needle));
+      return [
+        { label: 'Plate Standards', value: programme?.standard ?? STANDARDS.specialized.stainless ?? '' },
+        { label: 'Plate Dimensions', value: 'ASTM, ASME, EN, DIN & IS' },
+        { label: 'Material', value: programme?.material ?? materialLabel },
+        { label: 'Width', value: '1000 mm to 3200 mm' },
+        { label: 'Thickness', value: '3 mm to 150 mm (thicker on request)' },
+        { label: 'Length', value: '2000 mm to 12000 mm & cut length' },
+        { label: 'Hardness', value: programme?.hardness ?? 'As per grade specification' },
+        { label: 'Condition', value: 'Quenched & tempered, normalised, as-rolled & annealed' },
+        { label: 'Surface Finish', value: 'Hot rolled, descaled, shot blasted & primer coated' },
+        { label: 'Test Certificate', value: CERTIFICATE_VALUE },
+      ];
+    }
+  }
+};
+
+export const getGradeSpecification = (product: {
+  title: string;
+  category: string;
+  subCat: string;
+}): GradeSpecification => {
+  const form = resolveFormKey(product.category, product.subCat, product.title);
+  // Structural sections and the specialized plate programmes are carbon/alloy
+  // steel unless the listing says otherwise; everywhere else stainless is the
+  // safer default for an unnamed grade.
+  const fallbackMaterial: MaterialKey = form === 'structural' || form === 'specialized' ? 'carbon' : 'stainless';
+  const material = resolveMaterialKey(product.subCat, product.title, fallbackMaterial);
+
+  return {
+    heading: `${product.title} Grades and Specification`,
+    rows: buildRows(form, material, product.subCat),
+  };
+};
+
 export interface ScrapedGradeTableData {
   chemHeaders: string[];
   chemRows: string[][];

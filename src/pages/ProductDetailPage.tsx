@@ -23,6 +23,7 @@ import {
   getManufacturingStandards,
   getEquivalentGrades,
   getScrapedGradeTableData,
+  getGradeSpecification,
 } from '../data/productFallbacks';
 
 interface ProductDetailPageProps {
@@ -109,19 +110,17 @@ const SpecTableView: React.FC<{ table: SpecTable }> = ({ table }) => {
   );
 };
 
+// The published heading for a table, shown under the fixed section label.
 const SpecHeading: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <h3
-    style={{
-      fontSize: '1.05rem',
-      fontWeight: 800,
-      color: '#304050',
-      marginBottom: '16px',
-      textTransform: 'uppercase',
-      letterSpacing: '0.4px',
-    }}
-  >
+  <p className="pd-section-sub">{children}</p>
+);
+
+// One spec section. Every section renders on load — nothing sits behind a click.
+const SpecSection: React.FC<{ label: string; children: React.ReactNode }> = ({ label, children }) => (
+  <section className="pd-spec-section">
+    <h3 className="pd-section-label">{label}</h3>
     {children}
-  </h3>
+  </section>
 );
 
 export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuoteModal }) => {
@@ -176,6 +175,10 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
     [currentProduct]
   );
 
+  // Stock summary panel shown above the spec tabs. Row set depends on the
+  // product form, so it is derived from the whole product, not just the title.
+  const gradeSpec = useMemo(() => getGradeSpecification(currentProduct), [currentProduct]);
+
   // Gallery imagery
   const galleryImages = useMemo(() => {
     const main = currentProduct.image || '/images/stainless_pipes.png';
@@ -192,15 +195,12 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
 
   const [activeImage, setActiveImage] = useState<string>(galleryImages[0]);
   const [quantityKgs] = useState<number>(500);
-  type TabKey = 'equiv' | 'comp' | 'specs' | 'desc' | 'apps';
-  // Equivalent Grades leads when we have it, matching the published running order.
-  const [activeTab, setActiveTab] = useState<TabKey>(spec?.equivalent ? 'equiv' : 'comp');
 
   const [appsExpanded, setAppsExpanded] = useState(false);
 
-  // Product changes (related-product links reuse this page) must reset the tab.
+  // Product changes (related-product links reuse this page) must re-collapse
+  // the application list.
   useEffect(() => {
-    setActiveTab(champakSpecs[currentProduct.id]?.equivalent ? 'equiv' : 'comp');
     setAppsExpanded(false);
   }, [currentProduct.id]);
 
@@ -246,37 +246,72 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
           object-fit: cover;
         }
 
-        .tab-btn {
-          padding: 16px 24px;
-          font-size: 0.84rem;
-          font-weight: 700;
-          cursor: pointer;
-          border: none;
-          background: transparent;
-          color: #7C8894;
-          position: relative;
-          transition: all 150ms ease;
-          letter-spacing: 0.6px;
-          text-transform: uppercase;
-          /* Keep full width so the strip scrolls rather than squeezing labels. */
-          flex: 0 0 auto;
-          white-space: nowrap;
+        /* Grades & Specification summary panel */
+        .pd-spec-box {
+          display: flex;
+          align-items: center;
+          gap: 36px;
+          background: #F1F6F5;
+          border: 1px solid #C9DBD7;
+          padding: 32px 36px;
+          margin-bottom: 40px;
         }
-        .tab-btn.active {
-          color: #588078;
+        .pd-spec-figure {
+          flex: 0 0 218px;
+          width: 218px;
+          height: 218px;
+          border-radius: 50%;
+          overflow: hidden;
+          background: #FFFFFF;
+          box-shadow: 0 0 0 6px #FFFFFF, 0 0 0 7px #C9DBD7;
+        }
+        .pd-spec-figure img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
+        .pd-spec-body { flex: 1 1 auto; min-width: 0; }
+        .pd-spec-heading {
+          font-size: 1.22rem;
           font-weight: 800;
+          color: #304050;
+          margin: 0 0 18px 0;
+          line-height: 1.3;
+          letter-spacing: 0.2px;
         }
-        /* Sits inside the strip (not at -1px) so it never overflows and
-           triggers a scrollbar; the strip's negative bottom margin is what
-           lets it cover the wrapper's rule. */
-        .tab-btn.active::after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          height: 3px;
-          background: #588078;
+        .pd-spec-row {
+          font-size: 0.88rem;
+          line-height: 1.65;
+          color: #46586A;
+          margin-bottom: 7px;
+        }
+        .pd-spec-row:last-child { margin-bottom: 0; }
+        .pd-spec-row b {
+          font-weight: 700;
+          color: #304050;
+        }
+
+        /* Spec sections run down the page in order — no tabs, nothing hidden
+           behind a click. */
+        .pd-spec-section { margin-bottom: 52px; }
+        .pd-spec-section:last-child { margin-bottom: 0; }
+        .pd-section-label {
+          font-size: 1.05rem;
+          font-weight: 800;
+          color: #304050;
+          text-transform: uppercase;
+          letter-spacing: 0.9px;
+          margin: 0 0 6px 0;
+          padding-bottom: 12px;
+          border-bottom: 2px solid #588078;
+        }
+        .pd-section-sub {
+          font-size: 0.84rem;
+          font-weight: 600;
+          color: #7C8894;
+          margin: 14px 0 16px 0;
+          line-height: 1.5;
         }
 
         .btn {
@@ -324,10 +359,26 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
           .pd-hero-panel { padding: 24px 20px !important; min-height: 0 !important; }
           .pd-title { font-size: 1.45rem !important; }
 
-          /* Tab strip scrolls horizontally; hide the bar on touch devices. */
-          .pd-tabs { scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-          .pd-tabs::-webkit-scrollbar { display: none; }
-          .tab-btn { padding: 13px 15px !important; font-size: 0.72rem !important; }
+          /* Spec panel: circle above the list. Alignment stays at stretch — with
+             flex-start the text block sizes to max-content and runs off-screen. */
+          .pd-spec-box {
+            flex-direction: column;
+            gap: 22px;
+            padding: 24px 20px !important;
+            margin-bottom: 30px;
+          }
+          .pd-spec-figure {
+            flex: 0 0 auto;
+            width: 160px;
+            height: 160px;
+            align-self: center;
+          }
+          .pd-spec-heading { font-size: 1.08rem; }
+          .pd-spec-row { font-size: 0.84rem; }
+
+          .pd-spec-section { margin-bottom: 38px; }
+          .pd-section-label { font-size: 0.92rem; letter-spacing: 0.6px; }
+          .pd-section-sub { font-size: 0.79rem; }
 
           /* Fixed 180-220px label columns leave the value column narrower than
              its own text, which overflows the card. Stack them instead. */
@@ -498,76 +549,43 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
       {/* 3. Middle Specification Tabbed Section */}
       <section className="pd-section" style={{ background: '#FFFFFF', borderTop: '1px solid #E0E8E8', borderBottom: '1px solid #E0E8E8', padding: '40px 0 60px' }}>
         <div className="container pd-container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
-          
-          {/* Horizontal Tab Navigation (Renamed per Database Scraping Mandate).
-              The rule lives on this wrapper, not on the scrolling strip, so the
-              strip can clip vertically without cutting the active underline. */}
-          <div style={{ borderBottom: '1px solid #E0E8E8', marginBottom: '32px' }}>
-          <div className="pd-tabs" style={{ display: 'flex', overflowX: 'auto', overflowY: 'hidden', marginBottom: '-1px' }}>
-            {spec?.equivalent && (
-              <button
-                type="button"
-                className={`tab-btn ${activeTab === 'equiv' ? 'active' : ''}`}
-                onClick={() => setActiveTab('equiv')}
-              >
-                EQUIVALENT GRADES
-              </button>
-            )}
-            <button
-              type="button"
-              className={`tab-btn ${activeTab === 'comp' ? 'active' : ''}`}
-              onClick={() => setActiveTab('comp')}
-            >
-              CHEMICAL COMPOSITION
-            </button>
-            <button
-              type="button"
-              className={`tab-btn ${activeTab === 'specs' ? 'active' : ''}`}
-              onClick={() => setActiveTab('specs')}
-            >
-              MECHANICAL PROPERTIES
-            </button>
-            <button
-              type="button"
-              className={`tab-btn ${activeTab === 'desc' ? 'active' : ''}`}
-              onClick={() => setActiveTab('desc')}
-            >
-              PHYSICAL PROPERTIES
-            </button>
-            <button
-              type="button"
-              className={`tab-btn ${activeTab === 'apps' ? 'active' : ''}`}
-              onClick={() => setActiveTab('apps')}
-            >
-              APPLICATION INDUSTRIES
-            </button>
-          </div>
+
+          {/* Grades & Specification summary — the stock envelope a buyer scans
+              before opening the detail tables. */}
+          <div className="pd-spec-box">
+            <div className="pd-spec-figure">
+              <img src={currentProduct.image || galleryImages[0]} alt={currentProduct.title} />
+            </div>
+            <div className="pd-spec-body">
+              <h2 className="pd-spec-heading">{gradeSpec.heading}</h2>
+              {gradeSpec.rows.map((row) => (
+                <div key={row.label} className="pd-spec-row">
+                  <b>{row.label}</b>: {row.value}
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* Active Tab Content (Full Width Layout) */}
-          <div style={{ width: '100%' }}>
             <div>
               {/* Section 0: Equivalent Grades */}
-              {activeTab === 'equiv' && spec?.equivalent && (
-                <div>
+              {spec?.equivalent && (
+                <SpecSection label="EQUIVALENT GRADES">
                   <SpecHeading>{spec.equivalent.heading}</SpecHeading>
                   <SpecTableView table={spec.equivalent} />
-                </div>
+                </SpecSection>
               )}
 
               {/* Section 1: Chemical Composition */}
-              {activeTab === 'comp' && spec?.chemical && (
-                <div>
+              {spec?.chemical && (
+                <SpecSection label="CHEMICAL COMPOSITION">
                   <SpecHeading>{spec.chemical.heading}</SpecHeading>
                   <SpecTableView table={spec.chemical} />
-                </div>
+                </SpecSection>
               )}
 
-              {activeTab === 'comp' && !spec?.chemical && (
-                <div>
-                  <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#304050', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.4px' }}>
-                    CHEMICAL COMPOSITION OF STAINLESS STEEL {currentProduct.title.toUpperCase()}
-                  </h3>
+              {!spec?.chemical && (
+                <SpecSection label="CHEMICAL COMPOSITION">
+                  <SpecHeading>Chemical composition of {currentProduct.title}</SpecHeading>
                   <div style={{ overflowX: 'auto', border: '1px solid #588078', marginBottom: '24px' }}>
                     <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem', textAlign: 'center' }}>
                       <thead>
@@ -623,22 +641,20 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
                       </div>
                     ))}
                   </div>
-                </div>
+                </SpecSection>
               )}
 
               {/* Section 2: Mechanical Properties */}
-              {activeTab === 'specs' && spec?.mechanical && (
-                <div>
+              {spec?.mechanical && (
+                <SpecSection label="MECHANICAL PROPERTIES">
                   <SpecHeading>{spec.mechanical.heading}</SpecHeading>
                   <SpecTableView table={spec.mechanical} />
-                </div>
+                </SpecSection>
               )}
 
-              {activeTab === 'specs' && !spec?.mechanical && (
-                <div>
-                  <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#304050', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.4px' }}>
-                    MECHANICAL PROPERTIES OF STAINLESS STEEL {currentProduct.title.toUpperCase()}
-                  </h3>
+              {!spec?.mechanical && (
+                <SpecSection label="MECHANICAL PROPERTIES">
+                  <SpecHeading>Mechanical properties of {currentProduct.title}</SpecHeading>
                   <div style={{ overflowX: 'auto', border: '1px solid #588078', marginBottom: '24px' }}>
                     <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem', textAlign: 'center' }}>
                       <thead>
@@ -694,22 +710,20 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
                       </div>
                     ))}
                   </div>
-                </div>
+                </SpecSection>
               )}
 
               {/* Section 3: Physical Properties */}
-              {activeTab === 'desc' && spec?.physical && (
-                <div>
+              {spec?.physical && (
+                <SpecSection label="PHYSICAL PROPERTIES">
                   <SpecHeading>{spec.physical.heading}</SpecHeading>
                   <SpecTableView table={spec.physical} />
-                </div>
+                </SpecSection>
               )}
 
-              {activeTab === 'desc' && !spec?.physical && (
-                <div>
-                  <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#304050', marginBottom: '14px' }}>
-                    Physical &amp; Thermal Properties
-                  </h3>
+              {!spec?.physical && (
+                <SpecSection label="PHYSICAL PROPERTIES">
+                  <SpecHeading>Physical &amp; thermal properties</SpecHeading>
                   <div style={{ border: '1px solid #E0E8E8' }}>
                     {Object.entries(physicalProps).map(([pKey, pVal], i) => (
                       <div
@@ -729,15 +743,12 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
                       </div>
                     ))}
                   </div>
-                </div>
+                </SpecSection>
               )}
 
               {/* Section 4: Application Industries */}
-              {activeTab === 'apps' && (
-                <div>
-                  <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#304050', marginBottom: '16px' }}>
-                    Certified Application Industries
-                  </h3>
+              <SpecSection label="APPLICATION INDUSTRIES">
+                <SpecHeading>Certified application industries</SpecHeading>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                     {visibleApps.map((app) => (
                       <div
@@ -793,10 +804,8 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
                       </button>
                     )}
                   </div>
-                </div>
-              )}
+              </SpecSection>
             </div>
-          </div>
 
           {/* 5. Supplementary Scraped Database Sections (Standards, Equivalent Grades, Dimensions) */}
           <div style={{ marginTop: '48px', paddingTop: '36px', borderTop: '1px solid #E0E8E8' }}>
