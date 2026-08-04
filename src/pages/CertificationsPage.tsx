@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   ArrowRight,
   Download,
+  Maximize2,
+  ExternalLink,
+  X,
 } from 'lucide-react';
-import { CapabilityNav } from '../components/CapabilityNav';
 
 interface CertificationsPageProps {
   onOpenQuoteModal: (productName?: string) => void;
@@ -86,8 +88,64 @@ const auditTimeline = [
   },
 ];
 
+/*
+ * Transcribed from the issued certificate scans. Every field here is printed on
+ * the certificate itself, so it can be checked against the scan shown beside it
+ * — do not edit these without a newer certificate in hand.
+ */
+const ISO_ISSUER = 'Quality Control Certification (QCC)';
+const ISO_ACCREDITATION = 'Accredited by UASL, England, UK';
+const ISO_VERIFY_URL = 'http://uasl.uk.com/certifiedorganization.html';
+const ISO_SCOPE =
+  'Manufacturer of S.S. Pipes & Tubes; supplier, stockist, importer & exporter of all kinds of ferrous & non-ferrous metals.';
+
+const MUMBAI_SITE = '102/8, Praveen House, 4th Kumbharwada Lane, Mumbai 400004, Maharashtra';
+const ALWAR_SITE = 'Plot No. E-41, G-1, RIICO Industrial Area, Khushkhera 301707, Distt. Alwar, Rajasthan';
+
+const isoCertificates = [
+  {
+    code: 'ISO 9001:2015',
+    system: 'Quality Management System',
+    certNo: 'QMS/010898/0619',
+    image: '/images/certificates/iso-9001-2015.jpg',
+    sites: [MUMBAI_SITE],
+  },
+  {
+    code: 'ISO 14001:2015',
+    system: 'Environmental Management System',
+    certNo: 'EMS/010896/0619',
+    image: '/images/certificates/iso-14001-2015.jpg',
+    sites: [MUMBAI_SITE, ALWAR_SITE],
+  },
+  {
+    code: 'ISO 45001:2018',
+    system: 'Occupational Health & Safety Management System',
+    certNo: 'OHS/010897/0619',
+    image: '/images/certificates/iso-45001-2018.jpg',
+    sites: [MUMBAI_SITE, ALWAR_SITE],
+  },
+];
+
+// All three certificates share one audit cycle, so the dates live outside the list.
+const ISO_DATES = [
+  { label: 'Original certification', value: '18 June 2019' },
+  { label: 'Current issue', value: '10 June 2025' },
+  { label: 'Valid until', value: '09 June 2028' },
+];
+
 export const CertificationsPage: React.FC<CertificationsPageProps> = ({ onOpenQuoteModal }) => {
   const navigate = useNavigate();
+  const [openCert, setOpenCert] = useState<(typeof isoCertificates)[number] | null>(null);
+
+  // Escape closes the enlarged certificate, matching the click-outside affordance.
+  useEffect(() => {
+    if (!openCert) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpenCert(null);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [openCert]);
 
   return (
     <div className="cert-page-root" style={{ background: COLORS.bg, minHeight: '100vh', color: COLORS.text }}>
@@ -208,6 +266,144 @@ export const CertificationsPage: React.FC<CertificationsPageProps> = ({ onOpenQu
           .mobile-full-btn { width: 100% !important; justify-content: center !important; }
         }
 
+        /* --- Issued ISO certificates --- */
+        .iso-date-strip {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          border: 1px solid ${COLORS.divider};
+          background: #F8FAF9;
+          margin-bottom: 28px;
+        }
+        .iso-date-item { padding: 16px 22px; }
+        .iso-date-item:not(:first-child) { border-left: 1px solid ${COLORS.divider}; }
+
+        .iso-cert-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 24px;
+        }
+        .iso-cert-card {
+          display: flex;
+          flex-direction: column;
+          background: #FFFFFF;
+          border: 1px solid ${COLORS.divider};
+          border-top: 4px solid ${COLORS.accent};
+          box-shadow: 0 4px 16px rgba(48, 64, 80, 0.06);
+          transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .iso-cert-card:hover { box-shadow: 0 14px 32px rgba(48, 64, 80, 0.15); }
+
+        .iso-cert-thumb {
+          position: relative;
+          display: block;
+          width: 100%;
+          padding: 0;
+          border: 0;
+          border-bottom: 1px solid ${COLORS.divider};
+          background: #F4F6F8;
+          cursor: pointer;
+          overflow: hidden;
+        }
+        /* Portrait A4 scans: contain, so no part of the certificate is cropped away. */
+        .iso-cert-thumb img {
+          display: block;
+          width: 100%;
+          height: 300px;
+          object-fit: contain;
+          object-position: center top;
+          background: #FFFFFF;
+          transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .iso-cert-thumb:hover img { transform: scale(1.03); }
+        .iso-cert-zoom {
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 6px;
+          padding: 9px;
+          font-size: 0.78rem;
+          font-weight: 700;
+          color: #FFFFFF;
+          background: rgba(48, 64, 80, 0.88);
+          opacity: 0;
+          transition: opacity 200ms ease;
+        }
+        .iso-cert-thumb:hover .iso-cert-zoom,
+        .iso-cert-thumb:focus-visible .iso-cert-zoom { opacity: 1; }
+        .iso-cert-thumb:focus-visible { outline: 2px solid ${COLORS.accent}; outline-offset: 2px; }
+
+        .iso-cert-body { padding: 22px 24px 26px; }
+        .iso-cert-meta { margin: 0; font-size: 0.84rem; line-height: 1.5; }
+        .iso-cert-meta dt {
+          font-weight: 700;
+          color: ${COLORS.textMuted};
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          font-size: 0.7rem;
+          margin-bottom: 3px;
+        }
+        .iso-cert-meta dd {
+          margin: 0 0 12px;
+          color: ${COLORS.text};
+        }
+        .iso-cert-meta dd:last-child { margin-bottom: 0; }
+
+        .iso-scope-note {
+          margin-top: 28px;
+          padding: 24px 28px;
+          background: #F8FAF9;
+          border: 1px solid ${COLORS.divider};
+          border-left: 4px solid ${COLORS.accent};
+        }
+
+        .iso-lightbox {
+          position: fixed;
+          inset: 0;
+          z-index: 1000;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 32px;
+          background: rgba(12, 18, 26, 0.92);
+        }
+        .iso-lightbox img {
+          max-width: min(920px, 100%);
+          max-height: 100%;
+          object-fit: contain;
+          background: #FFFFFF;
+          box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+        }
+        .iso-lightbox-close {
+          position: absolute;
+          top: 20px;
+          right: 24px;
+          display: inline-flex;
+          padding: 10px;
+          color: #FFFFFF;
+          background: rgba(255, 255, 255, 0.12);
+          border: 1px solid rgba(255, 255, 255, 0.25);
+          cursor: pointer;
+        }
+        .iso-lightbox-close:hover { background: rgba(255, 255, 255, 0.22); }
+
+        @media (max-width: 900px) {
+          .iso-cert-grid { grid-template-columns: 1fr; }
+          .iso-date-strip { grid-template-columns: 1fr; }
+          .iso-date-item:not(:first-child) {
+            border-left: none;
+            border-top: 1px solid ${COLORS.divider};
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .iso-cert-card, .iso-cert-thumb img { transition: none; }
+          .iso-cert-thumb:hover img { transform: none; }
+        }
+
         .btn {
           border-radius: 0 !important;
           font-weight: 700;
@@ -300,8 +496,113 @@ export const CertificationsPage: React.FC<CertificationsPageProps> = ({ onOpenQu
         </div>
       </section>
 
-      {/* 2. Top Horizontal Sticky Sub-Navigation Bar */}
-      <CapabilityNav currentPath="/certifications" />
+      {/* 2. Issued ISO Management System Certificates (scans of the real certificates) */}
+      <section style={{ padding: '60px 0', background: '#FFFFFF', borderBottom: `1px solid ${COLORS.divider}` }}>
+        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
+          <div style={{ textAlign: 'center', maxWidth: '760px', margin: '0 auto 40px' }}>
+            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: COLORS.accent, letterSpacing: '0.6px', textTransform: 'uppercase', display: 'block', marginBottom: '6px' }}>
+              ACCREDITED MANAGEMENT SYSTEMS
+            </span>
+            <h2 style={{ fontSize: 'clamp(1.7rem, 2.8vw, 2.2rem)', fontWeight: 700, color: COLORS.text, margin: '0 0 12px', letterSpacing: '0.4px' }}>
+              Our ISO Certificates
+            </h2>
+            <p style={{ color: COLORS.textMuted, fontSize: '1rem', lineHeight: 1.65, margin: 0 }}>
+              Issued by {ISO_ISSUER}, {ISO_ACCREDITATION.toLowerCase()}. Click any certificate to view it full size, or verify its status directly with the registrar.
+            </p>
+          </div>
+
+          {/* Shared audit cycle — one row rather than repeating dates on all three cards */}
+          <div className="iso-date-strip">
+            {ISO_DATES.map((d) => (
+              <div key={d.label} className="iso-date-item">
+                <div style={{ fontSize: '0.72rem', fontWeight: 700, color: COLORS.textMuted, textTransform: 'uppercase', letterSpacing: '0.6px', marginBottom: '4px' }}>
+                  {d.label}
+                </div>
+                <div style={{ fontSize: '1.02rem', fontWeight: 800, color: COLORS.text }}>{d.value}</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="iso-cert-grid">
+            {isoCertificates.map((cert) => (
+              <div key={cert.certNo} className="iso-cert-card">
+                <button
+                  type="button"
+                  className="iso-cert-thumb"
+                  onClick={() => setOpenCert(cert)}
+                  aria-label={`View the ${cert.code} certificate full size`}
+                >
+                  <img src={cert.image} alt={`${cert.code} certificate issued to Jyoti Metal (India)`} loading="lazy" />
+                  <span className="iso-cert-zoom">
+                    <Maximize2 size={16} /> View full size
+                  </span>
+                </button>
+
+                <div className="iso-cert-body">
+                  <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: COLORS.text, margin: '0 0 4px', letterSpacing: '0.3px' }}>
+                    {cert.code}
+                  </h3>
+                  <div style={{ fontSize: '0.84rem', fontWeight: 700, color: COLORS.accent, textTransform: 'uppercase', letterSpacing: '0.4px', marginBottom: '14px' }}>
+                    {cert.system}
+                  </div>
+
+                  <dl className="iso-cert-meta">
+                    <dt>Certificate no.</dt>
+                    <dd>{cert.certNo}</dd>
+                    <dt>Issued by</dt>
+                    <dd>{ISO_ISSUER}</dd>
+                    <dt>{cert.sites.length > 1 ? 'Covered sites' : 'Covered site'}</dt>
+                    <dd>
+                      {cert.sites.map((s) => (
+                        <span key={s} style={{ display: 'block', marginBottom: '4px' }}>{s}</span>
+                      ))}
+                    </dd>
+                  </dl>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="iso-scope-note">
+            <div style={{ fontSize: '0.72rem', fontWeight: 700, color: COLORS.textMuted, textTransform: 'uppercase', letterSpacing: '0.6px', marginBottom: '6px' }}>
+              Certified scope
+            </div>
+            <p style={{ margin: '0 0 16px', fontSize: '0.96rem', color: COLORS.text, lineHeight: 1.6 }}>
+              {ISO_SCOPE}
+            </p>
+            <a
+              href={ISO_VERIFY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-secondary"
+              style={{ padding: '12px 22px', fontSize: '0.86rem', textDecoration: 'none' }}
+            >
+              Verify certificate status <ExternalLink size={16} />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Enlarged certificate viewer */}
+      {openCert && (
+        <div
+          className="iso-lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${openCert.code} certificate`}
+          onClick={() => setOpenCert(null)}
+        >
+          <button type="button" className="iso-lightbox-close" onClick={() => setOpenCert(null)} aria-label="Close">
+            <X size={22} />
+          </button>
+          {/* Stop propagation so clicking the certificate itself does not dismiss it */}
+          <img
+            src={openCert.image}
+            alt={`${openCert.code} certificate issued to Jyoti Metal (India)`}
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
 
       {/* 3. Section 1: Certifications Carousel Deck */}
       {/* 3. Section 1: Certifications Directory Deck (Centered) */}
