@@ -127,15 +127,15 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
   const legacyPillars = [
     {
       title: 'Our Mission',
-      desc: 'To deliver certified zero-defect metallurgical products with complete chemical traceability, competitive lead times, and uncompromised technical integrity across global markets.',
+      desc: 'To supply flawless, fully certified metal products to customers worldwide — every order backed by test reports, delivered on time, and made without cutting corners.',
     },
     {
       title: 'Our Vision',
-      desc: "To be the world's most trusted partner for high-performance alloy stockholding, advanced structural steel supply, and custom engineering fabrication.",
+      desc: 'To be the name customers everywhere trust first for quality alloys, structural steel, and custom-made metal parts.',
     },
     {
       title: 'Core Values',
-      desc: 'Absolute Spectral Purity, EN 10204 3.1/3.2 Certification, Customer-Centric SLA Execution, and Sustainable Electric Arc Furnace Melting.',
+      desc: 'Pure, tested material. Proper certificates with every order. Delivery when we promise it. And a cleaner way of making steel.',
     },
   ];
 
