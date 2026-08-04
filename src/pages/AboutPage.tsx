@@ -17,37 +17,37 @@ const timelineMilestones = [
     year: '1989',
     title: 'Foundation & Regional Foundry Hub',
     desc: 'Established as a specialized regional foundry in India providing precision stainless steel castings to domestic oil refineries and chemical plants with 100% heat-lot chemistry tracking.',
-    image: '/images/pexels-bence-szemerey-337043-6804265.jpg',
+    image: '/images/heavy_rolling_mill.jpg',
   },
   {
     year: '2004',
     title: 'ISO 9001:2015 Quality Accreditation',
     desc: 'Achieved full ISO accreditation and introduced computer-guided ultrasonic non-destructive testing vaults across all continuous casting production lines.',
-    image: '/images/pexels-tokuo-nobuhiro-79378678-20472153.jpg',
+    image: '/images/quality_lab.jpg',
   },
   {
     year: '2012',
     title: 'Aerospace & Defense Titanium Expansion',
     desc: 'Commissioned titanium and nickel superalloy vacuum arc remelting (VAR) furnaces, securing AS9100D aerospace certification for Tier-1 defense turbine contractors.',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/titanium_plates.png',
   },
   {
     year: '2020',
     title: '98% Circular Electric Arc Recycling',
     desc: 'Transitioned melt shop operations to 98% circular scrap recycling and zero-discharge closed-loop water treatment systems with official EPD Environmental Declarations.',
-    image: '/images/pexels-jakubzerdzicki-33813584.jpg',
+    image: '/images/round_bars.png',
   },
   {
     year: '2024',
     title: 'Multi-Axis CNC Laser Cell Integration',
     desc: 'Expanded fabrication floor area to 120,000 m² with 6kW & 12kW fiber optic CNC laser cutting lines for sub-micron kerf edge tolerance component manufacturing.',
-    image: '/images/pexels-pppsdavid-5851494.jpg',
+    image: '/images/cnc_laser_blue.jpg',
   },
   {
     year: '2026',
     title: 'Global Aerospace Stock Warehouse Expansion',
     desc: 'Established strategic stock holding hubs across Europe and North America guaranteeing 48-hour container dispatch on EN 10204 3.2 certified stock.',
-    image: '/images/pexels-eugeniofr-30005294.jpg',
+    image: '/images/structural_beams.png',
   },
 ];
 
@@ -102,25 +102,25 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
       code: 'ISO 9001:2015',
       title: 'Quality Management Systems',
       desc: 'Complete process control across raw melt, rolling, machining, and dispatch.',
-      image: '/images/pexels-tokuo-nobuhiro-79378678-20472153.jpg',
+      image: '/images/precision_parts.png',
     },
     {
       code: 'AS9100D / EN 9100',
       title: 'Aerospace & Defense Quality',
       desc: 'Sub-micron tolerance airframe and turbine components for defense contractors.',
-      image: '/images/pexels-willians-huerta-2157111846-36397988.jpg',
+      image: '/images/industrial_facility.png',
     },
     {
       code: 'PED 2014/68/EU',
       title: 'Pressure Equipment Directive',
       desc: 'Certified manufacturing for high-pressure oil, gas, and nuclear pipelines.',
-      image: '/images/pexels-eugeniofr-30005294.jpg',
+      image: '/images/flanges_industrial.png',
     },
     {
       code: 'ISO 14001:2015',
       title: 'Environmental Management',
       desc: 'Zero-discharge melt shop operations and circular alloy scrap recycling.',
-      image: '/images/pexels-jakubzerdzicki-33813584.jpg',
+      image: '/images/stainless_pipes.png',
     },
   ];
 
@@ -233,6 +233,13 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
           border-top: 4px solid #588078;
           overflow: hidden;
           animation: timelineFade 320ms ease;
+          box-shadow: 0 4px 16px rgba(48, 64, 80, 0.06);
+          /* Shadow only — the card runs timelineFade on mount, so a hover
+             transform here would fight the keyframe mid-animation. */
+          transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .timeline-detail:hover {
+          box-shadow: 0 14px 32px rgba(48, 64, 80, 0.15);
         }
         @keyframes timelineFade {
           from { opacity: 0; transform: translateY(6px); }
@@ -258,6 +265,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
           height: 100%;
           object-fit: cover;
           display: block;
+          transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .timeline-detail:hover .timeline-detail-img img {
+          transform: scale(1.06);
         }
         /* Fixed floor so the card does not resize as descriptions change
            length as the reader tabs between years. */
@@ -290,8 +301,46 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
           margin: 0;
         }
 
+        /* Certification deck: card lifts, photo pushes in behind it. */
+        .cert-card {
+          position: relative;
+          height: 420px;
+          overflow: hidden;
+          border: 1px solid #E0E8E8;
+          box-shadow: 0 8px 24px rgba(48, 64, 80, 0.07);
+          cursor: pointer;
+          transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
+                      box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .cert-card:hover {
+          transform: translateY(-6px);
+          box-shadow: 0 18px 40px rgba(48, 64, 80, 0.18);
+        }
+        .cert-card img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          /* Slower than the card lift so the photo reads as depth behind the
+             frame rather than moving with it. */
+          transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .cert-card:hover img {
+          transform: scale(1.08);
+        }
+
         @media (prefers-reduced-motion: reduce) {
           .timeline-detail { animation: none; }
+          .timeline-detail-img img,
+          .cert-card,
+          .cert-card img {
+            transition: none;
+          }
+          .timeline-detail:hover .timeline-detail-img img,
+          .cert-card:hover,
+          .cert-card:hover img {
+            transform: none;
+          }
         }
 
         /* Mobile: rail turns into a horizontal scrollable year strip */
@@ -357,7 +406,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
       {/* 1. Hero with Rich Background Photography */}
       <section
         style={{
-          backgroundImage: 'linear-gradient(135deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.85) 100%), url("/images/pexels-sergey-sergeev-2153675005-32845683.jpg")',
+          backgroundImage: 'linear-gradient(135deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.82) 100%), url("/images/furnace_melt.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           color: '#FFFFFF',
@@ -624,43 +673,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
             }}
           >
             {certifications.map((cert) => (
-              <div
-                key={cert.code}
-                style={{
-                  position: 'relative',
-                  height: '420px',
-                  overflow: 'hidden',
-                  borderRadius: '0px',
-                  boxShadow: '0 8px 24px rgba(0, 0, 0, 0.06)',
-                  cursor: 'pointer',
-                  border: '1px solid #E0E8E8',
-                  transition: 'transform 300ms ease, box-shadow 300ms ease',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-6px)';
-                  e.currentTarget.style.boxShadow = '0 16px 36px rgba(0, 0, 0, 0.16)';
-                  const img = e.currentTarget.querySelector('img');
-                  if (img) img.style.transform = 'scale(1.08)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.06)';
-                  const img = e.currentTarget.querySelector('img');
-                  if (img) img.style.transform = 'scale(1)';
-                }}
-              >
+              <div key={cert.code} className="cert-card">
                 {/* Background Image */}
-                <img
-                  src={cert.image}
-                  alt={cert.title}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    display: 'block',
-                    transition: 'transform 400ms cubic-bezier(0.4, 0, 0.2, 1)',
-                  }}
-                />
+                <img src={cert.image} alt={cert.title} />
 
                 {/* Dark Gradient Overlay for Readability */}
                 <div
