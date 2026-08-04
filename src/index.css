@@ -227,6 +227,66 @@ h1, h2, h3, h4, h5, h6 {
   .marquee-container { overflow-x: auto; }
 }
 
+/* Mobile nav drawer — mirrors the desktop menu, with each dropdown collapsed
+   into an accordion so the whole structure fits one thumb-scroll.
+   Rows are full-bleed: each carries its own rule edge to edge, and the tap
+   padding lives inside the row rather than on the drawer. */
+.mobile-nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 10px;
+  padding: 19px 20px;
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f172a;
+  text-align: left;
+  text-decoration: none;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #e8edf0;
+  cursor: pointer;
+}
+
+.mobile-nav-link.is-active,
+.mobile-nav-link.is-open {
+  color: #51847D;
+}
+
+/* An expanded group reads as one block, so the toggle drops its rule and the
+   sublist below carries the closing one instead. */
+.mobile-nav-toggle.is-open {
+  border-bottom-color: transparent;
+}
+
+.mobile-nav-chevron {
+  flex-shrink: 0;
+  color: #334155;
+}
+
+/* Sub-items sit indented under their heading with no rules between them, and
+   deliberately lighter than the bold top level so the hierarchy is legible. */
+.mobile-nav-sublist {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 10px;
+  border-bottom: 1px solid #e8edf0;
+}
+
+.mobile-nav-sublink {
+  padding: 12px 20px 12px 38px;
+  font-size: 1.02rem;
+  font-weight: 500;
+  color: #1e293b;
+  text-decoration: none;
+}
+
+.mobile-nav-sublink:active {
+  color: #51847D;
+}
+
 /* Container Wrapper */
 .container {
   max-width: 1280px;

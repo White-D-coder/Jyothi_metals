@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, Menu, X, Phone, Mail, Clock } from 'lucide-react';
+import { ChevronDown, Menu, X, Plus, Minus, Phone, Mail, Clock } from 'lucide-react';
 
 interface NavbarProps {
   activeTab: string;
@@ -16,6 +16,14 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  // Which mobile accordion is expanded — only one at a time, so a long drawer
+  // never buries Contact Us under every open sub-list.
+  const [mobileSection, setMobileSection] = useState<string | null>(null);
+
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+    setMobileSection(null);
+  };
 
   const handleNavClick = (id: string, category?: string) => {
     if (category && onSelectCategory) {
@@ -24,7 +32,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       setActiveTab(id);
     }
     setActiveDropdown(null);
-    setMobileMenuOpen(false);
+    closeMobileMenu();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -47,6 +55,58 @@ export const Navbar: React.FC<NavbarProps> = ({
     'Gasketing Solutions',
     'Structural Steel',
     'Specialized Product',
+  ];
+
+  /* Mirrors the desktop <ul className="nav-menu"> above so the drawer offers the
+     same seven entries with the same sub-lists — keep the two in step when a
+     link is added. `items` present ⇒ renders as an accordion. */
+  const mobileNav: {
+    key: string;
+    label: string;
+    id?: string;
+    items?: { label: string; id?: string; category?: string; onClick?: () => void }[];
+  }[] = [
+    { key: 'home', label: 'Home', id: 'home' },
+    {
+      key: 'company',
+      label: 'Company',
+      items: [
+        { label: 'About Us & Heritage', id: 'about' },
+        { label: 'Foundry Infrastructure', id: 'infrastructure' },
+        { label: 'Quality Policy & ISO Standards', id: 'quality-policy' },
+        { label: 'Certifications & Compliance', id: 'certifications' },
+      ],
+    },
+    {
+      key: 'products',
+      label: 'Products',
+      items: productDropdownItems.map((item) => ({ label: item, id: 'products', category: item })),
+    },
+    {
+      key: 'services',
+      label: 'Services',
+      items: [
+        { label: 'Custom Laser Cutting & Milling', id: 'services/laser-cutting' },
+        { label: 'Open Die & Closed Die Forging', id: 'services/forging' },
+        { label: 'Ultrasonic Weld Inspection', id: 'services/weld-inspection' },
+      ],
+    },
+    {
+      key: 'price',
+      label: 'Price',
+      items: [
+        {
+          label: 'Instant Alloy Quote Calculator',
+          onClick: () => {
+            closeMobileMenu();
+            onOpenQuoteModal();
+          },
+        },
+        { label: 'Sheet & Plate Weight Estimator', id: 'contact' },
+      ],
+    },
+    { key: 'blog', label: 'Blog', id: 'blog' },
+    { key: 'contact', label: 'Contact Us', id: 'contact' },
   ];
 
   return (
@@ -375,7 +435,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Mobile Hamburger Toggle */}
           <button
             className="hamburger-sharp"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            onClick={() => (mobileMenuOpen ? closeMobileMenu() : setMobileMenuOpen(true))}
             aria-label="Toggle navigation menu"
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-nav-drawer"
@@ -396,7 +456,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 background: 'rgba(15, 23, 42, 0.5)',
                 zIndex: 998,
               }}
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={closeMobileMenu}
             />
             <div
               id="mobile-nav-drawer"
@@ -405,59 +465,75 @@ export const Navbar: React.FC<NavbarProps> = ({
                 zIndex: 999,
                 background: '#ffffff',
                 borderTop: '1px solid #cbd5e1',
-                padding: '16px 20px',
+                /* No horizontal padding: every row draws its own full-bleed
+                   divider, so the rules run edge to edge down the drawer. */
+                padding: '0 0 20px',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '8px',
                 maxHeight: 'calc(100vh - 120px)',
                 overflowY: 'auto',
                 boxShadow: '0 10px 25px rgba(0,0,0,0.15)',
               }}
             >
-              <a href="#home" className="dropdown-item" onClick={() => handleNavClick('home')} style={{ padding: '12px 16px', fontWeight: 700 }}>Home</a>
-              <a href="#about" className="dropdown-item" onClick={() => handleNavClick('about')} style={{ padding: '12px 16px', fontWeight: 700 }}>About Us &amp; Heritage</a>
-              <a href="#infrastructure" className="dropdown-item" onClick={() => handleNavClick('infrastructure')} style={{ padding: '12px 16px', fontWeight: 700 }}>Foundry Infrastructure</a>
-              <a href="#quality-policy" className="dropdown-item" onClick={() => handleNavClick('quality-policy')} style={{ padding: '12px 16px', fontWeight: 700 }}>Quality Policy &amp; ISO Standards</a>
-              <a href="#certifications" className="dropdown-item" onClick={() => handleNavClick('certifications')} style={{ padding: '12px 16px', fontWeight: 700 }}>Certifications &amp; Compliance</a>
-              <a href="#services/laser-cutting" className="dropdown-item" onClick={() => handleNavClick('services/laser-cutting')} style={{ padding: '12px 16px', fontWeight: 700 }}>Custom Laser Cutting &amp; Milling</a>
-              <a href="#services/forging" className="dropdown-item" onClick={() => handleNavClick('services/forging')} style={{ padding: '12px 16px', fontWeight: 700 }}>Open Die &amp; Closed Die Forging</a>
-              <a href="#services/weld-inspection" className="dropdown-item" onClick={() => handleNavClick('services/weld-inspection')} style={{ padding: '12px 16px', fontWeight: 700 }}>Ultrasonic Weld Inspection</a>
-              <a href="#products" className="dropdown-item" onClick={() => handleNavClick('products')} style={{ padding: '12px 16px', fontWeight: 700 }}>Products Catalog</a>
-              <a href="#blog" className="dropdown-item" onClick={() => handleNavClick('blog')} style={{ padding: '12px 16px', fontWeight: 700 }}>Blog</a>
-              <a href="#careers" className="dropdown-item" onClick={() => handleNavClick('careers')} style={{ padding: '12px 16px', fontWeight: 700 }}>Careers</a>
-              <a href="#faq" className="dropdown-item" onClick={() => handleNavClick('faq')} style={{ padding: '12px 16px', fontWeight: 700 }}>FAQ</a>
-              <a href="#contact" className="dropdown-item" onClick={() => handleNavClick('contact')} style={{ padding: '12px 16px', fontWeight: 700 }}>Contact &amp; Weight Estimator</a>
+              {mobileNav.map((entry) => {
+                const isOpen = mobileSection === entry.key;
 
-              <div style={{ padding: '12px 16px', borderTop: '1px solid #e2e8f0', marginTop: '6px' }}>
-                <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#51847D', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '8px' }}>
-                  Popular Product Categories
-                </div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
-                  {productDropdownItems.map((item) => (
-                    <button
-                      key={item}
-                      onClick={() => handleNavClick('products', item)}
-                      style={{
-                        background: '#edf5f4',
-                        border: '1px solid #cbd5e1',
-                        padding: '8px 10px',
-                        fontSize: '0.8rem',
-                        fontWeight: 600,
-                        color: '#0f172a',
-                        textAlign: 'left',
-                        cursor: 'pointer',
+                if (!entry.items) {
+                  return (
+                    <a
+                      key={entry.key}
+                      href={`#${entry.id}`}
+                      className={`mobile-nav-link${activeTab === entry.id ? ' is-active' : ''}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleNavClick(entry.id!);
                       }}
                     >
-                      {item}
+                      {entry.label}
+                    </a>
+                  );
+                }
+
+                return (
+                  <div key={entry.key} className="mobile-nav-group">
+                    <button
+                      type="button"
+                      className={`mobile-nav-link mobile-nav-toggle${isOpen ? ' is-open' : ''}`}
+                      aria-expanded={isOpen}
+                      onClick={() => setMobileSection(isOpen ? null : entry.key)}
+                    >
+                      {entry.label}
+                      {isOpen
+                        ? <Minus size={20} className="mobile-nav-chevron" strokeWidth={1.75} />
+                        : <Plus size={20} className="mobile-nav-chevron" strokeWidth={1.75} />}
                     </button>
-                  ))}
-                </div>
-              </div>
+
+                    {isOpen && (
+                      <div className="mobile-nav-sublist">
+                        {entry.items.map((item) => (
+                          <a
+                            key={item.label}
+                            href={item.id ? `#${item.id}` : '#'}
+                            className="mobile-nav-sublink"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              if (item.onClick) item.onClick();
+                              else handleNavClick(item.id!, item.category);
+                            }}
+                          >
+                            {item.label}
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
 
               <button
-                onClick={() => { setMobileMenuOpen(false); onOpenQuoteModal(); }}
+                onClick={() => { closeMobileMenu(); onOpenQuoteModal(); }}
                 className="btn btn-accent"
-                style={{ marginTop: '12px', width: '100%', padding: '14px' }}
+                style={{ margin: '20px 20px 0', width: 'calc(100% - 40px)', padding: '15px' }}
               >
                 Get Instant Quote
               </button>
