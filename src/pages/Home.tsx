@@ -76,16 +76,84 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
     },
   ];
 
-  /* Served from public/ rather than hotlinked off Wikimedia — the upstream
-     paths are content-hashed and three of them had already 404'd. */
-  const clientLogos = [
-    { src: '/images/logos/boeing.svg', alt: 'Boeing Aerospace' },
-    { src: '/images/logos/siemens.svg', alt: 'Siemens Energy' },
-    { src: '/images/logos/chevron.svg', alt: 'Chevron Petroleum' },
-    { src: '/images/logos/general-electric.svg', alt: 'General Electric' },
-    { src: '/images/logos/tata.svg', alt: 'Tata Metallurgy' },
-    { src: '/images/logos/lockheed-martin.svg', alt: 'Lockheed Martin Defense' },
-    { src: '/images/logos/larsen-toubro.svg', alt: 'Larsen & Toubro Infrastructure' },
+  /* Three logo rails, matching the company's own "logo WEB SITE" deck:
+     the TPI agencies that witness inspection, the clients we supply, and the
+     mills we source from. Assets are served from public/ rather than
+     hotlinked — upstream CDN paths are content-hashed and go stale. */
+  const logoRails = [
+    {
+      key: 'tpi',
+      label: 'Third-Party Inspection',
+      title: 'TPI AGENCIES',
+      blurb: 'Independent agencies that witness our testing and counter-sign EN 10204 3.2 certificates.',
+      duration: '38s',
+      reverse: false,
+      logos: [
+        { src: '/images/logos/tpi/tuv-sud.png', alt: 'TÜV SÜD South Asia' },
+        { src: '/images/logos/tpi/tuv-india.png', alt: 'TÜV India — TÜV NORD Group' },
+        { src: '/images/logos/tpi/sgs.png', alt: 'SGS' },
+        { src: '/images/logos/tpi/tuv-rheinland.png', alt: 'TÜV Rheinland' },
+        { src: '/images/logos/tpi/tcs.png', alt: 'Tata Consultancy Services' },
+        { src: '/images/logos/tpi/bureau-veritas.png', alt: 'Bureau Veritas' },
+        { src: '/images/logos/tpi/lloyds-register.png', alt: "Lloyd's Register" },
+        { src: '/images/logos/tpi/pdil.png', alt: 'Projects & Development India Ltd (PDIL)' },
+        { src: '/images/logos/tpi/irclass.png', alt: 'Indian Register of Shipping (IRCLASS)' },
+        { src: '/images/logos/tpi/intertek.png', alt: 'Intertek' },
+      ],
+    },
+    {
+      key: 'clients',
+      label: 'Supplied To',
+      title: 'OUR CLIENTS',
+      blurb: 'Refineries, fertiliser plants, power utilities and defence PSUs served across India.',
+      duration: '55s',
+      reverse: true,
+      logos: [
+        { src: '/images/logos/clients/indian-oil.png', alt: 'Indian Oil Corporation Limited' },
+        { src: '/images/logos/clients/bharat-petroleum.png', alt: 'Bharat Petroleum Corporation Ltd.' },
+        { src: '/images/logos/clients/hindustan-petroleum.png', alt: 'Hindustan Petroleum Corporation Ltd.' },
+        { src: '/images/logos/clients/cpcl.png', alt: 'Chennai Petroleum Corporation Ltd.' },
+        { src: '/images/logos/clients/ongc.png', alt: 'Oil and Natural Gas Corporation' },
+        { src: '/images/logos/clients/gail.png', alt: 'GAIL (India) Limited' },
+        { src: '/images/logos/clients/rcf.png', alt: 'Rashtriya Chemicals & Fertilizers Ltd.' },
+        { src: '/images/logos/clients/deepak-fertilisers.png', alt: 'Deepak Fertilisers and Petrochemicals Corporation Ltd.' },
+        { src: '/images/logos/clients/iffco.png', alt: 'IFFCO' },
+        { src: '/images/logos/clients/fact.png', alt: 'Fertilisers and Chemicals Travancore (FACT)' },
+        { src: '/images/logos/clients/ntpc.png', alt: 'NTPC' },
+        { src: '/images/logos/clients/bhel.png', alt: 'BHEL' },
+        { src: '/images/logos/clients/larsen-toubro.png', alt: 'Larsen & Toubro' },
+        { src: '/images/logos/clients/barc.png', alt: 'Bhabha Atomic Research Centre' },
+        { src: '/images/logos/clients/npcil.png', alt: 'Nuclear Power Corporation of India Ltd.' },
+        { src: '/images/logos/clients/isgec.png', alt: 'ISGEC Heavy Engineering Ltd.' },
+        { src: '/images/logos/clients/adani.png', alt: 'Adani Group' },
+      ],
+    },
+    {
+      key: 'sources',
+      label: 'Approved Mills',
+      title: 'OUR SOURCES',
+      blurb: 'Material drawn only from reputed domestic and international mills, with mill test certificates.',
+      duration: '50s',
+      reverse: false,
+      logos: [
+        { src: '/images/logos/sources/jindal-steel-power.png', alt: 'Jindal Steel & Power' },
+        { src: '/images/logos/sources/jindal-stainless.png', alt: 'Jindal Stainless (JSL)' },
+        { src: '/images/logos/sources/sail.png', alt: 'Steel Authority of India (SAIL)' },
+        { src: '/images/logos/sources/vizag-steel.png', alt: 'Vizag Steel — RINL' },
+        { src: '/images/logos/sources/mukand.png', alt: 'Mukand Ltd — Bajaj Group' },
+        { src: '/images/logos/sources/viraj.png', alt: 'Viraj Profiles' },
+        { src: '/images/logos/sources/maharashtra-seamless.png', alt: 'Maharashtra Seamless Limited' },
+        { src: '/images/logos/sources/venus-pipes.png', alt: 'Venus Pipes and Tubes' },
+        { src: '/images/logos/sources/remi.png', alt: 'Remi Group' },
+        { src: '/images/logos/sources/rimjhim-ispat.png', alt: 'Rimjhim Ispat' },
+        { src: '/images/logos/sources/arcelormittal.png', alt: 'ArcelorMittal' },
+        { src: '/images/logos/sources/amns-india.png', alt: 'AM/NS India' },
+        { src: '/images/logos/sources/nippon-steel.png', alt: 'Nippon Steel & Sumitomo Metal Corporation' },
+        { src: '/images/logos/sources/tubacex.png', alt: 'Tubacex Group' },
+        { src: '/images/logos/sources/sij-acroni.png', alt: 'SIJ Acroni' },
+        { src: '/images/logos/sources/dkc.png', alt: 'DKC Steel' },
+      ],
+    },
   ];
 
   // 4 Pexels Industrial Hero Background Slides
@@ -1730,51 +1798,83 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
         </div>
       </section>
 
-      {/* 8. Enterprise Clients Infinite Logo Marquee Section (No Boxes, Clean Company Logo Images) */}
+      {/* 8. TPI Agencies / Clients / Sources — three infinite logo rails */}
       <section
         style={{
           background: '#ffffff',
-          padding: '40px 0',
+          padding: '70px 0 60px',
           borderTop: '1px solid #e2e8f0',
           borderBottom: '1px solid #e2e8f0',
           position: 'relative',
           overflow: 'hidden',
         }}
       >
-        {/* Infinite Scrolling Logo Marquee Container */}
-        <div className="marquee-container">
-          <div className="marquee-track" style={{ gap: '70px', alignItems: 'center' }}>
-            {/* Duplicated 2x for smooth 100% continuous infinite loop */}
-            {[...Array(2)].map((_, loopIdx) => (
-              <React.Fragment key={loopIdx}>
-                {clientLogos.map((logo) => (
-                  <div
-                    key={logo.src}
-                    /* Uniform slot: the wordmarks are far wider than the square
-                       marks, so each logo is fitted inside the same box instead
-                       of sharing one height — otherwise Lockheed (6.6:1) would
-                       run three times the width of GE (1:1). */
-                    style={{
-                      flexShrink: 0,
-                      width: '150px',
-                      height: '46px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    <img
-                      src={logo.src}
-                      alt={logo.alt}
-                      loading="lazy"
-                      style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
-                    />
-                  </div>
-                ))}
-              </React.Fragment>
-            ))}
+        <div className="container">
+          <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 46px' }} className="reveal">
+            <span className="small-label" style={{ color: '#51847D', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
+              WHO WE WORK WITH
+            </span>
+            <h2 className="section-title" style={{ fontSize: '2.5rem', color: '#061221', marginBottom: '14px', fontWeight: 900, letterSpacing: '0.02em' }}>
+              INSPECTED, TRUSTED &amp; SOURCED
+            </h2>
+            <div style={{ width: '60px', height: '4px', background: '#51847D', margin: '0 auto 16px' }} />
+            <p style={{ color: '#475569', fontSize: '1.05rem', lineHeight: 1.6 }}>
+              Every consignment passes through recognised third-party inspection, reaches India&rsquo;s
+              largest process and power industries, and starts life at an approved mill.
+            </p>
           </div>
         </div>
+
+        {logoRails.map((rail) => (
+          <div key={rail.key} className="logo-rail">
+            <div className="container">
+              <div className="logo-rail-head">
+                <span className="logo-rail-label">{rail.label}</span>
+                <h3 className="logo-rail-title">{rail.title}</h3>
+                <p className="logo-rail-blurb">{rail.blurb}</p>
+              </div>
+            </div>
+
+            {/* Infinite scroll: the list is duplicated so the -50% keyframe lands
+                on an identical frame and the loop reads as continuous. */}
+            <div className="marquee-container">
+              <div
+                className={`marquee-track${rail.reverse ? ' marquee-reverse' : ''}`}
+                style={{ gap: '64px', alignItems: 'center', animationDuration: rail.duration }}
+              >
+                {[...Array(2)].map((_, loopIdx) => (
+                  <React.Fragment key={loopIdx}>
+                    {rail.logos.map((logo) => (
+                      <div
+                        key={logo.src}
+                        /* Uniform slot: wordmarks are far wider than the square
+                           marks, so each logo is fitted inside the same box
+                           instead of sharing one height — otherwise IRCLASS
+                           (5:1) would run several times the width of BARC. */
+                        style={{
+                          flexShrink: 0,
+                          width: '170px',
+                          height: '62px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <img
+                          src={logo.src}
+                          alt={logo.alt}
+                          title={logo.alt}
+                          loading="lazy"
+                          style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
+                        />
+                      </div>
+                    ))}
+                  </React.Fragment>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
       </section>
     </div>
   );

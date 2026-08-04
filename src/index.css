@@ -169,6 +169,64 @@ h1, h2, h3, h4, h5, h6 {
   animation-play-state: paused;
 }
 
+/* Adjacent rails scroll opposite ways so the block does not read as one
+   single sliding band. */
+.marquee-reverse {
+  animation-direction: reverse;
+}
+
+/* TPI / Clients / Sources rails */
+.logo-rail + .logo-rail {
+  margin-top: 22px;
+  padding-top: 22px;
+  border-top: 1px solid #eef2f4;
+}
+
+.logo-rail-head {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 12px;
+}
+
+.logo-rail-label {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #51847D;
+  background: #f1f6f5;
+  border-radius: 999px;
+  padding: 5px 14px;
+  margin-bottom: 8px;
+}
+
+.logo-rail-title {
+  font-size: 1.28rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  color: #061221;
+  margin: 0 0 6px;
+}
+
+.logo-rail-blurb {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: #64748b;
+  margin: 0 0 14px;
+}
+
+@media (max-width: 640px) {
+  .logo-rail-title { font-size: 1.1rem; }
+  .logo-rail-blurb { font-size: 0.84rem; }
+  .logo-rail + .logo-rail { margin-top: 18px; padding-top: 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+  .marquee-container { overflow-x: auto; }
+}
+
 /* Container Wrapper */
 .container {
   max-width: 1280px;
