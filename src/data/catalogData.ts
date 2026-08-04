@@ -1595,60 +1595,60 @@ export const catalogProducts: CatalogProduct[] = [
 
   // SPECIALIZED PRODUCTS
   // 1. Abrasion Resistant Plates
-  { id: 'abrex-steel-plates', title: 'Abrasion Resistant Steel Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/sheets_plates.png', specs: ['High Wear Resistance', 'Quenched & Tempered', 'Heavy Machinery Line'] },
-  { id: 'abrex-400-plates', title: 'Abrex 400 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/sheets_plates.png', specs: ['400 HBW Hardness', 'Nippon Steel Grade', 'Wear Resistant'] },
-  { id: 'abrex-450-plates', title: 'Abrex 450 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/sheets_plates.png', specs: ['450 HBW Hardness', 'Mining Equipment Plate'] },
-  { id: 'abrex-500-plates', title: 'Abrex 500 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/sheets_plates.png', specs: ['500 HBW Hardness', 'Chute & Hopper Liners'] },
-  { id: 'abrex-600-plates', title: 'Abrex 600 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/sheets_plates.png', specs: ['600 HBW Ultra Hard Plate', 'Cement Plant Liners'] },
-  { id: 'rockstar-400-plates', title: 'Rockstar 400 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/sheets_plates.png', specs: ['Essar Rockstar 400', '400 HBW Abrasion Steel'] },
-  { id: 'rockstar-450-plates', title: 'Rockstar 450 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/sheets_plates.png', specs: ['Essar Rockstar 450', '450 HBW High Toughness'] },
-  { id: 'rockstar-500-plates', title: 'Rockstar 500 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/sheets_plates.png', specs: ['Essar Rockstar 500', '500 HBW Wear Plate'] },
-  { id: 'ar-400-plates', title: 'AR 400 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/sheets_plates.png', specs: ['AR 400 Hardness Steel', 'Excavator Bucket Liners'] },
-  { id: 'ar-450-plates', title: 'AR 450 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/sheets_plates.png', specs: ['AR 450 Wear Resistant Steel', 'Quarry Liners'] },
-  { id: 'ar-500-plates', title: 'AR 500 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/sheets_plates.png', specs: ['AR 500 Severe Wear Steel', 'Crusher Equipment'] },
-  { id: 'ar-600-plates', title: 'AR 600 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/sheets_plates.png', specs: ['AR 600 Max Hardness Steel', 'Extreme Impact Armor'] },
-  { id: 'jfe-eh-plates', title: 'JFE EH 360, 400, 500 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/sheets_plates.png', specs: ['JFE EVERHARD EH 360 / 400 / 500', 'Japanese Wear Steel'] },
+  { id: 'abrex-steel-plates', title: 'Abrasion Resistant Steel Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/plate_laser_cutting.jpg', specs: ['High Wear Resistance', 'Quenched & Tempered', 'Heavy Machinery Line'] },
+  { id: 'abrex-400-plates', title: 'Abrex 400 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/plate_laser_cutting.jpg', specs: ['400 HBW Hardness', 'Nippon Steel Grade', 'Wear Resistant'] },
+  { id: 'abrex-450-plates', title: 'Abrex 450 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/plate_laser_cutting.jpg', specs: ['450 HBW Hardness', 'Mining Equipment Plate'] },
+  { id: 'abrex-500-plates', title: 'Abrex 500 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/plate_laser_cutting.jpg', specs: ['500 HBW Hardness', 'Chute & Hopper Liners'] },
+  { id: 'abrex-600-plates', title: 'Abrex 600 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/plate_laser_cutting.jpg', specs: ['600 HBW Ultra Hard Plate', 'Cement Plant Liners'] },
+  { id: 'rockstar-400-plates', title: 'Rockstar 400 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/plate_laser_cutting.jpg', specs: ['Essar Rockstar 400', '400 HBW Abrasion Steel'] },
+  { id: 'rockstar-450-plates', title: 'Rockstar 450 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/plate_laser_cutting.jpg', specs: ['Essar Rockstar 450', '450 HBW High Toughness'] },
+  { id: 'rockstar-500-plates', title: 'Rockstar 500 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/plate_laser_cutting.jpg', specs: ['Essar Rockstar 500', '500 HBW Wear Plate'] },
+  { id: 'ar-400-plates', title: 'AR 400 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/plate_laser_cutting.jpg', specs: ['AR 400 Hardness Steel', 'Excavator Bucket Liners'] },
+  { id: 'ar-450-plates', title: 'AR 450 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/plate_laser_cutting.jpg', specs: ['AR 450 Wear Resistant Steel', 'Quarry Liners'] },
+  { id: 'ar-500-plates', title: 'AR 500 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/plate_laser_cutting.jpg', specs: ['AR 500 Severe Wear Steel', 'Crusher Equipment'] },
+  { id: 'ar-600-plates', title: 'AR 600 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/plate_laser_cutting.jpg', specs: ['AR 600 Max Hardness Steel', 'Extreme Impact Armor'] },
+  { id: 'jfe-eh-plates', title: 'JFE EH 360, 400, 500 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/plate_laser_cutting.jpg', specs: ['JFE EVERHARD EH 360 / 400 / 500', 'Japanese Wear Steel'] },
 
   // 2. Quenched & Tempered Steel
-  { id: 'qt-steel-plates', title: 'Quenched & Tempered Steel Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/sheets_plates.png', specs: ['High Tensile Yield Steel', 'EN 10025-6', 'Crane & Structural Steel'] },
-  { id: 's690ql-plates', title: 'S690ql Sheets & Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/sheets_plates.png', specs: ['EN 10025-6 S690QL', '690 MPa Yield Strength', 'High Strength Crane Boom'] },
-  { id: 'weldox-700-plates', title: 'Weldox 700 Sheets & Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/sheets_plates.png', specs: ['SSAB Weldox 700 / Strenx 700', '700 MPa High Yield'] },
-  { id: 'welten-780e-plates', title: 'Welten 780E Sheets & Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/sheets_plates.png', specs: ['Nippon Steel Welten 780E', 'High Yield Structural Plate'] },
-  { id: 'jfe-hiten-780le', title: 'JFE Hiten 780LE Sheets & Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/sheets_plates.png', specs: ['JFE HITEN 780LE', 'High Tensile Structural Steel'] },
+  { id: 'qt-steel-plates', title: 'Quenched & Tempered Steel Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/plate_forming_mill.jpg', specs: ['High Tensile Yield Steel', 'EN 10025-6', 'Crane & Structural Steel'] },
+  { id: 's690ql-plates', title: 'S690ql Sheets & Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/plate_forming_mill.jpg', specs: ['EN 10025-6 S690QL', '690 MPa Yield Strength', 'High Strength Crane Boom'] },
+  { id: 'weldox-700-plates', title: 'Weldox 700 Sheets & Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/plate_forming_mill.jpg', specs: ['SSAB Weldox 700 / Strenx 700', '700 MPa High Yield'] },
+  { id: 'welten-780e-plates', title: 'Welten 780E Sheets & Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/plate_forming_mill.jpg', specs: ['Nippon Steel Welten 780E', 'High Yield Structural Plate'] },
+  { id: 'jfe-hiten-780le', title: 'JFE Hiten 780LE Sheets & Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/plate_forming_mill.jpg', specs: ['JFE HITEN 780LE', 'High Tensile Structural Steel'] },
 
   // 3. Corten Steel
-  { id: 'corten-steel-plates', title: 'Corten Steel Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/sheets_plates.png', specs: ['Atmospheric Corrosion Steel', 'Weathering Steel'] },
-  { id: 'corten-steel-a', title: 'Corten Steel A Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/sheets_plates.png', specs: ['ASTM A242 Corten A', 'Architectural Weathering Steel'] },
-  { id: 'corten-steel-b', title: 'Corten Steel B Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/sheets_plates.png', specs: ['ASTM A588 Corten B', 'Bridge & Heavy Structural'] },
-  { id: 'corten-a588', title: 'Corten Steel Gr A588 Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/sheets_plates.png', specs: ['ASTM A588 Grade A / B / C', 'High Strength Weathering'] },
-  { id: 'corten-irsm41', title: 'Corten Steel Gr 41 IRSM Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/sheets_plates.png', specs: ['IRSM 41-97 Railway Grade', 'Indian Railways Weathering Steel'] },
+  { id: 'corten-steel-plates', title: 'Corten Steel Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/corten_weathered_steel.jpg', specs: ['Atmospheric Corrosion Steel', 'Weathering Steel'] },
+  { id: 'corten-steel-a', title: 'Corten Steel A Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/corten_weathered_steel.jpg', specs: ['ASTM A242 Corten A', 'Architectural Weathering Steel'] },
+  { id: 'corten-steel-b', title: 'Corten Steel B Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/corten_weathered_steel.jpg', specs: ['ASTM A588 Corten B', 'Bridge & Heavy Structural'] },
+  { id: 'corten-a588', title: 'Corten Steel Gr A588 Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/corten_weathered_steel.jpg', specs: ['ASTM A588 Grade A / B / C', 'High Strength Weathering'] },
+  { id: 'corten-irsm41', title: 'Corten Steel Gr 41 IRSM Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/corten_weathered_steel.jpg', specs: ['IRSM 41-97 Railway Grade', 'Indian Railways Weathering Steel'] },
 
   // 4. 15Mo3 Steel
-  { id: '15mo3-steel-plates', title: '15Mo3 Steel Plates', category: 'Specialized Product', subCat: '15Mo3 Steel', image: '/images/sheets_plates.png', specs: ['DIN 17155 15Mo3', 'EN 10028-2 16Mo3', 'Boiler Quality Steel'] },
+  { id: '15mo3-steel-plates', title: '15Mo3 Steel Plates', category: 'Specialized Product', subCat: '15Mo3 Steel', image: '/images/steel_mill_hall.jpg', specs: ['DIN 17155 15Mo3', 'EN 10028-2 16Mo3', 'Boiler Quality Steel'] },
 
   // 5. 16Mo3 / SA 204 Steel
-  { id: '16mo3-sa204-plates', title: '16Mo3 / SA 204 Steel Plates', category: 'Specialized Product', subCat: '16Mo3 / SA 204 Steel', image: '/images/sheets_plates.png', specs: ['ASTM A204 Grade A / B / C', 'Molybdenum Alloy Pressure Vessel'] },
+  { id: '16mo3-sa204-plates', title: '16Mo3 / SA 204 Steel Plates', category: 'Specialized Product', subCat: '16Mo3 / SA 204 Steel', image: '/images/steel_mill_hall.jpg', specs: ['ASTM A204 Grade A / B / C', 'Molybdenum Alloy Pressure Vessel'] },
 
   // 6. Armour Steel
-  { id: 'armour-steel-plates', title: 'Armour Steel Plates', category: 'Specialized Product', subCat: 'Armour Steel', image: '/images/sheets_plates.png', specs: ['Ballistic Protection Armor Plate', 'Defense Grade Steel', 'MIL-DTL Certified'] },
+  { id: 'armour-steel-plates', title: 'Armour Steel Plates', category: 'Specialized Product', subCat: 'Armour Steel', image: '/images/armour_steel_works.jpg', specs: ['Ballistic Protection Armor Plate', 'Defense Grade Steel', 'MIL-DTL Certified'] },
 
   // 7. DSQ Plates
-  { id: 'dsq-steel-plates', title: 'DSQ Steel Plates', category: 'Specialized Product', subCat: 'DSQ Plates', image: '/images/sheets_plates.png', specs: ['Deep Drawing Quality Steel Plate', 'IS 2062 E250 / E350'] },
+  { id: 'dsq-steel-plates', title: 'DSQ Steel Plates', category: 'Specialized Product', subCat: 'DSQ Plates', image: '/images/machine_shop_floor.jpg', specs: ['Deep Drawing Quality Steel Plate', 'IS 2062 E250 / E350'] },
 
   // 8. Boiler Steel
-  { id: 'boiler-steel-plates', title: 'Boiler Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/sheets_plates.png', specs: ['High Pressure Vessel Steel', 'ASTM A516 / ASME SA516'] },
-  { id: 'a516-gr60-plates', title: 'ASTM A516 Grade 60 Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/sheets_plates.png', specs: ['ASTM A516 Gr 60', 'Low Temp Pressure Vessel'] },
-  { id: 'a516-gr65-plates', title: 'ASTM A516 Grade 65 Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/sheets_plates.png', specs: ['ASTM A516 Gr 65', 'Moderate & Lower Temp Service'] },
-  { id: 'a516-gr70-plates', title: 'ASTM A516 Grade 70 Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/sheets_plates.png', specs: ['ASTM A516 Gr 70 / SA 516 Gr 70', 'NACE MR0175 Compliant'] },
-  { id: 'nace-hic-plates', title: 'NACE + HIC Resistant Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/sheets_plates.png', specs: ['Hydrogen Induced Cracking Resistant', 'Sour Oil & Gas Service'] },
+  { id: 'boiler-steel-plates', title: 'Boiler Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/steel_mill_hall.jpg', specs: ['High Pressure Vessel Steel', 'ASTM A516 / ASME SA516'] },
+  { id: 'a516-gr60-plates', title: 'ASTM A516 Grade 60 Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/steel_mill_hall.jpg', specs: ['ASTM A516 Gr 60', 'Low Temp Pressure Vessel'] },
+  { id: 'a516-gr65-plates', title: 'ASTM A516 Grade 65 Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/steel_mill_hall.jpg', specs: ['ASTM A516 Gr 65', 'Moderate & Lower Temp Service'] },
+  { id: 'a516-gr70-plates', title: 'ASTM A516 Grade 70 Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/steel_mill_hall.jpg', specs: ['ASTM A516 Gr 70 / SA 516 Gr 70', 'NACE MR0175 Compliant'] },
+  { id: 'nace-hic-plates', title: 'NACE + HIC Resistant Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/steel_mill_hall.jpg', specs: ['Hydrogen Induced Cracking Resistant', 'Sour Oil & Gas Service'] },
 
   // 9. Manganese Steel
-  { id: 'manganese-steel-plates', title: 'Manganese Steel Plates', category: 'Specialized Product', subCat: 'Manganese Steel', image: '/images/sheets_plates.png', specs: ['High Impact Work Hardening Steel'] },
-  { id: 'manganese-1214-plates', title: '12 - 14% Manganese Plates', category: 'Specialized Product', subCat: 'Manganese Steel', image: '/images/sheets_plates.png', specs: ['12-14% Mn High Hadfield Steel', 'Crusher & Shot Blast Liners'] },
-  { id: 'hadfield-manganese-plates', title: 'Hadfield Manganese Plates', category: 'Specialized Product', subCat: 'Manganese Steel', image: '/images/sheets_plates.png', specs: ['ASTM A128 Grade B2 / B3', 'Austenitic Manganese Steel'] },
+  { id: 'manganese-steel-plates', title: 'Manganese Steel Plates', category: 'Specialized Product', subCat: 'Manganese Steel', image: '/images/heavy_wear_parts.jpg', specs: ['High Impact Work Hardening Steel'] },
+  { id: 'manganese-1214-plates', title: '12 - 14% Manganese Plates', category: 'Specialized Product', subCat: 'Manganese Steel', image: '/images/heavy_wear_parts.jpg', specs: ['12-14% Mn High Hadfield Steel', 'Crusher & Shot Blast Liners'] },
+  { id: 'hadfield-manganese-plates', title: 'Hadfield Manganese Plates', category: 'Specialized Product', subCat: 'Manganese Steel', image: '/images/heavy_wear_parts.jpg', specs: ['ASTM A128 Grade B2 / B3', 'Austenitic Manganese Steel'] },
 
   // 10. Tiscral Sailhard Plates
-  { id: 'tiscral-sailhard-plates', title: 'Tiscral Sailhard Plates', category: 'Specialized Product', subCat: 'Tiscral Sailhard Plates', image: '/images/sheets_plates.png', specs: ['SAIL SAILHARD Wear Plate', 'TISCRAL High Abrasion Resistance', 'Mining & Earthmoving Steel'] },
+  { id: 'tiscral-sailhard-plates', title: 'Tiscral Sailhard Plates', category: 'Specialized Product', subCat: 'Tiscral Sailhard Plates', image: '/images/alloy_bar_texture.jpg', specs: ['SAIL SAILHARD Wear Plate', 'TISCRAL High Abrasion Resistance', 'Mining & Earthmoving Steel'] },
 
   // GASKETING SOLUTIONS PRODUCTS
   // 1. Asbestos Free (AF) Fibre Jointing Sheets

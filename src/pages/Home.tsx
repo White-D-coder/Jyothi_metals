@@ -43,30 +43,49 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
       num: '01',
       title: 'ADVANCED METALLURGY TECHNOLOGY',
       desc: 'Multi-axis CNC laser cutting and computer-controlled rolling lines ensure sub-micron tolerance precision across all metal components and titanium sheets.',
-      image: '/images/pexels-alex-60339926-9878853.jpg',
+      image: '/images/industrial_facility.png',
       alt: 'Multi-axis CNC Laser Cutting Production Line',
     },
     {
       num: '02',
       title: 'DUAL ISO 9001 & AS9100D CERTIFIED',
       desc: 'Comprehensive lab testing, X-ray weld inspection, and full heat-lot traceability reports included with every shipment for aerospace compliance.',
-      image: '/images/titanium_plates.png',
+      image: '/images/quality_lab.jpg',
       alt: 'Aerospace Grade Titanium Testing & Accreditation',
     },
     {
       num: '03',
       title: '30+ YEARS EXPERT ENGINEERING TEAMS',
       desc: 'In-house metallurgists assist in customizing heat-treatment schedules and bespoke extrusion profiles tailored to your exact CAD files.',
-      image: '/images/pexels-bence-szemerey-337043-6804265.jpg',
+      image: '/images/heavy_rolling_mill.jpg',
       alt: 'Expert Metallurgical Engineering & Technical CAD Advisory',
     },
     {
       num: '04',
       title: 'EXPEDITED 48H GLOBAL SUPPLY CHAIN',
       desc: 'Strategic warehouses in North America, Europe, and Asia guaranteeing rapid dispatch and real-time tracking on standard alloy stock.',
-      image: '/images/pexels-willians-huerta-2157111846-36397988.jpg',
+      image: '/images/stock_warehouse_racks.jpg',
       alt: 'Global Supply Logistics & Heavy Infrastructure Freight',
     },
+    {
+      num: '05',
+      title: 'INDEPENDENT THIRD-PARTY INSPECTION',
+      desc: 'We arrange third-party inspection on request. Independent agencies such as DNV, Lloyd’s and TÜV witness the testing, stamp the coupons, and counter-sign EN 10204 3.2 mill test certificates before dispatch.',
+      image: '/images/precision_parts.png',
+      alt: 'Third-Party Witnessed Inspection & EN 10204 3.2 Certification',
+    },
+  ];
+
+  /* Served from public/ rather than hotlinked off Wikimedia — the upstream
+     paths are content-hashed and three of them had already 404'd. */
+  const clientLogos = [
+    { src: '/images/logos/boeing.svg', alt: 'Boeing Aerospace' },
+    { src: '/images/logos/siemens.svg', alt: 'Siemens Energy' },
+    { src: '/images/logos/chevron.svg', alt: 'Chevron Petroleum' },
+    { src: '/images/logos/general-electric.svg', alt: 'General Electric' },
+    { src: '/images/logos/tata.svg', alt: 'Tata Metallurgy' },
+    { src: '/images/logos/lockheed-martin.svg', alt: 'Lockheed Martin Defense' },
+    { src: '/images/logos/larsen-toubro.svg', alt: 'Larsen & Toubro Infrastructure' },
   ];
 
   // 4 Pexels Industrial Hero Background Slides
@@ -579,7 +598,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
               }}
             >
               <img
-                src="/images/pexels-alex-60339926-9878853.jpg"
+                src="/images/pipe_stockyard.jpg"
                 alt="Jyoti Metal Foundry Production Facilities"
                 style={{
                   width: '100%',
@@ -992,7 +1011,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                 title: 'Sheets',
                 mainCat: 'Plates & Sheets',
                 tag: 'ASTM A240 / 304 & 316',
-                image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+                image: '/images/plate_forming_mill.jpg',
               },
               {
                 title: 'Pipe and Tubes',
@@ -1028,13 +1047,13 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                 title: 'Forged Fittings',
                 mainCat: 'Forged Fittings',
                 tag: '3000# / 6000# Socket Weld',
-                image: '/images/pipe_fittings.png',
+                image: '/images/machine_shop_floor.jpg',
               },
               {
                 title: 'Specialized Product',
                 mainCat: 'Specialized Product',
                 tag: 'Laser Cut & CNC Drilled',
-                image: '/images/precision_parts.png',
+                image: '/images/plate_laser_cutting.jpg',
               },
             ].map((cat, catIdx) => (
               <div
@@ -1728,68 +1747,30 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
             {/* Duplicated 2x for smooth 100% continuous infinite loop */}
             {[...Array(2)].map((_, loopIdx) => (
               <React.Fragment key={loopIdx}>
-                {/* Boeing */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Boeing_full_logo.svg"
-                    alt="Boeing Aerospace"
-                    style={{ height: '36px', objectFit: 'contain' }}
-                  />
-                </div>
-
-                {/* Siemens */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Siemens-logo.svg"
-                    alt="Siemens Energy"
-                    style={{ height: '32px', objectFit: 'contain' }}
-                  />
-                </div>
-
-                {/* Chevron */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Chevron_Logo.svg"
-                    alt="Chevron Petroleum"
-                    style={{ height: '40px', objectFit: 'contain' }}
-                  />
-                </div>
-
-                {/* General Electric */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/f/ff/General_Electric_logo.svg"
-                    alt="General Electric"
-                    style={{ height: '42px', objectFit: 'contain' }}
-                  />
-                </div>
-
-                {/* Tata Steel */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Tata_logo.svg"
-                    alt="Tata Metallurgy"
-                    style={{ height: '34px', objectFit: 'contain' }}
-                  />
-                </div>
-
-                {/* Lockheed Martin */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/9/99/Lockheed_Martin_logo.svg"
-                    alt="Lockheed Defense"
-                    style={{ height: '38px', objectFit: 'contain' }}
-                  />
-                </div>
-
-                {/* Larsen & Toubro */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Larsen%26Toubro_logo.svg"
-                    alt="Larsen &amp; Toubro Infra"
-                    style={{ height: '36px', objectFit: 'contain' }}
-                  />
-                </div>
+                {clientLogos.map((logo) => (
+                  <div
+                    key={logo.src}
+                    /* Uniform slot: the wordmarks are far wider than the square
+                       marks, so each logo is fitted inside the same box instead
+                       of sharing one height — otherwise Lockheed (6.6:1) would
+                       run three times the width of GE (1:1). */
+                    style={{
+                      flexShrink: 0,
+                      width: '150px',
+                      height: '46px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <img
+                      src={logo.src}
+                      alt={logo.alt}
+                      loading="lazy"
+                      style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
+                    />
+                  </div>
+                ))}
               </React.Fragment>
             ))}
           </div>
