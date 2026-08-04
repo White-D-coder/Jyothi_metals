@@ -17,7 +17,7 @@ const BlogPage = lazy(() => import('./pages/BlogPage').then(m => ({ default: m.B
 const CareersPage = lazy(() => import('./pages/CareersPage').then(m => ({ default: m.CareersPage })));
 const FaqPage = lazy(() => import('./pages/FaqPage').then(m => ({ default: m.FaqPage })));
 const LaserCuttingPage = lazy(() => import('./pages/LaserCuttingPage').then(m => ({ default: m.LaserCuttingPage })));
-const ArcCastingPage = lazy(() => import('./pages/ArcCastingPage').then(m => ({ default: m.ArcCastingPage })));
+const ForgingPage = lazy(() => import('./pages/ForgingPage').then(m => ({ default: m.ForgingPage })));
 const WeldInspectionPage = lazy(() => import('./pages/WeldInspectionPage').then(m => ({ default: m.WeldInspectionPage })));
 const QualityPolicyPage = lazy(() => import('./pages/QualityPolicyPage').then(m => ({ default: m.QualityPolicyPage })));
 const CertificationsPage = lazy(() => import('./pages/CertificationsPage').then(m => ({ default: m.CertificationsPage })));
@@ -125,8 +125,8 @@ export function App() {
               element={<LaserCuttingPage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
             />
             <Route
-              path="/services/arc-casting"
-              element={<ArcCastingPage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
+              path="/services/forging"
+              element={<ForgingPage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
             />
             <Route
               path="/services/weld-inspection"

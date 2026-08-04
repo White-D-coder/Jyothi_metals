@@ -3,14 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import {
   ArrowRight,
   ArrowUpRight,
-  Flame,
-  Layers,
-  Thermometer,
+  Hammer,
+  CircleDot,
+  Gauge,
   CheckCircle2,
 } from 'lucide-react';
 import { CapabilityNav } from '../components/CapabilityNav';
 
-interface ArcCastingPageProps {
+interface ForgingPageProps {
   onOpenQuoteModal: (productName?: string) => void;
   onNavigate?: (tab: string) => void;
 }
@@ -26,54 +26,54 @@ const COLORS = {
 };
 
 const heroStats = [
-  { label: 'Annual Capacity', value: '50,000 MT', sub: 'Certified melt shop output' },
-  { label: 'Primary Furnace', value: 'Double EAF', sub: 'Computer-controlled arc melting' },
-  { label: 'Secondary Refining', value: 'AOD / VOD', sub: 'Argon & vacuum degassing' },
-  { label: 'Alloy Coverage', value: '200+ Grades', sub: 'Austenitic, Duplex & Titanium' },
+  { label: 'Press Capacity', value: '2,500 T', sub: 'Hydraulic open die press' },
+  { label: 'Piece Weight', value: '0.5 – 8 T', sub: 'Single forged component' },
+  { label: 'Forging Ratio', value: '4:1 Min', sub: 'Verified grain refinement' },
+  { label: 'Alloy Coverage', value: '200+ Grades', sub: 'Stainless, Duplex & Nickel' },
 ];
 
 const processHighlights = [
   {
-    title: 'Controlled Atmosphere Melting',
-    desc: 'Dual-shell EAF primary smelting with automated electrode positioning and sub-ppm gas analysis.',
-    icon: Flame,
+    title: 'Open Die Forging',
+    desc: 'Free-form forging of shafts, blocks and discs on a 2,500-tonne hydraulic press for heavy sections with no die tooling cost.',
+    icon: Hammer,
   },
   {
-    title: 'AOD Secondary Decarburization',
-    desc: 'Argon oxygen decarburization vessels producing ultra-low carbon stainless steel & superalloys.',
-    icon: Thermometer,
+    title: 'Closed Die Forging',
+    desc: 'Impression die forging produces near-net-shape flanges, fittings and valve bodies with minimal machining allowance.',
+    icon: Gauge,
   },
   {
-    title: 'Electromagnetic Stirring (EMS)',
-    desc: 'Continuous strand casting with EMS to eliminate center-line porosity and macro-segregation.',
-    icon: Layers,
+    title: 'Seamless Ring Rolling',
+    desc: 'Radial-axial ring rolling mill delivers seamless rolled rings up to 2,000 mm outside diameter with continuous circumferential grain flow.',
+    icon: CircleDot,
   },
 ];
 
 const specifications = [
-  { step: 'I', label: 'Furnace Type', value: 'Double-shell Electric Arc Furnace (EAF) & Ladle Refining Furnace (LRF)', image: '/images/furnace_melt.jpg' },
-  { step: 'II', label: 'Annual Melt Capacity', value: '50,000 Metric Tons of certified alloy billets, blooms & slabs', image: '/images/heavy_rolling_mill.jpg' },
-  { step: 'III', label: 'Refining Process', value: 'Vacuum Oxygen Decarburization (VOD) & Argon Oxygen Decarburization (AOD)', image: '/images/quality_lab.jpg' },
-  { step: 'IV', label: 'Billet & Slab Range', value: 'Square Billets 100mm to 300mm | Slabs up to 1500mm width x 250mm thickness', image: '/images/titanium_plates.png' },
-  { step: 'V', label: 'Alloy Grade Coverage', value: '200+ certified grades: Stainless Steel, Super Alloys, Titanium', image: '/images/round_bars.png' },
-  { step: 'VI', label: 'Melt Purity Standard', value: 'Sub-ppm gas analysis with 100% Optical Emission Spectrometry per heat lot', image: '/images/pexels-tokuo-nobuhiro-79378678-20472153.jpg' },
+  { step: 'I', label: 'Forging Method', value: 'Open die (free forging), closed die (impression), and seamless radial-axial ring rolling', image: '/images/furnace_melt.jpg' },
+  { step: 'II', label: 'Press & Hammer Line', value: '2,500 T hydraulic open die press, 5 T pneumatic hammer & 1,600 T closed die press', image: '/images/heavy_rolling_mill.jpg' },
+  { step: 'III', label: 'Component Weight Range', value: '0.5 kg forged fittings up to 8 metric tons single-piece open die forgings', image: '/images/flanges_industrial.png' },
+  { step: 'IV', label: 'Ring Rolling Capacity', value: 'Seamless rolled rings 150 mm to 2,000 mm outside diameter, 40 mm to 400 mm height', image: '/images/round_bars.png' },
+  { step: 'V', label: 'Post-Forge Heat Treatment', value: 'Normalizing, quench & temper, solution annealing and stress relief in computer-controlled furnaces', image: '/images/quality_lab.jpg' },
+  { step: 'VI', label: 'Governing Standards', value: 'ASTM A182 / A105 / A350, ASME B16.5 & B16.11, with NACE MR0175 compliance for sour service', image: '/images/pipe_fittings.png' },
 ];
 
 const equipmentList = [
   {
-    title: 'Double-Shell EAF Melt Cell',
-    image: '/images/pexels-alex-60339926-9878853.jpg',
-    caption: 'Primary electric arc furnace with computer-controlled electrode positioning.',
+    title: '2,500 T Hydraulic Forging Press',
+    image: '/images/furnace_melt.jpg',
+    caption: 'Open die press with programmable manipulator for heavy shafts, blocks and stepped discs.',
   },
   {
-    title: 'AOD / VOD Refining Converter',
-    image: '/images/stainless_pipes.png',
-    caption: 'Argon oxygen decarburization unit producing low-carbon stainless grades.',
-  },
-  {
-    title: 'Continuous Billet Caster',
+    title: 'Radial-Axial Ring Rolling Mill',
     image: '/images/round_bars.png',
-    caption: 'Multi-strand continuous casting line producing dense, crack-free forged billets.',
+    caption: 'Produces seamless rolled rings with uninterrupted circumferential grain flow and no weld seam.',
+  },
+  {
+    title: 'Closed Die Flange & Fitting Cell',
+    image: '/images/flanges_industrial.png',
+    caption: 'Impression die line for near-net-shape flanges, elbows, tees and forged pipe fittings.',
   },
 ];
 
@@ -244,13 +244,13 @@ const SpecHoverList: React.FC<{ items: typeof specifications }> = ({ items }) =>
   );
 };
 
-export const ArcCastingPage: React.FC<ArcCastingPageProps> = ({ onOpenQuoteModal }) => {
+export const ForgingPage: React.FC<ForgingPageProps> = ({ onOpenQuoteModal }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="arc-page-root" style={{ background: COLORS.bg, minHeight: '100vh', color: COLORS.text }}>
+    <div className="forging-page-root" style={{ background: COLORS.bg, minHeight: '100vh', color: COLORS.text }}>
       <style>{`
-        .arc-page-root {
+        .forging-page-root {
           font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
@@ -305,24 +305,6 @@ export const ArcCastingPage: React.FC<ArcCastingPageProps> = ({ onOpenQuoteModal
           flex-direction: column;
         }
 
-        .spec-table-row {
-          display: grid;
-          grid-template-columns: 240px 1fr;
-          padding: 18px 24px;
-          margin: 0 -32px;
-          border-bottom: 1px solid ${COLORS.divider};
-          transition: background-color 200ms ease, padding-left 200ms ease;
-          cursor: pointer;
-        }
-        .spec-table-row:hover {
-          background-color: #EDF5F4;
-          padding-left: 32px;
-        }
-        .spec-table-row:hover > div:first-child {
-          color: ${COLORS.accent};
-        }
-        .spec-table-row:last-child { border-bottom: none; }
-
         @media (max-width: 1024px) {
           .feature-split-grid { grid-template-columns: 1fr; gap: 32px; }
           .hero-stats-grid { grid-template-columns: repeat(2, 1fr); row-gap: 20px; }
@@ -330,7 +312,6 @@ export const ArcCastingPage: React.FC<ArcCastingPageProps> = ({ onOpenQuoteModal
 
         @media (max-width: 768px) {
           .process-cards-grid { grid-template-columns: 1fr; }
-          .spec-table-row { grid-template-columns: 1fr; gap: 4px; }
           .hero-stats-grid { grid-template-columns: 1fr; row-gap: 20px; padding-top: 20px; }
           .hero-stat-item { padding: 0; }
           .hero-stat-item:not(:first-child) {
@@ -367,7 +348,7 @@ export const ArcCastingPage: React.FC<ArcCastingPageProps> = ({ onOpenQuoteModal
       {/* 1. Hero Section with Rich Photography */}
       <section
         style={{
-          backgroundImage: 'linear-gradient(135deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.85) 100%), url("/images/pexels-alex-60339926-9878853.jpg")',
+          backgroundImage: 'linear-gradient(135deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.85) 100%), url("/images/furnace_melt.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           color: '#FFFFFF',
@@ -387,17 +368,17 @@ export const ArcCastingPage: React.FC<ArcCastingPageProps> = ({ onOpenQuoteModal
                 letterSpacing: '0.6px',
               }}
             >
-              Continuous Electric Arc Casting
+              Open Die &amp; Closed Die Forging
             </h1>
 
             <p style={{ fontSize: '1.08rem', color: '#CBD5E1', lineHeight: 1.65, marginBottom: '28px', letterSpacing: '0.3px' }}>
-              High-purity electric arc furnaces combined with AOD secondary refining deliver ultra-clean alloy ingots, billets, and continuous cast slabs.
+              Hydraulic press forging and seamless ring rolling deliver components with continuous grain flow, higher fatigue strength, and no internal porosity.
             </p>
 
             <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
               <button
                 type="button"
-                onClick={() => onOpenQuoteModal('Custom Alloy Billets & Slabs')}
+                onClick={() => onOpenQuoteModal('Custom Forged Components')}
                 className="btn btn-primary mobile-full-btn"
                 style={{ padding: '14px 28px', fontSize: '0.9rem' }}
               >
@@ -434,7 +415,7 @@ export const ArcCastingPage: React.FC<ArcCastingPageProps> = ({ onOpenQuoteModal
       </section>
 
       {/* 2. Top Horizontal Sticky Sub-Navigation Bar */}
-      <CapabilityNav currentPath="/services/arc-casting" showQualityTabs={false} />
+      <CapabilityNav currentPath="/services/forging" showQualityTabs={false} />
 
       {/* 3. Section 1: Feature Split Showcase */}
       <section style={{ padding: '60px 0' }}>
@@ -443,32 +424,32 @@ export const ArcCastingPage: React.FC<ArcCastingPageProps> = ({ onOpenQuoteModal
             <div className="feature-split-grid">
               <div style={{ border: `1px solid ${COLORS.divider}`, overflow: 'hidden', background: COLORS.panel }}>
                 <img
-                  src="/images/pexels-alex-60339926-9878853.jpg"
-                  alt="Electric Arc Furnace casting in action"
+                  src="/images/furnace_melt.jpg"
+                  alt="Heated billet under the hydraulic forging press"
                   style={{ width: '100%', height: '400px', objectFit: 'cover', display: 'block' }}
                 />
               </div>
 
               <div>
                 <h2 style={{ fontSize: 'clamp(1.5rem, 2.6vw, 2.0rem)', fontWeight: 700, color: COLORS.text, marginBottom: '18px', lineHeight: 1.25 }}>
-                  Controlled Atmosphere Primary Smelting &amp; Continuous Strand Casting
+                  Grain Flow Engineered for Pressure &amp; Fatigue Service
                 </h2>
                 <p style={{ fontSize: '0.98rem', color: COLORS.textMuted, lineHeight: 1.7, marginBottom: '16px' }}>
-                  Our foundry infrastructure is anchored by high-efficiency double-shell Electric Arc Furnaces (EAF) paired with Argon Oxygen Decarburization (AOD) vessels. This two-stage refining route allows precise removal of carbon and unwanted tramp elements, achieving hydrogen and nitrogen levels well below critical ASTM/EN thresholds.
+                  Forging deforms the billet while it is plastic, so the internal grain structure follows the contour of the finished part instead of being cut through it. The result is a component with no shrinkage porosity, no gas cavities, and significantly higher impact and fatigue strength than an equivalent casting or a part machined from solid bar.
                 </p>
                 <p style={{ fontSize: '0.98rem', color: COLORS.textMuted, lineHeight: 1.7, marginBottom: '24px' }}>
-                  Liquid steel from the refining ladle is transferred to multi-strand continuous casters equipped with electromagnetic stirring (EMS). EMS eliminates center-line porosity and macro-segregation, yielding homogeneous billets, blooms, and slabs ready for direct extrusion or hot rolling.
+                  Billets are soaked to a controlled forging temperature, worked to a minimum 4:1 reduction ratio, then normalized or solution annealed to restore a uniform fine grain. Every heat lot is verified by spectrographic analysis and ultrasonically inspected to ASTM A388 before release.
                 </p>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.92rem', fontWeight: 600, color: COLORS.text }}>
-                    <CheckCircle2 size={18} color={COLORS.accent} /> Dual-shell EAF primary melt with automated electrode positioning
+                    <CheckCircle2 size={18} color={COLORS.accent} /> Continuous grain flow with no porosity or shrinkage defects
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.92rem', fontWeight: 600, color: COLORS.text }}>
-                    <CheckCircle2 size={18} color={COLORS.accent} /> AOD / VOD secondary decarburization for ultra-low carbon grades
+                    <CheckCircle2 size={18} color={COLORS.accent} /> Minimum 4:1 forging ratio with post-forge grain refinement
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.92rem', fontWeight: 600, color: COLORS.text }}>
-                    <CheckCircle2 size={18} color={COLORS.accent} /> Electromagnetic stirring (EMS) continuous strand casting
+                    <CheckCircle2 size={18} color={COLORS.accent} /> ASTM A388 ultrasonic inspection on every heat lot
                   </div>
                 </div>
               </div>
@@ -500,10 +481,10 @@ export const ArcCastingPage: React.FC<ArcCastingPageProps> = ({ onOpenQuoteModal
           <Reveal>
             <div style={{ maxWidth: '750px', marginBottom: '28px' }}>
               <h2 style={{ fontSize: 'clamp(1.5rem, 2.6vw, 2.0rem)', fontWeight: 700, color: COLORS.text, marginBottom: '12px' }}>
-                Casting &amp; Refining Specifications
+                Forging Specifications
               </h2>
               <p style={{ fontSize: '0.96rem', color: COLORS.textMuted, lineHeight: 1.65 }}>
-                Sub-ppm gas purity and full spectral chemistry validation across 200+ certified alloy grades.
+                Press capacity, size envelope and heat treatment routes across stainless, duplex, nickel alloy and carbon steel forgings.
               </p>
             </div>
 
@@ -518,10 +499,10 @@ export const ArcCastingPage: React.FC<ArcCastingPageProps> = ({ onOpenQuoteModal
           <Reveal>
             <div style={{ maxWidth: '750px', marginBottom: '32px' }}>
               <h2 style={{ fontSize: 'clamp(1.5rem, 2.6vw, 2.0rem)', fontWeight: 700, color: COLORS.text, marginBottom: '12px' }}>
-                Casting Machinery Showcase
+                Forge Shop Machinery
               </h2>
               <p style={{ fontSize: '0.96rem', color: COLORS.textMuted, lineHeight: 1.65 }}>
-                Integrated Electric Arc Furnaces, refining vessels, and continuous strand casters under one roof.
+                Press line, ring rolling mill and closed die cell operating alongside our in-house heat treatment furnaces.
               </p>
             </div>
 
@@ -557,16 +538,16 @@ export const ArcCastingPage: React.FC<ArcCastingPageProps> = ({ onOpenQuoteModal
       >
         <div className="container" style={{ maxWidth: '760px', margin: '0 auto', padding: '0 20px' }}>
           <h2 style={{ fontSize: 'clamp(1.8rem, 3.4vw, 2.3rem)', fontWeight: 700, color: COLORS.text, marginBottom: '14px', lineHeight: 1.25 }}>
-            Need Custom Melt Ingot or Billet Stock?
+            Need a Custom Forging to Drawing?
           </h2>
           <p style={{ color: COLORS.textMuted, fontSize: '1.02rem', lineHeight: 1.65, marginBottom: '32px' }}>
-            Discuss your specific alloy chemistry and ingot requirements with our melt shop engineers.
+            Send us your drawing, grade and service conditions — our forge engineers will advise on the forging route, tooling and heat treatment.
           </p>
 
           <div style={{ display: 'flex', justifyContent: 'center', gap: '14px', flexWrap: 'wrap' }}>
             <button
               type="button"
-              onClick={() => onOpenQuoteModal('Custom Alloy Billets & Slabs')}
+              onClick={() => onOpenQuoteModal('Custom Forged Components')}
               className="btn btn-primary mobile-full-btn"
               style={{ padding: '15px 32px', fontSize: '0.92rem' }}
             >

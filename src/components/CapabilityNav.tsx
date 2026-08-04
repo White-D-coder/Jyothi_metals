@@ -16,9 +16,9 @@ export const CAPABILITY_NAV_ITEMS: NavItem[] = [
     category: 'capability',
   },
   {
-    title: 'Continuous Electric Arc Casting',
-    shortTitle: 'Electric Arc Casting',
-    path: '/services/arc-casting',
+    title: 'Open Die & Closed Die Forging',
+    shortTitle: 'Forging',
+    path: '/services/forging',
     category: 'capability',
   },
   {

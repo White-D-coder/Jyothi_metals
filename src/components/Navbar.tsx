@@ -283,14 +283,14 @@ export const Navbar: React.FC<NavbarProps> = ({
                   Custom Laser Cutting &amp; Milling
                 </a>
                 <a
-                  href="#services/arc-casting"
+                  href="#services/forging"
                   className="dropdown-item"
                   onClick={(e) => {
                     e.preventDefault();
-                    handleNavClick('services/arc-casting');
+                    handleNavClick('services/forging');
                   }}
                 >
-                  Continuous Electric Arc Casting
+                  Open Die &amp; Closed Die Forging
                 </a>
                 <a
                   href="#services/weld-inspection"
@@ -420,7 +420,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <a href="#quality-policy" className="dropdown-item" onClick={() => handleNavClick('quality-policy')} style={{ padding: '12px 16px', fontWeight: 700 }}>Quality Policy &amp; ISO Standards</a>
               <a href="#certifications" className="dropdown-item" onClick={() => handleNavClick('certifications')} style={{ padding: '12px 16px', fontWeight: 700 }}>Certifications &amp; Compliance</a>
               <a href="#services/laser-cutting" className="dropdown-item" onClick={() => handleNavClick('services/laser-cutting')} style={{ padding: '12px 16px', fontWeight: 700 }}>Custom Laser Cutting &amp; Milling</a>
-              <a href="#services/arc-casting" className="dropdown-item" onClick={() => handleNavClick('services/arc-casting')} style={{ padding: '12px 16px', fontWeight: 700 }}>Continuous Electric Arc Casting</a>
+              <a href="#services/forging" className="dropdown-item" onClick={() => handleNavClick('services/forging')} style={{ padding: '12px 16px', fontWeight: 700 }}>Open Die &amp; Closed Die Forging</a>
               <a href="#services/weld-inspection" className="dropdown-item" onClick={() => handleNavClick('services/weld-inspection')} style={{ padding: '12px 16px', fontWeight: 700 }}>Ultrasonic Weld Inspection</a>
               <a href="#products" className="dropdown-item" onClick={() => handleNavClick('products')} style={{ padding: '12px 16px', fontWeight: 700 }}>Products Catalog</a>
               <a href="#blog" className="dropdown-item" onClick={() => handleNavClick('blog')} style={{ padding: '12px 16px', fontWeight: 700 }}>Blog</a>

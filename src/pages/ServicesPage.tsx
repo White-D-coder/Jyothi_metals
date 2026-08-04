@@ -4,10 +4,10 @@ import {
   ChevronRight,
   CheckCircle2,
   Scissors,
-  Flame,
   ScanLine,
   Thermometer,
   Hammer,
+  Wrench,
   Ship,
   MessagesSquare,
   Layers,
@@ -35,9 +35,9 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenQuoteModal, on
       desc: 'Multi-axis TruLaser cells and 5-axis CNC centers deliver sub-micron tolerance profiles cut directly from your CAD files.',
     },
     {
-      icon: <Flame size={24} />,
-      title: 'Continuous Electric Arc Casting',
-      desc: 'Zero-carbon electric arc furnaces produce ultra-clean billets, blooms and slabs across 200+ certified alloy grades.',
+      icon: <Hammer size={24} />,
+      title: 'Open Die & Closed Die Forging',
+      desc: 'Hydraulic press forging and seamless ring rolling deliver continuous grain flow, higher fatigue strength and zero internal porosity.',
     },
     {
       icon: <ScanLine size={24} />,
@@ -50,7 +50,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenQuoteModal, on
       desc: 'Computer-controlled vacuum annealing and quench lines tune grain structure, hardness and residual stress to spec.',
     },
     {
-      icon: <Hammer size={24} />,
+      icon: <Wrench size={24} />,
       title: 'Custom Fabrication & Forming',
       desc: 'Press-braking, rolling, welding and bespoke assembly turn raw stock into finished fabricated structures and skids.',
     },
