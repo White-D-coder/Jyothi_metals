@@ -102,12 +102,18 @@ const ISO_SCOPE =
 const MUMBAI_SITE = '102/8, Praveen House, 4th Kumbharwada Lane, Mumbai 400004, Maharashtra';
 const ALWAR_SITE = 'Plot No. E-41, G-1, RIICO Industrial Area, Khushkhera 301707, Distt. Alwar, Rajasthan';
 
+/*
+ * Each certificate ships as a 640px thumbnail for the card and the full A4 scan
+ * for the lightbox. The cards only ever render ~300px tall, so serving the full
+ * scan up front cost 1.5 MB before anyone clicked anything.
+ */
 const isoCertificates = [
   {
     code: 'ISO 9001:2015',
     system: 'Quality Management System',
     certNo: 'QMS/010898/0619',
     image: '/images/certificates/iso-9001-2015.jpg',
+    thumb: '/images/certificates/iso-9001-2015-thumb.jpg',
     sites: [MUMBAI_SITE],
   },
   {
@@ -115,6 +121,7 @@ const isoCertificates = [
     system: 'Environmental Management System',
     certNo: 'EMS/010896/0619',
     image: '/images/certificates/iso-14001-2015.jpg',
+    thumb: '/images/certificates/iso-14001-2015-thumb.jpg',
     sites: [MUMBAI_SITE, ALWAR_SITE],
   },
   {
@@ -122,6 +129,7 @@ const isoCertificates = [
     system: 'Occupational Health & Safety Management System',
     certNo: 'OHS/010897/0619',
     image: '/images/certificates/iso-45001-2018.jpg',
+    thumb: '/images/certificates/iso-45001-2018-thumb.jpg',
     sites: [MUMBAI_SITE, ALWAR_SITE],
   },
 ];
@@ -532,7 +540,14 @@ export const CertificationsPage: React.FC<CertificationsPageProps> = ({ onOpenQu
                   onClick={() => setOpenCert(cert)}
                   aria-label={`View the ${cert.code} certificate full size`}
                 >
-                  <img src={cert.image} alt={`${cert.code} certificate issued to Jyoti Metal (India)`} loading="lazy" />
+                  <img
+                    src={cert.thumb}
+                    alt={`${cert.code} certificate issued to Jyoti Metal (India)`}
+                    width={640}
+                    height={904}
+                    loading="lazy"
+                    decoding="async"
+                  />
                   <span className="iso-cert-zoom">
                     <Maximize2 size={16} /> View full size
                   </span>
@@ -642,6 +657,8 @@ export const CertificationsPage: React.FC<CertificationsPageProps> = ({ onOpenQu
                 <img
                 src={cert.image}
                 alt={cert.title}
+                loading="lazy"
+                decoding="async"
                 style={{
                   width: '100%',
                   height: '100%',
