@@ -264,7 +264,7 @@ export const QualityPolicyPage: React.FC<QualityPolicyPageProps> = ({ onOpenQuot
               </blockquote>
 
               <p style={{ fontSize: '1.02rem', color: '#475569', lineHeight: 1.7, margin: 0 }}>
-                Our Quality Management System (QMS) is structured around ISO 9001:2015 and AS9100D principles. Every raw ingot melt, continuous cast billet, cut plate, and machined flange is assigned a unique heat identification number that guarantees 100% material traceability back to its chemical melt heat.
+                Our Quality Management System (QMS) is structured around ISO 9001:2015 and AS9100D principles. Every incoming billet, forged component, cut plate, and machined flange is assigned a unique heat identification number that guarantees 100% material traceability back to its chemical melt heat.
               </p>
             </div>
 

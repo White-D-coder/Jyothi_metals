@@ -34,16 +34,12 @@ function table(t) {
 // `set` is keyed by column header. Values marked "from standard" are the only
 // figures not recoverable from the published row itself.
 // ---------------------------------------------------------------------------
+// NOTE: the SS 304H chemical row is published by Champak in the order Cr, Ni,
+// C, Si, Mn, P, S, N against a C, Mn, Si, P, S, Cr, Ni, N header. A re-seating
+// correction used to fix it here; the site owner decided (2026-08-05) to
+// reproduce the row verbatim instead, exactly as the source page prints it.
+// audit.cjs carries the matching acknowledgement so only NEW anomalies surface.
 const CORRECTIONS = [
-  {
-    id: '304H-column-order',
-    label: 'SS 304H',
-    grade: '304H',
-    // Published in the order Cr, Ni, C, Si, Mn, P, S, N against a C, Mn, Si,
-    // P, S, Cr, Ni, N header. Pure re-seating: no value is invented.
-    expect: { C: 'min: 18.0 max:20.0', Mn: 'min: 8.0 max: 10.5', Si: 'min: 0.04 max:0.10', P: '0.75 max', S: '2.0 max', Cr: '0.045 max', Ni: '0.03 max' },
-    set: { C: 'min: 0.04 max:0.10', Mn: '2.0 max', Si: '0.75 max', P: '0.045 max', S: '0.03 max', Cr: 'min: 18.0 max: 20.0', Ni: 'min: 8.0 max: 10.5' },
-  },
   {
     id: '321H-silicon',
     label: 'SS 321H',
@@ -119,7 +115,7 @@ function correct(slug, t) {
 }
 
 const out = {};
-const stats = { equivalent: 0, chemical: 0, mechanical: 0, physical: 0, applications: 0 };
+const stats = { equivalent: 0, chemical: 0, mechanical: 0, physical: 0, applications: 0, specification: 0 };
 
 for (const [id, slug] of Object.entries(map)) {
   const rec = db[slug];
@@ -140,6 +136,13 @@ for (const [id, slug] of Object.entries(map)) {
     entry.applications = rec.applications.map(fixText);
     stats.applications++;
   }
+  if (rec.specification) {
+    entry.specification = {
+      heading: fixText(rec.specification.heading),
+      rows: rec.specification.rows.map((r) => ({ label: fixText(r.label), value: fixText(r.value) })),
+    };
+    stats.specification++;
+  }
   out[id] = entry;
 }
 
@@ -154,11 +157,12 @@ const header = `// AUTO-GENERATED — do not edit by hand.
 // champaksteel.com (see \`source\` on each entry). Products absent from that
 // catalogue are intentionally missing here and keep the generic fallback data.
 //
-// Tables are reproduced verbatim, with six documented exceptions where the
-// source row was demonstrably defective (values seated under the wrong column
-// headers, a missing decimal point, and a duplicated cell). Each fix asserts
-// the published values before rewriting, so the generator fails loudly if the
-// source page changes. Corrected rows:
+// Tables are reproduced verbatim, with ${CORRECTIONS.length} documented exceptions where the
+// source row was demonstrably defective (a shifted row, a missing decimal
+// point, duplicated cells). Each fix asserts the published values before
+// rewriting, so the generator fails loudly if the source page changes. The
+// SS 304H chemical row is reproduced verbatim although the source mis-seats
+// it — the site owner's explicit choice. Corrected rows:
 ${correctionDoc}
 //
 // Regenerate: scripts/champak/generate.cjs
@@ -180,6 +184,17 @@ export interface SpecTable {
   note?: string;
 }
 
+export interface SpecificationRow {
+  label: string;
+  value: string;
+}
+
+/** The "Specification of …" label/value block near the top of the source page. */
+export interface ProductSpecification {
+  heading: string;
+  rows: SpecificationRow[];
+}
+
 export interface ChampakSpec {
   source: string;
   sourceTitle: string;
@@ -188,6 +203,7 @@ export interface ChampakSpec {
   mechanical?: SpecTable;
   physical?: SpecTable;
   applications?: string[];
+  specification?: ProductSpecification;
 }
 
 export const champakSpecs: Record<string, ChampakSpec> = `;

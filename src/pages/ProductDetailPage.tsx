@@ -204,7 +204,9 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
     setAppsExpanded(false);
   }, [currentProduct.id]);
 
-  const allApps = spec?.applications ?? appList;
+  // Champak-sourced products only ever show the published list (empty hides
+  // the section); the generic list is for products with no source page.
+  const allApps = spec ? spec.applications ?? [] : appList;
   const visibleApps = appsExpanded ? allApps : allApps.slice(0, APPS_PREVIEW_COUNT);
 
   // Related products from same category
@@ -583,7 +585,10 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
                 </SpecSection>
               )}
 
-              {!spec?.chemical && (
+              {/* Generic fallbacks below are for products with no Champak source
+                  page only. A Champak-sourced product whose page lacks a table
+                  shows nothing for that section — never invented data. */}
+              {!spec && (
                 <SpecSection label="CHEMICAL COMPOSITION">
                   <SpecHeading>Chemical composition of {currentProduct.title}</SpecHeading>
                   <div style={{ overflowX: 'auto', border: '1px solid #588078', marginBottom: '24px' }}>
@@ -652,7 +657,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
                 </SpecSection>
               )}
 
-              {!spec?.mechanical && (
+              {!spec && (
                 <SpecSection label="MECHANICAL PROPERTIES">
                   <SpecHeading>Mechanical properties of {currentProduct.title}</SpecHeading>
                   <div style={{ overflowX: 'auto', border: '1px solid #588078', marginBottom: '24px' }}>
@@ -721,7 +726,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
                 </SpecSection>
               )}
 
-              {!spec?.physical && (
+              {!spec && (
                 <SpecSection label="PHYSICAL PROPERTIES">
                   <SpecHeading>Physical &amp; thermal properties</SpecHeading>
                   <div style={{ border: '1px solid #E0E8E8' }}>
@@ -747,6 +752,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
               )}
 
               {/* Section 4: Application Industries */}
+              {allApps.length > 0 && (
               <SpecSection label="APPLICATION INDUSTRIES">
                 <SpecHeading>Certified application industries</SpecHeading>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -805,29 +811,59 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
                     )}
                   </div>
               </SpecSection>
+              )}
             </div>
 
-          {/* 5. Supplementary Scraped Database Sections (Standards, Equivalent Grades, Dimensions) */}
-          <div style={{ marginTop: '48px', paddingTop: '36px', borderTop: '1px solid #E0E8E8' }}>
-            <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#304050', marginBottom: '20px' }}>
-              Manufacturing Standards, Dimensions &amp; Equivalent Grades
-            </h3>
-            <div className="pd-supp-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
-              <div style={{ background: '#F8F8F8', border: '1px solid #E0E8E8', padding: '20px' }}>
-                <h4 style={{ fontSize: '0.92rem', fontWeight: 700, color: '#588078', marginBottom: '12px', textTransform: 'uppercase' }}>
-                  Manufacturing Standards
-                </h4>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                  {stdList.map((std) => (
-                    <span key={std} style={{ background: '#FFFFFF', border: '1px solid #CBD5E1', padding: '6px 12px', fontSize: '0.82rem', fontWeight: 700, color: '#304050' }}>
-                      {std}
-                    </span>
-                  ))}
+          {/* 5. Supplementary Section. Products carrying published Champak data
+              show that page's "Specification of …" block verbatim (nothing at all
+              when the source page has none); only products without a published
+              source keep the generic fallback chips. */}
+          {spec ? (
+            spec.specification && (
+              <div style={{ marginTop: '48px', paddingTop: '36px', borderTop: '1px solid #E0E8E8' }}>
+                <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#304050', marginBottom: '20px' }}>
+                  Manufacturing Standards &amp; Specification
+                </h3>
+                <div style={{ background: '#F8F8F8', border: '1px solid #E0E8E8', padding: '20px' }}>
+                  <h4 style={{ fontSize: '0.92rem', fontWeight: 700, color: '#588078', marginBottom: '12px', textTransform: 'uppercase' }}>
+                    {spec.specification.heading || 'Specification'}
+                  </h4>
+                  <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                    <tbody>
+                      {spec.specification.rows.map((row, idx) => (
+                        <tr key={`${row.label}-${idx}`}>
+                          <td style={{ padding: '8px 16px 8px 0', fontSize: '0.86rem', fontWeight: 700, color: '#304050', verticalAlign: 'top', width: '220px', borderBottom: '1px solid #E0E8E8' }}>
+                            {row.label}
+                          </td>
+                          <td style={{ padding: '8px 0', fontSize: '0.86rem', color: '#304050', verticalAlign: 'top', borderBottom: '1px solid #E0E8E8' }}>
+                            {row.value}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               </div>
+            )
+          ) : (
+            <div style={{ marginTop: '48px', paddingTop: '36px', borderTop: '1px solid #E0E8E8' }}>
+              <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#304050', marginBottom: '20px' }}>
+                Manufacturing Standards, Dimensions &amp; Equivalent Grades
+              </h3>
+              <div className="pd-supp-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
+                <div style={{ background: '#F8F8F8', border: '1px solid #E0E8E8', padding: '20px' }}>
+                  <h4 style={{ fontSize: '0.92rem', fontWeight: 700, color: '#588078', marginBottom: '12px', textTransform: 'uppercase' }}>
+                    Manufacturing Standards
+                  </h4>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                    {stdList.map((std) => (
+                      <span key={std} style={{ background: '#FFFFFF', border: '1px solid #CBD5E1', padding: '6px 12px', fontSize: '0.82rem', fontWeight: 700, color: '#304050' }}>
+                        {std}
+                      </span>
+                    ))}
+                  </div>
+                </div>
 
-              {/* Superseded by the Equivalent Grades tab wherever we hold the real table. */}
-              {!spec?.equivalent && (
                 <div style={{ background: '#F8F8F8', border: '1px solid #E0E8E8', padding: '20px' }}>
                   <h4 style={{ fontSize: '0.92rem', fontWeight: 700, color: '#588078', marginBottom: '12px', textTransform: 'uppercase' }}>
                     International Equivalent Grades
@@ -840,9 +876,9 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
                     ))}
                   </div>
                 </div>
-              )}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </section>
 

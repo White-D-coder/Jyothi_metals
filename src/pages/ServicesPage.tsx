@@ -78,7 +78,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenQuoteModal, on
       num: '03',
       icon: <Cpu size={22} color="#51847D" />,
       title: 'Precision Manufacturing',
-      desc: 'Casting, laser cutting, machining and forming run on calibrated lines with full heat-lot traceability at every stage.',
+      desc: 'Forging, laser cutting, machining and forming run on calibrated lines with full heat-lot traceability at every stage.',
     },
     {
       num: '04',
@@ -154,7 +154,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenQuoteModal, on
                 marginRight: 'auto',
               }}
             >
-              A single integrated partner for casting, cutting, machining, testing and global delivery.
+              A single integrated partner for forging, cutting, machining, testing and global delivery.
               We manage every stage in-house so your specifications are met with zero-defect precision.
             </p>
             <div style={{ display: 'flex', justifyContent: 'center', gap: '16px' }}>
@@ -404,7 +404,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenQuoteModal, on
                 One Facility, Total Control Over Every Tolerance
               </h2>
               <p style={{ fontSize: '1.05rem', color: '#475569', lineHeight: 1.7, marginBottom: '28px' }}>
-                Because casting, machining, treatment and testing all happen under our own roof, we eliminate
+                Because forging, machining, treatment and testing all happen under our own roof, we eliminate
                 subcontractor handoffs — protecting quality, traceability and lead times on even the most
                 demanding aerospace and defense contracts.
               </p>

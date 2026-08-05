@@ -1545,6 +1545,31 @@ h1, h2, h3, h4, h5, h6 {
   grid-template-columns: 1fr 1.25fr;
 }
 
+/* The rotated BENEFIT backdrop overhangs the right edge and has to be clipped,
+   but `overflow: hidden` would make this section a scroll container and stop
+   the sticky column inside it from ever sticking. `clip` contains the text
+   without that side effect; the `hidden` line stays as the older-browser
+   fallback (there, the column simply scrolls normally). Same trade-off as the
+   body rule near the top of this file. */
+.benefits-section {
+  overflow: hidden;
+  overflow: clip;
+}
+
+/* Benefits section: the heading and visual frame ride along while the reader
+   works down the five numbered points, then release as the section ends — the
+   grid's align-items: flex-start leaves the travel room for it.
+   Offset clears the sticky header (30px announcement bar + 90px navbar).
+   Desktop only: below 1025px the grid collapses to one column, where pinning
+   the image would just hold it over the list it belongs to. */
+@media (min-width: 1025px) {
+  .benefits-sticky-col {
+    position: sticky;
+    top: 136px;
+    align-self: start;
+  }
+}
+
 /* Mobile Specific Tweaks for Phone View (Does NOT affect Desktop View) */
 .mobile-only-see-all-btn {
   display: none;

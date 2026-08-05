@@ -435,7 +435,7 @@ export const ForgingPage: React.FC<ForgingPageProps> = ({ onOpenQuoteModal }) =>
                   Grain Flow Engineered for Pressure &amp; Fatigue Service
                 </h2>
                 <p style={{ fontSize: '0.98rem', color: COLORS.textMuted, lineHeight: 1.7, marginBottom: '16px' }}>
-                  Forging deforms the billet while it is plastic, so the internal grain structure follows the contour of the finished part instead of being cut through it. The result is a component with no shrinkage porosity, no gas cavities, and significantly higher impact and fatigue strength than an equivalent casting or a part machined from solid bar.
+                  Forging deforms the billet while it is plastic, so the internal grain structure follows the contour of the finished part instead of being cut through it. The result is a component with no shrinkage porosity, no gas cavities, and significantly higher impact and fatigue strength than a part machined from solid bar.
                 </p>
                 <p style={{ fontSize: '0.98rem', color: COLORS.textMuted, lineHeight: 1.7, marginBottom: '24px' }}>
                   Billets are soaked to a controlled forging temperature, worked to a minimum 4:1 reduction ratio, then normalized or solution annealed to restore a uniform fine grain. Every heat lot is verified by spectrographic analysis and ultrasonically inspected to ASTM A388 before release.

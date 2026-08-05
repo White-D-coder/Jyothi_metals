@@ -98,10 +98,10 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
     },
     {
       icon: <Gauge size={20} />,
-      title: 'Continuous Casting Lines',
-      desc: 'Six casting strands with electromagnetic stirring producing billets, blooms and slabs at 850k+ tons/yr.',
+      title: 'Forging Press & Ring Rolling',
+      desc: 'Open die press, closed die cell and radial-axial ring rolling mill producing forged bar, flanges and seamless rings.',
       image: '/images/jm1.jpg',
-      tag: 'CONTINUOUS CASTING',
+      tag: 'OPEN & CLOSED DIE FORGING',
     },
     {
       isDarkCallout: true,
@@ -119,8 +119,8 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
 
   const capacityStats: CapacityStat[] = [
     { countTo: 120000, comma: true, suffix: ' m²', label: 'Integrated Floor Area' },
-    { countTo: 850, suffix: 'k+', label: 'Tons Cast / Year' },
-    { countTo: 6, label: 'Continuous Casting Lines' },
+    { countTo: 850, suffix: 'k+', label: 'Tons Processed / Year' },
+    { countTo: 6, label: 'Forging & Rolling Lines' },
     { countTo: 30, suffix: '+', label: 'Multi-Axis CNC Cells' },
     { staticValue: '24/7', label: 'Operations & Dispatch' },
   ];
@@ -128,7 +128,7 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
   const [counts, setCounts] = useState<number[]>(capacityStats.map(() => 0));
 
   const gallery = [
-    { image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg', caption: 'Casting Bay' },
+    { image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg', caption: 'Forge Shop' },
     { image: '/images/pexels-alex-60339926-9878853.jpg', caption: 'Laser Cutting Cell' },
     { image: '/images/pexels-eugeniofr-30005294.jpg', caption: 'QA & Spectrometry Lab' },
     { image: '/images/pexels-jakubzerdzicki-33813584.jpg', caption: 'Rolling Mill Line' },
@@ -137,7 +137,7 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
 
   const marqueeItems = [
     'Vacuum Arc Remelting',
-    'Continuous Casting',
+    'Open & Closed Die Forging',
     'Hot & Cold Rolling',
     'Multi-Axis CNC Laser',
     'Ultrasonic NDT',
@@ -151,7 +151,7 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
   const sustainabilityPoints = [
     '98% circular electric arc recycling of returned scrap and machining swarf into new heats.',
     'Zero-carbon smelting powered by on-site solar arrays and certified renewable grid contracts.',
-    'Closed-loop water cooling recovering 90%+ of process water across casting and rolling lines.',
+    'Closed-loop water cooling recovering 90%+ of process water across forging and rolling lines.',
     'Full cradle-to-gate Environmental Product Declarations (EPD) supplied on request.',
   ];
 
@@ -252,7 +252,7 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
               ))}
             </h1>
             <p className="infra-reveal is-visible" style={{ fontSize: '1.15rem', color: '#cbd5e1', lineHeight: 1.7, marginBottom: '32px', maxWidth: '760px', marginLeft: 'auto', marginRight: 'auto', transitionDelay: '350ms' }}>
-              Vacuum arc melting, continuous casting, hot &amp; cold rolling and multi-axis CNC machining under one
+              Open die and closed die forging, hot &amp; cold rolling and multi-axis CNC machining under one
               roof — full heat-lot traceability from raw charge to finished component.
             </p>            <div className="infra-reveal is-visible" style={{ display: 'flex', justifyContent: 'center', gap: '16px', transitionDelay: '420ms', marginTop: '28px' }}>
               <button
@@ -296,8 +296,8 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
                 One Roof, End-to-End Metallurgical Control
               </h2>
               <p style={{ fontSize: '1.05rem', color: '#475569', lineHeight: 1.7, marginBottom: '20px' }}>
-                Our flagship foundry consolidates every critical process from primary melt and continuous casting
-                through rolling, forging and precision machining into a single vertically-integrated campus
+                Our flagship plant consolidates every critical process from forging and ring rolling
+                through hot rolling and precision machining into a single vertically-integrated campus
                 eliminating supply-chain hand-offs and guaranteeing uninterrupted heat-lot traceability.
               </p>
             </div>
@@ -641,7 +641,7 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
               A Walk Through Our Production Floor
             </h2>
             <p style={{ color: '#64748b', fontSize: '1.05rem' }}>
-              From the casting bay to final dispatch, explore the environments where precision alloys take shape.
+              From the forge shop to final dispatch, explore the environments where precision alloys take shape.
             </p>
           </div>
 

@@ -16,13 +16,13 @@ const timelineMilestones = [
   {
     year: '1989',
     title: 'Foundation & Regional Foundry Hub',
-    desc: 'Established as a specialized regional foundry in India providing precision stainless steel castings to domestic oil refineries and chemical plants with 100% heat-lot chemistry tracking.',
+    desc: 'Established as a specialized stockist and processor in India supplying precision stainless steel pipes, fittings and flanges to domestic oil refineries and chemical plants with 100% heat-lot chemistry tracking.',
     image: '/images/heavy_rolling_mill.jpg',
   },
   {
     year: '2004',
     title: 'ISO 9001:2015 Quality Accreditation',
-    desc: 'Achieved full ISO accreditation and introduced computer-guided ultrasonic non-destructive testing vaults across all continuous casting production lines.',
+    desc: 'Achieved full ISO accreditation and introduced computer-guided ultrasonic non-destructive testing vaults across all production lines.',
     image: '/images/quality_lab.jpg',
   },
   {
@@ -430,7 +430,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
             </h1>
 
             <p style={{ fontSize: '1.08rem', color: '#CBD5E1', lineHeight: 1.65, marginBottom: '28px', letterSpacing: '0.3px' }}>
-              Over three decades of metallurgical innovation, certified zero-defect alloy manufacturing, and high-yield continuous casting for global aerospace, defense, and nuclear contracts.
+              Over three decades of metallurgical expertise, certified zero-defect alloy processing, and high-yield precision fabrication for global aerospace, defense, and nuclear contracts.
             </p>
 
             <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
@@ -464,7 +464,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
               </p>
 
               <p style={{ fontSize: '1.02rem', color: '#475569', lineHeight: 1.7, margin: 0 }}>
-                Operating advanced continuous casting foundries and CNC laser fabrication units certified under ISO 9001:2015, we maintain 100% heat-lot chemistry traceability to serve critical defense, aerospace, nuclear power, oil &amp; gas, and heavy infrastructure sectors worldwide.
+                Operating advanced forging, rolling and CNC laser fabrication units certified under ISO 9001:2015, we maintain 100% heat-lot chemistry traceability to serve critical defense, aerospace, nuclear power, oil &amp; gas, and heavy infrastructure sectors worldwide.
               </p>
             </div>
 

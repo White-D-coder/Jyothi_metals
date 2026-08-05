@@ -198,12 +198,19 @@ function resolveProduct(p) {
     pageUrl: `${SITE}/product-detail?id=${encodeURIComponent(p.id)}`,
     pricePerKg: getAlloyPricePerKg(p.title),
 
-    equivalent: spec?.equivalent
-      ? { kind: 'table', heading: spec.equivalent.heading, data: expandSpecTable(spec.equivalent), note: spec.equivalent.note }
+    // A published product shows a section only when its source page has it —
+    // `null` means the section is omitted on the site. Generic fallbacks are
+    // reserved for products with no source page at all.
+    equivalent: spec
+      ? (spec.equivalent
+          ? { kind: 'table', heading: spec.equivalent.heading, data: expandSpecTable(spec.equivalent), note: spec.equivalent.note }
+          : null)
       : { kind: 'chips', heading: 'International Equivalent Grades', items: getEquivalentGrades(p.title) },
 
-    chemical: spec?.chemical
-      ? { kind: 'table', heading: spec.chemical.heading, data: expandSpecTable(spec.chemical), note: spec.chemical.note }
+    chemical: spec
+      ? (spec.chemical
+          ? { kind: 'table', heading: spec.chemical.heading, data: expandSpecTable(spec.chemical), note: spec.chemical.note }
+          : null)
       : {
           kind: 'fallback',
           heading: `CHEMICAL COMPOSITION OF STAINLESS STEEL ${p.title.toUpperCase()}`,
@@ -211,8 +218,10 @@ function resolveProduct(p) {
           breakdown: kvGrid(getAlloyComposition(p.title)),
         },
 
-    mechanical: spec?.mechanical
-      ? { kind: 'table', heading: spec.mechanical.heading, data: expandSpecTable(spec.mechanical), note: spec.mechanical.note }
+    mechanical: spec
+      ? (spec.mechanical
+          ? { kind: 'table', heading: spec.mechanical.heading, data: expandSpecTable(spec.mechanical), note: spec.mechanical.note }
+          : null)
       : {
           kind: 'fallback',
           heading: `MECHANICAL PROPERTIES OF STAINLESS STEEL ${p.title.toUpperCase()}`,
@@ -220,13 +229,19 @@ function resolveProduct(p) {
           breakdown: kvGrid(getMechanicalProperties(p.title)),
         },
 
-    physical: spec?.physical
-      ? { kind: 'table', heading: spec.physical.heading, data: expandSpecTable(spec.physical), note: spec.physical.note }
+    physical: spec
+      ? (spec.physical
+          ? { kind: 'table', heading: spec.physical.heading, data: expandSpecTable(spec.physical), note: spec.physical.note }
+          : null)
       : { kind: 'fallback', heading: 'Physical & Thermal Properties', data: kvGrid(getPhysicalProperties(p.title)) },
 
-    applications: spec?.applications ?? getCertifiedApplications(p.title),
+    applications: spec ? spec.applications ?? [] : getCertifiedApplications(p.title),
     applicationsArePublished: !!spec?.applications,
-    standards: getManufacturingStandards(p.title),
+    // The source page's "Specification of …" block. Published products show
+    // this (or nothing when the source page has none); only products without
+    // a published source fall back to the generic standards chips.
+    specification: spec?.specification ?? null,
+    standards: spec ? null : getManufacturingStandards(p.title),
   };
 }
 
@@ -258,8 +273,8 @@ wb.created = new Date(Number(process.env.SOURCE_DATE_EPOCH || 0) * 1000 || Date.
     ['Total products', String(products.length)],
     ['Categories', `${categories.length} — one worksheet each`],
     ['Product Index sheet', 'One row per product. Filter/sort here, then open the matching category sheet for the full detail.'],
-    ['Category sheets', 'Each product is a block: heading row, then the same five tabs the website shows (Equivalent Grades, Chemical Composition, Mechanical Properties, Physical Properties, Applications) plus Manufacturing Standards.'],
-    ['"Data Source" column', 'PUBLISHED = the real spec tables sourced from champaksteel.com, shown verbatim on the site. GENERIC = the site has no published table for this product and falls back to a family-level default (e.g. every non-316/duplex/titanium item shows the same SS 304 table). Check GENERIC rows first — those are the ones most likely to need real data.'],
+    ['Category sheets', 'Each product is a block: heading row, then the same five tabs the website shows (Equivalent Grades, Chemical Composition, Mechanical Properties, Physical Properties, Applications) plus the Manufacturing Standards & Specification block — the source page\'s own specification list for PUBLISHED products (omitted when the source page has none), generic standards chips only for GENERIC products.'],
+    ['"Data Source" column', 'PUBLISHED = the real spec tables sourced from champaksteel.com, shown verbatim on the site. A PUBLISHED product whose source page lacks a section shows nothing for it — marked "omitted" in the index and category sheets. GENERIC = the product has no champaksteel.com page at all, so the site falls back to family-level default data (e.g. every non-316/duplex/titanium item shows the same SS 304 table). Check GENERIC rows first — those are the ones most likely to need real data.'],
     ['Website link', 'Each product block carries a clickable link to its live page, so you can compare side by side.'],
     ['Regenerate', 'node scripts/export-catalog-xlsx.mjs — re-run any time the site data changes.'],
   ];
@@ -312,11 +327,11 @@ wb.created = new Date(Number(process.env.SOURCE_DATE_EPOCH || 0) * 1000 || Date.
       chips: p.specs.join('  |  '),
       price: p.pricePerKg,
       src: p.isPublished ? 'PUBLISHED' : 'GENERIC',
-      eq: p.equivalent.kind === 'table' ? 'Published table' : 'Generic chips',
-      chem: p.chemical.kind === 'table' ? 'Published table' : 'Generic table',
-      mech: p.mechanical.kind === 'table' ? 'Published table' : 'Generic table',
-      phys: p.physical.kind === 'table' ? 'Published table' : 'Generic list',
-      apps: p.applicationsArePublished ? `Published (${p.applications.length})` : `Generic (${p.applications.length})`,
+      eq: p.equivalent ? (p.equivalent.kind === 'table' ? 'Published table' : 'Generic chips') : '— omitted',
+      chem: p.chemical ? (p.chemical.kind === 'table' ? 'Published table' : 'Generic table') : '— omitted',
+      mech: p.mechanical ? (p.mechanical.kind === 'table' ? 'Published table' : 'Generic table') : '— omitted',
+      phys: p.physical ? (p.physical.kind === 'table' ? 'Published table' : 'Generic list') : '— omitted',
+      apps: p.applicationsArePublished ? `Published (${p.applications.length})` : p.applications.length ? `Generic (${p.applications.length})` : '— omitted',
       img: p.image,
       page: { text: 'Open page', hyperlink: p.pageUrl },
       ref: p.sourceUrl ? { text: p.sourceTitle || p.sourceUrl, hyperlink: p.sourceUrl } : '—',
@@ -389,8 +404,14 @@ categories.forEach((cat) => {
     r = writeMetaRow(ws, r, 'Live Page', p.pageUrl, true);
     r += 1;
 
+    // A null section means the source page has no such table, so the site
+    // shows nothing — the marker row records that this is deliberate.
+    const OMITTED = 'not on the source page — section omitted on site';
+
     // Tab 1 — Equivalent Grades
-    if (p.equivalent.kind === 'table') {
+    if (!p.equivalent) {
+      r = writeSectionTitle(ws, r, `TAB 1 — EQUIVALENT GRADES:  ${OMITTED}`, 4);
+    } else if (p.equivalent.kind === 'table') {
       r = writeSectionTitle(ws, r, `TAB 1 — EQUIVALENT GRADES:  ${p.equivalent.heading}`, p.equivalent.data.width);
       r = p.equivalent.note && !p.equivalent.data.grid.length
         ? writeList(ws, r, [p.equivalent.note])
@@ -402,42 +423,73 @@ categories.forEach((cat) => {
     r += 1;
 
     // Tab 2 — Chemical Composition
-    r = writeSectionTitle(ws, r, `TAB 2 — CHEMICAL COMPOSITION:  ${p.chemical.heading}`, p.chemical.data.width);
-    r = writeGrid(ws, r, p.chemical.data);
-    if (p.chemical.kind === 'fallback') {
-      r += 1;
-      r = writeSectionTitle(ws, r, 'Composition breakdown list (as shown below the table)', 2);
-      r = writeGrid(ws, r, p.chemical.breakdown);
+    if (!p.chemical) {
+      r = writeSectionTitle(ws, r, `TAB 2 — CHEMICAL COMPOSITION:  ${OMITTED}`, 4);
+    } else {
+      r = writeSectionTitle(ws, r, `TAB 2 — CHEMICAL COMPOSITION:  ${p.chemical.heading}`, p.chemical.data.width);
+      r = writeGrid(ws, r, p.chemical.data);
+      if (p.chemical.kind === 'fallback') {
+        r += 1;
+        r = writeSectionTitle(ws, r, 'Composition breakdown list (as shown below the table)', 2);
+        r = writeGrid(ws, r, p.chemical.breakdown);
+      }
     }
     r += 1;
 
     // Tab 3 — Mechanical Properties
-    r = writeSectionTitle(ws, r, `TAB 3 — MECHANICAL PROPERTIES:  ${p.mechanical.heading}`, p.mechanical.data.width);
-    r = writeGrid(ws, r, p.mechanical.data);
-    if (p.mechanical.kind === 'fallback') {
-      r += 1;
-      r = writeSectionTitle(ws, r, 'Mechanical breakdown list (as shown below the table)', 2);
-      r = writeGrid(ws, r, p.mechanical.breakdown);
+    if (!p.mechanical) {
+      r = writeSectionTitle(ws, r, `TAB 3 — MECHANICAL PROPERTIES:  ${OMITTED}`, 4);
+    } else {
+      r = writeSectionTitle(ws, r, `TAB 3 — MECHANICAL PROPERTIES:  ${p.mechanical.heading}`, p.mechanical.data.width);
+      r = writeGrid(ws, r, p.mechanical.data);
+      if (p.mechanical.kind === 'fallback') {
+        r += 1;
+        r = writeSectionTitle(ws, r, 'Mechanical breakdown list (as shown below the table)', 2);
+        r = writeGrid(ws, r, p.mechanical.breakdown);
+      }
     }
     r += 1;
 
     // Tab 4 — Physical Properties
-    r = writeSectionTitle(ws, r, `TAB 4 — PHYSICAL PROPERTIES:  ${p.physical.heading}`, p.physical.data.width);
-    r = writeGrid(ws, r, p.physical.data);
+    if (!p.physical) {
+      r = writeSectionTitle(ws, r, `TAB 4 — PHYSICAL PROPERTIES:  ${OMITTED}`, 4);
+    } else {
+      r = writeSectionTitle(ws, r, `TAB 4 — PHYSICAL PROPERTIES:  ${p.physical.heading}`, p.physical.data.width);
+      r = writeGrid(ws, r, p.physical.data);
+    }
     r += 1;
 
     // Tab 5 — Applications
-    r = writeSectionTitle(ws, r, `TAB 5 — CERTIFIED APPLICATION INDUSTRIES${p.applicationsArePublished ? '' : '  (generic)'}`, 6);
-    r = writeList(ws, r, p.applications);
+    if (!p.applications.length) {
+      r = writeSectionTitle(ws, r, `TAB 5 — CERTIFIED APPLICATION INDUSTRIES:  ${OMITTED}`, 6);
+    } else {
+      r = writeSectionTitle(ws, r, `TAB 5 — CERTIFIED APPLICATION INDUSTRIES${p.applicationsArePublished ? '' : '  (generic)'}`, 6);
+      r = writeList(ws, r, p.applications);
+    }
     r += 1;
 
-    // Manufacturing standards (always generic on the site)
-    r = writeSectionTitle(ws, r, 'MANUFACTURING STANDARDS  (generic)', 6);
-    const stdCell = ws.getRow(r).getCell(2);
-    stdCell.value = p.standards.join('   |   ');
-    stdCell.font = { size: 10, color: { argb: DARK } };
-    ws.mergeCells(r, 2, r, 7);
-    r += 4;
+    // Manufacturing standards & specification — the source page's own
+    // "Specification of …" block for published products (omitted entirely when
+    // the source page has none), generic chips only for unpublished products.
+    if (p.specification) {
+      r = writeSectionTitle(ws, r, `MANUFACTURING STANDARDS & SPECIFICATION:  ${p.specification.heading}`, 6);
+      r = writeGrid(ws, r, {
+        grid: p.specification.rows.map((row) => [
+          { text: row.label, header: true },
+          { text: row.value, header: false },
+        ]),
+        merges: p.specification.rows.map((_, i) => [i, 1, i, 6]),
+        width: 7,
+      });
+    } else if (p.standards) {
+      r = writeSectionTitle(ws, r, 'MANUFACTURING STANDARDS  (generic)', 6);
+      const stdCell = ws.getRow(r).getCell(2);
+      stdCell.value = p.standards.join('   |   ');
+      stdCell.font = { size: 10, color: { argb: DARK } };
+      ws.mergeCells(r, 2, r, 7);
+      r += 1;
+    }
+    r += 3;
   });
 });
 

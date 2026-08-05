@@ -42,7 +42,7 @@ export const CareersPage: React.FC<CareersPageProps> = ({ onOpenQuoteModal, onNa
     {
       icon: <GraduationCap size={24} />,
       title: 'Learn From Master Metallurgists',
-      desc: 'Work shoulder-to-shoulder with engineers holding 30+ years of casting, alloy and heat-treatment expertise.',
+      desc: 'Work shoulder-to-shoulder with engineers holding 30+ years of forging, alloy and heat-treatment expertise.',
     },
     {
       icon: <Cpu size={24} />,
@@ -78,7 +78,7 @@ export const CareersPage: React.FC<CareersPageProps> = ({ onOpenQuoteModal, onNa
       location: 'Mumbai',
       type: 'Full-Time',
       summary:
-        'Lead alloy development and process optimisation across our continuous casting and vacuum arc remelting lines, ensuring every heat-lot meets aerospace-grade specifications.',
+        'Lead alloy development and process optimisation across our forging and precision rolling lines, ensuring every heat-lot meets aerospace-grade specifications.',
       requirements: [
         'B.Tech / M.Tech in Metallurgical or Materials Engineering.',
         '8+ years in ferrous and non-ferrous alloy production.',

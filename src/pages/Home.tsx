@@ -156,26 +156,28 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
     },
   ];
 
-  // 4 Pexels Industrial Hero Background Slides
+  // 4 hero background slides. The overlay over these is deliberately light, so
+  // they need to be bright, high-contrast shots — dim or muddy frames read as
+  // flat grey here rather than dramatic.
   const heroSlides = [
     {
       id: 1,
-      url: '/images/pexels-alex-60339926-9878853.jpg',
+      url: '/images/jm6.jpg',
       title: 'Precision Metal Solutions for Modern Industry',
     },
     {
       id: 2,
-      url: '/images/pexels-bence-szemerey-337043-6804265.jpg',
+      url: '/images/pexels-shuaizhi-tian-485596-33996167.jpg',
       title: 'Certified High-Performance Alloy Metallurgy',
     },
     {
       id: 3,
-      url: '/images/pexels-eugeniofr-30005294.jpg',
-      title: 'Advanced Robotic Casting & Fabrication',
+      url: '/images/pexels-willians-huerta-2157111846-36397989.jpg',
+      title: 'Advanced Robotic Forging & Fabrication',
     },
     {
       id: 4,
-      url: '/images/pexels-jakubzerdzicki-33813584.jpg',
+      url: '/images/jm7.jpg',
       title: 'Sub-Micron CNC Aerospace Calibration',
     },
   ];
@@ -530,7 +532,9 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
             style={{
               position: 'absolute',
               inset: 0,
-              backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.45) 100%), url("${slide.url}")`,
+              // Light scrim only — the photo should read bright and clear. The
+              // headline carries its own shadow instead of leaning on a wash.
+              backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.30) 100%), url("${slide.url}")`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
@@ -545,10 +549,10 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
         {/* Hero Content Container */}
         <div className="container" style={{ position: 'relative', zIndex: 10, width: '100%' }}>
           <div className="hero-content reveal" style={{ maxWidth: '880px', margin: '0 auto', textAlign: 'center' }}>
-            <h1 className="hero-title" style={{ fontSize: 'clamp(2.1rem, 5.5vw, 4.2rem)', marginBottom: '24px', color: '#ffffff' }}>
-              Precision Metal Solutions for <span style={{ color: '#77b8b0' }}>Modern Industry</span>
+            <h1 className="hero-title" style={{ fontSize: 'clamp(2.1rem, 5.5vw, 4.2rem)', marginBottom: '24px', color: '#ffffff', textShadow: '0 2px 10px rgba(0,0,0,0.55), 0 1px 3px rgba(0,0,0,0.7)' }}>
+              Precision Metal Solutions for <span style={{ color: '#8fd0c7' }}>Modern Industry</span>
             </h1>
-            <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.25rem)', color: '#f1f5f9', margin: '0 auto 36px', maxWidth: '750px', lineHeight: 1.6, textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
+            <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.25rem)', color: '#f8fafc', margin: '0 auto 36px', maxWidth: '750px', lineHeight: 1.6, textShadow: '0 2px 8px rgba(0,0,0,0.7), 0 1px 3px rgba(0,0,0,0.6)' }}>
               Supplying certified high-performance stainless steel, titanium alloys, structural profiles, and custom fabricated components for global aerospace, energy, and defense projects.
             </p>
             <div className="hero-actions" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px', marginTop: '36px' }}>
@@ -806,7 +810,11 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
         style={{
           position: 'relative',
           padding: '52px 0',
-          backgroundImage: 'linear-gradient(rgba(6, 18, 33, 0.7), rgba(6, 18, 33, 0.8)), url("/images/pexels-alex-60339926-9878853.jpg")',
+          // Mill hall under an overhead crane. Light scrim — the depth and the
+          // orange crane line are the point, so they stay visible; the wordmark
+          // sits over the darker mid-band and carries its own shadow.
+          backgroundImage:
+            'linear-gradient(rgba(6, 18, 33, 0.40), rgba(6, 18, 33, 0.58)), url("/images/pexels-egojane-10031804.jpg")',
           backgroundAttachment: 'fixed',
           backgroundPosition: 'center',
           backgroundSize: 'cover',
@@ -859,8 +867,11 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
               fontSize: '1.15rem',
               maxWidth: '720px',
               margin: '0 auto 32px',
-              color: '#e2e8f0',
+              color: '#f1f5f9',
               lineHeight: 1.6,
+              // The scrim is light enough that this line can land on the bright
+              // crane girder; the shadow is what keeps it readable there.
+              textShadow: '0 2px 10px rgba(0,0,0,0.8), 0 1px 3px rgba(0,0,0,0.7)',
             }}
           >
             Integrating sub-micron laser calibration, high-capacity arc furnaces, and certified global supply logistics to power tomorrow's infrastructure.
@@ -885,7 +896,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
       </section>
 
       {/* Why Industry Leaders Trust Jyoti Metal (Interactive Hover Animated 01-04 Layout) */}
-      <section className="section bg-white" style={{ padding: '48px 0', position: 'relative', overflow: 'hidden', borderBottom: '1px solid #e2e8f0' }}>
+      <section className="section bg-white benefits-section" style={{ padding: '48px 0', position: 'relative', borderBottom: '1px solid #e2e8f0' }}>
         {/* Far Right Vertical Rotated Backdrop Typography */}
         <div
           className="rotated-backdrop-text"
@@ -911,8 +922,9 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
 
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div className="grid-responsive-about" style={{ display: 'grid', gap: '60px', alignItems: 'flex-start' }}>
-            {/* Left Column: Title & Dynamic Crossfading Industrial Visual Frame */}
-            <div className="reveal">
+            {/* Left Column: Title & Dynamic Crossfading Industrial Visual Frame.
+                Pinned while the reader works down the five points beside it. */}
+            <div className="reveal benefits-sticky-col">
               <h2
                 className="section-title benefits-title"
                 style={{

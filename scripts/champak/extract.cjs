@@ -39,6 +39,32 @@ function extractApplications(html) {
   return null;
 }
 
+// The "Specification of …" block near the top of each product page: a single
+// <div class="std-spec"> holding <strong>Label :</strong> value pairs separated
+// by <br>, headed by the nearest preceding <p class="numb specif">.
+function extractSpecification(html) {
+  const at = html.search(/<div class="std-spec/i);
+  if (at < 0) return null;
+  const body = html.slice(at).split(/<\/div>/i)[0];
+
+  const rows = [];
+  const parts = body.split(/<strong[^>]*>/i);
+  for (let i = 1; i < parts.length; i++) {
+    const [rawLabel, ...rest] = parts[i].split(/<\/strong>/i);
+    if (!rest.length) continue;
+    const label = clean(rawLabel).replace(/\s*:\s*$/, '');
+    // Value runs to the next <strong>; the split already guarantees that.
+    const value = clean(rest.join('</strong>'));
+    if (label) rows.push({ label, value });
+  }
+  if (!rows.length) return null;
+
+  // "specif" (the block heading), not "specif1" (the table headings).
+  const heads = [...html.slice(0, at).matchAll(/<p class="[^"]*\bspecif\b[^"]*"[^>]*>([\s\S]*?)<\/p>/gi)];
+  const heading = heads.length ? clean(heads[heads.length - 1][1]) : '';
+  return { heading, rows };
+}
+
 function extractPage(html) {
   const out = { equivalent: null, chemical: null, mechanical: null, physical: null, applications: null };
   for (const t of parseTables(html)) {
@@ -64,6 +90,7 @@ function extractPage(html) {
   }
 
   out.applications = extractApplications(html);
+  out.specification = extractSpecification(html);
   const titleMatch = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
   out.pageTitle = titleMatch ? clean(titleMatch[1]) : '';
   return out;
@@ -72,7 +99,7 @@ function extractPage(html) {
 if (require.main === module) {
   const files = fs.readdirSync('pages').filter((f) => f.endsWith('.html'));
   const db = {};
-  const stats = { equivalent: 0, chemical: 0, mechanical: 0, physical: 0, applications: 0 };
+  const stats = { equivalent: 0, chemical: 0, mechanical: 0, physical: 0, applications: 0, specification: 0 };
   for (const f of files) {
     const slug = f.replace(/\.html$/, '');
     const rec = extractPage(fs.readFileSync('pages/' + f, 'utf8'));

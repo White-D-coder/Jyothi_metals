@@ -91,20 +91,6 @@ export const Navbar: React.FC<NavbarProps> = ({
         { label: 'Ultrasonic Weld Inspection', id: 'services/weld-inspection' },
       ],
     },
-    {
-      key: 'price',
-      label: 'Price',
-      items: [
-        {
-          label: 'Instant Alloy Quote Calculator',
-          onClick: () => {
-            closeMobileMenu();
-            onOpenQuoteModal();
-          },
-        },
-        { label: 'Sheet & Plate Weight Estimator', id: 'contact' },
-      ],
-    },
     { key: 'blog', label: 'Blog', id: 'blog' },
     { key: 'contact', label: 'Contact Us', id: 'contact' },
   ];
@@ -361,46 +347,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                   }}
                 >
                   Ultrasonic Weld Inspection
-                </a>
-              </div>
-            </li>
-
-            {/* Price ▾ Dropdown */}
-            <li
-              className="nav-item"
-              onMouseEnter={() => setActiveDropdown('price')}
-              onMouseLeave={() => setActiveDropdown(null)}
-            >
-              <a
-                href="#contact"
-                className="nav-menu-link"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleDropdownClick('price');
-                }}
-              >
-                Price <ChevronDown size={14} />
-              </a>
-              <div className={`dropdown-menu ${activeDropdown === 'price' ? 'is-open' : ''}`}>
-                <a
-                  href="#"
-                  className="dropdown-item"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onOpenQuoteModal();
-                  }}
-                >
-                  Instant Alloy Quote Calculator
-                </a>
-                <a
-                  href="#contact"
-                  className="dropdown-item"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick('contact');
-                  }}
-                >
-                  Sheet &amp; Plate Weight Estimator
                 </a>
               </div>
             </li>
