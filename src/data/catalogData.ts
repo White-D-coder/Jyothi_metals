@@ -228,7 +228,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 304/304L/304H Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Stainless Steel Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/ss-304-pipe.jpg',
     specs: ['ASTM A312', 'Seamless & ERW', '304/304L/304H'],
   },
   {
@@ -236,7 +236,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 309/310/310S Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Stainless Steel Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/ss-310-pipe.jpg',
     specs: ['High Temperature', 'ASTM A312', '309/310/310S'],
   },
   {
@@ -244,7 +244,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 316/316L/316Ti Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Stainless Steel Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/ss-316-pipe.jpg',
     specs: ['Marine Grade', 'UNS S31600/S31603', 'Corrosion Proof'],
   },
   {
@@ -252,7 +252,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 317/317L Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Stainless Steel Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/ss-317-pipe.jpg',
     specs: ['High Moly Alloy', 'ASTM A312', 'UNS S31700'],
   },
   {
@@ -260,7 +260,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 321/321H Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Stainless Steel Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/ss-321-pipe.jpg',
     specs: ['Titanium Stabilized', 'ASTM A312', '321/321H'],
   },
   {
@@ -268,7 +268,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 347/347H Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Stainless Steel Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/ss-347-pipe.jpg',
     specs: ['Niobium Stabilized', 'High Temp Service', '347/347H'],
   },
   {
@@ -276,7 +276,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 410 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Stainless Steel Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/ss-410-pipe.jpg',
     specs: ['Martensitic SS', 'ASTM A268', 'UNS S41000'],
   },
   {
@@ -284,7 +284,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 904L Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Stainless Steel Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/ss-904l-pipe.jpg',
     specs: ['UNS N08904', 'High Sulfuric Acid Resistance', '904L Grade'],
   },
 
@@ -294,7 +294,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Duplex Steel S31803 / S32205 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Duplex / Super Duplex Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/duplex-s31803.jpg',
     specs: ['ASTM A790', 'UNS S31803/S32205', 'High Tensile & Yield'],
   },
   {
@@ -302,7 +302,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Super Duplex S32750 / S32760 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Duplex / Super Duplex Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/super-duplex-s32750.jpg',
     specs: ['ASTM A790', 'UNS S32750/S32760', 'Offshore Oil & Gas'],
   },
 
@@ -312,7 +312,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Inconel 600/601/625/718 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Inconel / Incoloy Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/inconel-600.jpg',
     specs: ['Nickel Alloy', 'ASTM B167 / B444', 'Cryogenic to 1100°C'],
   },
   {
@@ -320,7 +320,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Incoloy 800/800HT/825 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Inconel / Incoloy Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/incoloy-800.jpg',
     specs: ['ASTM B407 / B423', 'UNS N08800/N08825', 'Carburization Resistance'],
   },
 
@@ -330,7 +330,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Monel 400/K500 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Monel Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/monel-400.jpg',
     specs: ['Nickel-Copper Alloy', 'ASTM B165', 'UNS N04400/N05500'],
   },
 
@@ -340,7 +340,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Nickel 200/201 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Nickel Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/nickel-200.jpg',
     specs: ['Pure Nickel', 'ASTM B161 / B163', 'UNS N02200/N02201'],
   },
 
@@ -350,7 +350,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Hastelloy C276 / C22 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Hastelloy Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/hastelloy-c276.jpg',
     specs: ['Ni-Mo-Cr Alloy', 'ASTM B619 / B622', 'UNS N10276'],
   },
 
@@ -360,7 +360,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy 20 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Alloy 20 Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/alloy-20-pipe.jpg',
     specs: ['UNS N08020', 'ASTM B729 / B464', 'Acid Plant Piping'],
   },
 
@@ -370,7 +370,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel P5 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Alloy Steel Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/alloy-steel-p5.jpg',
     specs: ['ASTM A335 Grade P5', '5% Cr-1/2% Mo', 'Power Station Boilers'],
   },
   {
@@ -378,7 +378,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel P9 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Alloy Steel Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/alloy-steel-p9.jpg',
     specs: ['ASTM A335 Grade P9', '9% Cr-1% Mo', 'Refinery Lines'],
   },
   {
@@ -386,7 +386,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel P11 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Alloy Steel Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/alloy-steel-p11.jpg',
     specs: ['ASTM A335 Grade P11', '1.25% Cr-1/2% Mo', 'High Pressure Steam'],
   },
   {
@@ -394,7 +394,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel P12 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Alloy Steel Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/alloy-steel-p12.jpg',
     specs: ['ASTM A335 Grade P12', '1% Cr-1/2% Mo', 'Thermal Plants'],
   },
   {
@@ -402,7 +402,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel P22 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Alloy Steel Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/alloy-steel-p22.jpg',
     specs: ['ASTM A335 Grade P22', '2.25% Cr-1% Mo', 'High Boiler Temp'],
   },
   {
@@ -410,7 +410,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel P91 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Alloy Steel Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/alloy-steel-p91.jpg',
     specs: ['ASTM A335 Grade P91', '9% Cr-1% Mo-V', 'Ultra Supercritical'],
   },
   {
@@ -418,7 +418,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel P92 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Alloy Steel Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/alloy-steel-p92.jpg',
     specs: ['ASTM A335 Grade P92', 'W-Tolerant Alloy Steel', 'Advanced Power'],
   },
 
@@ -428,7 +428,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Titanium Gr 1 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Titanium Pipes & Tubes',
-    image: '/images/titanium_plates.png',
+    image: '/images/products/ti-gr1-pipe.jpg',
     specs: ['ASTM B861 Grade 1', 'UNS R50250', 'Commercially Pure Ti'],
   },
   {
@@ -436,7 +436,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Titanium Gr 2 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Titanium Pipes & Tubes',
-    image: '/images/titanium_plates.png',
+    image: '/images/products/ti-gr2-pipe.jpg',
     specs: ['ASTM B861 Grade 2', 'UNS R50400', 'Desalination Plants'],
   },
   {
@@ -444,7 +444,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Titanium Gr 5 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Titanium Pipes & Tubes',
-    image: '/images/titanium_plates.png',
+    image: '/images/products/ti-gr5-pipe.jpg',
     specs: ['Ti-6Al-4V', 'AMS 4928 / ASTM B861', 'Aerospace Structural'],
   },
   {
@@ -452,7 +452,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Titanium Gr 9 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Titanium Pipes & Tubes',
-    image: '/images/titanium_plates.png',
+    image: '/images/products/ti-gr9-pipe.jpg',
     specs: ['Ti-3Al-2.5V', 'ASTM B861 Grade 9', 'Hydraulic Aircraft Lines'],
   },
 
@@ -462,7 +462,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Seamless & ERW Carbon Steel Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Carbon Steel Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/cs-erw-pipe.jpg',
     specs: ['ASTM A106 Grade B', 'ASTM A53', 'High Strength Carbon'],
   },
   {
@@ -470,7 +470,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SAW / LSAW / HSAW Line Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Carbon Steel Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/cs-lsaw-pipe.jpg',
     specs: ['Large Diameter', 'API 5L Grade X42 - X80', 'Oil Transport'],
   },
   {
@@ -478,7 +478,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'API 5L Line Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Carbon Steel Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/cs-api5l-pipe.jpg',
     specs: ['PSL1 / PSL2', 'Grade B to X80', 'Gas Distribution'],
   },
 
@@ -488,7 +488,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SMO 254 Pipes and Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Other Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/smo-254-pipe.jpg',
     specs: ['6% Moly Alloy', 'UNS S31254', 'Seawater Scrubbers'],
   },
   {
@@ -496,7 +496,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy 28 Pipes and Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Other Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/alloy-28-pipe.jpg',
     specs: ['UNS N08282', 'High Phosphoric Acid Resistance'],
   },
   {
@@ -504,7 +504,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: '253 MA [S30815] High Temp Pipes',
     category: 'Pipes & Tubes',
     subCat: 'Other Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/253-ma-pipe.jpg',
     specs: ['UNS S30815', 'Up to 1150°C Oxidation Proof'],
   },
 
@@ -514,7 +514,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Copper Nickel 70/30 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Copper Nickel Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/cu-ni-7030.jpg',
     specs: ['CuNi 70/30 (C71500)', 'ASTM B466', 'Marine Condensers'],
   },
   {
@@ -522,7 +522,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Copper Nickel 90/10 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Copper Nickel Pipes & Tubes',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/cu-ni-9010.jpg',
     specs: ['CuNi 90/10 (C70600)', 'ASTM B466', 'Shipbuilding Piping'],
   },
 
@@ -532,7 +532,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Aluminium Alloy Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Aluminium Pipes & Tubes',
-    image: '/images/titanium_plates.png',
+    image: '/images/products/alu-alloy-pipe.jpg',
     specs: ['Alloy 6061-T6 / 6063', 'ASTM B241', 'Lightweight Structural'],
   },
 
@@ -542,7 +542,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'A691 1.25 (1-1/4 Cr) Welded Pipe',
     category: 'Pipes & Tubes',
     subCat: 'Alloy Steel Welded Pipe',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/a691-125-pipe.jpg',
     specs: ['ASTM A691 Grade 1-1/4 Cr', 'Electric-Fusion Welded'],
   },
   {
@@ -550,7 +550,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'A691 2.25 (2-1/4 Cr) Welded Pipe',
     category: 'Pipes & Tubes',
     subCat: 'Alloy Steel Welded Pipe',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/a691-225-pipe.jpg',
     specs: ['ASTM A691 Grade 2-1/4 Cr', 'EFW High Pressure Pipe'],
   },
   {
@@ -558,7 +558,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'A691 5 Cr Welded Pipe',
     category: 'Pipes & Tubes',
     subCat: 'Alloy Steel Welded Pipe',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/a691-5cr-pipe.jpg',
     specs: ['ASTM A691 Grade 5Cr', 'EFW High Temp Service'],
   },
   {
@@ -566,7 +566,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'A691 9 Cr Welded Pipe',
     category: 'Pipes & Tubes',
     subCat: 'Alloy Steel Welded Pipe',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/a691-9cr-pipe.jpg',
     specs: ['ASTM A691 Grade 9Cr', 'EFW Power Plant Piping'],
   },
   {
@@ -574,7 +574,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'A691 91 Cr Welded Pipe',
     category: 'Pipes & Tubes',
     subCat: 'Alloy Steel Welded Pipe',
-    image: '/images/stainless_pipes.png',
+    image: '/images/products/a691-91cr-pipe.jpg',
     specs: ['ASTM A691 Grade 91', 'Modified 9Cr-1Mo EFW Pipe'],
   },
 
@@ -585,7 +585,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: '409L Sheets & Plates in Stainless Steel',
     category: 'Plates & Sheets',
     subCat: 'Stainless Steel Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/ss-409l-sheet.jpg',
     specs: ['UNS S40903', 'Low Carbon Automotive Exhaust Sheet', 'Prioritised SS Grade'],
   },
   {
@@ -593,7 +593,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: '409M Sheets & Plates in Stainless Steel',
     category: 'Plates & Sheets',
     subCat: 'Stainless Steel Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/ss-409m-sheet.jpg',
     specs: ['Modified 12% Cr Stainless Steel', 'Corrosion Resistant Structural Sheet', 'ASTM A240'],
   },
   {
@@ -601,7 +601,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 253MA Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Stainless Steel Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/ss-253ma-sheet.jpg',
     specs: ['UNS S30815', 'ASTM A240', 'High Temperature Grade'],
   },
   {
@@ -609,7 +609,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 304/304L/304H Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Stainless Steel Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/ss-304-sheet.jpg',
     specs: ['ASTM A240', '2B / 8K Mirror / HR', 'Thk 0.5mm - 50mm'],
   },
   {
@@ -617,7 +617,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 309/310/310S Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Stainless Steel Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/ss-310-sheet.jpg',
     specs: ['Heat Resistant', 'ASTM A240', '309/310/310S'],
   },
   {
@@ -625,7 +625,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 316/316L/316Ti Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Stainless Steel Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/ss-316-sheet.jpg',
     specs: ['Marine Grade', 'UNS S31600/S31603', 'Acid Resistant'],
   },
   {
@@ -633,7 +633,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 317/317L Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Stainless Steel Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/ss-317-sheet.jpg',
     specs: ['High Moly', 'ASTM A240', 'UNS S31700'],
   },
   {
@@ -641,7 +641,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 321/321H Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Stainless Steel Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/ss-321-sheet.jpg',
     specs: ['Titanium Stabilized', 'ASTM A240', '321/321H'],
   },
   {
@@ -649,7 +649,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 347/347H Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Stainless Steel Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/ss-347-sheet.jpg',
     specs: ['Niobium Stabilized', 'High Temp Boiler Grade'],
   },
   {
@@ -657,7 +657,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 409 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Stainless Steel Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/ss-409-sheet.jpg',
     specs: ['Ferritic SS', 'ASTM A240', 'UNS S40900'],
   },
   {
@@ -665,7 +665,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 410 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Stainless Steel Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/ss-410-sheet.jpg',
     specs: ['Martensitic Grade', 'ASTM A240', 'High Hardness'],
   },
   {
@@ -673,7 +673,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 420 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Stainless Steel Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/ss-420-sheet.jpg',
     specs: ['High Carbon Martensitic', 'Wear Resistant'],
   },
   {
@@ -681,7 +681,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 430 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Stainless Steel Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/ss-430-sheet.jpg',
     specs: ['Ferritic Stainless Steel', 'BA / 2B Finish'],
   },
   {
@@ -689,7 +689,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 446 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Stainless Steel Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/ss-446-sheet.jpg',
     specs: ['Non-Scaling Heat Resistant', 'ASTM A240'],
   },
   {
@@ -697,7 +697,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 904L Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Stainless Steel Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/ss-904l-sheet.jpg',
     specs: ['UNS N08904', 'High Sulfuric Acid Resistance'],
   },
 
@@ -707,7 +707,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Duplex Steel S31803 / S32205 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Duplex / Super Duplex Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/duplex-s31803-sheet.jpg',
     specs: ['ASTM A240', 'UNS S31803/S32205', 'High Strength'],
   },
   {
@@ -715,7 +715,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Super Duplex S32750 / S32760 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Duplex / Super Duplex Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/super-duplex-s32750-sheet.jpg',
     specs: ['ASTM A240', 'UNS S32750/S32760', 'Offshore Heavy Plates'],
   },
 
@@ -725,7 +725,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Inconel 600 / 625 / 718 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Inconel / Incoloy Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/inconel-sheet.jpg',
     specs: ['AMS 5599', 'ASTM B168 / B443', 'Aerospace Alloys'],
   },
   {
@@ -733,7 +733,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Incoloy 800 / 800HT / 825 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Inconel / Incoloy Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/incoloy-sheet.jpg',
     specs: ['ASTM B409 / B424', 'UNS N08800/N08825'],
   },
 
@@ -743,7 +743,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Monel 400 / K500 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Monel Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/monel-sheet.jpg',
     specs: ['ASTM B127', 'UNS N04400', 'Seawater Corrosion Resistant'],
   },
 
@@ -753,7 +753,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Nickel 200 / 201 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Nickel Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/nickel-sheet.jpg',
     specs: ['ASTM B162', 'UNS N02200/N02201', 'Pure Nickel Plate'],
   },
 
@@ -763,7 +763,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Hastelloy C276 / C22 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Hastelloy Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/hastelloy-sheet.jpg',
     specs: ['ASTM B575', 'UNS N10276', 'Extreme Chemical Resistance'],
   },
 
@@ -773,7 +773,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy 20 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Alloy 20 Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/alloy-20-sheet.jpg',
     specs: ['UNS N08020', 'ASTM B463', 'Sulfuric Acid Tank Plates'],
   },
 
@@ -783,7 +783,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Titanium Gr 1 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Titanium Sheets & Plates',
-    image: '/images/titanium_plates.png',
+    image: '/images/products/ti-gr1-sheet.jpg',
     specs: ['ASTM B265 Grade 1', 'Commercially Pure Titanium'],
   },
   {
@@ -791,7 +791,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Titanium Gr 2 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Titanium Sheets & Plates',
-    image: '/images/titanium_plates.png',
+    image: '/images/products/ti-gr2-sheet.jpg',
     specs: ['ASTM B265 Grade 2', 'UNS R50400', 'Desalination Vessel'],
   },
   {
@@ -799,7 +799,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Titanium Gr 5 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Titanium Sheets & Plates',
-    image: '/images/titanium_plates.png',
+    image: '/images/products/ti-gr5-sheet.jpg',
     specs: ['Ti-6Al-4V', 'AMS 4911 / ASTM B265', 'Aerospace Structural'],
   },
   {
@@ -807,7 +807,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Titanium Gr 9 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Titanium Sheets & Plates',
-    image: '/images/titanium_plates.png',
+    image: '/images/products/ti-gr9-sheet.jpg',
     specs: ['Ti-3Al-2.5V', 'ASTM B265 Grade 9', 'High Strength Sheet'],
   },
 
@@ -817,7 +817,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Aluminium Alloy 5052 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Aluminium Sheets & Plates',
-    image: '/images/titanium_plates.png',
+    image: '/images/products/alu-5052-sheet.jpg',
     specs: ['ASTM B209', 'Alloy 5052-H32', 'Marine Grade Aluminium'],
   },
   {
@@ -825,7 +825,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Aluminium Alloy 5083 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Aluminium Sheets & Plates',
-    image: '/images/titanium_plates.png',
+    image: '/images/products/alu-5083-sheet.jpg',
     specs: ['ASTM B209', 'Alloy 5083-H111', 'Shipbuilding Heavy Plate'],
   },
   {
@@ -833,7 +833,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Aluminium Alloy 5086 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Aluminium Sheets & Plates',
-    image: '/images/titanium_plates.png',
+    image: '/images/products/alu-5086-sheet.jpg',
     specs: ['ASTM B209', 'Alloy 5086', 'High Corrosion Resistance'],
   },
   {
@@ -841,7 +841,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Aluminium Alloy 5454 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Aluminium Sheets & Plates',
-    image: '/images/titanium_plates.png',
+    image: '/images/products/alu-5454-sheet.jpg',
     specs: ['ASTM B209', 'Alloy 5454', 'Pressure Vessels & Tankers'],
   },
   {
@@ -849,7 +849,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Aluminium Alloy 6061 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Aluminium Sheets & Plates',
-    image: '/images/titanium_plates.png',
+    image: '/images/products/alu-6061-sheet.jpg',
     specs: ['ASTM B209', '6061-T6 / T651', 'Structural Aircraft Grade'],
   },
 
@@ -859,7 +859,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Cupro Nickel 70/30 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Copper Nickel Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/cuni-7030-sheet.jpg',
     specs: ['CuNi 70/30 (C71500)', 'ASTM B171', 'Marine Condenser Plates'],
   },
   {
@@ -867,7 +867,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Cupro Nickel 90/10 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Copper Nickel Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/cuni-9010-sheet.jpg',
     specs: ['CuNi 90/10 (C70600)', 'ASTM B171', 'Seawater Sheathing'],
   },
 
@@ -877,7 +877,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'API Line Grade Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Carbon Steel Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/cs-api-sheet.jpg',
     specs: ['API 5L Grade X42-X80', 'Oil & Gas Pipeline Plates'],
   },
   {
@@ -885,7 +885,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'High Strength & Tensile Carbon Steel Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Carbon Steel Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/cs-high-tensile-sheet.jpg',
     specs: ['IS 2062 E350 / E450', 'High Yield Structural'],
   },
   {
@@ -893,7 +893,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Mild Steel Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Carbon Steel Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/cs-mild-steel-sheet.jpg',
     specs: ['IS 2062 Grade A/B', 'ASTM A36', 'General Fabrication'],
   },
   {
@@ -901,7 +901,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'S500MC Hot Rolled High Tensile Sheets',
     category: 'Plates & Sheets',
     subCat: 'Carbon Steel Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/cs-s500mc-sheet.jpg',
     specs: ['EN 10149-2', 'S500MC', 'Cold Forming High Tensile'],
   },
   {
@@ -909,7 +909,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'S550MC Hot Rolled High Tensile Sheets',
     category: 'Plates & Sheets',
     subCat: 'Carbon Steel Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/cs-s550mc-sheet.jpg',
     specs: ['EN 10149-2', 'S550MC', 'Chassis & Automotive Heavy Sheet'],
   },
 
@@ -919,7 +919,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel 5 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Alloy Steel Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/as-grade5-sheet.jpg',
     specs: ['ASTM A387 Grade 5', '5% Cr - 1/2% Mo', 'Boiler Pressure Vessel'],
   },
   {
@@ -927,7 +927,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel 9 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Alloy Steel Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/as-grade9-sheet.jpg',
     specs: ['ASTM A387 Grade 9', '9% Cr - 1% Mo', 'High Temp Refinery'],
   },
   {
@@ -935,7 +935,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel 11 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Alloy Steel Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/as-grade11-sheet.jpg',
     specs: ['ASTM A387 Grade 11', '1.25% Cr - 0.5% Mo', 'Class 1 & 2'],
   },
   {
@@ -943,7 +943,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel 12 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Alloy Steel Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/as-grade12-sheet.jpg',
     specs: ['ASTM A387 Grade 12', '1% Cr - 0.5% Mo', 'Power Station Plates'],
   },
   {
@@ -951,7 +951,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel 22 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Alloy Steel Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/as-grade22-sheet.jpg',
     specs: ['ASTM A387 Grade 22', '2.25% Cr - 1% Mo', 'High Boiler Pressure'],
   },
   {
@@ -959,7 +959,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel 91 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Alloy Steel Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/as-grade91-sheet.jpg',
     specs: ['ASTM A387 Grade 91', '9% Cr - 1% Mo - V', 'Ultra Thermal Grade'],
   },
 
@@ -969,7 +969,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SMO 254 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Other Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/smo-254-sheet.jpg',
     specs: ['UNS S31254', 'ASTM A240', '6% Moly Super Austenitic'],
   },
   {
@@ -977,7 +977,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy 28 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Other Sheets & Plates',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/alloy-28-sheet.jpg',
     specs: ['UNS N08282', 'High Phosphoric Acid Service'],
   },
 
@@ -988,7 +988,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 304/304L/304H Round Bars',
     category: 'Round Bars',
     subCat: 'Stainless Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/ss-304-bar.jpg',
     specs: ['ASTM A276 / A479', 'Dia: 3mm - 500mm', '304/304L/304H'],
   },
   {
@@ -996,7 +996,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 309/310/310S Round Bars',
     category: 'Round Bars',
     subCat: 'Stainless Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/ss-310-bar.jpg',
     specs: ['High Temp Furnace Grade', 'ASTM A276', '309/310/310S'],
   },
   {
@@ -1004,7 +1004,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 316/316L/316Ti Round Bars',
     category: 'Round Bars',
     subCat: 'Stainless Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/ss-316-bar.jpg',
     specs: ['Marine Grade', 'UNS S31600/S31603', 'Bright / Peeled Finish'],
   },
   {
@@ -1012,7 +1012,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 317/317L Round Bars',
     category: 'Round Bars',
     subCat: 'Stainless Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/ss-317-bar.jpg',
     specs: ['High Moly Alloy', 'ASTM A276', 'UNS S31700'],
   },
   {
@@ -1020,7 +1020,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 321/321H Round Bars',
     category: 'Round Bars',
     subCat: 'Stainless Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/ss-321-bar.jpg',
     specs: ['Titanium Stabilized', 'ASTM A276', '321/321H'],
   },
   {
@@ -1028,7 +1028,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 347/347H Round Bars',
     category: 'Round Bars',
     subCat: 'Stainless Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/ss-347-bar.jpg',
     specs: ['Niobium Stabilized', 'ASTM A276', 'High Temp Service'],
   },
   {
@@ -1036,7 +1036,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 410 Round Bars',
     category: 'Round Bars',
     subCat: 'Stainless Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/ss-410-bar.jpg',
     specs: ['Martensitic SS Bar', 'ASTM A276', 'UNS S41000'],
   },
   {
@@ -1044,7 +1044,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 420 Round Bars',
     category: 'Round Bars',
     subCat: 'Stainless Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/ss-420-bar.jpg',
     specs: ['High Carbon Martensitic', 'Wear & Cut Resistant'],
   },
   {
@@ -1052,7 +1052,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 430 Round Bars',
     category: 'Round Bars',
     subCat: 'Stainless Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/ss-430-bar.jpg',
     specs: ['Ferritic Stainless Bar', 'ASTM A276', 'Magnetic Grade'],
   },
   {
@@ -1060,7 +1060,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 431 Round Bars',
     category: 'Round Bars',
     subCat: 'Stainless Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/ss-431-bar.jpg',
     specs: ['High Tensile Martensitic', 'UNS S43100', 'Pump Shafting'],
   },
   {
@@ -1068,7 +1068,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 440 A Round Bars',
     category: 'Round Bars',
     subCat: 'Stainless Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/ss-440a-bar.jpg',
     specs: ['High Hardness SS', 'ASTM A276 Grade 440A'],
   },
   {
@@ -1076,7 +1076,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 440 B Round Bars',
     category: 'Round Bars',
     subCat: 'Stainless Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/ss-440b-bar.jpg',
     specs: ['Cutlery & Bearing Grade', 'ASTM A276 Grade 440B'],
   },
   {
@@ -1084,7 +1084,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 440 C Round Bars',
     category: 'Round Bars',
     subCat: 'Stainless Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/ss-440c-bar.jpg',
     specs: ['Extreme Hardness 60 HRC', 'UNS S44004'],
   },
   {
@@ -1092,7 +1092,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 446 Round Bars',
     category: 'Round Bars',
     subCat: 'Stainless Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/ss-446-bar.jpg',
     specs: ['Heat Resistant Ferritic', 'ASTM A276 Grade 446'],
   },
   {
@@ -1100,7 +1100,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 904L Round Bars',
     category: 'Round Bars',
     subCat: 'Stainless Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/ss-904l-bar.jpg',
     specs: ['UNS N08904', 'High Sulfuric Acid Resistance'],
   },
   {
@@ -1108,7 +1108,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 15-5PH Round Bars',
     category: 'Round Bars',
     subCat: 'Stainless Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/ss-15-5ph-bar.jpg',
     specs: ['Precipitation Hardening', 'UNS S15500', 'AMS 5659'],
   },
   {
@@ -1116,7 +1116,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 17-4PH Round Bars',
     category: 'Round Bars',
     subCat: 'Stainless Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/ss-17-4ph-bar.jpg',
     specs: ['UNS S17400', 'Condition H900/H1150', 'AMS 5643'],
   },
 
@@ -1126,7 +1126,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Duplex Steel Round Bars',
     category: 'Round Bars',
     subCat: 'Duplex / Super Duplex Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/duplex-steel-bar.jpg',
     specs: ['UNS S31803 / S32205', 'ASTM A276 / A479', 'High Yield'],
   },
   {
@@ -1134,7 +1134,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Super Duplex Steel Round Bars',
     category: 'Round Bars',
     subCat: 'Duplex / Super Duplex Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/super-duplex-bar.jpg',
     specs: ['UNS S32750 / S32760', 'Offshore Marine Shafting'],
   },
 
@@ -1144,7 +1144,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Inconel Round Bars',
     category: 'Round Bars',
     subCat: 'Inconel / Incoloy Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/inconel-bar.jpg',
     specs: ['Inconel 600 / 601 / 625 / 718', 'ASTM B166 / B446'],
   },
   {
@@ -1152,7 +1152,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Incoloy Round Bars',
     category: 'Round Bars',
     subCat: 'Inconel / Incoloy Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/incoloy-bar.jpg',
     specs: ['Incoloy 800 / 800HT / 825', 'ASTM B408'],
   },
 
@@ -1162,7 +1162,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Monel Round Bars',
     category: 'Round Bars',
     subCat: 'Monel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/monel-bar.jpg',
     specs: ['Monel 400 / K500', 'ASTM B164 / QQ-N-286'],
   },
 
@@ -1172,7 +1172,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Nickel & Nickel Alloys Round Bars',
     category: 'Round Bars',
     subCat: 'Nickel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/nickel-bar.jpg',
     specs: ['Nickel 200 / 201', 'ASTM B160', 'UNS N02200'],
   },
 
@@ -1182,7 +1182,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Hastelloy Round Bars',
     category: 'Round Bars',
     subCat: 'Hastelloy Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/hastelloy-bar.jpg',
     specs: ['Hastelloy C276 / C22 / B2', 'ASTM B574'],
   },
 
@@ -1192,7 +1192,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel Round Bars',
     category: 'Round Bars',
     subCat: 'Alloy Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/as-bar-general.jpg',
     specs: ['High Tensile Forging Bar', 'AISI 4140 / 4340'],
   },
   {
@@ -1200,7 +1200,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel F1 Round Bars',
     category: 'Round Bars',
     subCat: 'Alloy Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/as-f1-bar.jpg',
     specs: ['ASTM A182 Grade F1', 'Carbon-Moly Steel Bar'],
   },
   {
@@ -1208,7 +1208,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel F5 Round Bars',
     category: 'Round Bars',
     subCat: 'Alloy Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/as-f5-bar.jpg',
     specs: ['ASTM A182 Grade F5', '5% Cr Alloy Bar'],
   },
   {
@@ -1216,7 +1216,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel F9 Round Bars',
     category: 'Round Bars',
     subCat: 'Alloy Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/as-f9-bar.jpg',
     specs: ['ASTM A182 Grade F9', '9% Cr Alloy Bar'],
   },
   {
@@ -1224,7 +1224,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel F11 Round Bars',
     category: 'Round Bars',
     subCat: 'Alloy Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/as-f11-bar.jpg',
     specs: ['ASTM A182 Grade F11', '1.25% Cr - 0.5% Mo'],
   },
   {
@@ -1232,7 +1232,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel F12 Round Bars',
     category: 'Round Bars',
     subCat: 'Alloy Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/as-f12-bar.jpg',
     specs: ['ASTM A182 Grade F12', '1% Cr - 0.5% Mo'],
   },
   {
@@ -1240,7 +1240,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel F22 Round Bars',
     category: 'Round Bars',
     subCat: 'Alloy Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/as-f22-bar.jpg',
     specs: ['ASTM A182 Grade F22', '2.25% Cr - 1% Mo'],
   },
   {
@@ -1248,7 +1248,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel F91 Round Bars',
     category: 'Round Bars',
     subCat: 'Alloy Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/as-f91-bar.jpg',
     specs: ['ASTM A182 Grade F91', '9% Cr - 1% Mo - V'],
   },
   {
@@ -1256,7 +1256,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel F92 Round Bars',
     category: 'Round Bars',
     subCat: 'Alloy Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/as-f92-bar.jpg',
     specs: ['ASTM A182 Grade F92', 'Ultra High Temp Power Bar'],
   },
 
@@ -1266,7 +1266,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy 20 Round Bars',
     category: 'Round Bars',
     subCat: 'Alloy 20 Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/alloy-20-bar.jpg',
     specs: ['UNS N08020', 'ASTM B473', 'Acid Plant Shafting'],
   },
 
@@ -1276,7 +1276,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Brass Round Bar',
     category: 'Round Bars',
     subCat: 'Brass Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/brass-bar.jpg',
     specs: ['Free Cutting Brass C36000', 'IS 319 / BS 2874'],
   },
 
@@ -1286,7 +1286,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Tantalum Round Bar',
     category: 'Round Bars',
     subCat: 'Tantalum Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/tantalum-bar.jpg',
     specs: ['Pure Tantalum UNS R05200', 'ASTM B365', 'Extreme Chemical Proof'],
   },
 
@@ -1296,7 +1296,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Copper Nickel 70/30 Round Bars',
     category: 'Round Bars',
     subCat: 'Copper Nickel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/cuni-7030-bar.jpg',
     specs: ['CuNi 70/30 (C71500)', 'ASTM B151', 'Marine Hardware'],
   },
   {
@@ -1304,7 +1304,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Copper Nickel 90/10 Round Bars',
     category: 'Round Bars',
     subCat: 'Copper Nickel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/cuni-9010-bar.jpg',
     specs: ['CuNi 90/10 (C70600)', 'ASTM B151', 'Seawater Shafting'],
   },
 
@@ -1314,7 +1314,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Mild Steel Round Bars',
     category: 'Round Bars',
     subCat: 'Carbon Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/cs-mild-steel-bar.jpg',
     specs: ['IS 2062 / EN8 / MS Bright Bar', 'General Engineering'],
   },
   {
@@ -1322,7 +1322,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'High Strength & High Tensile Steel Round Bars',
     category: 'Round Bars',
     subCat: 'Carbon Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/cs-high-tensile-bar.jpg',
     specs: ['EN19 / EN24 / AISI 4140', 'High Yield Shafting'],
   },
   {
@@ -1330,7 +1330,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Carbon Steel A36 Round Bars',
     category: 'Round Bars',
     subCat: 'Carbon Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/cs-a36-bar.jpg',
     specs: ['ASTM A36', 'Structural Carbon Steel Bar'],
   },
   {
@@ -1338,7 +1338,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Carbon Steel S355J2+N Round Bars',
     category: 'Round Bars',
     subCat: 'Carbon Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/cs-s355-bar.jpg',
     specs: ['EN 10025-2 S355J2+N', 'Normalized Structural Bar'],
   },
   {
@@ -1346,7 +1346,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Carbon Steel ST 52 Round Bars',
     category: 'Round Bars',
     subCat: 'Carbon Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/cs-st52-bar.jpg',
     specs: ['DIN 17100 ST52-3', 'High Strength Construction Bar'],
   },
   {
@@ -1354,7 +1354,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Carbon Steel EN 353 Round Bars',
     category: 'Round Bars',
     subCat: 'Carbon Steel Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/cs-en353-bar.jpg',
     specs: ['EN 353 Case Hardening Alloy Steel Bar', 'Gear Shafting'],
   },
 
@@ -1364,7 +1364,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Titanium Gr 1 Round Bars',
     category: 'Round Bars',
     subCat: 'Titanium Round Bars',
-    image: '/images/titanium_plates.png',
+    image: '/images/products/ti-gr1-bar.jpg',
     specs: ['ASTM B348 Grade 1', 'UNS R50250', 'Pure Titanium'],
   },
   {
@@ -1372,7 +1372,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Titanium Gr 2 Round Bars',
     category: 'Round Bars',
     subCat: 'Titanium Round Bars',
-    image: '/images/titanium_plates.png',
+    image: '/images/products/ti-gr2-bar.jpg',
     specs: ['ASTM B348 Grade 2', 'UNS R50400', 'Desalination Hardware'],
   },
   {
@@ -1380,7 +1380,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Titanium Gr 5 Round Bars',
     category: 'Round Bars',
     subCat: 'Titanium Round Bars',
-    image: '/images/titanium_plates.png',
+    image: '/images/products/ti-gr5-bar.jpg',
     specs: ['Ti-6Al-4V', 'AMS 4928 / ASTM B348', 'Aerospace Grade'],
   },
   {
@@ -1388,7 +1388,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Titanium Gr 9 Round Bars',
     category: 'Round Bars',
     subCat: 'Titanium Round Bars',
-    image: '/images/titanium_plates.png',
+    image: '/images/products/ti-gr9-bar.jpg',
     specs: ['Ti-3Al-2.5V', 'ASTM B348 Grade 9', 'High Strength Bar'],
   },
 
@@ -1398,7 +1398,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 316LVM Round Bars',
     category: 'Round Bars',
     subCat: 'Other Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/ss-316lvm-bar.jpg',
     specs: ['ASTM F138 Medical Grade', 'UNS S31673', 'Surgical Implants'],
   },
   {
@@ -1406,7 +1406,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Beryllium Copper Round Bars',
     category: 'Round Bars',
     subCat: 'Other Round Bars',
-    image: '/images/round_bars.png',
+    image: '/images/products/beryllium-copper-bar.jpg',
     specs: ['C17200 Beryllium Copper', 'ASTM B196', 'Non-Sparking Tools'],
   },
   // FLANGES PRODUCTS
@@ -1415,7 +1415,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 304/304L/316/316L Weld Neck Flanges (WNF)',
     category: 'Flanges',
     subCat: 'Stainless Steel Flanges',
-    image: '/images/flanges_industrial.png',
+    image: '/images/products/ss-weld-neck-flange.jpg',
     specs: ['ANSI B16.5 / BS 4504', 'Class 150 - 2500#', 'Raised Face (RF) / RTJ'],
   },
   {
@@ -1423,7 +1423,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 304/316 Slip-On Flanges (SOF)',
     category: 'Flanges',
     subCat: 'Stainless Steel Flanges',
-    image: '/images/flanges_industrial.png',
+    image: '/images/products/ss-slip-on-flange.jpg',
     specs: ['ASME B16.5', 'Class 150 / 300 / 600#', 'FORGED SS316L'],
   },
   {
@@ -1431,7 +1431,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 316L / 321 / 347 Blind Flanges (BLRF)',
     category: 'Flanges',
     subCat: 'Stainless Steel Flanges',
-    image: '/images/flanges_industrial.png',
+    image: '/images/products/ss-blind-flange.jpg',
     specs: ['ANSI B16.5', 'High Pressure End Pipe Seal', 'ASTM A182 F316L'],
   },
   {
@@ -1439,7 +1439,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Duplex S31803 / Super Duplex S32750 Forged Flanges',
     category: 'Flanges',
     subCat: 'Duplex / Super Duplex Flanges',
-    image: '/images/flanges_industrial.png',
+    image: '/images/products/duplex-flanges.jpg',
     specs: ['ASTM A182 F51 / F53 / F55', 'Offshore Marine Pipe Joints'],
   },
   {
@@ -1447,7 +1447,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Inconel 600 / 625 / 718 Forged Flanges',
     category: 'Flanges',
     subCat: 'Inconel / Incoloy Flanges',
-    image: '/images/flanges_industrial.png',
+    image: '/images/products/inconel-flanges.jpg',
     specs: ['ASTM B564 UNS N06625', 'Class 600 - 2500# High Temp'],
   },
   {
@@ -1455,7 +1455,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Monel 400 & Nickel 200/201 Pipe Flanges',
     category: 'Flanges',
     subCat: 'Monel & Nickel Flanges',
-    image: '/images/flanges_industrial.png',
+    image: '/images/products/monel-nickel-flanges.jpg',
     specs: ['ASTM B564', 'UNS N04400 / UNS N02200', 'Seawater Proof'],
   },
   {
@@ -1463,7 +1463,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Hastelloy C276 / C22 & Alloy 20 Flanges',
     category: 'Flanges',
     subCat: 'Hastelloy & Alloy 20 Flanges',
-    image: '/images/flanges_industrial.png',
+    image: '/images/products/hastelloy-flanges.jpg',
     specs: ['ASTM B564', 'Extreme Chemical Acid Service'],
   },
   {
@@ -1471,7 +1471,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel F5 / F9 / F11 / F22 / F91 Flanges',
     category: 'Flanges',
     subCat: 'Alloy Steel Flanges',
-    image: '/images/flanges_industrial.png',
+    image: '/images/products/alloy-steel-flanges.jpg',
     specs: ['ASTM A182 F11 / F22 / F91', 'Boiler Steam Pipe Joints'],
   },
   {
@@ -1479,7 +1479,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Carbon Steel A105 / A350 LF2 Forged Flanges',
     category: 'Flanges',
     subCat: 'Carbon Steel Flanges',
-    image: '/images/flanges_industrial.png',
+    image: '/images/products/cs-flanges.jpg',
     specs: ['ASTM A105 / A350 LF2', 'Low Temp & High Pressure'],
   },
   {
@@ -1487,7 +1487,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Titanium Gr 2 / CuNi 70/30 Flanges',
     category: 'Flanges',
     subCat: 'Titanium & Copper Nickel Flanges',
-    image: '/images/flanges_industrial.png',
+    image: '/images/products/titanium-cuni-flanges.jpg',
     specs: ['ASTM B381 Grade F-2', 'Desalination & Ship Piping'],
   },
 
@@ -1497,7 +1497,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'High Pressure 90° & 45° Socket Weld Elbows',
     category: 'Forged Fittings',
     subCat: 'Socket Weld Forged Fittings',
-    image: '/images/pipe_fittings.png',
+    image: '/images/products/socket-weld-elbow.jpg',
     specs: ['ASME B16.11', '3000# / 6000# / 9000#', 'SS316L / A105'],
   },
   {
@@ -1505,7 +1505,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Socket Weld Tees, Full Couplings & Unions',
     category: 'Forged Fittings',
     subCat: 'Socket Weld Forged Fittings',
-    image: '/images/pipe_fittings.png',
+    image: '/images/products/socket-weld-tee-coupling.jpg',
     specs: ['ASME B16.11', 'Equal & Reducing Socket Fittings'],
   },
   {
@@ -1513,7 +1513,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Threaded NPT / BSP Screwed 90° Elbows & Tees',
     category: 'Forged Fittings',
     subCat: 'Threaded / Screwed Forged Fittings',
-    image: '/images/pipe_fittings.png',
+    image: '/images/products/threaded-npt-elbow.jpg',
     specs: ['ASME B16.11', '2000# / 3000# / 6000# Screwed Fittings'],
   },
   {
@@ -1521,7 +1521,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Forged Swage Nipples, Hex Plugs & Bushings',
     category: 'Forged Fittings',
     subCat: 'Threaded / Screwed Forged Fittings',
-    image: '/images/pipe_fittings.png',
+    image: '/images/products/swage-nipple-plugs.jpg',
     specs: ['MSS SP-79 / SP-83 / SP-95', 'Concentric & Eccentric Swage'],
   },
   {
@@ -1529,7 +1529,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 304L / 316L / 321 Forged High Pressure Fittings',
     category: 'Forged Fittings',
     subCat: 'Stainless Steel Forged Fittings',
-    image: '/images/pipe_fittings.png',
+    image: '/images/products/ss-forged-fittings.jpg',
     specs: ['ASTM A182 F304L / F316L', 'Corrosion Proof Chemical Line'],
   },
   {
@@ -1537,7 +1537,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Duplex S31803 & Inconel 625 Forged Fittings',
     category: 'Forged Fittings',
     subCat: 'Duplex & Nickel Alloy Forged Fittings',
-    image: '/images/pipe_fittings.png',
+    image: '/images/products/duplex-nickel-forged-fittings.jpg',
     specs: ['ASTM A182 F51', 'ASTM B564 Inconel / Monel'],
   },
   {
@@ -1545,7 +1545,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Carbon Steel A105 & Alloy Steel F11/F22 Forged Fittings',
     category: 'Forged Fittings',
     subCat: 'Alloy Steel & Carbon Steel Forged Fittings',
-    image: '/images/pipe_fittings.png',
+    image: '/images/products/cs-as-forged-fittings.jpg',
     specs: ['ASTM A105 / A182 F11 / F22 / F91', 'High Temp Power Line'],
   },
 
@@ -1555,7 +1555,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 304L / 316L 90° & 45° Buttweld Pipe Elbows',
     category: 'Buttweld Fittings',
     subCat: 'Stainless Steel Buttweld Fittings',
-    image: '/images/pipe_fittings.png',
+    image: '/images/products/bw-ss-elbow.jpg',
     specs: ['ASME B16.9', 'Seamless & Welded', 'Sch 10S to Sch 160'],
   },
 
@@ -1565,7 +1565,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS 304 / 316 / 310 / 321 Heavy Hex Bolts & Screws',
     category: 'Fasteners',
     subCat: 'Stainless Steel Fasteners',
-    image: '/images/precision_parts.png',
+    image: '/images/products/ss-hex-bolts.jpg',
     specs: ['ASTM A193 B8 / B8M / B8T', 'M6 to M100 Threaded'],
   },
   {
@@ -1573,7 +1573,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'ASTM A193 Grade B7 / B8 Stud Bolts & 2H Heavy Nuts',
     category: 'Fasteners',
     subCat: 'High Tensile Alloy Fasteners',
-    image: '/images/precision_parts.png',
+    image: '/images/products/stud-bolts-nuts.jpg',
     specs: ['ASTM A193 B7 / B8M with A194 2H / 8M Heavy Nuts', 'Flange Bolting'],
   },
   {
@@ -1581,7 +1581,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Inconel 625 / 718 & Monel 400 High Temp Studs & Bolts',
     category: 'Fasteners',
     subCat: 'Inconel & Monel Fasteners',
-    image: '/images/precision_parts.png',
+    image: '/images/products/inconel-monel-fasteners.jpg',
     specs: ['AMS 5662 / ASTM B164', 'High Temp & Offshore Fasteners'],
   },
   {
@@ -1589,66 +1589,66 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Super Duplex S32750 & Titanium Gr 5 Fasteners',
     category: 'Fasteners',
     subCat: 'Duplex & Titanium Fasteners',
-    image: '/images/precision_parts.png',
+    image: '/images/products/duplex-titanium-fasteners.jpg',
     specs: ['UNS S32750 / Ti-6Al-4V', 'Corrosion & Flight Certified'],
   },
 
   // SPECIALIZED PRODUCTS
   // 1. Abrasion Resistant Plates
-  { id: 'abrex-steel-plates', title: 'Abrasion Resistant Steel Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/plate_laser_cutting.jpg', specs: ['High Wear Resistance', 'Quenched & Tempered', 'Heavy Machinery Line'] },
-  { id: 'abrex-400-plates', title: 'Abrex 400 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/plate_laser_cutting.jpg', specs: ['400 HBW Hardness', 'Nippon Steel Grade', 'Wear Resistant'] },
-  { id: 'abrex-450-plates', title: 'Abrex 450 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/plate_laser_cutting.jpg', specs: ['450 HBW Hardness', 'Mining Equipment Plate'] },
-  { id: 'abrex-500-plates', title: 'Abrex 500 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/plate_laser_cutting.jpg', specs: ['500 HBW Hardness', 'Chute & Hopper Liners'] },
-  { id: 'abrex-600-plates', title: 'Abrex 600 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/plate_laser_cutting.jpg', specs: ['600 HBW Ultra Hard Plate', 'Cement Plant Liners'] },
-  { id: 'rockstar-400-plates', title: 'Rockstar 400 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/plate_laser_cutting.jpg', specs: ['Essar Rockstar 400', '400 HBW Abrasion Steel'] },
-  { id: 'rockstar-450-plates', title: 'Rockstar 450 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/plate_laser_cutting.jpg', specs: ['Essar Rockstar 450', '450 HBW High Toughness'] },
-  { id: 'rockstar-500-plates', title: 'Rockstar 500 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/plate_laser_cutting.jpg', specs: ['Essar Rockstar 500', '500 HBW Wear Plate'] },
-  { id: 'ar-400-plates', title: 'AR 400 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/plate_laser_cutting.jpg', specs: ['AR 400 Hardness Steel', 'Excavator Bucket Liners'] },
-  { id: 'ar-450-plates', title: 'AR 450 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/plate_laser_cutting.jpg', specs: ['AR 450 Wear Resistant Steel', 'Quarry Liners'] },
-  { id: 'ar-500-plates', title: 'AR 500 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/plate_laser_cutting.jpg', specs: ['AR 500 Severe Wear Steel', 'Crusher Equipment'] },
-  { id: 'ar-600-plates', title: 'AR 600 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/plate_laser_cutting.jpg', specs: ['AR 600 Max Hardness Steel', 'Extreme Impact Armor'] },
-  { id: 'jfe-eh-plates', title: 'JFE EH 360, 400, 500 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/plate_laser_cutting.jpg', specs: ['JFE EVERHARD EH 360 / 400 / 500', 'Japanese Wear Steel'] },
+  { id: 'abrex-steel-plates', title: 'Abrasion Resistant Steel Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/products/abrex-steel-plates.jpg', specs: ['High Wear Resistance', 'Quenched & Tempered', 'Heavy Machinery Line'] },
+  { id: 'abrex-400-plates', title: 'Abrex 400 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/products/abrex-400-plates.jpg', specs: ['400 HBW Hardness', 'Nippon Steel Grade', 'Wear Resistant'] },
+  { id: 'abrex-450-plates', title: 'Abrex 450 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/products/abrex-450-plates.jpg', specs: ['450 HBW Hardness', 'Mining Equipment Plate'] },
+  { id: 'abrex-500-plates', title: 'Abrex 500 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/products/abrex-500-plates.jpg', specs: ['500 HBW Hardness', 'Chute & Hopper Liners'] },
+  { id: 'abrex-600-plates', title: 'Abrex 600 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/products/abrex-600-plates.jpg', specs: ['600 HBW Ultra Hard Plate', 'Cement Plant Liners'] },
+  { id: 'rockstar-400-plates', title: 'Rockstar 400 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/products/rockstar-400-plates.jpg', specs: ['Essar Rockstar 400', '400 HBW Abrasion Steel'] },
+  { id: 'rockstar-450-plates', title: 'Rockstar 450 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/products/rockstar-450-plates.jpg', specs: ['Essar Rockstar 450', '450 HBW High Toughness'] },
+  { id: 'rockstar-500-plates', title: 'Rockstar 500 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/products/rockstar-500-plates.jpg', specs: ['Essar Rockstar 500', '500 HBW Wear Plate'] },
+  { id: 'ar-400-plates', title: 'AR 400 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/products/ar-400-plates.jpg', specs: ['AR 400 Hardness Steel', 'Excavator Bucket Liners'] },
+  { id: 'ar-450-plates', title: 'AR 450 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/products/ar-450-plates.jpg', specs: ['AR 450 Wear Resistant Steel', 'Quarry Liners'] },
+  { id: 'ar-500-plates', title: 'AR 500 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/products/ar-500-plates.jpg', specs: ['AR 500 Severe Wear Steel', 'Crusher Equipment'] },
+  { id: 'ar-600-plates', title: 'AR 600 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/products/ar-600-plates.jpg', specs: ['AR 600 Max Hardness Steel', 'Extreme Impact Armor'] },
+  { id: 'jfe-eh-plates', title: 'JFE EH 360, 400, 500 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/products/jfe-eh-plates.jpg', specs: ['JFE EVERHARD EH 360 / 400 / 500', 'Japanese Wear Steel'] },
 
   // 2. Quenched & Tempered Steel
-  { id: 'qt-steel-plates', title: 'Quenched & Tempered Steel Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/plate_forming_mill.jpg', specs: ['High Tensile Yield Steel', 'EN 10025-6', 'Crane & Structural Steel'] },
-  { id: 's690ql-plates', title: 'S690ql Sheets & Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/plate_forming_mill.jpg', specs: ['EN 10025-6 S690QL', '690 MPa Yield Strength', 'High Strength Crane Boom'] },
-  { id: 'weldox-700-plates', title: 'Weldox 700 Sheets & Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/plate_forming_mill.jpg', specs: ['SSAB Weldox 700 / Strenx 700', '700 MPa High Yield'] },
-  { id: 'welten-780e-plates', title: 'Welten 780E Sheets & Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/plate_forming_mill.jpg', specs: ['Nippon Steel Welten 780E', 'High Yield Structural Plate'] },
-  { id: 'jfe-hiten-780le', title: 'JFE Hiten 780LE Sheets & Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/plate_forming_mill.jpg', specs: ['JFE HITEN 780LE', 'High Tensile Structural Steel'] },
+  { id: 'qt-steel-plates', title: 'Quenched & Tempered Steel Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/products/qt-steel-plates.jpg', specs: ['High Tensile Yield Steel', 'EN 10025-6', 'Crane & Structural Steel'] },
+  { id: 's690ql-plates', title: 'S690ql Sheets & Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/products/s690ql-plates.jpg', specs: ['EN 10025-6 S690QL', '690 MPa Yield Strength', 'High Strength Crane Boom'] },
+  { id: 'weldox-700-plates', title: 'Weldox 700 Sheets & Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/products/weldox-700-plates.jpg', specs: ['SSAB Weldox 700 / Strenx 700', '700 MPa High Yield'] },
+  { id: 'welten-780e-plates', title: 'Welten 780E Sheets & Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/products/welten-780e-plates.jpg', specs: ['Nippon Steel Welten 780E', 'High Yield Structural Plate'] },
+  { id: 'jfe-hiten-780le', title: 'JFE Hiten 780LE Sheets & Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/products/jfe-hiten-780le.jpg', specs: ['JFE HITEN 780LE', 'High Tensile Structural Steel'] },
 
   // 3. Corten Steel
-  { id: 'corten-steel-plates', title: 'Corten Steel Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/corten_weathered_steel.jpg', specs: ['Atmospheric Corrosion Steel', 'Weathering Steel'] },
-  { id: 'corten-steel-a', title: 'Corten Steel A Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/corten_weathered_steel.jpg', specs: ['ASTM A242 Corten A', 'Architectural Weathering Steel'] },
-  { id: 'corten-steel-b', title: 'Corten Steel B Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/corten_weathered_steel.jpg', specs: ['ASTM A588 Corten B', 'Bridge & Heavy Structural'] },
-  { id: 'corten-a588', title: 'Corten Steel Gr A588 Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/corten_weathered_steel.jpg', specs: ['ASTM A588 Grade A / B / C', 'High Strength Weathering'] },
-  { id: 'corten-irsm41', title: 'Corten Steel Gr 41 IRSM Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/corten_weathered_steel.jpg', specs: ['IRSM 41-97 Railway Grade', 'Indian Railways Weathering Steel'] },
+  { id: 'corten-steel-plates', title: 'Corten Steel Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/products/corten-steel-plates.jpg', specs: ['Atmospheric Corrosion Steel', 'Weathering Steel'] },
+  { id: 'corten-steel-a', title: 'Corten Steel A Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/products/corten-steel-a.jpg', specs: ['ASTM A242 Corten A', 'Architectural Weathering Steel'] },
+  { id: 'corten-steel-b', title: 'Corten Steel B Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/products/corten-steel-b.jpg', specs: ['ASTM A588 Corten B', 'Bridge & Heavy Structural'] },
+  { id: 'corten-a588', title: 'Corten Steel Gr A588 Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/products/corten-a588.jpg', specs: ['ASTM A588 Grade A / B / C', 'High Strength Weathering'] },
+  { id: 'corten-irsm41', title: 'Corten Steel Gr 41 IRSM Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/products/corten-irsm41.jpg', specs: ['IRSM 41-97 Railway Grade', 'Indian Railways Weathering Steel'] },
 
   // 4. 15Mo3 Steel
-  { id: '15mo3-steel-plates', title: '15Mo3 Steel Plates', category: 'Specialized Product', subCat: '15Mo3 Steel', image: '/images/steel_mill_hall.jpg', specs: ['DIN 17155 15Mo3', 'EN 10028-2 16Mo3', 'Boiler Quality Steel'] },
+  { id: '15mo3-steel-plates', title: '15Mo3 Steel Plates', category: 'Specialized Product', subCat: '15Mo3 Steel', image: '/images/products/15mo3-steel-plates.jpg', specs: ['DIN 17155 15Mo3', 'EN 10028-2 16Mo3', 'Boiler Quality Steel'] },
 
   // 5. 16Mo3 / SA 204 Steel
-  { id: '16mo3-sa204-plates', title: '16Mo3 / SA 204 Steel Plates', category: 'Specialized Product', subCat: '16Mo3 / SA 204 Steel', image: '/images/steel_mill_hall.jpg', specs: ['ASTM A204 Grade A / B / C', 'Molybdenum Alloy Pressure Vessel'] },
+  { id: '16mo3-sa204-plates', title: '16Mo3 / SA 204 Steel Plates', category: 'Specialized Product', subCat: '16Mo3 / SA 204 Steel', image: '/images/products/16mo3-sa204-plates.jpg', specs: ['ASTM A204 Grade A / B / C', 'Molybdenum Alloy Pressure Vessel'] },
 
   // 6. Armour Steel
-  { id: 'armour-steel-plates', title: 'Armour Steel Plates', category: 'Specialized Product', subCat: 'Armour Steel', image: '/images/armour_steel_works.jpg', specs: ['Ballistic Protection Armor Plate', 'Defense Grade Steel', 'MIL-DTL Certified'] },
+  { id: 'armour-steel-plates', title: 'Armour Steel Plates', category: 'Specialized Product', subCat: 'Armour Steel', image: '/images/products/armour-steel-plates.jpg', specs: ['Ballistic Protection Armor Plate', 'Defense Grade Steel', 'MIL-DTL Certified'] },
 
   // 7. DSQ Plates
-  { id: 'dsq-steel-plates', title: 'DSQ Steel Plates', category: 'Specialized Product', subCat: 'DSQ Plates', image: '/images/machine_shop_floor.jpg', specs: ['Deep Drawing Quality Steel Plate', 'IS 2062 E250 / E350'] },
+  { id: 'dsq-steel-plates', title: 'DSQ Steel Plates', category: 'Specialized Product', subCat: 'DSQ Plates', image: '/images/products/dsq-steel-plates.jpg', specs: ['Deep Drawing Quality Steel Plate', 'IS 2062 E250 / E350'] },
 
   // 8. Boiler Steel
-  { id: 'boiler-steel-plates', title: 'Boiler Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/steel_mill_hall.jpg', specs: ['High Pressure Vessel Steel', 'ASTM A516 / ASME SA516'] },
-  { id: 'a516-gr60-plates', title: 'ASTM A516 Grade 60 Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/steel_mill_hall.jpg', specs: ['ASTM A516 Gr 60', 'Low Temp Pressure Vessel'] },
-  { id: 'a516-gr65-plates', title: 'ASTM A516 Grade 65 Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/steel_mill_hall.jpg', specs: ['ASTM A516 Gr 65', 'Moderate & Lower Temp Service'] },
-  { id: 'a516-gr70-plates', title: 'ASTM A516 Grade 70 Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/steel_mill_hall.jpg', specs: ['ASTM A516 Gr 70 / SA 516 Gr 70', 'NACE MR0175 Compliant'] },
-  { id: 'nace-hic-plates', title: 'NACE + HIC Resistant Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/steel_mill_hall.jpg', specs: ['Hydrogen Induced Cracking Resistant', 'Sour Oil & Gas Service'] },
+  { id: 'boiler-steel-plates', title: 'Boiler Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/products/boiler-steel-plates.jpg', specs: ['High Pressure Vessel Steel', 'ASTM A516 / ASME SA516'] },
+  { id: 'a516-gr60-plates', title: 'ASTM A516 Grade 60 Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/products/a516-gr60-plates.jpg', specs: ['ASTM A516 Gr 60', 'Low Temp Pressure Vessel'] },
+  { id: 'a516-gr65-plates', title: 'ASTM A516 Grade 65 Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/products/a516-gr65-plates.jpg', specs: ['ASTM A516 Gr 65', 'Moderate & Lower Temp Service'] },
+  { id: 'a516-gr70-plates', title: 'ASTM A516 Grade 70 Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/products/a516-gr70-plates.jpg', specs: ['ASTM A516 Gr 70 / SA 516 Gr 70', 'NACE MR0175 Compliant'] },
+  { id: 'nace-hic-plates', title: 'NACE + HIC Resistant Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/products/nace-hic-plates.jpg', specs: ['Hydrogen Induced Cracking Resistant', 'Sour Oil & Gas Service'] },
 
   // 9. Manganese Steel
-  { id: 'manganese-steel-plates', title: 'Manganese Steel Plates', category: 'Specialized Product', subCat: 'Manganese Steel', image: '/images/heavy_wear_parts.jpg', specs: ['High Impact Work Hardening Steel'] },
-  { id: 'manganese-1214-plates', title: '12 - 14% Manganese Plates', category: 'Specialized Product', subCat: 'Manganese Steel', image: '/images/heavy_wear_parts.jpg', specs: ['12-14% Mn High Hadfield Steel', 'Crusher & Shot Blast Liners'] },
-  { id: 'hadfield-manganese-plates', title: 'Hadfield Manganese Plates', category: 'Specialized Product', subCat: 'Manganese Steel', image: '/images/heavy_wear_parts.jpg', specs: ['ASTM A128 Grade B2 / B3', 'Austenitic Manganese Steel'] },
+  { id: 'manganese-steel-plates', title: 'Manganese Steel Plates', category: 'Specialized Product', subCat: 'Manganese Steel', image: '/images/products/manganese-steel-plates.jpg', specs: ['High Impact Work Hardening Steel'] },
+  { id: 'manganese-1214-plates', title: '12 - 14% Manganese Plates', category: 'Specialized Product', subCat: 'Manganese Steel', image: '/images/products/manganese-1214-plates.jpg', specs: ['12-14% Mn High Hadfield Steel', 'Crusher & Shot Blast Liners'] },
+  { id: 'hadfield-manganese-plates', title: 'Hadfield Manganese Plates', category: 'Specialized Product', subCat: 'Manganese Steel', image: '/images/products/hadfield-manganese-plates.jpg', specs: ['ASTM A128 Grade B2 / B3', 'Austenitic Manganese Steel'] },
 
   // 10. Tiscral Sailhard Plates
-  { id: 'tiscral-sailhard-plates', title: 'Tiscral Sailhard Plates', category: 'Specialized Product', subCat: 'Tiscral Sailhard Plates', image: '/images/alloy_bar_texture.jpg', specs: ['SAIL SAILHARD Wear Plate', 'TISCRAL High Abrasion Resistance', 'Mining & Earthmoving Steel'] },
+  { id: 'tiscral-sailhard-plates', title: 'Tiscral Sailhard Plates', category: 'Specialized Product', subCat: 'Tiscral Sailhard Plates', image: '/images/products/tiscral-sailhard-plates.jpg', specs: ['SAIL SAILHARD Wear Plate', 'TISCRAL High Abrasion Resistance', 'Mining & Earthmoving Steel'] },
 
   // GASKETING SOLUTIONS PRODUCTS
   // 1. Asbestos Free (AF) Fibre Jointing Sheets
@@ -1657,7 +1657,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Asbestos Free (AF) Fibre Jointing Sheets (Non-Asbestos)',
     category: 'Gasketing Solutions',
     subCat: 'Asbestos Free (AF) Fibre Jointing Sheets',
-    image: '/images/flanges_industrial.png',
+    image: '/images/products/af-fibre-sheet-standard.jpg',
     specs: ['BS 7531 Grade Y / Grade X', 'Max Temp: 400°C', 'Eco-Friendly Non-Asbestos'],
   },
   {
@@ -1665,7 +1665,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'High Temp Synthetic Fibre AF Jointing Sheet',
     category: 'Gasketing Solutions',
     subCat: 'Asbestos Free (AF) Fibre Jointing Sheets',
-    image: '/images/flanges_industrial.png',
+    image: '/images/products/af-fibre-sheet-ht.jpg',
     specs: ['NBR / Aramid Fibre Binder', 'Pressure: Up to 100 Bar', 'Oil & Fuel Resistant'],
   },
   {
@@ -1673,7 +1673,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Wire Reinforced Asbestos Free (AF) Jointing Sheet',
     category: 'Gasketing Solutions',
     subCat: 'Asbestos Free (AF) Fibre Jointing Sheets',
-    image: '/images/flanges_industrial.png',
+    image: '/images/products/af-fibre-sheet-reinforced.jpg',
     specs: ['Steel Wire Mesh Insert', 'High Pressure Flange Gasketing', 'Steam & Gas Seals'],
   },
 
@@ -1683,7 +1683,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Compressed Fibre (CAF) Jointing Sheets',
     category: 'Gasketing Solutions',
     subCat: 'Compressed Fibre (CAF) Jointing Sheets',
-    image: '/images/flanges_industrial.png',
+    image: '/images/products/caf-jointing-sheet-std.jpg',
     specs: ['IS 2712 Grade W/1 & W/2', 'Max Temp: 450°C', 'High Tensile Jointing'],
   },
   {
@@ -1691,7 +1691,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Acid & Chemical Resistant CAF Jointing Sheet',
     category: 'Gasketing Solutions',
     subCat: 'Compressed Fibre (CAF) Jointing Sheets',
-    image: '/images/flanges_industrial.png',
+    image: '/images/products/caf-jointing-sheet-acid.jpg',
     specs: ['IS 2712 Grade A/1 Acid Resistant', 'Chemical Pipeline Seals', 'Thickness: 0.5mm - 5mm'],
   },
   {
@@ -1699,7 +1699,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Metallic Wire Mesh Reinforced CAF Sheet',
     category: 'Gasketing Solutions',
     subCat: 'Compressed Fibre (CAF) Jointing Sheets',
-    image: '/images/flanges_industrial.png',
+    image: '/images/products/caf-jointing-sheet-metallic.jpg',
     specs: ['IS 2712 Grade M/1 Metallic', 'Exhaust & Boiler Flanges', 'Extreme Pressure Rating'],
   },
 
@@ -1709,7 +1709,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS304 / SS316 Spiral Wound Gasket (Inner & Outer Ring)',
     category: 'Gasketing Solutions',
     subCat: 'Spiral Wound Gaskets',
-    image: '/images/flanges_industrial.png',
+    image: '/images/products/spiral-wound-gasket-ss304.jpg',
     specs: ['ASME B16.20 / ANSI B16.5', 'Class 150# - 2500#', 'Graphite / PTFE Filler'],
   },
   {
@@ -1717,7 +1717,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SS316L High Pressure Graphite Spiral Wound Gasket',
     category: 'Gasketing Solutions',
     subCat: 'Spiral Wound Gaskets',
-    image: '/images/flanges_industrial.png',
+    image: '/images/products/spiral-wound-gasket-ss316l.jpg',
     specs: ['ASME B16.20 API 605', 'High Pressure Steam & Heat Exchangers', 'Zero Leak Seal'],
   },
   {
@@ -1725,7 +1725,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Inconel 600 / Monel 400 Spiral Wound Gasket',
     category: 'Gasketing Solutions',
     subCat: 'Spiral Wound Gaskets',
-    image: '/images/flanges_industrial.png',
+    image: '/images/products/spiral-wound-gasket-inconel.jpg',
     specs: ['NACE MR0175 Compliant', 'Severe Corrosive Service', 'Refinery Grade'],
   },
 
@@ -1735,7 +1735,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Precision Pre Cut Full Face Flange Gaskets',
     category: 'Gasketing Solutions',
     subCat: 'Pre Cut Gaskets',
-    image: '/images/flanges_industrial.png',
+    image: '/images/products/pre-cut-flange-gasket-fullface.jpg',
     specs: ['ASME B16.21 Standard', 'Full Face Bolt Hole Pattern', 'Custom CNC Cut'],
   },
   {
@@ -1743,7 +1743,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Pre Cut IBC Ring Type Flange Gaskets',
     category: 'Gasketing Solutions',
     subCat: 'Pre Cut Gaskets',
-    image: '/images/flanges_industrial.png',
+    image: '/images/products/pre-cut-flange-gasket-ring.jpg',
     specs: ['Inside Bolt Circle (IBC)', 'Non-Asbestos / CAF Material', '1/2" to 24" NB Sizes'],
   },
   {
@@ -1751,7 +1751,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Metal Jacketed Pre Cut Heat Exchanger Gaskets',
     category: 'Gasketing Solutions',
     subCat: 'Pre Cut Gaskets',
-    image: '/images/flanges_industrial.png',
+    image: '/images/products/pre-cut-gasket-metal-jacketed.jpg',
     specs: ['Double Jacketed SS316 with Soft Filler', 'Heat Exchanger Shells', 'ASME Section VIII'],
   },
 
@@ -1761,7 +1761,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Mild Steel Angles',
     category: 'Structural Steel',
     subCat: 'Mild Steel Angles',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+    image: '/images/products/mild-steel-angles.jpg',
     specs: [
       'ISA L-shaped steel section for construction & frameworks',
       'Sizes: 25 mm x 25 mm to 250 mm x 250 mm',
@@ -1773,7 +1773,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Mild Steel Beams',
     category: 'Structural Steel',
     subCat: 'Mild Steel Beams',
-    image: '/images/pexels-bence-szemerey-337043-6804265.jpg',
+    image: '/images/products/mild-steel-beams.jpg',
     specs: [
       'MS Beams / ISMB horizontal load-bearing members',
       'Sizes: 100 mm x 50 mm to 600 mm x 210 mm',
@@ -1785,7 +1785,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Mild Steel Channels',
     category: 'Structural Steel',
     subCat: 'Mild Steel Channels',
-    image: '/images/pexels-pppsdavid-5851494.jpg',
+    image: '/images/products/mild-steel-channels.jpg',
     specs: [
       'MS Channels U-shaped structural framing & bracing sections',
       'Sizes: 75 mm x 40 mm to 400 mm x 100 mm',
@@ -1797,7 +1797,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Narrow Parallel Flange Beam',
     category: 'Structural Steel',
     subCat: 'Narrow Parallel Flange Beam',
-    image: '/images/pexels-jakubzerdzicki-33813584.jpg',
+    image: '/images/products/narrow-parallel-flange-beam.jpg',
     specs: [
       'NPB specialized steel beam with narrow flange for lightweight strength',
       'Sizes: 200 mm x 100 mm to 600 mm x 220 mm',
@@ -1809,7 +1809,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Universal Beam',
     category: 'Structural Steel',
     subCat: 'Universal Beam',
-    image: '/images/pexels-eugeniofr-30005294.jpg',
+    image: '/images/products/universal-beam.jpg',
     specs: [
       'UB versatile wide-flange beam for heavy bridges & buildings',
       'Sizes: 203 mm x 133 mm to 610 mm x 229 mm',
@@ -1821,7 +1821,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Universal Column',
     category: 'Structural Steel',
     subCat: 'Universal Column',
-    image: '/images/pexels-tokuo-nobuhiro-79378678-20472153.jpg',
+    image: '/images/products/universal-column.jpg',
     specs: [
       'UC vertical load-bearing column section for frameworks & supports',
       'Sizes: 203 mm x 203 mm to 356 mm x 368 mm / 356 mm x 406 mm',
@@ -1833,7 +1833,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Wide Parallel Flange Beam',
     category: 'Structural Steel',
     subCat: 'Wide Parallel Flange Beam',
-    image: '/images/pexels-willians-huerta-2157111846-36397988.jpg',
+    image: '/images/products/wide-parallel-flange-beam.jpg',
     specs: [
       'WPB heavy-duty beam with wide plates for high-rise & plant infrastructure',
       'Sizes: 160 mm x 160 mm to 900 mm x 300 mm',
@@ -1845,7 +1845,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'IU Rails',
     category: 'Structural Steel',
     subCat: 'IU Rails',
-    image: '/images/pexels-tokuo-nobuhiro-79378678-20472153.jpg',
+    image: '/images/products/iu-rails.jpg',
     specs: [
       'Track sections for railways, industrial tracks & crane runways',
       'Weight Range: 24 kg/m to 60 kg/m',
@@ -1857,7 +1857,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Crane Rails',
     category: 'Structural Steel',
     subCat: 'Crane Rails',
-    image: '/images/pexels-jakubzerdzicki-33813584.jpg',
+    image: '/images/products/crane-rails.jpg',
     specs: [
       'Heavy-duty rails for overhead cranes & gantry systems',
       'Sizes: CR 50 to CR 175',
