@@ -24,6 +24,7 @@ import {
   getEquivalentGrades,
   getScrapedGradeTableData,
   getGradeSpecification,
+  getGalleryImages,
 } from '../data/productFallbacks';
 
 interface ProductDetailPageProps {
@@ -180,18 +181,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
   const gradeSpec = useMemo(() => getGradeSpecification(currentProduct), [currentProduct]);
 
   // Gallery imagery
-  const galleryImages = useMemo(() => {
-    const main = currentProduct.image || '/images/stainless_pipes.png';
-    const pool = [
-      '/images/stainless_pipes.png',
-      '/images/pipe_fittings.png',
-      '/images/flanges_industrial.png',
-      '/images/round_bars.png',
-      '/images/titanium_plates.png',
-      '/images/precision_parts.png',
-    ].filter((img) => img !== main);
-    return [main, ...pool.slice(0, 3)];
-  }, [currentProduct]);
+  const galleryImages = useMemo(() => getGalleryImages(currentProduct), [currentProduct]);
 
   const [activeImage, setActiveImage] = useState<string>(galleryImages[0]);
   const [quantityKgs] = useState<number>(500);
@@ -199,10 +189,11 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
   const [appsExpanded, setAppsExpanded] = useState(false);
 
   // Product changes (related-product links reuse this page) must re-collapse
-  // the application list.
+  // the application list and swap the gallery back to the new product's photo.
   useEffect(() => {
     setAppsExpanded(false);
-  }, [currentProduct.id]);
+    setActiveImage(getGalleryImages(currentProduct)[0]);
+  }, [currentProduct]);
 
   // Champak-sourced products only ever show the published list (empty hides
   // the section); the generic list is for products with no source page.

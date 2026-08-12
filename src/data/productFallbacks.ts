@@ -711,6 +711,34 @@ const buildRows = (form: ProductFormKey, material: MaterialKey, subCat: string):
   }
 };
 
+// Detail-page gallery thumbnails, from the client's product photography.
+// Keyed by form so a flange page shows other flanges rather than a mix of
+// pipes and bars.
+const GALLERY_BY_FORM: Record<ProductFormKey, string[]> = {
+  pipe: ['client/ss-seamless-piping.jpg', 'client/images-2.jpg', 'client/stainless-steel-pipe.jpg', 'client/02.jpg'],
+  plate: ['client/stainless-steel-sheets-plates.jpg', 'client/images-5.jpg', 'client/3.webp', 'client/304-ss-sheet-500x500.webp'],
+  bar: ['client/images-8.jpg', 'client/8776124.jpg', 'client/ss-316-hex-and-square-bars-thumbs-500x500.jpg', 'client/super-duplex-steel-round-bar.webp'],
+  flange: ['client/ss-flanges.jpg', 'client/images-10.jpg', 'client/stainless-steel-flange.webp', 'client/large-diameter-stainless-steel-flanges.jpg'],
+  forged: ['client/stainless-steel-forged-fittings.jpg', 'client/threaded-forged-fitting.jpg', 'client/images-13.jpg', 'client/ms-forged-elbow-45degree.jpg'],
+  buttweld: ['client/stainless-steel-buttweld-fittings.jpg', 'client/butt-welding-fitting.jpg', 'client/images-15.jpg', 'client/buttweld-fittings.jpg'],
+  fastener: ['client/stainless-steel-fasteners-500x500.webp', 'client/images-16.jpg', 'client/60f27d878e28f-fasteners.jpg', 'client/ss-fastners.webp'],
+  gasket: ['client/images-11.jpg', 'client/ss-flanges-supplier.jpg', 'client/fittings-1.png', 'client/duplex-flange-500x500.webp'],
+  structural: ['structural_beams.png', 'jm1.jpg', 'pexels-tokuo-nobuhiro-79378678-20472153.jpg', 'jm2.jpg'],
+  specialized: ['plate_laser_cutting.jpg', 'corten_weathered_steel.jpg', 'heavy_wear_parts.jpg', 'plate_forming_mill.jpg'],
+};
+
+/** Thumbnails for the detail-page gallery, led by the product's own image. */
+export const getGalleryImages = (product: {
+  title: string;
+  category: string;
+  subCat: string;
+  image: string;
+}): string[] => {
+  const form = resolveFormKey(product.category, product.subCat, product.title);
+  const others = GALLERY_BY_FORM[form].map((f) => `/images/${f}`);
+  return [product.image, ...others.filter((f) => f !== product.image)].slice(0, 4);
+};
+
 export const getGradeSpecification = (product: {
   title: string;
   category: string;
