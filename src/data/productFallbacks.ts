@@ -727,16 +727,25 @@ const GALLERY_BY_FORM: Record<ProductFormKey, string[]> = {
   specialized: ['plate_laser_cutting.jpg', 'corten_weathered_steel.jpg', 'heavy_wear_parts.jpg', 'plate_forming_mill.jpg'],
 };
 
-/** Thumbnails for the detail-page gallery, led by the product's own image. */
-export const getGalleryImages = (product: {
-  title: string;
-  category: string;
-  subCat: string;
-  image: string;
-}): string[] => {
+/**
+ * Thumbnails for the detail-page gallery.
+ *
+ * Order: the product's own card image, then the photograph Champak publishes
+ * for that exact grade (when we hold one — it is the real article, so it earns
+ * second place), then same-form shots from the client's photography.
+ */
+export const getGalleryImages = (
+  product: { title: string; category: string; subCat: string; image: string },
+  /** Champak's photo of this exact grade, from `getChampakImage`. */
+  champakImage?: string | null
+): string[] => {
   const form = resolveFormKey(product.category, product.subCat, product.title);
-  const others = GALLERY_BY_FORM[form].map((f) => `/images/${f}`);
-  return [product.image, ...others.filter((f) => f !== product.image)].slice(0, 4);
+  const pool = [
+    product.image,
+    ...(champakImage ? [champakImage] : []),
+    ...GALLERY_BY_FORM[form].map((f) => `/images/${f}`),
+  ];
+  return [...new Set(pool)].slice(0, 4);
 };
 
 export const getGradeSpecification = (product: {

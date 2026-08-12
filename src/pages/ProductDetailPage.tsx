@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { catalogProducts, type CatalogProduct } from '../data/catalogData';
 import { champakSpecs, type SpecTable } from '../data/champakSpecs';
+import { getChampakImage } from '../data/champakImages';
 import {
   getAlloyPricePerKg,
   getAlloyComposition,
@@ -181,7 +182,10 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
   const gradeSpec = useMemo(() => getGradeSpecification(currentProduct), [currentProduct]);
 
   // Gallery imagery
-  const galleryImages = useMemo(() => getGalleryImages(currentProduct), [currentProduct]);
+  const galleryImages = useMemo(
+    () => getGalleryImages(currentProduct, getChampakImage(currentProduct.id)),
+    [currentProduct]
+  );
 
   const [activeImage, setActiveImage] = useState<string>(galleryImages[0]);
   const [quantityKgs] = useState<number>(500);
@@ -192,7 +196,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
   // the application list and swap the gallery back to the new product's photo.
   useEffect(() => {
     setAppsExpanded(false);
-    setActiveImage(getGalleryImages(currentProduct)[0]);
+    setActiveImage(getGalleryImages(currentProduct, getChampakImage(currentProduct.id))[0]);
   }, [currentProduct]);
 
   // Champak-sourced products only ever show the published list (empty hides

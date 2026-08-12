@@ -144,54 +144,38 @@ export const allSubCategoriesList = [
   { id: 'Crane Rails', label: 'Crane Rails' },
 ];
 
+// Older links and nav entries use a few spellings for the same category.
+const CATEGORY_ALIASES: Record<string, string> = {
+  'Sheets & Plates': 'Plates & Sheets',
+  Gasketing: 'Gasketing Solutions',
+  'Gasketing & Sealing': 'Gasketing Solutions',
+  'Structural Steel Products': 'Structural Steel',
+  'Specialized Products': 'Specialized Product',
+};
+
+/**
+ * Sub-categories belonging to a category, derived from the products themselves.
+ *
+ * This used to guess by substring, which put every "… Steel Pipes & Tubes"
+ * under Specialized Product (it matches `includes('Steel')`) and left the user
+ * on a sub-category with nothing in it. Reading the products instead means the
+ * list is exactly the sub-categories that have stock, and adding a product can
+ * never leave the sidebar out of date.
+ */
 export const getSubCategoriesForCategory = (mainCat: string) => {
   if (!mainCat || mainCat === 'all' || mainCat === 'All') return allSubCategoriesList;
-  if (mainCat === 'Pipes & Tubes') {
-    return allSubCategoriesList.filter(s => s.id.includes('Pipes & Tubes') || s.id.includes('Pipe'));
-  }
-  if (mainCat === 'Plates & Sheets' || mainCat === 'Sheets & Plates') {
-    return allSubCategoriesList.filter(s => s.id.includes('Sheets & Plates'));
-  }
-  if (mainCat === 'Round Bars') {
-    return allSubCategoriesList.filter(s => s.id.includes('Round Bar'));
-  }
-  if (mainCat === 'Flanges') {
-    return allSubCategoriesList.filter(s => s.id.includes('Flanges'));
-  }
-  if (mainCat === 'Forged Fittings') {
-    return allSubCategoriesList.filter(s => s.id.includes('Forged Fittings'));
-  }
-  if (mainCat === 'Buttweld Fittings') {
-    return allSubCategoriesList.filter(s => s.id.includes('Buttweld Fittings'));
-  }
-  if (mainCat === 'Fasteners') {
-    return allSubCategoriesList.filter(s => s.id.includes('Fasteners'));
-  }
-  if (mainCat === 'Gasketing Solutions' || mainCat === 'Gasketing' || mainCat === 'Gasketing & Sealing') {
-    return allSubCategoriesList.filter(s =>
-      s.id.includes('Jointing Sheets') ||
-      s.id.includes('Spiral Wound Gaskets') ||
-      s.id.includes('Pre Cut Gaskets')
-    );
-  }
-  if (mainCat === 'Structural Steel' || mainCat === 'Structural Steel Products') {
-    return allSubCategoriesList.filter(s =>
-      s.id.includes('Mild Steel') ||
-      s.id.includes('Flange Beam') ||
-      s.id.includes('Universal') ||
-      s.id.includes('Rails')
-    );
-  }
-  if (mainCat === 'Specialized Product' || mainCat === 'Specialized Products') {
-    return allSubCategoriesList.filter(s =>
-      s.id.includes('Plates') ||
-      s.id.includes('Steel') ||
-      s.id.includes('15Mo3') ||
-      s.id.includes('16Mo3') ||
-      s.id.includes('Sailhard')
-    );
-  }
-  return allSubCategoriesList.filter(s => s.id === mainCat || s.label.toLowerCase().includes(mainCat.toLowerCase()));
+  const category = CATEGORY_ALIASES[mainCat] ?? mainCat;
+
+  const used = new Set(
+    catalogProducts.filter((p) => p.category === category).map((p) => p.subCat)
+  );
+  if (!used.size) return [];
+
+  // Keep the curated ordering and labels, then append anything the list omits.
+  const known = allSubCategoriesList.filter((s) => used.has(s.id));
+  const listed = new Set(known.map((s) => s.id));
+  const extra = [...used].filter((id) => !listed.has(id)).map((id) => ({ id, label: id }));
+  return [...known, ...extra];
 };
 
 export const getFirstSubCategoryForCategory = (mainCat: string) => {
