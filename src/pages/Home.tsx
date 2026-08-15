@@ -156,6 +156,25 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
     },
   ];
 
+  /* The sectors we supply, mirroring the "Industries We Serve" strip on
+     champaksteel.com. Their strip carries 14 tiles, but Oil & Gas, Aeronautical
+     and Automobile each appear twice as carousel padding — these are the 11
+     distinct sectors. Oil & Gas and Petrochemical lead deliberately: refineries
+     head the client rail blurb above and are the largest segment served. */
+  const industriesServed = [
+    { src: '/images/industries/oil-and-gas.webp', label: 'Oil & Gas' },
+    { src: '/images/industries/petrochemical.webp', label: 'Petrochemical' },
+    { src: '/images/industries/chemical.webp', label: 'Acid & Chemical' },
+    { src: '/images/industries/power.webp', label: 'Power Sectors' },
+    { src: '/images/industries/defence.webp', label: 'Defence' },
+    { src: '/images/industries/iron-and-steel.webp', label: 'Iron & Steel' },
+    { src: '/images/industries/aeronautical.webp', label: 'Aeronautical Engineering' },
+    { src: '/images/industries/automobile.webp', label: 'Automobile' },
+    { src: '/images/industries/construction.webp', label: 'Construction' },
+    { src: '/images/industries/mines.webp', label: 'Mines' },
+    { src: '/images/industries/paper-and-pulp.webp', label: 'Paper & Pulp' },
+  ];
+
   // 4 hero background slides. The overlay over these is deliberately light, so
   // they need to be bright, high-contrast shots — dim or muddy frames read as
   // flat grey here rather than dramatic.
@@ -1668,7 +1687,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
 
           <div style={{ textAlign: 'center', marginTop: '24px' }}>
             <button
-              onClick={() => onNavigate('products')}
+              onClick={() => onNavigate('catalog')}
               className="btn btn-outline"
               style={{ padding: '12px 32px' }}
             >
@@ -1887,6 +1906,38 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
             </div>
           </div>
         ))}
+      </section>
+
+      {/* 9. Industries We Serve — sector tiles, mirroring the strip Champak
+          publishes. Rendered as a grid rather than their carousel so every
+          sector is visible at once without waiting for a rotation. */}
+      <section className="section bg-tint" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
+        <div className="container">
+          <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 46px' }} className="reveal">
+            <span className="small-label" style={{ color: '#51847D', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
+              WHERE OUR METAL GOES
+            </span>
+            <h2 className="section-title" style={{ fontSize: '2.5rem', color: '#061221', marginBottom: '14px', fontWeight: 900, letterSpacing: '0.02em' }}>
+              INDUSTRIES WE SERVE
+            </h2>
+            <div style={{ width: '60px', height: '4px', background: '#51847D', margin: '0 auto 16px' }} />
+            <p style={{ color: '#475569', fontSize: '1.05rem', lineHeight: 1.6 }}>
+              From refinery and petrochemical process lines to defence, power and heavy
+              engineering — our certified stock is specified wherever material failure is not an option.
+            </p>
+          </div>
+
+          <div className="industry-grid reveal">
+            {industriesServed.map((industry) => (
+              <div key={industry.src} className="industry-card">
+                <div className="industry-card-media">
+                  <img src={industry.src} alt={`${industry.label} Industry`} title={industry.label} loading="lazy" />
+                </div>
+                <span className="industry-card-label">{industry.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
     </div>
   );

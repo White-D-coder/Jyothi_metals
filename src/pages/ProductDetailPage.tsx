@@ -400,7 +400,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
           <div className="pd-breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.8rem', color: '#7C8894' }}>
             <span style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>Home</span>
             <span>/</span>
-            <span style={{ cursor: 'pointer' }} onClick={() => navigate('/products')}>Products Catalog</span>
+            <span style={{ cursor: 'pointer' }} onClick={() => navigate('/catalog')}>Products Catalog</span>
             <span>/</span>
             <span>{currentProduct.category}</span>
             <span>/</span>
@@ -886,7 +886,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
             </h2>
             <button
               type="button"
-              onClick={() => navigate('/products')}
+              onClick={() => navigate(`/catalog?category=${encodeURIComponent(currentProduct.category)}`)}
               style={{ background: 'none', border: 'none', color: '#588078', fontWeight: 700, fontSize: '0.86rem', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
             >
               View Full Catalog <ArrowRight size={14} />

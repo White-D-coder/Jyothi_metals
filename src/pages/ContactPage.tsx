@@ -97,14 +97,10 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
                 <div style={{ marginBottom: '12px', paddingBottom: '10px', borderBottom: '1px solid #E2E8F0' }}>
                   <strong style={{ color: '#304050', fontSize: '0.95rem' }}>Dhawal Choudhary:</strong><br />
                   <a href="tel:+919322281549" style={{ color: '#588078', fontWeight: 700, textDecoration: 'none' }}>+91 9322281549</a>
-                  <span style={{ margin: '0 8px', color: '#CBD5E1' }}>|</span>
-                  <a href="tel:+919137880994" style={{ color: '#588078', fontWeight: 700, textDecoration: 'none' }}>+91 9137880994</a>
                 </div>
                 <div>
                   <strong style={{ color: '#304050', fontSize: '0.95rem' }}>Dinesh Choudhary:</strong><br />
                   <a href="tel:+919769388813" style={{ color: '#588078', fontWeight: 700, textDecoration: 'none' }}>+91 9769388813</a>
-                  <span style={{ margin: '0 8px', color: '#CBD5E1' }}>|</span>
-                  <a href="tel:+919082886991" style={{ color: '#588078', fontWeight: 700, textDecoration: 'none' }}>+91 9082886991</a>
                 </div>
               </div>
             </div>
@@ -153,8 +149,8 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
               <div style={{ fontSize: '0.9rem', color: '#475569', lineHeight: 1.65, paddingLeft: '44px' }}>
                 <p style={{ margin: '0 0 6px 0' }}>
                   <strong>Sales Inquiry:</strong>{' '}
-                  <a href="mailto:sales@jyotimetals.com" style={{ color: '#588078', fontWeight: 700, textDecoration: 'none' }}>
-                    sales@jyotimetals.com
+                  <a href="mailto:info@jyotimetal.co.in" style={{ color: '#588078', fontWeight: 700, textDecoration: 'none' }}>
+                    info@jyotimetal.co.in
                   </a>
                 </p>
                 <p style={{ margin: 0, display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -292,7 +288,7 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
             <div style={{ background: '#FFFFFF', border: '1px solid #CBD5E1', padding: '28px 24px 24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxShadow: '0 4px 14px rgba(0,0,0,0.02)' }}>
               <div>
                 <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#588078', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '6px' }}>
-                  HEADQUARTERS
+                  HEAD OFFICE
                 </div>
                 <h4 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#304050', marginBottom: '8px' }}>
                   Regd. Office (Mumbai)

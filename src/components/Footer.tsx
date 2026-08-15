@@ -363,11 +363,10 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenQuoteModal }
 
             <div>
               <h4 style={{ color: '#ffffff', fontSize: '1.05rem', fontWeight: 800, marginBottom: '10px' }}>
-                Email Addresses
+                Email Address
               </h4>
               <p style={{ color: '#cbd5e1', fontSize: '0.82rem', margin: 0, lineHeight: 1.6 }}>
-                info@jyotimetal.co.in<br />
-                dinu1301@gmail.com
+                info@jyotimetal.co.in
               </p>
             </div>
           </div>

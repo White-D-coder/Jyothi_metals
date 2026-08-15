@@ -8,6 +8,7 @@ import { PageLoader } from './components/PageLoader';
 // Lazy-loaded Page Components for fast code-splitting and smooth transition loading
 const Home = lazy(() => import('./pages/Home').then(m => ({ default: m.Home })));
 const ProductsPage = lazy(() => import('./pages/ProductsPage').then(m => ({ default: m.ProductsPage })));
+const CatalogPage = lazy(() => import('./pages/CatalogPage').then(m => ({ default: m.CatalogPage })));
 const AboutPage = lazy(() => import('./pages/AboutPage').then(m => ({ default: m.AboutPage })));
 const ContactPage = lazy(() => import('./pages/ContactPage').then(m => ({ default: m.ContactPage })));
 const ServicesPage = lazy(() => import('./pages/ServicesPage').then(m => ({ default: m.ServicesPage })));
@@ -27,7 +28,12 @@ const ProductDetailPage = lazy(() => import('./pages/ProductDetailPage').then(m 
 const tabToPath = (tab: string): string => (tab === 'home' ? '/' : `/${tab}`);
 
 // Derive the active tab id from the current URL path (drives nav highlighting).
-const pathToTab = (pathname: string): string => (pathname === '/' ? 'home' : pathname.slice(1));
+// The catalogue lives under its own path but still belongs to the Products nav item.
+const pathToTab = (pathname: string): string => {
+  if (pathname === '/') return 'home';
+  if (pathname === '/catalog') return 'products';
+  return pathname.slice(1);
+};
 
 // Scroll to top whenever the route changes (mirrors the old per-click scroll).
 function ScrollToTop() {
@@ -38,11 +44,11 @@ function ScrollToTop() {
   return null;
 }
 
-// Reads the ?category= query param and feeds it to ProductsPage.
-function ProductsRoute({ onOpenQuoteModal }: { onOpenQuoteModal: (productName?: string) => void }) {
+// Reads the ?category= query param and feeds it to the filterable catalogue.
+function CatalogRoute({ onOpenQuoteModal }: { onOpenQuoteModal: (productName?: string) => void }) {
   const [params] = useSearchParams();
   const category = params.get('category') || 'Pipes & Tubes';
-  return <ProductsPage initialCategory={category} onOpenQuoteModal={onOpenQuoteModal} />;
+  return <CatalogPage initialCategory={category} onOpenQuoteModal={onOpenQuoteModal} />;
 }
 
 export function App() {
@@ -92,7 +98,11 @@ export function App() {
             />
             <Route
               path="/products"
-              element={<ProductsRoute onOpenQuoteModal={handleOpenQuoteModal} />}
+              element={<ProductsPage onOpenQuoteModal={handleOpenQuoteModal} />}
+            />
+            <Route
+              path="/catalog"
+              element={<CatalogRoute onOpenQuoteModal={handleOpenQuoteModal} />}
             />
             <Route path="/about" element={<AboutPage onOpenQuoteModal={() => handleOpenQuoteModal()} />} />
             <Route path="/contact" element={<ContactPage onOpenQuoteModal={() => handleOpenQuoteModal()} />} />

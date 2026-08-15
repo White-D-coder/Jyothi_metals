@@ -227,6 +227,83 @@ h1, h2, h3, h4, h5, h6 {
   .marquee-container { overflow-x: auto; }
 }
 
+/* Industries We Serve — sector tiles. Column counts are pinned rather than
+   auto-fit: the list is 11 items, and auto-fit resolves to 5 columns on a wide
+   screen, which strands a single orphan tile on the last row. 4 / 3 / 2 divide
+   11 into balanced rows at every breakpoint. */
+.industry-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+@media (max-width: 1024px) {
+  .industry-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.industry-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+.industry-card:hover {
+  transform: translateY(-6px);
+  border-color: #51847D;
+  box-shadow: 0 14px 30px rgba(6, 18, 33, 0.13);
+}
+
+/* Source photos are a uniform 250x200; the fixed ratio keeps every tile
+   aligned even if a replacement image ships at a different size. */
+.industry-card-media {
+  aspect-ratio: 5 / 4;
+  overflow: hidden;
+}
+
+.industry-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.industry-card:hover .industry-card-media img { transform: scale(1.07); }
+
+.industry-card-label {
+  padding: 14px 12px;
+  text-align: center;
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  color: #061221;
+  border-top: 1px solid #eef2f4;
+  /* Labels run from "Mines" to "Aeronautical Engineering" — pushing the text
+     block down keeps the one- and two-line captions on a shared baseline. */
+  margin-top: auto;
+}
+
+.industry-card:hover .industry-card-label { color: #51847D; }
+
+@media (max-width: 640px) {
+  .industry-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .industry-card-label { padding: 11px 8px; font-size: 0.82rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .industry-card,
+  .industry-card-media img { transition: none; }
+  .industry-card:hover { transform: none; }
+  .industry-card:hover .industry-card-media img { transform: none; }
+}
+
 /* Mobile nav drawer — mirrors the desktop menu, with each dropdown collapsed
    into an accordion so the whole structure fits one thumb-scroll.
    Rows are full-bleed: each carries its own rule edge to edge, and the tap
@@ -558,6 +635,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .dropdown-item:last-child {
   border-bottom: none;
+}
+
+/* Leading "All Products" entry — the landing page, above the category jumps. */
+.dropdown-item-lead {
+  font-weight: 700;
+  color: #51847D;
+  border-bottom: 1px solid #e2e8f0;
 }
 
 .dropdown-item:hover {
@@ -2365,3 +2449,298 @@ img,
 }
 
 
+
+/* ==========================================================================
+   Products Landing Page (/products)
+   Alternating full-width product rows, editorial hero and closing CTA.
+   ========================================================================== */
+
+@keyframes ppFadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ppScaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.pp-fade-up { animation: ppFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.pp-scale-in { animation: ppScaleIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+/* --- Hero ---------------------------------------------------------------- */
+.pp-hero {
+  position: relative;
+  height: 70vh;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.pp-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.pp-hero-scrim { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.5); }
+
+.pp-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.pp-hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.6rem, 6vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.08;
+  margin: 0 0 22px;
+  letter-spacing: -0.5px;
+  /* Overrides the global `h1..h6 { color: var(--text) }` rule. */
+  color: #ffffff;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
+}
+
+.pp-hero-sub {
+  font-size: clamp(1.05rem, 2.2vw, 1.5rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+}
+
+/* --- Section shell ------------------------------------------------------- */
+.pp-section { padding: 80px 0; }
+.pp-section-top { background: linear-gradient(to bottom, #ffffff, #f8fafc); }
+.pp-section-alt { background: linear-gradient(to bottom, #f8fafc, #ffffff); }
+
+.pp-section-head { text-align: center; margin-bottom: 64px; }
+
+.pp-section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4.4vw, 3rem);
+  font-weight: 800;
+  color: #0D1B2A;
+  margin: 0 0 18px;
+  letter-spacing: -0.4px;
+}
+
+.pp-section-sub {
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  color: #475569;
+  max-width: 780px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* --- Alternating product rows -------------------------------------------- */
+.pp-rows { display: flex; flex-direction: column; gap: 64px; }
+
+.pp-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+  scroll-margin-top: 120px;
+}
+
+.pp-media {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 20px 45px rgba(13, 27, 42, 0.16);
+  cursor: pointer;
+}
+
+.pp-media img {
+  display: block;
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  filter: grayscale(1);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+}
+
+.pp-media:hover img { transform: scale(1.1); filter: grayscale(0); }
+
+.pp-media-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(13, 27, 42, 0.85), transparent 55%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.pp-media:hover .pp-media-scrim { opacity: 1; }
+
+.pp-media-caption {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 800;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.pp-media:hover .pp-media-caption { opacity: 1; transform: translateY(0); }
+
+.pp-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 24px; }
+
+.pp-body-title {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+  font-weight: 800;
+  color: #0D1B2A;
+  margin: 0 0 8px;
+  padding-bottom: 12px;
+  letter-spacing: -0.3px;
+}
+
+.pp-body-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 64px;
+  height: 4px;
+  background: #51847D;
+}
+
+.pp-info-card {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.06);
+}
+
+.pp-info-card + .pp-info-card { margin-top: 16px; }
+
+.pp-info-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0D1B2A;
+  margin: 0 0 12px;
+}
+
+.pp-info-head::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #51847D;
+  flex-shrink: 0;
+}
+
+.pp-info-card p { margin: 0; color: #475569; line-height: 1.7; }
+
+/* --- Buttons ------------------------------------------------------------- */
+.pp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 26px;
+  background: #0D1B2A;
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pp-btn:hover {
+  background: #16324d;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(13, 27, 42, 0.28);
+}
+
+.pp-btn svg { transition: transform 0.3s ease; }
+.pp-btn:hover svg { transform: translateX(4px); }
+
+/* --- Closing CTA --------------------------------------------------------- */
+.pp-cta { padding: 80px 0; background: #0D1B2A; color: #ffffff; }
+.pp-cta-inner { max-width: 860px; margin: 0 auto; padding: 0 20px; text-align: center; }
+
+.pp-cta h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 3.6vw, 2.5rem);
+  font-weight: 800;
+  margin: 0 0 22px;
+  line-height: 1.25;
+  /* Overrides the global `h1..h6 { color: var(--text) }` rule. */
+  color: #ffffff;
+}
+
+.pp-cta p {
+  font-size: clamp(1.02rem, 2vw, 1.25rem);
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.65;
+  margin: 0 0 34px;
+}
+
+.pp-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 34px;
+  background: #51847D;
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.pp-cta-btn:hover { background: #3d6963; transform: scale(1.05); }
+.pp-cta-btn svg { transition: transform 0.3s ease; }
+.pp-cta-btn:hover svg { transform: translateX(4px); }
+
+/* --- Responsive ---------------------------------------------------------- */
+@media (min-width: 1024px) {
+  .pp-row { flex-direction: row; }
+  .pp-row.pp-row-reverse { flex-direction: row-reverse; }
+  .pp-media img { height: 340px; }
+}
+
+@media (max-width: 640px) {
+  .pp-section { padding: 56px 0; }
+  .pp-rows { gap: 48px; }
+  .pp-media img { height: 240px; }
+  .pp-hero { height: 60vh; min-height: 420px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pp-fade-up,
+  .pp-scale-in { animation: none; }
+  .pp-media img,
+  .pp-media-scrim,
+  .pp-media-caption { transition: none; }
+}

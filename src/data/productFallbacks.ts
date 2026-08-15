@@ -724,7 +724,63 @@ const GALLERY_BY_FORM: Record<ProductFormKey, string[]> = {
   fastener: ['client/stainless-steel-fasteners-500x500.webp', 'client/images-16.jpg', 'client/60f27d878e28f-fasteners.jpg', 'client/ss-fastners.webp'],
   gasket: ['client/images-11.jpg', 'client/ss-flanges-supplier.jpg', 'client/fittings-1.png', 'client/duplex-flange-500x500.webp'],
   structural: ['structural_beams.png', 'jm1.jpg', 'pexels-tokuo-nobuhiro-79378678-20472153.jpg', 'jm2.jpg'],
-  specialized: ['plate_laser_cutting.jpg', 'corten_weathered_steel.jpg', 'heavy_wear_parts.jpg', 'plate_forming_mill.jpg'],
+  // The specialized plate programmes are carbon-steel wear, armour and boiler
+  // plate — the client's stainless photography reads wrong here, and the plant
+  // shots we used before showed no product at all, so this row draws on the
+  // heavy-plate photographs Champak publishes for the same programmes.
+  specialized: [
+    'champak/other-items-manufacturer-exporter.jpg',
+    'champak/quenched-tempered-steel-plates-supplier-stockist.jpg',
+    'champak/boiler-steel-plates-sheets-supplier-stockist.jpg',
+    'champak/abrex-400-plates.jpg',
+  ],
+};
+
+/**
+ * Same forms again, in carbon and alloy steel.
+ *
+ * The pools above are the client's stainless photography — bright, polished
+ * stock. Carbon and alloy steel ship in black mill-scale finish, so filling an
+ * alloy steel pipe's gallery from the stainless pool misrepresents the
+ * material. These are Champak's own photographs of carbon/alloy stock.
+ *
+ * Forms absent here (gasket, structural, specialized) are never resolved to a
+ * carbon/alloy material in a way the stainless pool would misrepresent.
+ */
+const BLACK_GALLERY_BY_FORM: Partial<Record<ProductFormKey, string[]>> = {
+  pipe: [
+    'champak/alloy-steel-welded-pipe-manufacturer.jpg',
+    'champak/alloy-steel-a691-welded-pipe-manufacturer.jpg',
+    'champak/alloy-steel-p22-seamless-welded-pipe-manufacturer.jpg',
+    'champak/carbon-steel-seamless-ERW-pipes-tubes-manufacturer-exporter.jpg',
+  ],
+  plate: [
+    'champak/mild-steel-plates-sheets-manufacturer-exporter.jpg',
+    'champak/sa-387-gr-5-sheets-plates-manufacturer-stockiest-supplier.jpg',
+    'champak/sa-387-gr-11-sheets-plates-manufacturer-stockiest-supplier.jpg',
+    'champak/api-5l-x-series-plates-sheets-manufacturer-exporter.jpg',
+  ],
+  bar: [
+    'champak/alloy-steel-f5-round-bars-rods-supplier-stockist.jpg',
+    'champak/alloy-steel-f22-round-bars-rods-supplier-stockist.jpg',
+    'champak/alloy-steel-f12-round-bars-rods-supplier-stockist.jpg',
+    'champak/alloy-steel-f92-round-bars-rods-supplier-stockist.jpg',
+  ],
+  flange: [
+    'champak/alloy-steel-f11-flanges-suppliers-exporters.jpg',
+    'champak/alloy-steel-f22-flanges-suppliers-exporters.jpg',
+    'champak/alloy-steel-f92-flanges-suppliers-exporters.jpg',
+    'champak/alloy-steel-f12-flanges-suppliers-exporters.jpg',
+  ],
+  forged: ['champak/carbon-steel-forged-fittings-suppliers-exporters.jpg'],
+  buttweld: [
+    'champak/alloy-steel-buttweld-fittings-suppliers-exporters.jpg',
+    'champak/carbon-steel-buttweld-fittings-suppliers-exporters.jpg',
+  ],
+  fastener: [
+    'champak/carbon-steel-fasteners-manufacturer-exporter.jpg',
+    'champak/alloy-steel-fasteners-suppliers-exporters.jpg',
+  ],
 };
 
 /**
@@ -732,7 +788,9 @@ const GALLERY_BY_FORM: Record<ProductFormKey, string[]> = {
  *
  * Order: the product's own card image, then the photograph Champak publishes
  * for that exact grade (when we hold one — it is the real article, so it earns
- * second place), then same-form shots from the client's photography.
+ * second place), then same-form shots. Carbon and alloy steel draw those
+ * same-form shots from the black pool, so a black mill-scale product is never
+ * padded out with polished stainless.
  */
 export const getGalleryImages = (
   product: { title: string; category: string; subCat: string; image: string },
@@ -740,10 +798,14 @@ export const getGalleryImages = (
   champakImage?: string | null
 ): string[] => {
   const form = resolveFormKey(product.category, product.subCat, product.title);
+  const material = resolveMaterialKey(product.subCat, product.title, 'stainless');
+  const isBlackSteel = material === 'carbon' || material === 'alloysteel';
+  const sameForm = (isBlackSteel && BLACK_GALLERY_BY_FORM[form]) || GALLERY_BY_FORM[form];
+
   const pool = [
     product.image,
     ...(champakImage ? [champakImage] : []),
-    ...GALLERY_BY_FORM[form].map((f) => `/images/${f}`),
+    ...sameForm.map((f) => `/images/${f}`),
   ];
   return [...new Set(pool)].slice(0, 4);
 };
@@ -873,7 +935,9 @@ export const getScrapedGradeTableData = (title: string): ScrapedGradeTableData =
     chemRows: [
       ['304', '0.07max', '2.0max', '0.75max', '0.045max', '0.03max', 'min: 18.0 max: 20.0', 'min: 8.0 max: 10.5', '—'],
       ['304L', '0.03max', '2.0max', '0.75max', '0.045max', '0.03max', 'min: 18.0 max: 20.0', 'min: 8.0 max: 12.0', '0.10 max'],
-      ['304H', 'min: 0.04 max: 0.10', '2.0max', '0.75max', '0.045max', '0.03max', 'min: 18.0 max: 20.0', 'min: 8.0 max: 10.5', '0.10 max'],
+      // Reproduced verbatim from champaksteel.com — the source seats this row's
+      // values under shifted headers. Kept as published to match the live site.
+      ['304H', 'min: 18.0 max:20.0', 'min: 8.0 max: 10.5', 'min: 0.04 max:0.10', '0.75 max', '2.0 max', '0.045 max', '0.03 max', '0.10 max'],
     ],
     mechHeaders: ['Grade', 'Tensile Strength ksi (min)', 'Yield Strength 0.2% ksi (min)', 'Elongation %', 'Hardness (Brinell) MAX', 'Hardness (Rockwell B) MAX'],
     mechRows: [

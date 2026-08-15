@@ -72,7 +72,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       label: 'Company',
       items: [
         { label: 'About Us & Heritage', id: 'about' },
-        { label: 'Foundry Infrastructure', id: 'infrastructure' },
+        { label: 'Manufacturing Facilities', id: 'infrastructure' },
         { label: 'Quality Policy & ISO Standards', id: 'quality-policy' },
         { label: 'Certifications & Compliance', id: 'certifications' },
       ],
@@ -80,7 +80,10 @@ export const Navbar: React.FC<NavbarProps> = ({
     {
       key: 'products',
       label: 'Products',
-      items: productDropdownItems.map((item) => ({ label: item, id: 'products', category: item })),
+      items: [
+        { label: 'All Products', id: 'products' },
+        ...productDropdownItems.map((item) => ({ label: item, id: 'products', category: item })),
+      ],
     },
     {
       key: 'services',
@@ -242,7 +245,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     handleNavClick('infrastructure');
                   }}
                 >
-                  Foundry Infrastructure
+                  Manufacturing Facilities
                 </a>
                 <a
                   href="#quality-policy"
@@ -284,6 +287,18 @@ export const Navbar: React.FC<NavbarProps> = ({
                 Products <ChevronDown size={14} />
               </a>
               <div className={`dropdown-menu ${activeDropdown === 'products' ? 'is-open' : ''}`}>
+                {/* Entry point to the products landing page itself — the items
+                    below it jump to a single category on that same page. */}
+                <a
+                  href="#products"
+                  className="dropdown-item dropdown-item-lead"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick('products');
+                  }}
+                >
+                  All Products
+                </a>
                 {productDropdownItems.map((item) => (
                   <a
                     key={item}

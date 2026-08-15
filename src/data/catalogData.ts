@@ -109,8 +109,10 @@ export const allSubCategoriesList = [
   { id: 'Copper Nickel Fasteners', label: 'Copper Nickel Fasteners' },
   { id: 'Monel Fasteners', label: 'Monel Fasteners' },
   { id: 'Hastelloy Fasteners', label: 'Hastelloy Fasteners' },
-  { id: 'Inconel Alloy Fasteners', label: 'Inconel Alloy Fasteners' },
-  { id: 'Incoloy Alloy Fasteners', label: 'Incoloy Alloy Fasteners' },
+  // Grouped as one row for the same reason every other category groups them:
+  // "Inconel" and "Incoloy" differ by a single letter and read as a duplicate
+  // in the sidebar. Both alloy families' fasteners live here.
+  { id: 'Inconel / Incoloy Fasteners', label: 'Inconel / Incoloy Fasteners' },
   { id: 'Alloy 20 Fasteners', label: 'Alloy 20 Fasteners' },
   { id: 'Titanium Fasteners', label: 'Titanium Fasteners' },
 
@@ -360,7 +362,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel P5 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Alloy Steel Pipes & Tubes',
-    image: '/images/products/alloy-steel-p5.jpg',
+    image: '/images/champak/alloy-steel-p5-seamless-welded-pipe-manufacturer.jpg',
     specs: ['ASTM A335 Grade P5', '5% Cr-1/2% Mo', 'Power Station Boilers'],
   },
   {
@@ -368,7 +370,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel P9 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Alloy Steel Pipes & Tubes',
-    image: '/images/products/alloy-steel-p9.jpg',
+    image: '/images/champak/alloy-steel-p9-seamless-welded-pipe-manufacturer.jpg',
     specs: ['ASTM A335 Grade P9', '9% Cr-1% Mo', 'Refinery Lines'],
   },
   {
@@ -376,7 +378,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel P11 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Alloy Steel Pipes & Tubes',
-    image: '/images/products/alloy-steel-p11.jpg',
+    image: '/images/champak/alloy-steel-p11-seamless-welded-pipe-manufacturer.jpg',
     specs: ['ASTM A335 Grade P11', '1.25% Cr-1/2% Mo', 'High Pressure Steam'],
   },
   {
@@ -384,7 +386,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel P12 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Alloy Steel Pipes & Tubes',
-    image: '/images/products/alloy-steel-p12.jpg',
+    image: '/images/champak/alloy-steel-p12-seamless-welded-pipe-manufacturer.jpg',
     specs: ['ASTM A335 Grade P12', '1% Cr-1/2% Mo', 'Thermal Plants'],
   },
   {
@@ -392,7 +394,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel P22 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Alloy Steel Pipes & Tubes',
-    image: '/images/products/alloy-steel-p22.jpg',
+    image: '/images/champak/alloy-steel-p22-seamless-welded-pipe-manufacturer.jpg',
     specs: ['ASTM A335 Grade P22', '2.25% Cr-1% Mo', 'High Boiler Temp'],
   },
   {
@@ -400,7 +402,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel P91 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Alloy Steel Pipes & Tubes',
-    image: '/images/products/alloy-steel-p91.jpg',
+    image: '/images/champak/alloy-steel-p91-seamless-welded-pipe-manufacturer.jpg',
     specs: ['ASTM A335 Grade P91', '9% Cr-1% Mo-V', 'Ultra Supercritical'],
   },
   {
@@ -408,7 +410,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel P92 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Alloy Steel Pipes & Tubes',
-    image: '/images/products/alloy-steel-p92.jpg',
+    image: '/images/champak/alloy-steel-p92-seamless-welded-pipe-manufacturer.jpg',
     specs: ['ASTM A335 Grade P92', 'W-Tolerant Alloy Steel', 'Advanced Power'],
   },
 
@@ -452,7 +454,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Seamless & ERW Carbon Steel Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Carbon Steel Pipes & Tubes',
-    image: '/images/products/cs-erw-pipe.jpg',
+    image: '/images/champak/carbon-steel-seamless-ERW-pipes-tubes-manufacturer-exporter.jpg',
     specs: ['ASTM A106 Grade B', 'ASTM A53', 'High Strength Carbon'],
   },
   {
@@ -460,7 +462,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'SAW / LSAW / HSAW Line Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Carbon Steel Pipes & Tubes',
-    image: '/images/products/cs-lsaw-pipe.jpg',
+    image: '/images/champak/carbon-steel-SAW-LSAW-HSAW-pipes-tubes-manufacturer-exporter.jpg',
     specs: ['Large Diameter', 'API 5L Grade X42 - X80', 'Oil Transport'],
   },
   {
@@ -468,7 +470,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'API 5L Line Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Carbon Steel Pipes & Tubes',
-    image: '/images/products/cs-api5l-pipe.jpg',
+    image: '/images/champak/carbon-steel-api-5l-line-pipes-tubes-manufacturer-exporter.jpg',
     specs: ['PSL1 / PSL2', 'Grade B to X80', 'Gas Distribution'],
   },
 
@@ -532,7 +534,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'A691 1.25 (1-1/4 Cr) Welded Pipe',
     category: 'Pipes & Tubes',
     subCat: 'Alloy Steel Welded Pipe',
-    image: '/images/products/a691-125-pipe.jpg',
+    image: '/images/champak/alloy-steel-a691-welded-pipe-manufacturer.jpg',
     specs: ['ASTM A691 Grade 1-1/4 Cr', 'Electric-Fusion Welded'],
   },
   {
@@ -540,7 +542,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'A691 2.25 (2-1/4 Cr) Welded Pipe',
     category: 'Pipes & Tubes',
     subCat: 'Alloy Steel Welded Pipe',
-    image: '/images/products/a691-225-pipe.jpg',
+    image: '/images/champak/alloy-steel-a691-2-25-welded-pipe-manufacturer.jpg',
     specs: ['ASTM A691 Grade 2-1/4 Cr', 'EFW High Pressure Pipe'],
   },
   {
@@ -548,7 +550,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'A691 5 Cr Welded Pipe',
     category: 'Pipes & Tubes',
     subCat: 'Alloy Steel Welded Pipe',
-    image: '/images/products/a691-5cr-pipe.jpg',
+    image: '/images/champak/alloy-steel-a691-5-cr-welded-pipe-manufacturer.jpg',
     specs: ['ASTM A691 Grade 5Cr', 'EFW High Temp Service'],
   },
   {
@@ -556,7 +558,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'A691 9 Cr Welded Pipe',
     category: 'Pipes & Tubes',
     subCat: 'Alloy Steel Welded Pipe',
-    image: '/images/products/a691-9cr-pipe.jpg',
+    image: '/images/champak/alloy-steel-a691-9-cr-welded-pipe-manufacturer.jpg',
     specs: ['ASTM A691 Grade 9Cr', 'EFW Power Plant Piping'],
   },
   {
@@ -564,7 +566,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'A691 91 Cr Welded Pipe',
     category: 'Pipes & Tubes',
     subCat: 'Alloy Steel Welded Pipe',
-    image: '/images/products/a691-91cr-pipe.jpg',
+    image: '/images/champak/alloy-steel-a691-91-cr-welded-pipe-manufacturer.jpg',
     specs: ['ASTM A691 Grade 91', 'Modified 9Cr-1Mo EFW Pipe'],
   },
 
@@ -867,7 +869,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'API Line Grade Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Carbon Steel Sheets & Plates',
-    image: '/images/products/cs-api-sheet.jpg',
+    image: '/images/champak/api-5l-x-series-plates-sheets-manufacturer-exporter.jpg',
     specs: ['API 5L Grade X42-X80', 'Oil & Gas Pipeline Plates'],
   },
   {
@@ -875,7 +877,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'High Strength & Tensile Carbon Steel Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Carbon Steel Sheets & Plates',
-    image: '/images/products/cs-high-tensile-sheet.jpg',
+    image: '/images/champak/dsq-plates.jpg',
     specs: ['IS 2062 E350 / E450', 'High Yield Structural'],
   },
   {
@@ -883,7 +885,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Mild Steel Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Carbon Steel Sheets & Plates',
-    image: '/images/products/cs-mild-steel-sheet.jpg',
+    image: '/images/champak/mild-steel-plates-sheets-manufacturer-exporter.jpg',
     specs: ['IS 2062 Grade A/B', 'ASTM A36', 'General Fabrication'],
   },
   {
@@ -891,7 +893,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'S500MC Hot Rolled High Tensile Sheets',
     category: 'Plates & Sheets',
     subCat: 'Carbon Steel Sheets & Plates',
-    image: '/images/products/cs-s500mc-sheet.jpg',
+    image: '/images/champak/s500mc-hot-rolled-high-tensile-sheets.jpg',
     specs: ['EN 10149-2', 'S500MC', 'Cold Forming High Tensile'],
   },
   {
@@ -899,7 +901,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'S550MC Hot Rolled High Tensile Sheets',
     category: 'Plates & Sheets',
     subCat: 'Carbon Steel Sheets & Plates',
-    image: '/images/products/cs-s550mc-sheet.jpg',
+    image: '/images/champak/s550mc-hot-rolled-high-tensile-sheets.jpg',
     specs: ['EN 10149-2', 'S550MC', 'Chassis & Automotive Heavy Sheet'],
   },
 
@@ -909,7 +911,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel 5 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Alloy Steel Sheets & Plates',
-    image: '/images/products/as-grade5-sheet.jpg',
+    image: '/images/champak/sa-387-gr-5-sheets-plates-manufacturer-stockiest-supplier.jpg',
     specs: ['ASTM A387 Grade 5', '5% Cr - 1/2% Mo', 'Boiler Pressure Vessel'],
   },
   {
@@ -917,7 +919,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel 9 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Alloy Steel Sheets & Plates',
-    image: '/images/products/as-grade9-sheet.jpg',
+    image: '/images/champak/sgr9.jpg',
     specs: ['ASTM A387 Grade 9', '9% Cr - 1% Mo', 'High Temp Refinery'],
   },
   {
@@ -925,7 +927,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel 11 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Alloy Steel Sheets & Plates',
-    image: '/images/products/as-grade11-sheet.jpg',
+    image: '/images/champak/sa-387-gr-11-sheets-plates-manufacturer-stockiest-supplier.jpg',
     specs: ['ASTM A387 Grade 11', '1.25% Cr - 0.5% Mo', 'Class 1 & 2'],
   },
   {
@@ -933,7 +935,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel 12 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Alloy Steel Sheets & Plates',
-    image: '/images/products/as-grade12-sheet.jpg',
+    image: '/images/champak/sa-387-gr-5-sheets-plates-manufacturer-stockiest-supplier.jpg',
     specs: ['ASTM A387 Grade 12', '1% Cr - 0.5% Mo', 'Power Station Plates'],
   },
   {
@@ -941,7 +943,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel 22 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Alloy Steel Sheets & Plates',
-    image: '/images/products/as-grade22-sheet.jpg',
+    image: '/images/champak/sgr9.jpg',
     specs: ['ASTM A387 Grade 22', '2.25% Cr - 1% Mo', 'High Boiler Pressure'],
   },
   {
@@ -949,7 +951,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel 91 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Alloy Steel Sheets & Plates',
-    image: '/images/products/as-grade91-sheet.jpg',
+    image: '/images/champak/sa-387-gr-11-sheets-plates-manufacturer-stockiest-supplier.jpg',
     specs: ['ASTM A387 Grade 91', '9% Cr - 1% Mo - V', 'Ultra Thermal Grade'],
   },
 
@@ -1182,7 +1184,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel Round Bars',
     category: 'Round Bars',
     subCat: 'Alloy Steel Round Bars',
-    image: '/images/products/as-bar-general.jpg',
+    image: '/images/champak/alloy-steel-round-bars-rods-supplier-stockist.jpg',
     specs: ['High Tensile Forging Bar', 'AISI 4140 / 4340'],
   },
   {
@@ -1190,7 +1192,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel F1 Round Bars',
     category: 'Round Bars',
     subCat: 'Alloy Steel Round Bars',
-    image: '/images/products/as-f1-bar.jpg',
+    image: '/images/champak/alloy-steel-f1-round-bars-rods-supplier-stockist.jpg',
     specs: ['ASTM A182 Grade F1', 'Carbon-Moly Steel Bar'],
   },
   {
@@ -1198,7 +1200,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel F5 Round Bars',
     category: 'Round Bars',
     subCat: 'Alloy Steel Round Bars',
-    image: '/images/products/as-f5-bar.jpg',
+    image: '/images/champak/alloy-steel-f5-round-bars-rods-supplier-stockist.jpg',
     specs: ['ASTM A182 Grade F5', '5% Cr Alloy Bar'],
   },
   {
@@ -1206,7 +1208,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel F9 Round Bars',
     category: 'Round Bars',
     subCat: 'Alloy Steel Round Bars',
-    image: '/images/products/as-f9-bar.jpg',
+    image: '/images/champak/alloy-steel-f9-round-bars-rods-supplier-stockist.jpg',
     specs: ['ASTM A182 Grade F9', '9% Cr Alloy Bar'],
   },
   {
@@ -1214,7 +1216,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel F11 Round Bars',
     category: 'Round Bars',
     subCat: 'Alloy Steel Round Bars',
-    image: '/images/products/as-f11-bar.jpg',
+    image: '/images/champak/alloy-steel-f11-round-bars-rods-supplier-stockist.jpg',
     specs: ['ASTM A182 Grade F11', '1.25% Cr - 0.5% Mo'],
   },
   {
@@ -1222,7 +1224,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel F12 Round Bars',
     category: 'Round Bars',
     subCat: 'Alloy Steel Round Bars',
-    image: '/images/products/as-f12-bar.jpg',
+    image: '/images/champak/alloy-steel-f12-round-bars-rods-supplier-stockist.jpg',
     specs: ['ASTM A182 Grade F12', '1% Cr - 0.5% Mo'],
   },
   {
@@ -1230,7 +1232,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel F22 Round Bars',
     category: 'Round Bars',
     subCat: 'Alloy Steel Round Bars',
-    image: '/images/products/as-f22-bar.jpg',
+    image: '/images/champak/alloy-steel-f22-round-bars-rods-supplier-stockist.jpg',
     specs: ['ASTM A182 Grade F22', '2.25% Cr - 1% Mo'],
   },
   {
@@ -1238,7 +1240,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel F91 Round Bars',
     category: 'Round Bars',
     subCat: 'Alloy Steel Round Bars',
-    image: '/images/products/as-f91-bar.jpg',
+    image: '/images/champak/alloy-steel-f91-round-bars-rods-supplier-stockist.jpg',
     specs: ['ASTM A182 Grade F91', '9% Cr - 1% Mo - V'],
   },
   {
@@ -1246,7 +1248,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel F92 Round Bars',
     category: 'Round Bars',
     subCat: 'Alloy Steel Round Bars',
-    image: '/images/products/as-f92-bar.jpg',
+    image: '/images/champak/alloy-steel-f92-round-bars-rods-supplier-stockist.jpg',
     specs: ['ASTM A182 Grade F92', 'Ultra High Temp Power Bar'],
   },
 
@@ -1304,7 +1306,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Mild Steel Round Bars',
     category: 'Round Bars',
     subCat: 'Carbon Steel Round Bars',
-    image: '/images/products/cs-mild-steel-bar.jpg',
+    image: '/images/champak/carbon-steel-st-52-round-bars-rods-manufacturer-exporter.jpg',
     specs: ['IS 2062 / EN8 / MS Bright Bar', 'General Engineering'],
   },
   {
@@ -1312,7 +1314,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'High Strength & High Tensile Steel Round Bars',
     category: 'Round Bars',
     subCat: 'Carbon Steel Round Bars',
-    image: '/images/products/cs-high-tensile-bar.jpg',
+    image: '/images/champak/carbon-steel-a36-round-bars-rods-manufacturer-exporter.jpg',
     specs: ['EN19 / EN24 / AISI 4140', 'High Yield Shafting'],
   },
   {
@@ -1320,7 +1322,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Carbon Steel A36 Round Bars',
     category: 'Round Bars',
     subCat: 'Carbon Steel Round Bars',
-    image: '/images/products/cs-a36-bar.jpg',
+    image: '/images/champak/carbon-steel-a36-round-bars-rods-manufacturer-exporter.jpg',
     specs: ['ASTM A36', 'Structural Carbon Steel Bar'],
   },
   {
@@ -1328,7 +1330,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Carbon Steel S355J2+N Round Bars',
     category: 'Round Bars',
     subCat: 'Carbon Steel Round Bars',
-    image: '/images/products/cs-s355-bar.jpg',
+    image: '/images/champak/carbon-steel-s355j2-n-round-bars-rods-manufacturer-exporter.jpg',
     specs: ['EN 10025-2 S355J2+N', 'Normalized Structural Bar'],
   },
   {
@@ -1336,7 +1338,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Carbon Steel ST 52 Round Bars',
     category: 'Round Bars',
     subCat: 'Carbon Steel Round Bars',
-    image: '/images/products/cs-st52-bar.jpg',
+    image: '/images/champak/carbon-steel-st-52-round-bars-rods-manufacturer-exporter.jpg',
     specs: ['DIN 17100 ST52-3', 'High Strength Construction Bar'],
   },
   {
@@ -1344,7 +1346,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Carbon Steel EN 353 Round Bars',
     category: 'Round Bars',
     subCat: 'Carbon Steel Round Bars',
-    image: '/images/products/cs-en353-bar.jpg',
+    image: '/images/champak/carbon-steel-a36-round-bars-rods-manufacturer-exporter.jpg',
     specs: ['EN 353 Case Hardening Alloy Steel Bar', 'Gear Shafting'],
   },
 
@@ -1461,7 +1463,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel F5 / F9 / F11 / F22 / F91 Flanges',
     category: 'Flanges',
     subCat: 'Alloy Steel Flanges',
-    image: '/images/products/alloy-steel-flanges.jpg',
+    image: '/images/champak/alloy-steel-flanges-suppliers-exporters.jpg',
     specs: ['ASTM A182 F11 / F22 / F91', 'Boiler Steam Pipe Joints'],
   },
   {
@@ -1469,7 +1471,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Carbon Steel A105 / A350 LF2 Forged Flanges',
     category: 'Flanges',
     subCat: 'Carbon Steel Flanges',
-    image: '/images/products/cs-flanges.jpg',
+    image: '/images/champak/carbon-steel-flanges-suppliers-exporters.jpg',
     specs: ['ASTM A105 / A350 LF2', 'Low Temp & High Pressure'],
   },
   {
@@ -1535,7 +1537,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Carbon Steel A105 & Alloy Steel F11/F22 Forged Fittings',
     category: 'Forged Fittings',
     subCat: 'Carbon Steel Forged Fittings',
-    image: '/images/products/cs-as-forged-fittings.jpg',
+    image: '/images/champak/carbon-steel-forged-fittings-suppliers-exporters.jpg',
     specs: ['ASTM A105 / A182 F11 / F22 / F91', 'High Temp Power Line'],
   },
 
@@ -1570,7 +1572,7 @@ export const catalogProducts: CatalogProduct[] = [
     id: 'inconel-monel-fasteners',
     title: 'Inconel 625 / 718 & Monel 400 High Temp Studs & Bolts',
     category: 'Fasteners',
-    subCat: 'Inconel Alloy Fasteners',
+    subCat: 'Inconel / Incoloy Fasteners',
     image: '/images/products/inconel-monel-fasteners.jpg',
     specs: ['AMS 5662 / ASTM B164', 'High Temp & Offshore Fasteners'],
   },
@@ -1585,60 +1587,60 @@ export const catalogProducts: CatalogProduct[] = [
 
   // SPECIALIZED PRODUCTS
   // 1. Abrasion Resistant Plates
-  { id: 'abrex-steel-plates', title: 'Abrasion Resistant Steel Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/products/abrex-steel-plates.jpg', specs: ['High Wear Resistance', 'Quenched & Tempered', 'Heavy Machinery Line'] },
-  { id: 'abrex-400-plates', title: 'Abrex 400 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/products/abrex-400-plates.jpg', specs: ['400 HBW Hardness', 'Nippon Steel Grade', 'Wear Resistant'] },
-  { id: 'abrex-450-plates', title: 'Abrex 450 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/products/abrex-450-plates.jpg', specs: ['450 HBW Hardness', 'Mining Equipment Plate'] },
-  { id: 'abrex-500-plates', title: 'Abrex 500 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/products/abrex-500-plates.jpg', specs: ['500 HBW Hardness', 'Chute & Hopper Liners'] },
-  { id: 'abrex-600-plates', title: 'Abrex 600 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/products/abrex-600-plates.jpg', specs: ['600 HBW Ultra Hard Plate', 'Cement Plant Liners'] },
-  { id: 'rockstar-400-plates', title: 'Rockstar 400 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/products/rockstar-400-plates.jpg', specs: ['Essar Rockstar 400', '400 HBW Abrasion Steel'] },
-  { id: 'rockstar-450-plates', title: 'Rockstar 450 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/products/rockstar-450-plates.jpg', specs: ['Essar Rockstar 450', '450 HBW High Toughness'] },
-  { id: 'rockstar-500-plates', title: 'Rockstar 500 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/products/rockstar-500-plates.jpg', specs: ['Essar Rockstar 500', '500 HBW Wear Plate'] },
-  { id: 'ar-400-plates', title: 'AR 400 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/products/ar-400-plates.jpg', specs: ['AR 400 Hardness Steel', 'Excavator Bucket Liners'] },
-  { id: 'ar-450-plates', title: 'AR 450 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/products/ar-450-plates.jpg', specs: ['AR 450 Wear Resistant Steel', 'Quarry Liners'] },
-  { id: 'ar-500-plates', title: 'AR 500 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/products/ar-500-plates.jpg', specs: ['AR 500 Severe Wear Steel', 'Crusher Equipment'] },
-  { id: 'ar-600-plates', title: 'AR 600 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/products/ar-600-plates.jpg', specs: ['AR 600 Max Hardness Steel', 'Extreme Impact Armor'] },
-  { id: 'jfe-eh-plates', title: 'JFE EH 360, 400, 500 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/products/jfe-eh-plates.jpg', specs: ['JFE EVERHARD EH 360 / 400 / 500', 'Japanese Wear Steel'] },
+  { id: 'abrex-steel-plates', title: 'Abrasion Resistant Steel Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/champak/abrex-400-plates.jpg', specs: ['High Wear Resistance', 'Quenched & Tempered', 'Heavy Machinery Line'] },
+  { id: 'abrex-400-plates', title: 'Abrex 400 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/champak/abrex-400-plates.jpg', specs: ['400 HBW Hardness', 'Nippon Steel Grade', 'Wear Resistant'] },
+  { id: 'abrex-450-plates', title: 'Abrex 450 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/champak/abrex-450-plates.jpg', specs: ['450 HBW Hardness', 'Mining Equipment Plate'] },
+  { id: 'abrex-500-plates', title: 'Abrex 500 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/champak/abrex-500-plates.jpg', specs: ['500 HBW Hardness', 'Chute & Hopper Liners'] },
+  { id: 'abrex-600-plates', title: 'Abrex 600 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/champak/abrex-600-plates.jpg', specs: ['600 HBW Ultra Hard Plate', 'Cement Plant Liners'] },
+  { id: 'rockstar-400-plates', title: 'Rockstar 400 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/champak/rockstar-400-plates.jpg', specs: ['Essar Rockstar 400', '400 HBW Abrasion Steel'] },
+  { id: 'rockstar-450-plates', title: 'Rockstar 450 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/champak/rockstar-450-plates.jpg', specs: ['Essar Rockstar 450', '450 HBW High Toughness'] },
+  { id: 'rockstar-500-plates', title: 'Rockstar 500 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/champak/rockstar-500-plates.jpg', specs: ['Essar Rockstar 500', '500 HBW Wear Plate'] },
+  { id: 'ar-400-plates', title: 'AR 400 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/champak/ar-400-plates.jpg', specs: ['AR 400 Hardness Steel', 'Excavator Bucket Liners'] },
+  { id: 'ar-450-plates', title: 'AR 450 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/champak/ar-450-sheets-plates-supplier-stockist.jpg', specs: ['AR 450 Wear Resistant Steel', 'Quarry Liners'] },
+  { id: 'ar-500-plates', title: 'AR 500 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/champak/ar-500-sheets-plates-supplier-stockist.jpg', specs: ['AR 500 Severe Wear Steel', 'Crusher Equipment'] },
+  { id: 'ar-600-plates', title: 'AR 600 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/champak/ar-600-sheets-plates-supplier-stockist.jpg', specs: ['AR 600 Max Hardness Steel', 'Extreme Impact Armor'] },
+  { id: 'jfe-eh-plates', title: 'JFE EH 360, 400, 500 Plates', category: 'Specialized Product', subCat: 'Abrasion Resistant Plates', image: '/images/champak/jfe-eh-360-400-500-abrasion-resistant-sheets-plates-supplier-stockist.jpg', specs: ['JFE EVERHARD EH 360 / 400 / 500', 'Japanese Wear Steel'] },
 
   // 2. Quenched & Tempered Steel
-  { id: 'qt-steel-plates', title: 'Quenched & Tempered Steel Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/products/qt-steel-plates.jpg', specs: ['High Tensile Yield Steel', 'EN 10025-6', 'Crane & Structural Steel'] },
-  { id: 's690ql-plates', title: 'S690ql Sheets & Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/products/s690ql-plates.jpg', specs: ['EN 10025-6 S690QL', '690 MPa Yield Strength', 'High Strength Crane Boom'] },
-  { id: 'weldox-700-plates', title: 'Weldox 700 Sheets & Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/products/weldox-700-plates.jpg', specs: ['SSAB Weldox 700 / Strenx 700', '700 MPa High Yield'] },
-  { id: 'welten-780e-plates', title: 'Welten 780E Sheets & Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/products/welten-780e-plates.jpg', specs: ['Nippon Steel Welten 780E', 'High Yield Structural Plate'] },
-  { id: 'jfe-hiten-780le', title: 'JFE Hiten 780LE Sheets & Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/products/jfe-hiten-780le.jpg', specs: ['JFE HITEN 780LE', 'High Tensile Structural Steel'] },
+  { id: 'qt-steel-plates', title: 'Quenched & Tempered Steel Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/champak/quenched-tempered-steel-plates-supplier-stockist.jpg', specs: ['High Tensile Yield Steel', 'EN 10025-6', 'Crane & Structural Steel'] },
+  { id: 's690ql-plates', title: 'S690ql Sheets & Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/champak/s690ql-steel-sheets-plates-supplier-stockist.jpg', specs: ['EN 10025-6 S690QL', '690 MPa Yield Strength', 'High Strength Crane Boom'] },
+  { id: 'weldox-700-plates', title: 'Weldox 700 Sheets & Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/champak/weldox-700-plates-supplier-stockist.jpg', specs: ['SSAB Weldox 700 / Strenx 700', '700 MPa High Yield'] },
+  { id: 'welten-780e-plates', title: 'Welten 780E Sheets & Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/champak/welten780e-sheets-plates-supplier-stockist.jpg', specs: ['Nippon Steel Welten 780E', 'High Yield Structural Plate'] },
+  { id: 'jfe-hiten-780le', title: 'JFE Hiten 780LE Sheets & Plates', category: 'Specialized Product', subCat: 'Quenched & Tempered Steel', image: '/images/champak/jfe-hiten-780le-sheets-plates-supplier-stockist.jpg', specs: ['JFE HITEN 780LE', 'High Tensile Structural Steel'] },
 
   // 3. Corten Steel
-  { id: 'corten-steel-plates', title: 'Corten Steel Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/products/corten-steel-plates.jpg', specs: ['Atmospheric Corrosion Steel', 'Weathering Steel'] },
-  { id: 'corten-steel-a', title: 'Corten Steel A Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/products/corten-steel-a.jpg', specs: ['ASTM A242 Corten A', 'Architectural Weathering Steel'] },
-  { id: 'corten-steel-b', title: 'Corten Steel B Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/products/corten-steel-b.jpg', specs: ['ASTM A588 Corten B', 'Bridge & Heavy Structural'] },
-  { id: 'corten-a588', title: 'Corten Steel Gr A588 Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/products/corten-a588.jpg', specs: ['ASTM A588 Grade A / B / C', 'High Strength Weathering'] },
-  { id: 'corten-irsm41', title: 'Corten Steel Gr 41 IRSM Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/products/corten-irsm41.jpg', specs: ['IRSM 41-97 Railway Grade', 'Indian Railways Weathering Steel'] },
+  { id: 'corten-steel-plates', title: 'Corten Steel Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/champak/corten-steel-plates.jpg', specs: ['Atmospheric Corrosion Steel', 'Weathering Steel'] },
+  { id: 'corten-steel-a', title: 'Corten Steel A Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/champak/corten-steel-plates.jpg', specs: ['ASTM A242 Corten A', 'Architectural Weathering Steel'] },
+  { id: 'corten-steel-b', title: 'Corten Steel B Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/champak/corten-steel-plates.jpg', specs: ['ASTM A588 Corten B', 'Bridge & Heavy Structural'] },
+  { id: 'corten-a588', title: 'Corten Steel Gr A588 Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/champak/corten-steel-plates.jpg', specs: ['ASTM A588 Grade A / B / C', 'High Strength Weathering'] },
+  { id: 'corten-irsm41', title: 'Corten Steel Gr 41 IRSM Plates', category: 'Specialized Product', subCat: 'Corten Steel', image: '/images/champak/corten-steel-plates.jpg', specs: ['IRSM 41-97 Railway Grade', 'Indian Railways Weathering Steel'] },
 
   // 4. 15Mo3 Steel
-  { id: '15mo3-steel-plates', title: '15Mo3 Steel Plates', category: 'Specialized Product', subCat: '15Mo3 Steel', image: '/images/products/15mo3-steel-plates.jpg', specs: ['DIN 17155 15Mo3', 'EN 10028-2 16Mo3', 'Boiler Quality Steel'] },
+  { id: '15mo3-steel-plates', title: '15Mo3 Steel Plates', category: 'Specialized Product', subCat: '15Mo3 Steel', image: '/images/champak/15Mo3-steel-sheets-plates-supplier-stockist.jpg', specs: ['DIN 17155 15Mo3', 'EN 10028-2 16Mo3', 'Boiler Quality Steel'] },
 
   // 5. 16Mo3 / SA 204 Steel
-  { id: '16mo3-sa204-plates', title: '16Mo3 / SA 204 Steel Plates', category: 'Specialized Product', subCat: '16Mo3 / SA 204 Steel', image: '/images/products/16mo3-sa204-plates.jpg', specs: ['ASTM A204 Grade A / B / C', 'Molybdenum Alloy Pressure Vessel'] },
+  { id: '16mo3-sa204-plates', title: '16Mo3 / SA 204 Steel Plates', category: 'Specialized Product', subCat: '16Mo3 / SA 204 Steel', image: '/images/champak/16Mo3-sa-204-steel-sheets-plates-supplier-stockist.jpg', specs: ['ASTM A204 Grade A / B / C', 'Molybdenum Alloy Pressure Vessel'] },
 
   // 6. Armour Steel
-  { id: 'armour-steel-plates', title: 'Armour Steel Plates', category: 'Specialized Product', subCat: 'Armour Steel', image: '/images/products/armour-steel-plates.jpg', specs: ['Ballistic Protection Armor Plate', 'Defense Grade Steel', 'MIL-DTL Certified'] },
+  { id: 'armour-steel-plates', title: 'Armour Steel Plates', category: 'Specialized Product', subCat: 'Armour Steel', image: '/images/champak/armour-steel-sheets-plates-coils-supplier-stockist.jpg', specs: ['Ballistic Protection Armor Plate', 'Defense Grade Steel', 'MIL-DTL Certified'] },
 
   // 7. DSQ Plates
-  { id: 'dsq-steel-plates', title: 'DSQ Steel Plates', category: 'Specialized Product', subCat: 'DSQ Plates', image: '/images/products/dsq-steel-plates.jpg', specs: ['Deep Drawing Quality Steel Plate', 'IS 2062 E250 / E350'] },
+  { id: 'dsq-steel-plates', title: 'DSQ Steel Plates', category: 'Specialized Product', subCat: 'DSQ Plates', image: '/images/champak/abrex-400-plates.jpg', specs: ['Deep Drawing Quality Steel Plate', 'IS 2062 E250 / E350'] },
 
   // 8. Boiler Steel
-  { id: 'boiler-steel-plates', title: 'Boiler Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/products/boiler-steel-plates.jpg', specs: ['High Pressure Vessel Steel', 'ASTM A516 / ASME SA516'] },
-  { id: 'a516-gr60-plates', title: 'ASTM A516 Grade 60 Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/products/a516-gr60-plates.jpg', specs: ['ASTM A516 Gr 60', 'Low Temp Pressure Vessel'] },
-  { id: 'a516-gr65-plates', title: 'ASTM A516 Grade 65 Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/products/a516-gr65-plates.jpg', specs: ['ASTM A516 Gr 65', 'Moderate & Lower Temp Service'] },
-  { id: 'a516-gr70-plates', title: 'ASTM A516 Grade 70 Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/products/a516-gr70-plates.jpg', specs: ['ASTM A516 Gr 70 / SA 516 Gr 70', 'NACE MR0175 Compliant'] },
-  { id: 'nace-hic-plates', title: 'NACE + HIC Resistant Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/products/nace-hic-plates.jpg', specs: ['Hydrogen Induced Cracking Resistant', 'Sour Oil & Gas Service'] },
+  { id: 'boiler-steel-plates', title: 'Boiler Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/champak/boiler-steel-plates-sheets-supplier-stockist.jpg', specs: ['High Pressure Vessel Steel', 'ASTM A516 / ASME SA516'] },
+  { id: 'a516-gr60-plates', title: 'ASTM A516 Grade 60 Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/champak/boiler-steel-plates-sheets-supplier-stockist.jpg', specs: ['ASTM A516 Gr 60', 'Low Temp Pressure Vessel'] },
+  { id: 'a516-gr65-plates', title: 'ASTM A516 Grade 65 Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/champak/boiler-steel-plates-sheets-supplier-stockist.jpg', specs: ['ASTM A516 Gr 65', 'Moderate & Lower Temp Service'] },
+  { id: 'a516-gr70-plates', title: 'ASTM A516 Grade 70 Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/champak/boiler-steel-plates-sheets-supplier-stockist.jpg', specs: ['ASTM A516 Gr 70 / SA 516 Gr 70', 'NACE MR0175 Compliant'] },
+  { id: 'nace-hic-plates', title: 'NACE + HIC Resistant Steel Plates', category: 'Specialized Product', subCat: 'Boiler Steel', image: '/images/champak/boiler-steel-plates-sheets-supplier-stockist.jpg', specs: ['Hydrogen Induced Cracking Resistant', 'Sour Oil & Gas Service'] },
 
   // 9. Manganese Steel
-  { id: 'manganese-steel-plates', title: 'Manganese Steel Plates', category: 'Specialized Product', subCat: 'Manganese Steel', image: '/images/products/manganese-steel-plates.jpg', specs: ['High Impact Work Hardening Steel'] },
-  { id: 'manganese-1214-plates', title: '12 - 14% Manganese Plates', category: 'Specialized Product', subCat: 'Manganese Steel', image: '/images/products/manganese-1214-plates.jpg', specs: ['12-14% Mn High Hadfield Steel', 'Crusher & Shot Blast Liners'] },
-  { id: 'hadfield-manganese-plates', title: 'Hadfield Manganese Plates', category: 'Specialized Product', subCat: 'Manganese Steel', image: '/images/products/hadfield-manganese-plates.jpg', specs: ['ASTM A128 Grade B2 / B3', 'Austenitic Manganese Steel'] },
+  { id: 'manganese-steel-plates', title: 'Manganese Steel Plates', category: 'Specialized Product', subCat: 'Manganese Steel', image: '/images/champak/manganese-steel-plates-sheets-supplier-stockist.jpg', specs: ['High Impact Work Hardening Steel'] },
+  { id: 'manganese-1214-plates', title: '12 - 14% Manganese Plates', category: 'Specialized Product', subCat: 'Manganese Steel', image: '/images/champak/manganese-steel-plates-sheets-supplier-stockist.jpg', specs: ['12-14% Mn High Hadfield Steel', 'Crusher & Shot Blast Liners'] },
+  { id: 'hadfield-manganese-plates', title: 'Hadfield Manganese Plates', category: 'Specialized Product', subCat: 'Manganese Steel', image: '/images/champak/manganese-steel-plates-sheets-supplier-stockist.jpg', specs: ['ASTM A128 Grade B2 / B3', 'Austenitic Manganese Steel'] },
 
   // 10. Tiscral Sailhard Plates
-  { id: 'tiscral-sailhard-plates', title: 'Tiscral Sailhard Plates', category: 'Specialized Product', subCat: 'Tiscral Sailhard Plates', image: '/images/products/tiscral-sailhard-plates.jpg', specs: ['SAIL SAILHARD Wear Plate', 'TISCRAL High Abrasion Resistance', 'Mining & Earthmoving Steel'] },
+  { id: 'tiscral-sailhard-plates', title: 'Tiscral Sailhard Plates', category: 'Specialized Product', subCat: 'Tiscral Sailhard Plates', image: '/images/champak/tiscral-sailhard-plates.jpg', specs: ['SAIL SAILHARD Wear Plate', 'TISCRAL High Abrasion Resistance', 'Mining & Earthmoving Steel'] },
 
   // GASKETING SOLUTIONS PRODUCTS
   // 1. Asbestos Free (AF) Fibre Jointing Sheets
@@ -1873,7 +1875,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel Welded Pipe',
     category: 'Pipes & Tubes',
     subCat: 'Alloy Steel Welded Pipe',
-    image: '/images/products/alloy-steel-welded-pipe.jpg',
+    image: '/images/champak/alloy-steel-welded-pipe-manufacturer.jpg',
     specs: ['ASTM A691'],
   },
   {
@@ -1953,7 +1955,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel F1 Flanges',
     category: 'Flanges',
     subCat: 'Alloy Steel Flanges',
-    image: '/images/products/alloy-steel-f1-flanges.jpg',
+    image: '/images/champak/alloy-steel-f1-flanges-suppliers-exporters.jpg',
     specs: ['ASTM A182', 'UNS K12822', 'W.Nr. 1.5415'],
   },
   {
@@ -1961,7 +1963,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel F5 Flanges',
     category: 'Flanges',
     subCat: 'Alloy Steel Flanges',
-    image: '/images/products/alloy-steel-f5-flanges.jpg',
+    image: '/images/champak/alloy-steel-f5-flanges-suppliers-exporters.jpg',
     specs: ['ASTM A182', 'UNS K41545', 'W.Nr. 1.7362'],
   },
   {
@@ -1969,7 +1971,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel F9 Flanges',
     category: 'Flanges',
     subCat: 'Alloy Steel Flanges',
-    image: '/images/products/alloy-steel-f9-flanges.jpg',
+    image: '/images/champak/alloy-steel-f9-flanges-suppliers-exporters.jpg',
     specs: ['ASTM A182', 'UNS K90941', 'W.Nr. 1.7386'],
   },
   {
@@ -1977,7 +1979,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel F11 Flanges',
     category: 'Flanges',
     subCat: 'Alloy Steel Flanges',
-    image: '/images/products/alloy-steel-f11-flanges.jpg',
+    image: '/images/champak/alloy-steel-f11-flanges-suppliers-exporters.jpg',
     specs: ['ASTM A182', 'UNS K11597/K11572', 'W.Nr. 1.7335'],
   },
   {
@@ -1985,7 +1987,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel F12 Flanges',
     category: 'Flanges',
     subCat: 'Alloy Steel Flanges',
-    image: '/images/products/alloy-steel-f12-flanges.jpg',
+    image: '/images/champak/alloy-steel-f12-flanges-suppliers-exporters.jpg',
     specs: ['ASTM A182', 'UNS K11562/K11564', 'W.Nr. 1.7335'],
   },
   {
@@ -1993,7 +1995,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel F22 Flanges',
     category: 'Flanges',
     subCat: 'Alloy Steel Flanges',
-    image: '/images/products/alloy-steel-f22-flanges.jpg',
+    image: '/images/champak/alloy-steel-f22-flanges-suppliers-exporters.jpg',
     specs: ['ASTM A182', 'UNS K21590', 'W.Nr. 1.7380'],
   },
   {
@@ -2001,7 +2003,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel F91 Flanges',
     category: 'Flanges',
     subCat: 'Alloy Steel Flanges',
-    image: '/images/products/alloy-steel-f91-flanges.jpg',
+    image: '/images/champak/alloy-steel-f91-flanges-suppliers-exporters.jpg',
     specs: ['ASTM A182', 'UNS K90901', 'W.Nr. 1.4903'],
   },
   {
@@ -2009,7 +2011,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel F92 Flanges',
     category: 'Flanges',
     subCat: 'Alloy Steel Flanges',
-    image: '/images/products/alloy-steel-f92-flanges.jpg',
+    image: '/images/champak/alloy-steel-f92-flanges-suppliers-exporters.jpg',
     specs: ['ASTM A182'],
   },
   {
@@ -2017,7 +2019,9 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy 20 Flanges',
     category: 'Flanges',
     subCat: 'Alloy 20 Flanges',
-    image: '/images/products/alloy-20-flanges.jpg',
+    // products/alloy-20-flanges.jpg is the same photo as products/hastelloy-flanges.jpg
+    // (just a tighter crop), so the two flange cards rendered identically side by side.
+    image: '/images/champak/alloy-20-flanges-supplier-stockist.jpg',
     specs: ['ASTM B363', 'UNS N08020', 'W.Nr. 2.4660'],
   },
   {
@@ -2169,7 +2173,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Carbon Steel Buttweld Fittings',
     category: 'Buttweld Fittings',
     subCat: 'Carbon Steel Buttweld Fittings',
-    image: '/images/products/carbon-steel-buttweld-fittings.jpg',
+    image: '/images/champak/carbon-steel-buttweld-fittings-suppliers-exporters.jpg',
     specs: ['ASTM A234'],
   },
   {
@@ -2177,7 +2181,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel Buttweld Fittings',
     category: 'Buttweld Fittings',
     subCat: 'Alloy Steel Buttweld Fittings',
-    image: '/images/products/alloy-steel-buttweld-fittings.jpg',
+    image: '/images/champak/alloy-steel-buttweld-fittings-suppliers-exporters.jpg',
     specs: ['ASTM A234'],
   },
   {
@@ -2305,7 +2309,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel Forged Fittings',
     category: 'Forged Fittings',
     subCat: 'Alloy Steel Forged Fittings',
-    image: '/images/products/alloy-steel-forged-fittings.jpg',
+    image: '/images/champak/carbon-steel-forged-fittings-suppliers-exporters.jpg',
     specs: ['ASTM A182', 'UNS K12822'],
   },
   {
@@ -2369,7 +2373,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Carbon Steel Fasteners',
     category: 'Fasteners',
     subCat: 'Carbon Steel Fasteners',
-    image: '/images/products/carbon-steel-fasteners.jpg',
+    image: '/images/champak/carbon-steel-fasteners-manufacturer-exporter.jpg',
     specs: ['ASTM A194', 'ASTM A194 Gr 2H'],
   },
   {
@@ -2377,7 +2381,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy Steel Fasteners',
     category: 'Fasteners',
     subCat: 'Alloy Steel Fasteners',
-    image: '/images/products/alloy-steel-fasteners.jpg',
+    image: '/images/champak/alloy-steel-fasteners-suppliers-exporters.jpg',
     specs: ['ASTM A194', 'ASTM A194 Grade'],
   },
   {
@@ -2432,7 +2436,7 @@ export const catalogProducts: CatalogProduct[] = [
     id: 'incoloy-alloy-800-800h-825-fasteners',
     title: 'Incoloy 800/800HT/825 Fasteners',
     category: 'Fasteners',
-    subCat: 'Incoloy Alloy Fasteners',
+    subCat: 'Inconel / Incoloy Fasteners',
     image: '/images/products/incoloy-alloy-800-800h-825-fasteners.jpg',
     specs: ['ASTM B408', 'UNS N08800', 'W.Nr. 1.4876'],
   },
