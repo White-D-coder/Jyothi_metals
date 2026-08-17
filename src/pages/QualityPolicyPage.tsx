@@ -357,7 +357,7 @@ export const QualityPolicyPage: React.FC<QualityPolicyPageProps> = ({ onOpenQuot
 
               <div style={{ position: 'absolute', top: '28px', left: '24px', right: '24px', zIndex: 2 }}>
                 <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#FFFFFF', lineHeight: 1.25, margin: 0, textTransform: 'uppercase', letterSpacing: '0.6px' }}>
-                  {std.code} — {std.title}
+                  {std.code}: {std.title}
                 </h3>
               </div>
 

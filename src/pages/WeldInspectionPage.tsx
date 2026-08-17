@@ -28,7 +28,7 @@ const COLORS = {
 const heroStats = [
   { label: 'NDT Compliance', value: 'ASME Sec V', sub: 'ASNT Level III Inspectors' },
   { label: 'Flaw Threshold', value: '0.1 mm', sub: 'Sub-surface lamination detection' },
-  { label: 'UT Probe Freq', value: '1 – 15 MHz', sub: 'Phased-array multi-element' },
+  { label: 'UT Probe Freq', value: '1 to 15 MHz', sub: 'Phased-array multi-element' },
   { label: 'Hydro Pressure', value: '25,000 PSI', sub: 'Certified pressure bench' },
 ];
 
@@ -53,7 +53,7 @@ const processHighlights = [
 const specifications = [
   { step: 'I', label: 'NDT Standard Compliance', value: 'ASME Sec V, EN ISO 17640, ASTM A388, API 1104, BS EN 10228', image: '/images/quality_lab.jpg' },
   { step: 'II', label: 'Defect Detection Threshold', value: 'Sub-surface inclusions & weld laminations down to 0.1mm', image: '/images/pexels-pppsdavid-5851494.jpg' },
-  { step: 'III', label: 'Probe Technology', value: 'Phased-Array Ultrasonic (PAUT) 1MHz – 15MHz multi-element transducers', image: '/images/pexels-willians-huerta-2157111846-36397988.jpg' },
+  { step: 'III', label: 'Probe Technology', value: 'Phased-Array Ultrasonic (PAUT) 1MHz to 15MHz multi-element transducers', image: '/images/pexels-willians-huerta-2157111846-36397988.jpg' },
   { step: 'IV', label: 'Complementary NDT Methods', value: 'Radiographic (X-Ray), Dye Penetrant (DPT), Magnetic Particle (MPI)', image: '/images/stainless_pipes.png' },
   { step: 'V', label: 'Inspector Certification', value: '100% in-house inspection conducted by ASNT Level II & III certified personnel', image: '/images/pexels-bence-szemerey-337043-6804265.jpg' },
   { step: 'VI', label: 'Documentation Output', value: 'EN 10204 3.1 / 3.2 NDT Inspection Certificate + Digital Scan Records', image: '/images/pexels-jakubzerdzicki-33813584.jpg' },

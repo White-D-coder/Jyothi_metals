@@ -154,7 +154,7 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
                   </a>
                 </p>
                 <p style={{ margin: 0, display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <Clock size={14} color="#64748B" /> Mon – Sat: 9:00 AM – 7:30 PM (IST)
+                  <Clock size={14} color="#64748B" /> Mon to Sat: 9:00 AM to 7:30 PM (IST)
                 </p>
               </div>
             </div>

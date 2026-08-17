@@ -35,7 +35,7 @@ const heroStats = [
 const processHighlights = [
   {
     title: 'Oxide-Free Nitrogen Finish',
-    desc: 'Clean, dross-free edge profile ready for direct welding — no post-cut grinding required.',
+    desc: 'Clean, dross-free edge profile ready for direct welding, with no grinding needed afterwards.',
     icon: Zap,
   },
   {

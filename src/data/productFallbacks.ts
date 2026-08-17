@@ -338,7 +338,7 @@ const STANDARDS: Record<ProductFormKey, Partial<Record<MaterialKey, string>>> = 
     cupronickel: 'ASTM B466 / B467 · ASME SB466',
     aluminium: 'ASTM B210 / B221 / B241',
     carbon: 'ASTM A106 Gr. B / A53 / API 5L · ASME SA106',
-    alloysteel: 'ASTM A335 / A213 · ASME SA335 (P1 – P91)',
+    alloysteel: 'ASTM A335 / A213 · ASME SA335 (P1 to P91)',
   },
   plate: {
     stainless: 'ASTM A240 / A480 · ASME SA240',
@@ -445,7 +445,7 @@ const SPECIALIZED_PROGRAMMES: SpecializedProgramme[] = [
   {
     needle: 'armour',
     standard: 'MIL-DTL-46100 / MIL-DTL-12560 · EN 10025-6',
-    hardness: '480 – 640 HBW ballistic hardness',
+    hardness: '480 to 640 HBW ballistic hardness',
     material: 'Ballistic / armour grade alloy steel',
   },
   {
@@ -463,13 +463,13 @@ const SPECIALIZED_PROGRAMMES: SpecializedProgramme[] = [
   {
     needle: 'manganese',
     standard: 'ASTM A128 Gr. A / B2 / B3 · IS 276',
-    hardness: '200 – 230 HBW as supplied, work hardens to 550 HBW',
+    hardness: '200 to 230 HBW as supplied, work hardens to 550 HBW',
     material: 'Austenitic manganese (Hadfield) steel',
   },
   {
     needle: 'quenched',
     standard: 'EN 10025-6 S690QL / S890QL · Mill standard',
-    hardness: '250 – 350 HBW · 690 – 890 MPa yield',
+    hardness: '250 to 350 HBW · 690 to 890 MPa yield',
     material: 'High yield quenched & tempered alloy steel',
   },
   {
@@ -493,7 +493,7 @@ const SPECIALIZED_PROGRAMMES: SpecializedProgramme[] = [
   {
     needle: 'tiscral',
     standard: 'SAIL SAILHARD / TISCRAL mill standard · IS 3039',
-    hardness: '380 – 450 HBW abrasion resistant',
+    hardness: '380 to 450 HBW abrasion resistant',
     material: 'SAILHARD / TISCRAL abrasion resistant steel',
   },
 ];
@@ -518,7 +518,7 @@ const buildRows = (form: ProductFormKey, material: MaterialKey, subCat: string):
         { label: 'Pipe & Tube Standards', value: standard },
         { label: 'Pipe & Tube Dimensions', value: 'ASTM, ASME, API, DIN, EN & JIS' },
         { label: 'Material', value: materialLabel },
-        { label: 'Outside Diameter', value: '1/8" NB to 30" NB (6.00 mm – 762.00 mm), larger on request' },
+        { label: 'Outside Diameter', value: '1/8" NB to 30" NB (6.00 mm to 762.00 mm), larger on request' },
         { label: 'Wall Thickness', value: '0.3 mm to 50 mm · SCH 5S to SCH XXS' },
         { label: 'Schedule', value: 'SCH 5S, 10S, 20, 40, 40S, 60, 80, 80S, 100, 120, 140, 160, XS & XXS' },
         { label: 'Length', value: 'Single Random, Double Random & cut length' },
@@ -534,7 +534,7 @@ const buildRows = (form: ProductFormKey, material: MaterialKey, subCat: string):
         { label: 'Sheet & Plate Dimensions', value: 'ASTM, ASME, API, DIN, EN & JIS' },
         { label: 'Material', value: materialLabel },
         { label: 'Width', value: '1000 mm, 1219 mm, 1500 mm, 2000 mm, 2500 mm, 3000 mm & custom' },
-        { label: 'Thickness', value: 'Sheet 0.3 mm – 6.0 mm · Plate 3.0 mm – 100 mm (thicker on request)' },
+        { label: 'Thickness', value: 'Sheet 0.3 mm to 6.0 mm · Plate 3.0 mm to 100 mm (thicker on request)' },
         { label: 'Length', value: '2000 mm, 2440 mm, 3000 mm, 5800 mm, 6000 mm & cut length' },
         { label: 'Tolerance', value: 'acc. EN ISO 9445:2006, other on request' },
         {
@@ -861,9 +861,9 @@ export const getScrapedGradeTableData = (title: string): ScrapedGradeTableData =
     return {
       chemHeaders: ['Grade', 'C', 'Mn', 'Si', 'P', 'S', 'Cr', 'Ni', 'Mo', 'N'],
       chemRows: [
-        ['316', '0.08max', '2.0max', '0.75max', '0.045max', '0.03max', 'min: 16.0 max: 18.0', 'min: 10.0 max: 14.0', 'min: 2.0 max: 3.0', '—'],
+        ['316', '0.08max', '2.0max', '0.75max', '0.045max', '0.03max', 'min: 16.0 max: 18.0', 'min: 10.0 max: 14.0', 'min: 2.0 max: 3.0', 'NA'],
         ['316L', '0.03max', '2.0max', '0.75max', '0.045max', '0.03max', 'min: 16.0 max: 18.0', 'min: 10.0 max: 14.0', 'min: 2.0 max: 3.0', '0.10 max'],
-        ['316H', 'min: 0.04 max: 0.10', '2.0max', '0.75max', '0.045max', '0.03max', 'min: 16.0 max: 18.0', 'min: 10.0 max: 14.0', 'min: 2.0 max: 3.0', '—'],
+        ['316H', 'min: 0.04 max: 0.10', '2.0max', '0.75max', '0.045max', '0.03max', 'min: 16.0 max: 18.0', 'min: 10.0 max: 14.0', 'min: 2.0 max: 3.0', 'NA'],
         ['316Ti', '0.08max', '2.0max', '0.75max', '0.045max', '0.03max', 'min: 16.0 max: 18.0', 'min: 10.0 max: 14.0', 'min: 2.0 max: 3.0', 'Ti=5x(C+N)'],
       ],
       mechHeaders: ['Grade', 'Tensile Strength ksi (min)', 'Yield Strength 0.2% ksi (min)', 'Elongation %', 'Hardness (Brinell) MAX', 'Hardness (Rockwell B) MAX'],
@@ -880,7 +880,7 @@ export const getScrapedGradeTableData = (title: string): ScrapedGradeTableData =
     return {
       chemHeaders: ['Grade', 'UNS', 'C', 'Cr', 'Ni', 'Mo', 'N', 'Cu', 'PREN'],
       chemRows: [
-        ['2205', 'S31803 / S32205', '0.03max', 'min: 22.0 max: 23.0', 'min: 4.5 max: 6.5', 'min: 3.0 max: 3.5', 'min: 0.14 max: 0.20', '—', '≥ 34.5'],
+        ['2205', 'S31803 / S32205', '0.03max', 'min: 22.0 max: 23.0', 'min: 4.5 max: 6.5', 'min: 3.0 max: 3.5', 'min: 0.14 max: 0.20', 'NA', '≥ 34.5'],
         ['2507', 'S32750', '0.03max', 'min: 24.0 max: 26.0', 'min: 6.0 max: 8.0', 'min: 3.0 max: 5.0', 'min: 0.24 max: 0.32', '0.50', '≥ 42.0'],
         ['2101', 'S32101', '0.04max', 'min: 21.0 max: 22.0', 'min: 1.35 max: 1.70', 'min: 0.10 max: 0.80', 'min: 0.20 max: 0.25', '0.80 max', '≥ 26.0'],
       ],
@@ -897,8 +897,8 @@ export const getScrapedGradeTableData = (title: string): ScrapedGradeTableData =
     return {
       chemHeaders: ['Grade', 'UNS', 'Ti', 'Al', 'V', 'Fe', 'O', 'C', 'N'],
       chemRows: [
-        ['Ti Gr 1', 'R50250', 'Balance', '—', '—', '0.20max', '0.18max', '0.08max', '0.03max'],
-        ['Ti Gr 2', 'R50400', 'Balance', '—', '—', '0.30max', '0.25max', '0.08max', '0.03max'],
+        ['Ti Gr 1', 'R50250', 'Balance', 'NA', 'NA', '0.20max', '0.18max', '0.08max', '0.03max'],
+        ['Ti Gr 2', 'R50400', 'Balance', 'NA', 'NA', '0.30max', '0.25max', '0.08max', '0.03max'],
         ['Ti Gr 5', 'R56400', 'Balance', 'min: 5.5 max: 6.75', 'min: 3.5 max: 4.5', '0.40max', '0.20max', '0.08max', '0.05max'],
       ],
       mechHeaders: ['Grade', 'Tensile Strength ksi (min)', 'Yield Strength 0.2% ksi (min)', 'Elongation %', 'Hardness (Brinell) MAX', 'Hardness (Rockwell C) MAX'],
@@ -914,10 +914,10 @@ export const getScrapedGradeTableData = (title: string): ScrapedGradeTableData =
     return {
       chemHeaders: ['Grade', 'UNS', 'Ni', 'Cr', 'Mo', 'Nb + Ta', 'Fe', 'C', 'Cu'],
       chemRows: [
-        ['Inconel 600', 'N06600', 'min: 72.0', 'min: 14.0 max: 17.0', '—', '—', 'min: 6.0 max: 10.0', '0.15max', '0.50max'],
-        ['Inconel 625', 'N06625', 'min: 58.0', 'min: 20.0 max: 23.0', 'min: 8.0 max: 10.0', 'min: 3.15 max: 4.15', '5.0max', '0.10max', '—'],
-        ['Incoloy 825', 'N08825', 'min: 38.0 max: 46.0', 'min: 19.5 max: 23.5', 'min: 2.5 max: 3.5', '—', 'min: 22.0', '0.05max', 'min: 1.5 max: 3.0'],
-        ['Hastelloy C276', 'N10276', 'Balance (~57%)', 'min: 14.5 max: 16.5', 'min: 15.0 max: 17.0', '—', 'min: 4.0 max: 7.0', '0.01max', '—'],
+        ['Inconel 600', 'N06600', 'min: 72.0', 'min: 14.0 max: 17.0', 'NA', 'NA', 'min: 6.0 max: 10.0', '0.15max', '0.50max'],
+        ['Inconel 625', 'N06625', 'min: 58.0', 'min: 20.0 max: 23.0', 'min: 8.0 max: 10.0', 'min: 3.15 max: 4.15', '5.0max', '0.10max', 'NA'],
+        ['Incoloy 825', 'N08825', 'min: 38.0 max: 46.0', 'min: 19.5 max: 23.5', 'min: 2.5 max: 3.5', 'NA', 'min: 22.0', '0.05max', 'min: 1.5 max: 3.0'],
+        ['Hastelloy C276', 'N10276', 'Balance (~57%)', 'min: 14.5 max: 16.5', 'min: 15.0 max: 17.0', 'NA', 'min: 4.0 max: 7.0', '0.01max', 'NA'],
       ],
       mechHeaders: ['Grade', 'Tensile Strength ksi (min)', 'Yield Strength 0.2% ksi (min)', 'Elongation %', 'Hardness (Brinell) MAX', 'Hardness (Rockwell B) MAX'],
       mechRows: [
@@ -933,7 +933,7 @@ export const getScrapedGradeTableData = (title: string): ScrapedGradeTableData =
   return {
     chemHeaders: ['Grade', 'C', 'Mn', 'Si', 'P', 'S', 'Cr', 'Ni', 'N'],
     chemRows: [
-      ['304', '0.07max', '2.0max', '0.75max', '0.045max', '0.03max', 'min: 18.0 max: 20.0', 'min: 8.0 max: 10.5', '—'],
+      ['304', '0.07max', '2.0max', '0.75max', '0.045max', '0.03max', 'min: 18.0 max: 20.0', 'min: 8.0 max: 10.5', 'NA'],
       ['304L', '0.03max', '2.0max', '0.75max', '0.045max', '0.03max', 'min: 18.0 max: 20.0', 'min: 8.0 max: 12.0', '0.10 max'],
       // Reproduced verbatim from champaksteel.com — the source seats this row's
       // values under shifted headers. Kept as published to match the live site.

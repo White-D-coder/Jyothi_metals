@@ -38,7 +38,7 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onOpenQuoteModal, onNavigate }
       items: [
         {
           q: 'How do I request a quote?',
-          a: 'You can request a quote in three ways: use the "Get an Instant Quote" button anywhere on this site to submit your requirements online, email your drawings or specifications to our sales desk, or call our engineering team directly. Include the alloy grade, dimensions, quantity and any relevant standards, and our metallurgists will return a detailed, grade-specific quotation — typically within one business day.',
+          a: 'You can request a quote in three ways: use the "Get an Instant Quote" button anywhere on this site to submit your requirements online, email your drawings or specifications to our sales desk, or call our engineering team directly. Include the alloy grade, dimensions, quantity and any relevant standards, and our metallurgists will return a detailed, grade specific quotation, usually within one business day.',
         },
         {
           q: 'What is the minimum order quantity?',
@@ -46,7 +46,7 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onOpenQuoteModal, onNavigate }
         },
         {
           q: 'Do you supply custom / cut-to-size dimensions?',
-          a: 'Yes. Our in-house laser cutting, CNC milling, sawing and waterjet lines let us supply material cut precisely to your CAD files or dimensional list — including profiled blanks, rings, discs and near-net shapes. Cut-to-size supply reduces your machining scrap and inbound handling. Simply send a drawing or a length-width-thickness breakdown and we will quote the finished dimensions directly.',
+          a: 'Yes. Our in-house laser cutting, CNC milling, sawing and waterjet lines let us supply material cut precisely to your CAD files or dimensional list, including profiled blanks, rings, discs and near-net shapes. Cut-to-size supply reduces your machining scrap and inbound handling. Simply send a drawing or a length-width-thickness breakdown and we will quote the finished dimensions directly.',
         },
         {
           q: 'What payment terms do you offer?',
@@ -68,15 +68,15 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onOpenQuoteModal, onNavigate }
         },
         {
           q: 'Can you help me select the right grade for my application?',
-          a: 'Absolutely — grade advisory is a core part of our service. Share your service environment (temperature, pressure, corrosive media), mechanical loads and any code requirements, and our metallurgists will recommend the optimal grade and temper, balancing performance, weldability, machinability and cost. We routinely advise on trade-offs between competing grades so you avoid over-specifying and control your total cost.',
+          a: 'Yes. Grade advisory is a core part of our service. Share your service environment (temperature, pressure, corrosive media), mechanical loads and any code requirements, and our metallurgists will recommend the optimal grade and temper, balancing performance, weldability, machinability and cost. We routinely advise on trade-offs between competing grades so you avoid over-specifying and control your total cost.',
         },
         {
           q: 'Do you provide material equivalents / cross-references?',
-          a: 'Yes. We regularly cross-reference between international standards — ASTM/ASME, EN, DIN, JIS, BS and UNS designations — so you can specify in whichever system your drawings use. If your legacy specification calls out an obsolete or regional grade, we will identify the closest current equivalent and confirm that its chemistry and mechanical properties meet or exceed your original requirement.',
+          a: 'Yes. We regularly cross-reference between international standards such as ASTM/ASME, EN, DIN, JIS, BS and UNS designations, so you can specify in whichever system your drawings use. If your legacy specification calls out an obsolete or regional grade, we will identify the closest current equivalent and confirm that its chemistry and mechanical properties meet or exceed your original requirement.',
         },
         {
           q: 'What size and thickness ranges are available?',
-          a: 'Available dimensions depend on product form. Plate is typically supplied from around 3 mm up to 200 mm thick, sheet and coil in thinner gauges, and round bar from a few millimetres up to large forged diameters. Tube, pipe and structural sections are carried in standard schedules. For requirements outside our standard stock range we can arrange custom rolling, forging or fabrication — just send your dimensions and we will confirm feasibility.',
+          a: 'Available dimensions depend on product form. Plate is typically supplied from around 3 mm up to 200 mm thick, sheet and coil in thinner gauges, and round bar from a few millimetres up to large forged diameters. Tube, pipe and structural sections are carried in standard schedules. For requirements outside our standard stock range we can arrange custom rolling, forging or fabrication. Just send your dimensions and we will confirm feasibility.',
         },
       ],
     },
@@ -90,7 +90,7 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onOpenQuoteModal, onNavigate }
         },
         {
           q: 'What is the difference between EN 10204 3.1 and 3.2?',
-          a: 'Both are inspection certificates reporting actual test results on the delivered material, not merely typical values. A 3.1 certificate is validated by the manufacturer’s own authorised inspection representative, who is independent of the manufacturing department. A 3.2 certificate adds validation by an independent third party — either an authorised inspector nominated in your order or a representative of the responsible authority. Choose 3.2 when your contract or code mandates independent verification.',
+          a: 'Both are inspection certificates reporting actual test results on the delivered material, not merely typical values. A 3.1 certificate is validated by the manufacturer’s own authorised inspection representative, who is independent of the manufacturing department. A 3.2 certificate adds validation by an independent third party, either an authorised inspector nominated in your order or a representative of the responsible authority. Choose 3.2 when your contract or code mandates independent verification.',
         },
         {
           q: 'Are you ISO / AS9100 certified?',
@@ -108,7 +108,7 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onOpenQuoteModal, onNavigate }
       items: [
         {
           q: 'Do you ship internationally?',
-          a: 'Yes, we export worldwide from port-side warehouses and handle the full documentation set — commercial invoice, packing list, certificate of origin and material certificates. We can quote on Ex-Works, FOB, CIF or delivered terms per Incoterms, and coordinate with your nominated freight forwarder or arrange carriage on your behalf.',
+          a: 'Yes, we export worldwide from port-side warehouses and handle the full documentation set: commercial invoice, packing list, certificate of origin and material certificates. We can quote on Ex-Works, FOB, CIF or delivered terms per Incoterms, and coordinate with your nominated freight forwarder or arrange carriage on your behalf.',
         },
         {
           q: 'What are typical lead times?',
@@ -120,7 +120,7 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onOpenQuoteModal, onNavigate }
         },
         {
           q: 'Can you handle urgent / expedited orders?',
-          a: 'Yes. For time-critical breakdowns and production stoppages we offer expedited processing and priority dispatch on ex-stock material, and can arrange air freight where the schedule justifies it. Flag your requirement as urgent when you enquire — or call our team directly — and we will prioritise cutting, certification and shipping to hit your deadline.',
+          a: 'Yes. For time-critical breakdowns and production stoppages we offer expedited processing and priority dispatch on ex-stock material, and can arrange air freight where the schedule justifies it. Flag your requirement as urgent when you enquire, or call our team directly, and we will prioritise cutting, certification and shipping to hit your deadline.',
         },
       ],
     },
@@ -423,7 +423,7 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onOpenQuoteModal, onNavigate }
             </h2>
             <p style={{ fontSize: '1.1rem', color: '#cbd5e1', lineHeight: 1.7, marginBottom: '36px' }}>
               If your question isn&apos;t covered above, our engineering team is ready to help with
-              grade selection, certification requirements and custom orders — usually within one
+              grade selection, certification requirements and custom orders, usually within one
               business day.
             </p>
             <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', flexWrap: 'wrap' }}>

@@ -258,7 +258,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenQuoteModal, on
               A Proven Five-Stage Engineering Workflow
             </h2>
             <p style={{ color: '#64748b', fontSize: '1.05rem', lineHeight: 1.7 }}>
-              Every project moves through a disciplined, transparent process — so you always know exactly where
+              Every project moves through a disciplined, transparent process, so you always know exactly where
               your order stands from first consultation to final dispatch.
             </p>
           </div>
@@ -405,7 +405,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenQuoteModal, on
               </h2>
               <p style={{ fontSize: '1.05rem', color: '#475569', lineHeight: 1.7, marginBottom: '28px' }}>
                 Because forging, machining, treatment and testing all happen under our own roof, we eliminate
-                subcontractor handoffs — protecting quality, traceability and lead times on even the most
+                subcontractor handoffs. This protects quality, traceability and lead times on even the most
                 demanding aerospace and defense contracts.
               </p>
 
@@ -453,7 +453,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenQuoteModal, on
             </h2>
             <p style={{ fontSize: '1.1rem', color: '#cbd5e1', lineHeight: 1.7, marginBottom: '40px' }}>
               Share your drawings or specifications and our engineering team will return a detailed,
-              grade-specific quote — typically within one business day.
+              grade specific quote, usually within one business day.
             </p>
             <div
               style={{ display: 'flex', justifyContent: 'center', gap: '16px', flexWrap: 'wrap' }}

@@ -27,7 +27,7 @@ const COLORS = {
 
 const heroStats = [
   { label: 'Press Capacity', value: '2,500 T', sub: 'Hydraulic open die press' },
-  { label: 'Piece Weight', value: '0.5 – 8 T', sub: 'Single forged component' },
+  { label: 'Piece Weight', value: '0.5 to 8 T', sub: 'Single forged component' },
   { label: 'Forging Ratio', value: '4:1 Min', sub: 'Verified grain refinement' },
   { label: 'Alloy Coverage', value: '200+ Grades', sub: 'Stainless, Duplex & Nickel' },
 ];
@@ -541,7 +541,7 @@ export const ForgingPage: React.FC<ForgingPageProps> = ({ onOpenQuoteModal }) =>
             Need a Custom Forging to Drawing?
           </h2>
           <p style={{ color: COLORS.textMuted, fontSize: '1.02rem', lineHeight: 1.65, marginBottom: '32px' }}>
-            Send us your drawing, grade and service conditions — our forge engineers will advise on the forging route, tooling and heat treatment.
+            Send us your drawing, grade and service conditions. Our forge engineers will advise on the forging route, tooling and heat treatment.
           </p>
 
           <div style={{ display: 'flex', justifyContent: 'center', gap: '14px', flexWrap: 'wrap' }}>

@@ -246,7 +246,7 @@ export const CareersPage: React.FC<CareersPageProps> = ({ onOpenQuoteModal, onNa
               A Culture Engineered for Craftspeople
             </h2>
             <p style={{ color: '#64748b', fontSize: '1.05rem', lineHeight: 1.7 }}>
-              We invest in the people behind the metal — pairing world-class equipment with mentorship,
+              We invest in the people behind the metal, pairing good equipment with mentorship,
               certification and an uncompromising commitment to safety.
             </p>
           </div>

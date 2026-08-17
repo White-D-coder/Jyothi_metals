@@ -12,42 +12,38 @@ interface AboutPageProps {
   onOpenQuoteModal: (productName?: string) => void;
 }
 
+/*
+ * Milestones are kept to what the company can actually show on paper:
+ *   - the Khushkhera (Alwar) tube mill and its 5,000 TPA capacity — cert1.pdf
+ *   - the three ISO certificates, their scope, numbers and dates — the QCC
+ *     certificates in the repo root (ISO - JYOTI METAL INDIA *.jpeg)
+ * Do not add years for plant, capacity or approvals that have no certificate
+ * or brochure behind them.
+ */
 const timelineMilestones = [
   {
     year: '1989',
-    title: 'Foundation & Regional Foundry Hub',
-    desc: 'Established as a specialized stockist and processor in India supplying precision stainless steel pipes, fittings and flanges to domestic oil refineries and chemical plants with 100% heat-lot chemistry tracking.',
-    image: '/images/heavy_rolling_mill.jpg',
+    title: 'Business Started',
+    desc: 'Jyoti Metal (India) started work from Mumbai as a supplier and stockist of stainless steel and other metals. From the first year itself, the aim was simple. Give the customer correct material, at the correct time, with proper papers.',
+    image: '/images/plant/size-range-stock.jpg',
   },
   {
-    year: '2004',
-    title: 'ISO 9001:2015 Quality Accreditation',
-    desc: 'Achieved full ISO accreditation and introduced computer-guided ultrasonic non-destructive testing vaults across all production lines.',
-    image: '/images/quality_lab.jpg',
+    year: '2009',
+    title: 'Own Tube Mill at Alwar, Rajasthan',
+    desc: 'Our own stainless steel pipe and tube plant started at Plot E-41 (G-1), RIICO Industrial Area, Khushkhera, Distt. Alwar, Rajasthan. Installed capacity is 5,000 tonnes per year. The line is fully automatic and runs to ASTM standards.',
+    image: '/images/plant/plant-overview.jpg',
   },
   {
-    year: '2012',
-    title: 'Aerospace & Defense Titanium Expansion',
-    desc: 'Commissioned titanium and nickel superalloy vacuum arc remelting (VAR) furnaces, securing AS9100D aerospace certification for Tier-1 defense turbine contractors.',
-    image: '/images/titanium_plates.png',
+    year: '2019',
+    title: 'Three ISO Certificates Received',
+    desc: 'On 18 June 2019 we received ISO 9001:2015 for quality, ISO 14001:2015 for environment and ISO 45001:2018 for health and safety. All three cover both our Mumbai office and our Alwar plant.',
+    image: '/images/plant/inspection-packaging.jpg',
   },
   {
-    year: '2020',
-    title: '98% Circular Electric Arc Recycling',
-    desc: 'Transitioned melt shop operations to 98% circular scrap recycling and zero-discharge closed-loop water treatment systems with official EPD Environmental Declarations.',
-    image: '/images/round_bars.png',
-  },
-  {
-    year: '2024',
-    title: 'Multi-Axis CNC Laser Cell Integration',
-    desc: 'Expanded fabrication floor area to 120,000 m² with 6kW & 12kW fiber optic CNC laser cutting lines for sub-micron kerf edge tolerance component manufacturing.',
-    image: '/images/cnc_laser_blue.jpg',
-  },
-  {
-    year: '2026',
-    title: 'Global Aerospace Stock Warehouse Expansion',
-    desc: 'Established strategic stock holding hubs across Europe and North America guaranteeing 48-hour container dispatch on EN 10204 3.2 certified stock.',
-    image: '/images/structural_beams.png',
+    year: '2025',
+    title: 'All Certificates Renewed up to 2028',
+    desc: 'All three ISO certificates were re-issued on 10 June 2025 and are valid up to 9 June 2028. Certificate status can be checked online with the certifying body.',
+    image: '/images/plant/annealing-line.jpg',
   },
 ];
 
@@ -62,80 +58,80 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
    * is reachable without scrolling through a milestone-per-viewport.
    */
 
+  /* The four pillars follow the certified scope word for word: manufacturer of
+     S.S. pipes & tubes; supplier, stockist, importer & exporter of all kinds of
+     ferrous & non-ferrous metals. */
   const executivePillars = [
     {
       num: 'I',
-      title: 'PRIMARY MELT & SPECTROGRAPHIC CONTROL',
-      desc: 'Dual-shell Electric Arc Furnaces (EAF) paired with AOD secondary decarburization vessels to achieve sub-ppm gas purity and 100% spectral chemistry verification.',
-      image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
+      title: 'OUR OWN PIPE & TUBE PLANT',
+      desc: 'We make stainless steel pipes and tubes at our own plant in Alwar, Rajasthan. Capacity is 5,000 tonnes per year.',
+      image: '/images/plant/plant-overview.jpg',
       icon: Cpu,
-      tag: 'EAF & AOD REFINING',
+      tag: 'MANUFACTURING',
     },
     {
       num: 'II',
-      title: 'SUB-MICRON CNC LASER FABRICATION',
-      desc: 'High-power fiber optic CNC laser cutting lines and automated cold rolling mills guaranteeing sub-micron kerf edge tolerances for defense assemblies.',
-      image: '/images/pexels-bence-szemerey-337043-6804265.jpg',
+      title: 'READY STOCK IN MUMBAI',
+      desc: 'We keep ready stock of ferrous and non-ferrous metal. Small quantity or full lot, material can be given quickly.',
+      image: '/images/plant/size-range-stock.jpg',
       icon: Zap,
-      tag: 'CNC LASER CELL',
+      tag: 'STOCKIST & SUPPLY',
     },
     {
       num: 'III',
-      title: 'AS9100D AEROSPACE & DEFENSE QA',
-      desc: 'Phased-array ultrasonic volumetric scanning, high-energy X-ray radiography, and EN 10204 3.2 third-party witnessed mill test certificates.',
-      image: '/images/pexels-willians-huerta-2157111846-36397988.jpg',
+      title: 'TESTING BEFORE DISPATCH',
+      desc: 'Every piece is checked before packing. Test certificate and other papers go along with the material.',
+      image: '/images/plant/inspection-packaging.jpg',
       icon: ShieldCheck,
-      tag: 'AS9100D ACCREDITED',
+      tag: 'QUALITY CHECK',
     },
     {
       num: 'IV',
-      title: '48H GLOBAL LOGISTICS & TRACEABILITY',
-      desc: 'Strategic port stock hubs in Asia, Europe, and North America guaranteeing 48-hour container dispatch with QR-etched heat-lot tracking.',
-      image: '/images/pexels-jakubzerdzicki-33813584.jpg',
+      title: 'IMPORT & EXPORT',
+      desc: 'We import and export all kinds of ferrous and non-ferrous metal, and supply to customers in India and outside.',
+      image: '/images/plant/decoiler-coil-line.jpg',
       icon: Globe2,
-      tag: '48H DISPATCH SLA',
+      tag: 'INDIA & ABROAD',
     },
   ];
 
+  /* These three are the only certificates the company holds. Scans are in
+     public/images/certificates/ and the originals in the repo root. Numbers and
+     dates are copied from the certificates — do not edit without a new scan. */
   const certifications = [
     {
       code: 'ISO 9001:2015',
-      title: 'Quality Management Systems',
-      desc: 'Complete process control across raw melt, rolling, machining, and dispatch.',
-      image: '/images/precision_parts.png',
-    },
-    {
-      code: 'AS9100D / EN 9100',
-      title: 'Aerospace & Defense Quality',
-      desc: 'Sub-micron tolerance airframe and turbine components for defense contractors.',
-      image: '/images/industrial_facility.png',
-    },
-    {
-      code: 'PED 2014/68/EU',
-      title: 'Pressure Equipment Directive',
-      desc: 'Certified manufacturing for high-pressure oil, gas, and nuclear pipelines.',
-      image: '/images/flanges_industrial.png',
+      title: 'Quality Management System',
+      desc: 'Cert. No. QMS/010898/0619, valid up to 9 June 2028',
+      image: '/images/plant/inspection-packaging.jpg',
     },
     {
       code: 'ISO 14001:2015',
-      title: 'Environmental Management',
-      desc: 'Zero-discharge melt shop operations and circular alloy scrap recycling.',
-      image: '/images/stainless_pipes.png',
+      title: 'Environmental Management System',
+      desc: 'Cert. No. EMS/010896/0619, valid up to 9 June 2028',
+      image: '/images/plant/plant-overview.jpg',
+    },
+    {
+      code: 'ISO 45001:2018',
+      title: 'Occupational Health and Safety',
+      desc: 'Cert. No. OHS/010897/0619, valid up to 9 June 2028',
+      image: '/images/plant/polishing-line.jpg',
     },
   ];
 
   const legacyPillars = [
     {
       title: 'Our Mission',
-      desc: 'To supply flawless, fully certified metal products to customers worldwide — every order backed by test reports, delivered on time, and made without cutting corners.',
+      desc: 'To give the customer correct material at the correct time, with full test certificate and papers, at a fair rate.',
     },
     {
       title: 'Our Vision',
-      desc: 'To be the name customers everywhere trust first for quality alloys, structural steel, and custom-made metal parts.',
+      desc: 'To be the first name a customer thinks of when he needs stainless steel pipes, tubes and other metal, in India and outside.',
     },
     {
-      title: 'Core Values',
-      desc: 'Pure, tested material. Proper certificates with every order. Delivery when we promise it. And a cleaner way of making steel.',
+      title: 'How We Work',
+      desc: 'Right grade, right size. Proper testing. Delivery on the promised date. Clear rate, no hidden charges.',
     },
   ];
 
@@ -426,11 +422,12 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                 letterSpacing: '0.6px',
               }}
             >
-              About Jyoti Metal India
+              About Jyoti Metal (India)
             </h1>
 
             <p style={{ fontSize: '1.08rem', color: '#CBD5E1', lineHeight: 1.65, marginBottom: '28px', letterSpacing: '0.3px' }}>
-              Over three decades of metallurgical expertise, certified zero-defect alloy processing, and high-yield precision fabrication for global aerospace, defense, and nuclear contracts.
+              We make stainless steel pipes and tubes at our own plant. We also supply, stock, import
+              and export all kinds of ferrous and non-ferrous metal. Working in this line since 1989.
             </p>
 
             <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
@@ -453,18 +450,24 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
           <div className="feature-split-grid">
             <div>
               <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#588078', letterSpacing: '0.8px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
-                OUR METALLURGICAL LEGACY
+                WHO WE ARE
               </span>
               <h2 style={{ fontSize: 'clamp(1.8rem, 2.8vw, 2.4rem)', fontWeight: 700, color: '#0F172A', marginBottom: '24px', lineHeight: 1.2 }}>
-                Engineering Trust &amp; Metallurgical Excellence Since 1989
+                In the Steel Line Since 1989
               </h2>
 
               <p style={{ fontSize: '1.02rem', color: '#475569', lineHeight: 1.7, margin: '0 0 20px 0' }}>
-                Founded in 1989, Jyoti Metal India has evolved into one of the country&rsquo;s most reliable manufacturers, stockists, and global exporters of high-grade Stainless Steel, Nickel Alloys, Titanium, Duplex, Carbon Steel, Gasketing Solutions, and Structural Steel products.
+                Jyoti Metal (India) is a manufacturer of stainless steel pipes and tubes. We are also
+                a supplier, stockist, importer and exporter of all kinds of ferrous and non-ferrous
+                metal. Our office is in Mumbai and our plant is at Khushkhera, Distt. Alwar, Rajasthan.
               </p>
 
               <p style={{ fontSize: '1.02rem', color: '#475569', lineHeight: 1.7, margin: 0 }}>
-                Operating advanced forging, rolling and CNC laser fabrication units certified under ISO 9001:2015, we maintain 100% heat-lot chemistry traceability to serve critical defense, aerospace, nuclear power, oil &amp; gas, and heavy infrastructure sectors worldwide.
+                We supply stainless steel, nickel alloy, titanium, duplex, carbon steel, structural
+                steel, flanges, fittings, fasteners and gasketing items. Material is used in chemical
+                plants, refineries, pharma, dairy and food plants, water and power projects, railways,
+                automobile work, and building and architectural work. Every lot is checked before
+                dispatch and sent with proper test certificate.
               </p>
             </div>
 
@@ -512,13 +515,13 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
             <div className="timeline-col">
               <div style={{ marginBottom: '24px' }}>
                 <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#588078', letterSpacing: '0.8px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
-                  HERITAGE &amp; EVOLUTION
+                OUR JOURNEY
                 </span>
                 <h2 style={{ fontSize: 'clamp(1.5rem, 2.4vw, 2.1rem)', fontWeight: 800, color: '#304050', marginBottom: '8px', lineHeight: 1.25 }}>
-                  Our Growth &amp; Engineering Timeline
+                  How the Company Has Grown
                 </h2>
                 <p style={{ color: '#7C8894', fontSize: '0.92rem', margin: 0 }}>
-                  Select a year to explore our 37-year metallurgical journey (1989 – 2026).
+                  Click on any year to see what happened (1989 to 2025).
                 </p>
               </div>
 
@@ -566,17 +569,17 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
               </div>
             </div>
 
-            {/* RIGHT COLUMN: Four Pillars of Metallurgical Excellence (2x2 Grid, Title beside Number, No Images) */}
+            {/* RIGHT COLUMN: Four main strengths (2x2 Grid, Title beside Number, No Images) */}
             <div>
               <div style={{ marginBottom: '24px' }}>
                 <span style={{ color: '#588078', fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.8px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
-                  OPERATIONAL CORE
+                  WHAT WE DO
                 </span>
                 <h2 style={{ fontSize: 'clamp(1.5rem, 2.4vw, 2.1rem)', fontWeight: 800, color: '#304050', marginBottom: '8px', lineHeight: 1.25 }}>
-                  Four Pillars of Metallurgical Excellence
+                  Our Four Main Strengths
                 </h2>
                 <p style={{ fontSize: '0.92rem', color: '#7C8894', margin: 0 }}>
-                  Vertically integrated foundry capabilities and certified quality systems.
+                  Making, stocking, checking and supplying. All four are handled by us.
                 </p>
               </div>
 
@@ -655,13 +658,15 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
         <div className="container" style={{ maxWidth: '1350px', margin: '0 auto', padding: '0 24px' }}>
           <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 56px' }}>
             <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#588078', letterSpacing: '0.8px', textTransform: 'uppercase', display: 'block', marginBottom: '10px' }}>
-              GLOBAL ACCREDITATION
+              OUR CERTIFICATES
             </span>
             <h2 style={{ fontSize: 'clamp(1.9rem, 3.4vw, 2.5rem)', fontWeight: 800, color: '#304050', marginBottom: '14px', letterSpacing: '0.6px' }}>
-              International Metallurgical Certifications
+              We Are an ISO Certified Company
             </h2>
             <p style={{ color: '#7C8894', fontSize: '1.02rem', lineHeight: 1.65, margin: 0 }}>
-              Every alloy consignment carries official Mill Test Certificates (MTC) compliant with EN 10204 3.1 &amp; 3.2 standards.
+              Certified scope: manufacturer of S.S. pipes &amp; tubes; supplier, stockist, importer
+              and exporter of all kinds of ferrous and non-ferrous metals. Mill Test Certificate is
+              given with every consignment.
             </p>
           </div>
 
@@ -723,6 +728,19 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                   >
                     {cert.title}
                   </div>
+
+                  {/* Certificate number and validity — the detail a buyer checks. */}
+                  <div
+                    style={{
+                      fontSize: '0.78rem',
+                      fontWeight: 600,
+                      color: '#94A3B8',
+                      marginTop: '8px',
+                      letterSpacing: '0.2px',
+                    }}
+                  >
+                    {cert.desc}
+                  </div>
                 </div>
               </div>
             ))}
@@ -735,13 +753,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
         <div className="container" style={{ maxWidth: '1050px', margin: '0 auto', padding: '0 20px' }}>
           <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 40px' }}>
             <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#588078', letterSpacing: '0.8px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
-              EXECUTIVE LEADERSHIP
+              OUR TEAM
             </span>
             <h2 style={{ fontSize: 'clamp(1.8rem, 3.2vw, 2.3rem)', fontWeight: 800, color: '#304050', marginBottom: '12px' }}>
-              Guided by Decades of Metallurgical Vision
+              Who You Will Deal With
             </h2>
             <p style={{ color: '#7C8894', fontSize: '1rem', lineHeight: 1.6 }}>
-              Under the strategic leadership of Dhawal Choudhary &amp; Dinesh Choudhary, Jyoti Metal (India) has expanded from a regional foundry to a premier global supplier of high-precision stainless steel and specialty alloys.
+              The company is run by Dhawal Choudhary and Dinesh Choudhary. For any enquiry, rate or
+              delivery matter, you can call them directly on the numbers given below.
             </p>
           </div>
 
@@ -757,7 +776,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                 Mob: <a href="tel:+919322281549" style={{ color: '#588078', textDecoration: 'none' }}>+91 9322281549</a> / <a href="tel:+919137880994" style={{ color: '#588078', textDecoration: 'none' }}>+91 9137880994</a>
               </div>
               <p style={{ fontSize: '0.92rem', color: '#64748B', lineHeight: 1.65, margin: 0 }}>
-                Spearheading enterprise supply logistics, international client relations, and quality management systems across aerospace and energy sectors.
+                Looks after supply and dispatch, customer dealing in India and abroad, and the
+                quality system.
               </p>
             </div>
 
@@ -772,7 +792,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                 Mob: <a href="tel:+919769388813" style={{ color: '#588078', textDecoration: 'none' }}>+91 9769388813</a> / <a href="tel:+919082886991" style={{ color: '#588078', textDecoration: 'none' }}>+91 9082886991</a>
               </div>
               <p style={{ fontSize: '0.92rem', color: '#64748B', lineHeight: 1.65, margin: 0 }}>
-                Directing metallurgical R&amp;D, continuous arc furnace infrastructure, and strategic manufacturing expansion (including our Alwar Rajasthan plant facility).
+                Looks after the Alwar plant, production planning and purchase of raw material.
               </p>
             </div>
           </div>
@@ -790,10 +810,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
       >
         <div className="container" style={{ maxWidth: '760px', margin: '0 auto', padding: '0 20px' }}>
           <h2 style={{ fontSize: 'clamp(1.8rem, 3.4vw, 2.3rem)', fontWeight: 700, color: '#304050', marginBottom: '14px', lineHeight: 1.25, letterSpacing: '0.6px' }}>
-            Partner with Jyoti Metal India
+            Send Us Your Requirement
           </h2>
           <p style={{ color: '#7C8894', fontSize: '1.02rem', lineHeight: 1.65, marginBottom: '32px' }}>
-            Discuss your material requirements, custom extrusion profiles, or third-party witnessed testing with our QA engineers.
+            Tell us the grade, size and quantity you need. We will check the stock and send you the
+            rate and delivery time.
           </p>
 
           <div style={{ display: 'flex', justifyContent: 'center', gap: '14px', flexWrap: 'wrap' }}>

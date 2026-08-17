@@ -1,4 +1,4 @@
-import { useEffect, useState, lazy, Suspense } from 'react';
+import { useLayoutEffect, useState, lazy, Suspense } from 'react';
 import { Routes, Route, useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
@@ -35,11 +35,25 @@ const pathToTab = (pathname: string): string => {
   return pathname.slice(1);
 };
 
-// Scroll to top whenever the route changes (mirrors the old per-click scroll).
+// Jump to the top whenever the route changes, so a new page always opens at its
+// hero rather than wherever the previous page was scrolled to.
+//
+// This must be an INSTANT jump, not a smooth one. Navigating from the bottom of
+// a long page (e.g. "View Details" at the foot of /products) would otherwise
+// render the new page already scrolled to its footer and then visibly animate
+// all the way up. Two things have to be defeated for that:
+//   1. behavior: 'smooth' here, and
+//   2. `html { scroll-behavior: smooth }` in index.css — which also applies to
+//      the plain window.scrollTo(0, 0) form, so an inline override is needed.
+// useLayoutEffect runs before paint, so the jump is never rendered.
 function ScrollToTop() {
   const { pathname } = useLocation();
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  useLayoutEffect(() => {
+    const html = document.documentElement;
+    const previous = html.style.scrollBehavior;
+    html.style.scrollBehavior = 'auto';
+    window.scrollTo(0, 0);
+    html.style.scrollBehavior = previous;
   }, [pathname]);
   return null;
 }

@@ -90,7 +90,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
       reverse: false,
       logos: [
         { src: '/images/logos/tpi/tuv-sud.png', alt: 'TÜV SÜD South Asia' },
-        { src: '/images/logos/tpi/tuv-india.png', alt: 'TÜV India — TÜV NORD Group' },
+        { src: '/images/logos/tpi/tuv-india.png', alt: 'TUV India, TUV NORD Group' },
         { src: '/images/logos/tpi/sgs.png', alt: 'SGS' },
         { src: '/images/logos/tpi/tuv-rheinland.png', alt: 'TÜV Rheinland' },
         { src: '/images/logos/tpi/tcs.png', alt: 'Tata Consultancy Services' },
@@ -139,8 +139,8 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
         { src: '/images/logos/sources/jindal-steel-power.png', alt: 'Jindal Steel & Power' },
         { src: '/images/logos/sources/jindal-stainless.png', alt: 'Jindal Stainless (JSL)' },
         { src: '/images/logos/sources/sail.png', alt: 'Steel Authority of India (SAIL)' },
-        { src: '/images/logos/sources/vizag-steel.png', alt: 'Vizag Steel — RINL' },
-        { src: '/images/logos/sources/mukand.png', alt: 'Mukand Ltd — Bajaj Group' },
+        { src: '/images/logos/sources/vizag-steel.png', alt: 'Vizag Steel, RINL' },
+        { src: '/images/logos/sources/mukand.png', alt: 'Mukand Ltd, Bajaj Group' },
         { src: '/images/logos/sources/viraj.png', alt: 'Viraj Profiles' },
         { src: '/images/logos/sources/maharashtra-seamless.png', alt: 'Maharashtra Seamless Limited' },
         { src: '/images/logos/sources/venus-pipes.png', alt: 'Venus Pipes and Tubes' },
@@ -1923,7 +1923,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
             <div style={{ width: '60px', height: '4px', background: '#51847D', margin: '0 auto 16px' }} />
             <p style={{ color: '#475569', fontSize: '1.05rem', lineHeight: 1.6 }}>
               From refinery and petrochemical process lines to defence, power and heavy
-              engineering — our certified stock is specified wherever material failure is not an option.
+              engineering. Our certified stock is specified wherever material failure is not an option.
             </p>
           </div>
 
