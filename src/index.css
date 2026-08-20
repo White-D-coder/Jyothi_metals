@@ -548,7 +548,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-weight: 900;
   font-size: 1.35rem;
-  color: #0f172a;
+  color: #51847D;
   line-height: 1;
   letter-spacing: -0.01em;
 }
@@ -556,7 +556,7 @@ h1, h2, h3, h4, h5, h6 {
 .brand-subtitle-text {
   font-size: 0.65rem;
   font-weight: 800;
-  color: #51847D;
+  color: #0f172a;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   margin-top: 3px;
@@ -2743,4 +2743,299 @@ img,
   .pp-media img,
   .pp-media-scrim,
   .pp-media-caption { transition: none; }
+}
+
+/* ============================================================
+   LIVE METAL PRICE TICKER (Home Page)
+   Dark exchange-board strip that sits between the stats bar and
+   the engineering feature section. Sharp corners throughout, per
+   the global zero-radius directive.
+   ============================================================ */
+.metal-ticker {
+  background: #061221;
+  background-image:
+    radial-gradient(circle at 12% 0%, rgba(81, 132, 125, 0.28), transparent 55%),
+    radial-gradient(circle at 88% 100%, rgba(119, 184, 176, 0.16), transparent 50%);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 3px solid #51847D;
+  padding: 42px 0 38px;
+}
+
+.metal-ticker-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 26px;
+}
+
+.metal-ticker-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #77b8b0;
+  margin-bottom: 6px;
+}
+
+/* Breathing dot — the only motion in the strip, so "live" reads without
+   animating the numbers themselves. */
+.metal-ticker-pulse {
+  width: 8px;
+  height: 8px;
+  background: #4ade80;
+  box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7);
+  animation: metalTickerPulse 2s infinite;
+}
+
+@keyframes metalTickerPulse {
+  0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
+  70% { box-shadow: 0 0 0 7px rgba(74, 222, 128, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+}
+
+.metal-ticker-title {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  color: #ffffff;
+  margin: 0;
+}
+
+.metal-ticker-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+.metal-ticker-meta svg {
+  color: #77b8b0;
+  flex-shrink: 0;
+}
+
+.metal-ticker-stamp {
+  padding: 3px 9px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  color: #cbd5e1;
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+}
+
+.metal-ticker-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Cards share hairline gutters so the block reads as one trading board
+   rather than five detached tiles. */
+.metal-price-card {
+  position: relative;
+  background: #0b1b2e;
+  padding: 18px 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: background 0.25s ease;
+}
+
+.metal-price-card:hover {
+  background: #102541;
+}
+
+.metal-price-top {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.metal-price-symbol {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  height: 22px;
+  padding: 0 5px;
+  background: #51847D;
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
+.metal-price-name {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #e2e8f0;
+}
+
+.metal-price-value {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 900;
+  line-height: 1.05;
+  color: #ffffff;
+  font-variant-numeric: tabular-nums;
+}
+
+.metal-price-currency {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #77b8b0;
+  margin-right: 2px;
+}
+
+.metal-price-unit {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #7d8ea3;
+  margin-left: 4px;
+  letter-spacing: 0.04em;
+}
+
+.metal-price-inr {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #cbd5e1;
+  font-variant-numeric: tabular-nums;
+}
+
+.metal-price-change {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  align-self: flex-start;
+  padding: 2px 7px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.metal-price-change.is-up {
+  background: rgba(34, 197, 94, 0.14);
+  color: #4ade80;
+}
+
+.metal-price-change.is-down {
+  background: rgba(248, 113, 113, 0.14);
+  color: #f87171;
+}
+
+.metal-price-note {
+  margin-top: auto;
+  padding-top: 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #7d8ea3;
+}
+
+/* Loading state */
+.metal-price-card.is-loading {
+  gap: 10px;
+}
+
+.metal-price-skeleton {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.05) 25%, rgba(255, 255, 255, 0.12) 50%, rgba(255, 255, 255, 0.05) 75%);
+  background-size: 200% 100%;
+  animation: metalTickerShimmer 1.4s ease-in-out infinite;
+}
+
+.metal-price-skeleton-sm { height: 12px; width: 60%; }
+.metal-price-skeleton-lg { height: 26px; width: 85%; }
+
+@keyframes metalTickerShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.metal-ticker-disclaimer {
+  margin: 18px 0 0;
+  font-size: 0.76rem;
+  line-height: 1.6;
+  color: #8b9bb0;
+  max-width: 900px;
+}
+
+.metal-ticker-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  font-weight: 800;
+  color: #77b8b0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.metal-ticker-link:hover {
+  color: #ffffff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .metal-ticker-pulse,
+  .metal-price-skeleton {
+    animation: none;
+  }
+}
+
+@media (max-width: 1100px) {
+  .metal-ticker-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .metal-ticker {
+    padding: 32px 0 30px;
+  }
+  .metal-ticker-title {
+    font-size: 1.35rem;
+  }
+  .metal-ticker-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .metal-price-value {
+    font-size: 1.3rem;
+  }
+  .metal-price-card {
+    padding: 14px 15px 13px;
+  }
+}
+
+@media (max-width: 420px) {
+  .metal-ticker-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Seed/fallback state: amber rather than green, so a static snapshot is never
+   mistaken for the live exchange feed. */
+.metal-ticker-eyebrow.is-indicative {
+  color: #fbbf24;
+}
+
+.metal-ticker-eyebrow.is-indicative .metal-ticker-pulse {
+  background: #fbbf24;
+  animation: none;
+  box-shadow: none;
 }

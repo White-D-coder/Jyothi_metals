@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, ArrowUpRight, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react';
 
 /* ---------------------------------------------------------------------------
    Manufacturing Facilities (route: /infrastructure)
@@ -23,6 +23,41 @@ interface InfrastructurePageProps {
 
 export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQuoteModal }) => {
   const rootRef = useRef<HTMLDivElement>(null);
+
+  /* Manufacturing-process carousel. The track is a plain overflow-x flex row with
+     its scrollbar hidden, so on desktop there is no visible affordance that it
+     scrolls — hence the explicit prev/next arrows. `edge` tracks which ends are
+     reached so the arrows can grey out instead of looking broken at the limits. */
+  const processTrackRef = useRef<HTMLDivElement>(null);
+  const [edge, setEdge] = useState<{ start: boolean; end: boolean }>({ start: true, end: false });
+
+  const syncEdges = () => {
+    const el = processTrackRef.current;
+    if (!el) return;
+    // 2px of slack: fractional scroll widths mean scrollLeft rarely hits the exact max.
+    setEdge({
+      start: el.scrollLeft <= 2,
+      end: el.scrollLeft >= el.scrollWidth - el.clientWidth - 2,
+    });
+  };
+
+  useEffect(() => {
+    const el = processTrackRef.current;
+    if (!el) return;
+    syncEdges();
+    el.addEventListener('scroll', syncEdges, { passive: true });
+    window.addEventListener('resize', syncEdges);
+    return () => {
+      el.removeEventListener('scroll', syncEdges);
+      window.removeEventListener('resize', syncEdges);
+    };
+  }, []);
+
+  // Step by one whole card (flex-basis 360px + 32px gap) rather than a fixed
+  // pixel guess, so the scroll-snap always lands cleanly on the next card.
+  const scrollProcess = (dir: -1 | 1) => {
+    processTrackRef.current?.scrollBy({ left: dir * 392, behavior: 'smooth' });
+  };
 
   const heroTitle = 'Stainless Steel Tube, Pipe & Pipe Fittings';
 
@@ -62,7 +97,11 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
       number: '06',
       title: 'Chamfering',
       sub: 'Tube ends prepared',
-      image: '/images/plant/polishing-line.jpg',
+      // No brochure photo shows chamfering itself, so this step carries the
+      // tube mill floor shot. It is the one plant image not already spoken for
+      // by another card — 07 keeps the polishing-line bench, which is what that
+      // photo actually depicts.
+      image: '/images/plant/tube-mill-floor.jpg',
     },
     {
       number: '07',
@@ -357,7 +396,51 @@ export const InfrastructurePage: React.FC<InfrastructurePageProps> = ({ onOpenQu
             </p>
           </div>
 
+          {/* Prev/next controls, right-aligned above the track. Square and teal to
+              match the other buttons on the site.
+
+              position/zIndex are set inline and deliberately: this file's
+              "relative z-10" utility classes are inert (the project has no
+              Tailwind build), so the absolutely-positioned .infra-backdrop-word
+              — the giant grey "PROCESS" at the right edge, z-index 0 — paints
+              over static content and was clipping the right-hand button. */}
+          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', position: 'relative', zIndex: 2 }}>
+            {([
+              { dir: -1 as const, label: 'Show previous process steps', Icon: ChevronLeft, disabled: edge.start },
+              { dir: 1 as const, label: 'Show next process steps', Icon: ChevronRight, disabled: edge.end },
+            ]).map(({ dir, label, Icon, disabled }) => (
+              <button
+                key={dir}
+                type="button"
+                onClick={() => scrollProcess(dir)}
+                disabled={disabled}
+                aria-label={label}
+                style={{
+                  width: '44px',
+                  height: '44px',
+                  background: disabled ? '#cbd5e1' : '#51847D',
+                  border: 'none',
+                  color: '#ffffff',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: disabled ? 'default' : 'pointer',
+                  transition: 'background 0.2s',
+                }}
+                onMouseEnter={(e) => {
+                  if (!disabled) e.currentTarget.style.background = '#3d6963';
+                }}
+                onMouseLeave={(e) => {
+                  if (!disabled) e.currentTarget.style.background = '#51847D';
+                }}
+              >
+                <Icon size={22} />
+              </button>
+            ))}
+          </div>
+
           <div
+            ref={processTrackRef}
             style={{
               display: 'flex',
               gap: '32px',

@@ -16,6 +16,7 @@ import {
   getSubCategoriesForCategory,
   getFirstSubCategoryForCategory,
 } from '../data/catalogData';
+import { MetalPriceTicker } from '../components/MetalPriceTicker';
 
 interface HomeProps {
   onNavigate: (page: string) => void;
@@ -156,6 +157,11 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
     },
   ];
 
+  /* Hidden for now — the sector list and tile images were taken from
+     champaksteel.com by hand and have not been confirmed as ours. Flip to true
+     to bring the section back. */
+  const SHOW_INDUSTRIES_SECTION = false;
+
   /* The sectors we supply, mirroring the "Industries We Serve" strip on
      champaksteel.com. Their strip carries 14 tiles, but Oil & Gas, Aeronautical
      and Automobile each appear twice as carousel padding — these are the 11
@@ -175,32 +181,41 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
     { src: '/images/industries/paper-and-pulp.webp', label: 'Paper & Pulp' },
   ];
 
-  // 4 hero background slides. The overlay over these is deliberately light, so
-  // they need to be bright, high-contrast shots — dim or muddy frames read as
-  // flat grey here rather than dramatic.
+  // 4 hero background slides, alternating melt/foundry and refinery/process-plant
+  // frames — the two worlds the client wants the homepage to open on. Stockyard
+  // and warehouse shots were pulled: they read as a trader, not a metallurgist.
+  //
+  // Sourced from Unsplash (Unsplash Licence: free for commercial use, no
+  // attribution required) and re-encoded to 2400px wide, progressive, q82 —
+  // roughly 0.3-0.55 MB each, so the full set costs less than the smaller photos
+  // it replaced. Originals were 4288-6016px if a larger crop is ever needed.
+  //
+  // These are deliberately high-dynamic-range frames (dark plant, incandescent
+  // metal) rather than the evenly-lit shots that used to sit here, so the scrim
+  // below is a touch heavier than it was to keep the white headline legible over
+  // a molten highlight.
   const heroSlides = [
     {
       id: 1,
-      url: '/images/jm6.jpg',
-      title: 'Precision Metal Solutions for Modern Industry',
+      url: '/images/hero_molten_pour.jpg',
+      title: 'Molten Steel Pour — Foundry & Casting',
     },
     {
       id: 2,
-      url: '/images/pexels-shuaizhi-tian-485596-33996167.jpg',
-      title: 'Certified High-Performance Alloy Metallurgy',
+      url: '/images/hero_refinery_dusk.jpg',
+      title: 'Refinery & Petrochemical Plant Supply',
     },
     {
       id: 3,
-      url: '/images/pexels-willians-huerta-2157111846-36397989.jpg',
-      title: 'Advanced Robotic Forging & Fabrication',
+      url: '/images/hero_blast_furnace.jpg',
+      title: 'Blast Furnace & Primary Metallurgy',
     },
     {
       id: 4,
-      url: '/images/jm7.jpg',
-      title: 'Sub-Micron CNC Aerospace Calibration',
+      url: '/images/hero_refinery_pipework.jpg',
+      title: 'Refinery Pipework & Pressure Systems',
     },
   ];
-
   const [currentSlideIdx, setCurrentSlideIdx] = useState<number>(0);
 
   // Automatic Background Slide Rotation (Every 4.5 seconds)
@@ -551,9 +566,11 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
             style={{
               position: 'absolute',
               inset: 0,
-              // Light scrim only — the photo should read bright and clear. The
-              // headline carries its own shadow instead of leaning on a wash.
-              backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.30) 100%), url("${slide.url}")`,
+              // Scrim stays light enough that the plant still reads as a photo,
+              // but the molten/furnace frames throw bright highlights right where
+              // the centred headline sits, so it is a shade heavier than a pure
+              // wash. The headline also carries its own shadow.
+              backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0.28) 0%, rgba(0, 0, 0, 0.48) 100%), url("${slide.url}")`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
@@ -1078,6 +1095,12 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
         </div>
       </section>
 
+      {/* Live Metal Price Board — exchange reference prices for the base metals
+          that drive our quotations. Sits straight after the trust section so the
+          numbers land once the credibility case has been made. Fed by
+          /api/metal-prices. */}
+      <MetalPriceTicker onRequestQuote={() => onOpenQuoteModal()} />
+
       {/* 4.5. High Quality Products Category Grid Showcase (Image 2 Style 8-Category Arch Grid) */}
       <section className="section bg-white" style={{ paddingTop: '90px', paddingBottom: '80px', borderBottom: '1px solid #e2e8f0' }}>
         <div className="container">
@@ -1313,7 +1336,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
               Industrial Metal Product Catalog
             </h2>
             <p style={{ color: '#475569', fontSize: '1.1rem', lineHeight: 1.6, marginBottom: '28px' }}>
-              Explore our complete range of certified stainless steel, titanium alloys, structural profiles, forged flanges, and precision machined components.
+              Explore our complete range of certified pipes &amp; tubes, plates &amp; sheets, round bars, titanium alloys, structural profiles, forged flanges, and precision machined components.
             </p>
           </div>
 
@@ -1911,6 +1934,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
       {/* 9. Industries We Serve — sector tiles, mirroring the strip Champak
           publishes. Rendered as a grid rather than their carousel so every
           sector is visible at once without waiting for a rotation. */}
+      {SHOW_INDUSTRIES_SECTION && (
       <section className="section bg-tint" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
         <div className="container">
           <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 46px' }} className="reveal">
@@ -1939,6 +1963,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
           </div>
         </div>
       </section>
+      )}
     </div>
   );
 };

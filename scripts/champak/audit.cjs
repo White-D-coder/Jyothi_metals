@@ -11,12 +11,13 @@ ours.forEach((p) => (byId[p.id] = p));
 const CEILING = { C: 3, Si: 6, Mn: 15, P: 1, S: 1, N: 1 };
 
 // Values the site owner chose to publish verbatim although the source page
-// mis-seats them (see the SS 304H note in generate.cjs). Matched on the exact
-// published text, so any change on the source page resurfaces in the audit.
-const ACKNOWLEDGED = [
-  { grade: '304H', el: 'C', value: 'min: 18.0 max:20.0' },
-  { grade: '304H', el: 'S', value: '2.0 max' },
-];
+// mis-seats them. Matched on the exact published text, so any change on the
+// source page resurfaces in the audit.
+//
+// The two SS 304H entries that used to sit here were retired on 2026-08-20:
+// that row is now re-seated by the 304H-column-shift correction in
+// generate.cjs, so it no longer trips the ceiling check at all.
+const ACKNOWLEDGED = [];
 const isAcknowledged = (grade, el, value) =>
   ACKNOWLEDGED.some((a) => a.grade === grade.trim() && a.el === el && a.value === value.trim());
 

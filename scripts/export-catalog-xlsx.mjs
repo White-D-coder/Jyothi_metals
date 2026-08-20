@@ -189,6 +189,13 @@ function resolveProduct(p) {
   const spec = champakSpecs[p.id];
   const scraped = getScrapedGradeTableData(p.title);
 
+  // Mirrors `showMaterialSpecs` in ProductDetailPage: Gasketing Solutions items
+  // are fibre/graphite/PTFE composites with no source page, so the site shows
+  // none of the three material-property sections rather than falling through to
+  // the generic stainless tables. The sheet has to omit them for the same
+  // reason, otherwise it stops describing what the site actually publishes.
+  const noMaterialSpecs = p.category === 'Gasketing Solutions';
+
   return {
     ...p,
     spec,
@@ -207,7 +214,7 @@ function resolveProduct(p) {
           : null)
       : { kind: 'chips', heading: 'International Equivalent Grades', items: getEquivalentGrades(p.title) },
 
-    chemical: spec
+    chemical: noMaterialSpecs ? null : spec
       ? (spec.chemical
           ? { kind: 'table', heading: spec.chemical.heading, data: expandSpecTable(spec.chemical), note: spec.chemical.note }
           : null)
@@ -218,7 +225,7 @@ function resolveProduct(p) {
           breakdown: kvGrid(getAlloyComposition(p.title)),
         },
 
-    mechanical: spec
+    mechanical: noMaterialSpecs ? null : spec
       ? (spec.mechanical
           ? { kind: 'table', heading: spec.mechanical.heading, data: expandSpecTable(spec.mechanical), note: spec.mechanical.note }
           : null)
@@ -229,7 +236,7 @@ function resolveProduct(p) {
           breakdown: kvGrid(getMechanicalProperties(p.title)),
         },
 
-    physical: spec
+    physical: noMaterialSpecs ? null : spec
       ? (spec.physical
           ? { kind: 'table', heading: spec.physical.heading, data: expandSpecTable(spec.physical), note: spec.physical.note }
           : null)

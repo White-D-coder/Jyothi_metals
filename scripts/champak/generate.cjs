@@ -9,7 +9,25 @@ ours.forEach((p) => (byId[p.id] = p));
 
 // Champak typo — the word is misspelled identically on every page.
 const TEXT_FIXES = [[/\bIndusry\b/g, 'Industry']];
-const fixText = (s) => TEXT_FIXES.reduce((acc, [re, to]) => acc.replace(re, to), s);
+
+// Champak writes ranges with an en/em dash ("18.00 – 20.00", "at 68 – 212°F")
+// and marks "no data" with a lone dash. Both read badly in our tables, so the
+// dash becomes the word "to" and a lone dash becomes "NA".
+//
+// This normalisation was applied to src/data/champakSpecs.ts by hand at some
+// point and existed nowhere in this pipeline, which meant re-running the
+// generator silently reverted ~114 products to the raw dash form. Folding it in
+// here makes the generator reproduce the published file instead of fighting it.
+// ASCII hyphens are deliberately left alone — they are real minus signs and
+// grade separators ("Ksi-85", "A 240-304").
+const DASHES = /[\u2013\u2014]/;
+function normaliseDashes(s) {
+  if (DASHES.test(s) && s.replace(/[\s\u2013\u2014]/g, '') === '') return 'NA';
+  return s.replace(/\s*[\u2013\u2014]\s*/g, ' to ').replace(/\s+/g, ' ').trim();
+}
+
+const fixText = (s) =>
+  normaliseDashes(TEXT_FIXES.reduce((acc, [re, to]) => acc.replace(re, to), s));
 
 function cell(c) {
   const o = { t: fixText(c.t) };
@@ -34,12 +52,43 @@ function table(t) {
 // `set` is keyed by column header. Values marked "from standard" are the only
 // figures not recoverable from the published row itself.
 // ---------------------------------------------------------------------------
-// NOTE: the SS 304H chemical row is published by Champak in the order Cr, Ni,
-// C, Si, Mn, P, S, N against a C, Mn, Si, P, S, Cr, Ni, N header. A re-seating
-// correction used to fix it here; the site owner decided (2026-08-05) to
-// reproduce the row verbatim instead, exactly as the source page prints it.
-// audit.cjs carries the matching acknowledgement so only NEW anomalies surface.
+// NOTE on SS 304H: Champak publishes this row in the order Cr, Ni, C, Si, Mn,
+// P, S, N against a C, Mn, Si, P, S, Cr, Ni, N header. The site owner first
+// asked for the verbatim (mis-seated) row (2026-08-05), then on 2026-08-20
+// asked for it to match palgottametal.com instead, so the re-seating correction
+// below is back. Palgotta's figures are identical to the re-seated Champak
+// values, published in Palgotta's own notation, which is what `set` uses.
 const CORRECTIONS = [
+  {
+    id: '304H-column-shift',
+    label: 'SS 304H',
+    grade: '304H',
+    // Row published as Cr, Ni, C, Si, Mn, P, S, N under a C, Mn, Si, P, S, Cr,
+    // Ni, N header — every value one or more columns from its own heading.
+    // Re-seated, and restated in the notation used by the reference page:
+    // https://palgottametal.com/stainless-steel-304h-pipes-tubes-supplier-stockist.html
+    // Palgotta prints no N column; N keeps the source row's own 0.10 max.
+    expect: {
+      C: 'min: 18.0 max:20.0',
+      Mn: 'min: 8.0 max: 10.5',
+      Si: 'min: 0.04 max:0.10',
+      P: '0.75 max',
+      S: '2.0 max',
+      Cr: '0.045 max',
+      Ni: '0.03 max',
+      N: '0.10 max',
+    },
+    set: {
+      C: '0.04 - 0.10',
+      Si: '0.75 max',
+      Mn: '2.00 max',
+      P: '0.045 max',
+      S: '0.030 max',
+      Cr: '18.00 - 20.00',
+      Ni: '8.0 - 10.5',
+      N: '0.10 max',
+    },
+  },
   {
     id: '321H-silicon',
     label: 'SS 321H',
@@ -160,9 +209,8 @@ const header = `// AUTO-GENERATED — do not edit by hand.
 // Tables are reproduced verbatim, with ${CORRECTIONS.length} documented exceptions where the
 // source row was demonstrably defective (a shifted row, a missing decimal
 // point, duplicated cells). Each fix asserts the published values before
-// rewriting, so the generator fails loudly if the source page changes. The
-// SS 304H chemical row is reproduced verbatim although the source mis-seats
-// it — the site owner's explicit choice. Corrected rows:
+// rewriting, so the generator fails loudly if the source page changes.
+// Corrected rows:
 ${correctionDoc}
 //
 // Regenerate: scripts/champak/generate.cjs

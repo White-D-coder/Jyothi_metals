@@ -2,9 +2,15 @@
 // product has no published spec tables in `champakSpecs`. Kept in its own
 // module so the catalogue export script renders exactly what the site renders.
 
+// TMT reinforcement bar is IS 1786 carbon steel, not an alloy — every generator
+// below has to branch on it before the alloy keyword tests, or a rebar page
+// publishes 18/8 stainless chemistry and stainless pricing.
+const IS_REBAR = /\btmt\b|rebar|reinforcement bar/;
+
 // Price generator by alloy type
 export const getAlloyPricePerKg = (title: string): number => {
   const t = title.toLowerCase();
+  if (IS_REBAR.test(t)) return 62;
   if (t.includes('titanium')) return 1850;
   if (t.includes('inconel') || t.includes('hastelloy')) return 2450;
   if (t.includes('monel') || t.includes('nickel')) return 1650;
@@ -18,6 +24,16 @@ export const getAlloyPricePerKg = (title: string): number => {
 // Composition generator by alloy title
 export const getAlloyComposition = (title: string): Record<string, string> => {
   const t = title.toLowerCase();
+  if (IS_REBAR.test(t)) {
+    // IS 1786 ladle analysis limits for Fe-500 / Fe-550D.
+    return {
+      Carbon: '0.30% Max (0.25% Max for D grades)',
+      Sulphur: '0.055% Max (0.040% Max for D grades)',
+      Phosphorus: '0.055% Max (0.040% Max for D grades)',
+      'Sulphur + Phosphorus': '0.105% Max (0.075% Max for D grades)',
+      Iron: 'Balance',
+    };
+  }
   if (t.includes('titanium') || t.includes('ti-')) {
     return { Titanium: 'Balance (90%+)', Aluminum: '5.5 - 6.75%', Vanadium: '3.5 - 4.5%', Iron: '0.40% Max', Oxygen: '0.20% Max' };
   }
@@ -43,6 +59,15 @@ export const getAlloyComposition = (title: string): Record<string, string> => {
 // Mechanical Properties generator by alloy type
 export const getMechanicalProperties = (title: string): Record<string, string> => {
   const t = title.toLowerCase();
+  if (IS_REBAR.test(t)) {
+    return {
+      'Yield Strength 0.2% Proof (MPa)': '500 MPa Min (Fe-500) / 550 MPa Min (Fe-550D)',
+      'Tensile Strength (MPa)': '545 MPa Min (Fe-500) / 600 MPa Min (Fe-550D)',
+      'Elongation in 50mm (%)': '12% Min (Fe-500) / 14.5% Min (Fe-550D)',
+      'Total Elongation at Maximum Force (%)': '5.0% Min',
+      'Bend / Re-bend Test': 'Passes IS 1786 bend and re-bend requirement',
+    };
+  }
   if (t.includes('titanium')) {
     return {
       'Tensile Strength (MPa)': '880 MPa Min',
@@ -92,6 +117,16 @@ export const getMechanicalProperties = (title: string): Record<string, string> =
 // Physical Properties generator by alloy type
 export const getPhysicalProperties = (title: string): Record<string, string> => {
   const t = title.toLowerCase();
+  if (IS_REBAR.test(t)) {
+    return {
+      Density: '7.85 g/cm³',
+      'Melting Range': '1425 - 1540 °C',
+      'Modulus of Elasticity': '200 GPa',
+      'Thermal Conductivity': '50 W/m·K at 20°C',
+      'Electrical Resistivity': '0.17 µΩ·m',
+      'Specific Heat': '470 J/kg·K',
+    };
+  }
   if (t.includes('titanium')) {
     return {
       Density: '4.43 g/cm³',
@@ -135,6 +170,15 @@ export const getPhysicalProperties = (title: string): Record<string, string> => 
 // Certified Applications generator
 export const getCertifiedApplications = (title: string): string[] => {
   const t = title.toLowerCase();
+  if (IS_REBAR.test(t)) {
+    return [
+      'RCC Foundations, Columns, Beams & Slab Reinforcement',
+      'High-Rise Residential & Commercial Building Frames',
+      'Bridges, Flyovers & Elevated Corridor Substructures',
+      'Dams, Reservoirs & Canal Lining Works',
+      'Industrial Sheds, Plant Foundations & Equipment Plinths',
+    ];
+  }
   if (t.includes('titanium') || t.includes('aerospace')) {
     return [
       'Aerospace Structural Airframes & Jet Engine Components',
@@ -165,6 +209,9 @@ export const getCertifiedApplications = (title: string): string[] => {
 // Manufacturing Standards generator
 export const getManufacturingStandards = (title: string): string[] => {
   const t = title.toLowerCase();
+  if (IS_REBAR.test(t)) {
+    return ['IS 1786', 'IS 13920', 'IS 456', 'BS 4449', 'ASTM A615'];
+  }
   if (t.includes('titanium')) {
     return ['ASTM B338', 'ASTM B861', 'AMS 4928', 'DIN 17861', 'ISO 5832-3'];
   }
@@ -177,6 +224,9 @@ export const getManufacturingStandards = (title: string): string[] => {
 // International Equivalent Grades generator
 export const getEquivalentGrades = (title: string): string[] => {
   const t = title.toLowerCase();
+  if (IS_REBAR.test(t)) {
+    return ['IS 1786 Fe-500 / Fe-550D', 'BS 4449 B500B / B500C', 'ASTM A615 Gr 60 / Gr 75', 'ISO 6935-2 B500B'];
+  }
   if (t.includes('titanium')) {
     return ['UNS R56400', 'W.Nr. 3.7165', 'Grade 5 / Ti-6Al-4V', 'JIS Class 60'];
   }
@@ -222,6 +272,7 @@ export type ProductFormKey =
   | 'fastener'
   | 'gasket'
   | 'structural'
+  | 'rebar'
   | 'specialized';
 
 type MaterialKey =
@@ -253,6 +304,10 @@ const FORM_BY_CATEGORY: Record<string, ProductFormKey> = {
 };
 
 const resolveFormKey = (category: string, subCat: string, title: string): ProductFormKey => {
+  // Rebar sits inside Structural Steel but is a different product entirely —
+  // IS 1786 bar diameters, not IS 808 section sizes — so it is matched first.
+  if (/tmt|rebar|reinforcement bar/i.test(`${subCat} ${title}`)) return 'rebar';
+
   const byCategory = FORM_BY_CATEGORY[category];
   if (byCategory) return byCategory;
 
@@ -287,7 +342,7 @@ const MATERIAL_PATTERNS: Array<[MaterialKey, RegExp]> = [
   ['brass', /brass|bronze/],
   ['aluminium', /alumini?um/],
   ['stainless', /stainless|\bss\b/],
-  ['carbon', /carbon steel|mild steel|\bms\b/],
+  ['carbon', /carbon steel|mild steel|\bms\b|\btmt\b|rebar/],
   ['alloysteel', /alloy steel/],
 ];
 
@@ -420,6 +475,9 @@ const STANDARDS: Record<ProductFormKey, Partial<Record<MaterialKey, string>>> = 
   structural: {
     stainless: 'ASTM A276 / A484 · EN 10088-4',
     carbon: 'IS 2062 E250 / E350 · IS 808 · ASTM A36 · EN 10025 S275 / S355',
+  },
+  rebar: {
+    carbon: 'IS 1786 · IS 13920 (ductile detailing) · BS 4449 · ASTM A615',
   },
   specialized: {
     stainless: 'ASTM / ASME / EN / IS as applicable to grade',
@@ -691,6 +749,28 @@ const buildRows = (form: ProductFormKey, material: MaterialKey, subCat: string):
         { label: 'Test Certificate', value: CERTIFICATE_VALUE },
       ];
 
+    // Figures below follow IS 1786 and the size/weight schedule the rolling
+    // mills publish for Fe-500 / Fe-550D bar.
+    case 'rebar':
+      return [
+        { label: 'Rebar Standards', value: STANDARDS.rebar[material] ?? STANDARDS.rebar.carbon ?? '' },
+        { label: 'Grade', value: 'Fe-500 & Fe-550D (Fe-500D / Fe-550 on indent)' },
+        { label: 'Material', value: 'Thermo-mechanically treated (TMT) carbon steel' },
+        { label: 'Size', value: '8 mm, 10 mm, 12 mm, 16 mm, 20 mm, 25 mm & 32 mm diameter' },
+        { label: 'Length', value: '12 m standard; cut length & bent-to-shape on request' },
+        {
+          label: 'Unit Weight',
+          value:
+            '8 mm 0.395 kg/m · 10 mm 0.617 kg/m · 12 mm 0.888 kg/m · 16 mm 1.580 kg/m · 20 mm 2.470 kg/m · 25 mm 3.850 kg/m · 32 mm 6.310 kg/m',
+        },
+        { label: 'Surface', value: 'Ribbed / deformed high-bond pattern, mill black finish' },
+        {
+          label: 'Applications',
+          value: 'RCC construction, high-rise buildings, bridges & flyovers, dams and industrial structures',
+        },
+        { label: 'Test Certificate', value: CERTIFICATE_VALUE },
+      ];
+
     case 'specialized':
     default: {
       const key = subCat.toLowerCase();
@@ -722,8 +802,29 @@ const GALLERY_BY_FORM: Record<ProductFormKey, string[]> = {
   forged: ['client/stainless-steel-forged-fittings.jpg', 'client/threaded-forged-fitting.jpg', 'client/images-13.jpg', 'client/ms-forged-elbow-45degree.jpg'],
   buttweld: ['client/stainless-steel-buttweld-fittings.jpg', 'client/butt-welding-fitting.jpg', 'client/images-15.jpg', 'client/buttweld-fittings.jpg'],
   fastener: ['client/stainless-steel-fasteners-500x500.webp', 'client/images-16.jpg', 'client/60f27d878e28f-fasteners.jpg', 'client/ss-fastners.webp'],
-  gasket: ['client/images-11.jpg', 'client/ss-flanges-supplier.jpg', 'client/fittings-1.png', 'client/duplex-flange-500x500.webp'],
-  structural: ['structural_beams.png', 'jm1.jpg', 'pexels-tokuo-nobuhiro-79378678-20472153.jpg', 'jm2.jpg'],
+  // One representative of each sealing family. The old list here was flange and
+  // fitting photography — the hardware a gasket is bolted between, not the
+  // gasket — so every gasket page showed three pictures of the wrong product.
+  gasket: [
+    'products/af-fibre-sheet-standard.jpg',
+    'products/caf-jointing-sheet-std.jpg',
+    'products/spiral-wound-gasket-ss304.jpg',
+    'products/pre-cut-flange-gasket-fullface.jpg',
+  ],
+  // Rolled sections photographed as stock, not the generic plant shots that
+  // used to sit here — a beam page should show beams.
+  structural: [
+    'products/mild-steel-beams.jpg',
+    'products/mild-steel-angles.jpg',
+    'products/mild-steel-channels.jpg',
+    'products/universal-column.jpg',
+  ],
+  rebar: [
+    'products/tmt-rebar.jpg',
+    'products/structural-steel-sections.jpg',
+    'products/mild-steel-beams.jpg',
+    'products/mild-steel-angles.jpg',
+  ],
   // The specialized plate programmes are carbon-steel wear, armour and boiler
   // plate — the client's stainless photography reads wrong here, and the plant
   // shots we used before showed no product at all, so this row draws on the
@@ -784,6 +885,40 @@ const BLACK_GALLERY_BY_FORM: Partial<Record<ProductFormKey, string[]>> = {
 };
 
 /**
+ * Gaskets are the one form where the sub-category *is* the product: a compressed
+ * fibre sheet, a spiral wound ring and a metal jacketed heat exchanger gasket
+ * share a category and look nothing alike. A single pool cannot serve all four,
+ * so each sub-category draws on its own siblings, with one neighbouring family
+ * to fill the fourth slot once the product's own image is deduped out.
+ */
+const GASKET_GALLERY_BY_SUBCAT: Record<string, string[]> = {
+  'Asbestos Free (AF) Fibre Jointing Sheets': [
+    'products/af-fibre-sheet-standard.jpg',
+    'products/af-fibre-sheet-ht.jpg',
+    'products/af-fibre-sheet-reinforced.jpg',
+    'products/caf-jointing-sheet-std.jpg',
+  ],
+  'Compressed Fibre (CAF) Jointing Sheets': [
+    'products/caf-jointing-sheet-std.jpg',
+    'products/caf-jointing-sheet-acid.jpg',
+    'products/caf-jointing-sheet-metallic.jpg',
+    'products/af-fibre-sheet-standard.jpg',
+  ],
+  'Spiral Wound Gaskets': [
+    'products/spiral-wound-gasket-ss304.jpg',
+    'products/spiral-wound-gasket-ss316l.jpg',
+    'products/spiral-wound-gasket-inconel.jpg',
+    'products/pre-cut-gasket-metal-jacketed.jpg',
+  ],
+  'Pre Cut Gaskets': [
+    'products/pre-cut-flange-gasket-fullface.jpg',
+    'products/pre-cut-flange-gasket-ring.jpg',
+    'products/pre-cut-gasket-metal-jacketed.jpg',
+    'products/spiral-wound-gasket-ss304.jpg',
+  ],
+};
+
+/**
  * Thumbnails for the detail-page gallery.
  *
  * Order: the product's own card image, then the photograph Champak publishes
@@ -800,7 +935,10 @@ export const getGalleryImages = (
   const form = resolveFormKey(product.category, product.subCat, product.title);
   const material = resolveMaterialKey(product.subCat, product.title, 'stainless');
   const isBlackSteel = material === 'carbon' || material === 'alloysteel';
-  const sameForm = (isBlackSteel && BLACK_GALLERY_BY_FORM[form]) || GALLERY_BY_FORM[form];
+  const sameForm =
+    (form === 'gasket' && GASKET_GALLERY_BY_SUBCAT[product.subCat]) ||
+    (isBlackSteel && BLACK_GALLERY_BY_FORM[form]) ||
+    GALLERY_BY_FORM[form];
 
   const pool = [
     product.image,
@@ -837,6 +975,34 @@ export interface ScrapedGradeTableData {
 
 export const getScrapedGradeTableData = (title: string): ScrapedGradeTableData => {
   const t = title.toLowerCase();
+
+  if (IS_REBAR.test(t)) {
+    // IS 1786:2008, Tables 3 and 5. Chemistry is the ladle analysis limit;
+    // UTS is expressed as the standard does, relative to the actual yield.
+    return {
+      chemHeaders: ['Grade', 'C % Max', 'S % Max', 'P % Max', 'S + P % Max', 'Fe'],
+      chemRows: [
+        ['Fe-500', '0.300', '0.055', '0.055', '0.105', 'Balance'],
+        ['Fe-500D', '0.250', '0.040', '0.040', '0.075', 'Balance'],
+        ['Fe-550', '0.300', '0.055', '0.050', '0.100', 'Balance'],
+        ['Fe-550D', '0.250', '0.040', '0.040', '0.075', 'Balance'],
+      ],
+      mechHeaders: [
+        'Grade',
+        'Yield Strength MPa (min)',
+        'Tensile Strength MPa (min)',
+        'UTS / YS Ratio (min)',
+        'Elongation % (min)',
+        'Total Elongation at Max Force % (min)',
+      ],
+      mechRows: [
+        ['Fe-500', '500', '545', '1.08', '12.0', '5.0'],
+        ['Fe-500D', '500', '565', '1.10', '16.0', '5.0'],
+        ['Fe-550', '550', '585', '1.06', '10.0', '5.0'],
+        ['Fe-550D', '550', '600', '1.08', '14.5', '5.0'],
+      ],
+    };
+  }
 
   if (t.includes('409') || t.includes('410') || t.includes('430')) {
     return {

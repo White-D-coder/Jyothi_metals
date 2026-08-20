@@ -96,11 +96,11 @@ export const additionalCategories: ProductCategory[] = [
   {
     name: 'Structural Steel',
     slug: 'structural-steel',
-    image: '/images/products/mild-steel-angles.jpg',
+    image: '/images/products/structural-steel-sections.jpg',
     description:
-      'Mild steel angles, beams and channels, parallel flange sections, universal beams and columns, and rail sections for building frames, industrial sheds, crane runways and railway track work.',
+      'TMT reinforcement bar, mild steel angles, beams and channels, parallel flange sections, universal beams and columns, and rail sections for building frames, industrial sheds, crane runways and railway track work.',
     dimensions:
-      'Angles 25 x 25 mm to 250 x 250 mm, beams 100 x 50 mm to 900 x 300 mm, channels 75 x 40 mm to 400 x 100 mm, and rails from 24 kg/m to 60 kg/m.',
+      'TMT rebar 8 mm to 32 mm in Fe-500 and Fe-550D, angles 25 x 25 mm to 250 x 250 mm, beams 100 x 50 mm to 900 x 300 mm, channels 75 x 40 mm to 400 x 100 mm, and rails from 24 kg/m to 60 kg/m.',
   },
   {
     name: 'Specialized Product',

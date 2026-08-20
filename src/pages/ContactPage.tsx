@@ -7,14 +7,52 @@ interface ContactPageProps {
 
 export const ContactPage: React.FC<ContactPageProps> = () => {
   const [formCategory, setFormCategory] = useState('Enterprise Quote');
+  const [formName, setFormName] = useState('');
+  const [formEmail, setFormEmail] = useState('');
+  const [formPhone, setFormPhone] = useState('');
+  const [formMessage, setFormMessage] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setTimeout(() => setSubmitted(false), 4000);
-    }, 200);
+    if (submitting) return;
+
+    setSubmitting(true);
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('/api/send-inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          category: formCategory,
+          name: formName,
+          email: formEmail,
+          phone: formPhone,
+          message: formMessage,
+        }),
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(data.error || 'We could not send your inquiry. Please try again.');
+      }
+
+      setSubmitted(true);
+      setFormName('');
+      setFormEmail('');
+      setFormPhone('');
+      setFormMessage('');
+    } catch (error) {
+      setErrorMessage(
+        error instanceof Error ? error.message : 'We could not send your inquiry. Please try again.',
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -182,7 +220,7 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
                 <CheckCircle2 size={48} color="#588078" style={{ margin: '0 auto 12px' }} />
                 <h4 style={{ color: '#304050', fontSize: '1.3rem', fontWeight: 800 }}>Inquiry Received!</h4>
                 <p style={{ color: '#64748B', fontSize: '0.92rem', marginTop: '8px', lineHeight: 1.6 }}>
-                  Thank you for contacting Jyoti Metal. Reference ticket #JYO-9942 has been dispatched to our support team.
+                  Thank you for contacting Jyoti Metal. Your inquiry has been emailed to our sales team at info@jyotimetal.co.in and we will get back to you shortly.
                 </p>
               </div>
             ) : (
@@ -210,13 +248,13 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
                     <label htmlFor="contact-name" className="form-label" style={{ fontWeight: 700, fontSize: '0.82rem', color: '#304050', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '6px', display: 'block' }}>
                       Full Name *
                     </label>
-                    <input id="contact-name" type="text" required placeholder="John Doe" className="form-input" style={{ width: '100%', padding: '11px 14px', fontSize: '0.9rem', border: '1px solid #CBD5E1', borderRadius: '0px' }} />
+                    <input id="contact-name" type="text" required value={formName} onChange={(e) => setFormName(e.target.value)} placeholder="John Doe" className="form-input" style={{ width: '100%', padding: '11px 14px', fontSize: '0.9rem', border: '1px solid #CBD5E1', borderRadius: '0px' }} />
                   </div>
                   <div className="form-group">
                     <label htmlFor="contact-email" className="form-label" style={{ fontWeight: 700, fontSize: '0.82rem', color: '#304050', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '6px', display: 'block' }}>
                       Email Address *
                     </label>
-                    <input id="contact-email" type="email" required placeholder="j.doe@company.com" className="form-input" style={{ width: '100%', padding: '11px 14px', fontSize: '0.9rem', border: '1px solid #CBD5E1', borderRadius: '0px' }} />
+                    <input id="contact-email" type="email" required value={formEmail} onChange={(e) => setFormEmail(e.target.value)} placeholder="j.doe@company.com" className="form-input" style={{ width: '100%', padding: '11px 14px', fontSize: '0.9rem', border: '1px solid #CBD5E1', borderRadius: '0px' }} />
                   </div>
                 </div>
 
@@ -224,7 +262,7 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
                   <label htmlFor="contact-phone" className="form-label" style={{ fontWeight: 700, fontSize: '0.82rem', color: '#304050', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '6px', display: 'block' }}>
                     Phone Number
                   </label>
-                  <input id="contact-phone" type="tel" placeholder="+91 98000 00000" className="form-input" style={{ width: '100%', padding: '11px 14px', fontSize: '0.9rem', border: '1px solid #CBD5E1', borderRadius: '0px' }} />
+                  <input id="contact-phone" type="tel" value={formPhone} onChange={(e) => setFormPhone(e.target.value)} placeholder="+91 98000 00000" className="form-input" style={{ width: '100%', padding: '11px 14px', fontSize: '0.9rem', border: '1px solid #CBD5E1', borderRadius: '0px' }} />
                 </div>
 
                 <div className="form-group">
@@ -235,15 +273,27 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
                     id="contact-message"
                     rows={4}
                     required
+                    value={formMessage}
+                    onChange={(e) => setFormMessage(e.target.value)}
                     className="form-textarea"
                     placeholder="Describe your required alloy dimensions, target delivery dates, or technical specifications..."
                     style={{ width: '100%', padding: '11px 14px', fontSize: '0.9rem', border: '1px solid #CBD5E1', borderRadius: '0px' }}
                   ></textarea>
                 </div>
 
+                {errorMessage && (
+                  <div
+                    role="alert"
+                    style={{ background: '#FEF2F2', border: '1px solid #FCA5A5', color: '#B91C1C', padding: '11px 14px', fontSize: '0.85rem', lineHeight: 1.5 }}
+                  >
+                    {errorMessage}
+                  </div>
+                )}
+
                 <button
                   type="submit"
                   className="btn btn-primary"
+                  disabled={submitting}
                   style={{
                     width: '100%',
                     padding: '14px',
@@ -251,7 +301,7 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
                     fontWeight: 800,
                     letterSpacing: '0.6px',
                     textTransform: 'uppercase',
-                    background: '#588078',
+                    background: submitting ? '#8FAAA4' : '#588078',
                     color: '#FFFFFF',
                     border: 'none',
                     borderRadius: 0,
@@ -259,11 +309,11 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     gap: '10px',
-                    cursor: 'pointer',
+                    cursor: submitting ? 'not-allowed' : 'pointer',
                     marginTop: '6px',
                   }}
                 >
-                  Send Inquiry <Send size={16} />
+                  {submitting ? 'Sending…' : <>Send Inquiry <Send size={16} /></>}
                 </button>
               </form>
             )}
@@ -343,7 +393,7 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
             <div style={{ background: '#FFFFFF', border: '1px solid #CBD5E1', padding: '28px 24px 24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxShadow: '0 4px 14px rgba(0,0,0,0.02)' }}>
               <div>
                 <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#588078', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '6px' }}>
-                  NORTH BRANCH (ADDRESS ONLY)
+                  NORTH BRANCH
                 </div>
                 <h4 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#304050', marginBottom: '8px' }}>
                   Branch Office (Delhi)
@@ -397,7 +447,7 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
             <div style={{ background: '#FFFFFF', border: '1px solid #CBD5E1', padding: '28px 24px 24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxShadow: '0 4px 14px rgba(0,0,0,0.02)' }}>
               <div>
                 <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#588078', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '6px' }}>
-                  MANUFACTURING PLANT
+                  MANUFACTURING UNIT
                 </div>
                 <h4 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#304050', marginBottom: '8px' }}>
                   Plant Address (Alwar)

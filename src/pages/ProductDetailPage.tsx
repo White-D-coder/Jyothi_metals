@@ -181,6 +181,15 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
   // product form, so it is derived from the whole product, not just the title.
   const gradeSpec = useMemo(() => getGradeSpecification(currentProduct), [currentProduct]);
 
+  // Gaskets are fibre, graphite and PTFE composites, not a single alloy: one
+  // chemistry row, tensile figure or thermal-expansion coefficient cannot
+  // describe them. None of the 12 Gasketing Solutions products has a source
+  // page either, so all three material-property sections would fall through to
+  // the generic stainless fallbacks and publish figures that are simply wrong
+  // for a jointing sheet. The whole group is suppressed instead — sealing data
+  // (temperature/pressure limits, PxT) belongs there, not an alloy chemistry.
+  const showMaterialSpecs = currentProduct.category !== 'Gasketing Solutions';
+
   // Gallery imagery
   const galleryImages = useMemo(
     () => getGalleryImages(currentProduct, getChampakImage(currentProduct.id)),
@@ -573,7 +582,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
               )}
 
               {/* Section 1: Chemical Composition */}
-              {spec?.chemical && (
+              {showMaterialSpecs && spec?.chemical && (
                 <SpecSection label="CHEMICAL COMPOSITION">
                   <SpecHeading>{spec.chemical.heading}</SpecHeading>
                   <SpecTableView table={spec.chemical} />
@@ -583,7 +592,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
               {/* Generic fallbacks below are for products with no Champak source
                   page only. A Champak-sourced product whose page lacks a table
                   shows nothing for that section — never invented data. */}
-              {!spec && (
+              {showMaterialSpecs && !spec && (
                 <SpecSection label="CHEMICAL COMPOSITION">
                   <SpecHeading>Chemical composition of {currentProduct.title}</SpecHeading>
                   <div style={{ overflowX: 'auto', border: '1px solid #588078', marginBottom: '24px' }}>
@@ -645,14 +654,14 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
               )}
 
               {/* Section 2: Mechanical Properties */}
-              {spec?.mechanical && (
+              {showMaterialSpecs && spec?.mechanical && (
                 <SpecSection label="MECHANICAL PROPERTIES">
                   <SpecHeading>{spec.mechanical.heading}</SpecHeading>
                   <SpecTableView table={spec.mechanical} />
                 </SpecSection>
               )}
 
-              {!spec && (
+              {showMaterialSpecs && !spec && (
                 <SpecSection label="MECHANICAL PROPERTIES">
                   <SpecHeading>Mechanical properties of {currentProduct.title}</SpecHeading>
                   <div style={{ overflowX: 'auto', border: '1px solid #588078', marginBottom: '24px' }}>
@@ -714,14 +723,14 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
               )}
 
               {/* Section 3: Physical Properties */}
-              {spec?.physical && (
+              {showMaterialSpecs && spec?.physical && (
                 <SpecSection label="PHYSICAL PROPERTIES">
                   <SpecHeading>{spec.physical.heading}</SpecHeading>
                   <SpecTableView table={spec.physical} />
                 </SpecSection>
               )}
 
-              {!spec && (
+              {showMaterialSpecs && !spec && (
                 <SpecSection label="PHYSICAL PROPERTIES">
                   <SpecHeading>Physical &amp; thermal properties</SpecHeading>
                   <div style={{ border: '1px solid #E0E8E8' }}>
