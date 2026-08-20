@@ -352,11 +352,11 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenQuoteModal }
               <div style={{ color: '#cbd5e1', fontSize: '0.84rem', lineHeight: 1.6, marginBottom: '16px' }}>
                 <div style={{ marginBottom: '8px' }}>
                   <strong style={{ color: '#ffffff' }}>Dhawal Choudhary:</strong><br />
-                  <a href="tel:+919322281549" style={{ color: '#77b8b0', textDecoration: 'none', fontWeight: 700 }}>+91 9322281549</a> / <a href="tel:+919137880994" style={{ color: '#77b8b0', textDecoration: 'none', fontWeight: 700 }}>+91 9137880994</a>
+                  <a href="tel:+919322281549" style={{ color: '#77b8b0', textDecoration: 'none', fontWeight: 700 }}>+91 9322281549</a>
                 </div>
                 <div>
                   <strong style={{ color: '#ffffff' }}>Dinesh Choudhary:</strong><br />
-                  <a href="tel:+919769388813" style={{ color: '#77b8b0', textDecoration: 'none', fontWeight: 700 }}>+91 9769388813</a> / <a href="tel:+919082886991" style={{ color: '#77b8b0', textDecoration: 'none', fontWeight: 700 }}>+91 9082886991</a>
+                  <a href="tel:+919769388813" style={{ color: '#77b8b0', textDecoration: 'none', fontWeight: 700 }}>+91 9769388813</a>
                 </div>
               </div>
             </div>

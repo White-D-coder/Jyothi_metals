@@ -4,6 +4,7 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { QuoteModal } from './components/QuoteModal';
 import { PageLoader } from './components/PageLoader';
+import { WhatsAppButton } from './components/WhatsAppButton';
 
 // Lazy-loaded Page Components for fast code-splitting and smooth transition loading
 const Home = lazy(() => import('./pages/Home').then(m => ({ default: m.Home })));
@@ -182,6 +183,9 @@ export function App() {
         setActiveTab={navigateTab}
         onOpenQuoteModal={() => handleOpenQuoteModal()}
       />
+
+      {/* Floating WhatsApp contact button (bottom-right, all pages) */}
+      <WhatsAppButton />
 
       {/* Quote Calculator & Inquiry Modal */}
       <QuoteModal

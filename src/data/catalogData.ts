@@ -135,6 +135,7 @@ export const allSubCategoriesList = [
   { id: 'Pre Cut Gaskets', label: 'Pre Cut Gaskets' },
 
   // Structural Steel Sub-Categories
+  { id: 'TMT Rebar', label: 'TMT Rebar' },
   { id: 'Mild Steel Angles', label: 'Mild Steel Angles' },
   { id: 'Mild Steel Beams', label: 'Mild Steel Beams' },
   { id: 'Mild Steel Channels', label: 'Mild Steel Channels' },
@@ -332,7 +333,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Nickel 200/201 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Nickel Pipes & Tubes',
-    image: '/images/products/nickel-200.jpg',
+    image: '/images/champak/nickel-alloy-200-201-seamless-welded-pipes-tubes-manufacturer-exporter.jpg',
     specs: ['Pure Nickel', 'ASTM B161 / B163', 'UNS N02200/N02201'],
   },
 
@@ -342,7 +343,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Hastelloy C276 / C22 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Hastelloy Pipes & Tubes',
-    image: '/images/products/hastelloy-c276.jpg',
+    image: '/images/champak/hastelloy-alloy-c22-c276-seamless-welded-pipes-tubes-manufacturer-exporter.jpg',
     specs: ['Ni-Mo-Cr Alloy', 'ASTM B619 / B622', 'UNS N10276'],
   },
 
@@ -352,7 +353,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Alloy 20 Pipes & Tubes',
     category: 'Pipes & Tubes',
     subCat: 'Alloy 20 Pipes & Tubes',
-    image: '/images/products/alloy-20-pipe.jpg',
+    image: '/images/champak/alloy-20-pipes-tubes-supplier-stockist.jpg',
     specs: ['UNS N08020', 'ASTM B729 / B464', 'Acid Plant Piping'],
   },
 
@@ -735,7 +736,7 @@ export const catalogProducts: CatalogProduct[] = [
     title: 'Monel 400 / K500 Sheets & Plates',
     category: 'Plates & Sheets',
     subCat: 'Monel Sheets & Plates',
-    image: '/images/products/monel-sheet.jpg',
+    image: '/images/champak/stainless-steel-253ma-strip-coil-sheet-plate-round-bar-exporter.jpg',
     specs: ['ASTM B127', 'UNS N04400', 'Seawater Corrosion Resistant'],
   },
 
@@ -1748,6 +1749,18 @@ export const catalogProducts: CatalogProduct[] = [
   },
 
   // Structural Steel Products
+  {
+    id: 'tmt-rebar',
+    title: 'TMT Rebar',
+    category: 'Structural Steel',
+    subCat: 'TMT Rebar',
+    image: '/images/products/tmt-rebar.jpg',
+    specs: [
+      'Thermo-mechanically treated reinforcement bar for RCC work',
+      'Sizes: 8 mm to 32 mm in 12 m lengths',
+      'IS 1786 — Fe-500 & Fe-550D',
+    ],
+  },
   {
     id: 'mild-steel-angles',
     title: 'Mild Steel Angles',
