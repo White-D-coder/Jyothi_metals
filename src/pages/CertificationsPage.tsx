@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import {
   ArrowRight,
   Download,
+  FileText,
   Maximize2,
   ExternalLink,
   X,
 } from 'lucide-react';
+import { technicalDocuments } from '../data/technicalLibrary';
 
 interface CertificationsPageProps {
   onOpenQuoteModal: (productName?: string) => void;
@@ -412,6 +414,139 @@ export const CertificationsPage: React.FC<CertificationsPageProps> = ({ onOpenQu
           .iso-cert-thumb:hover img { transform: none; }
         }
 
+        /* --- Technical reference library --- */
+        .doc-lib-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          gap: 22px;
+        }
+        .doc-lib-card {
+          display: flex;
+          flex-direction: column;
+          background: #FFFFFF;
+          border: 1px solid ${COLORS.divider};
+          border-top: 4px solid ${COLORS.accent};
+          box-shadow: 0 4px 16px rgba(48, 64, 80, 0.06);
+          transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),
+                      transform 280ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .doc-lib-card:hover {
+          box-shadow: 0 16px 34px rgba(48, 64, 80, 0.16);
+          transform: translateY(-3px);
+        }
+
+        /* The cover is the whole clickable target — it opens the reader tab. */
+        .doc-lib-cover {
+          position: relative;
+          display: block;
+          overflow: hidden;
+          background: #EDF1F2;
+          border-bottom: 1px solid ${COLORS.divider};
+          text-decoration: none;
+        }
+        .doc-lib-cover img {
+          display: block;
+          width: 100%;
+          height: 208px;
+          object-fit: cover;
+          object-position: center top;
+          background: #FFFFFF;
+          transition: transform 550ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .doc-lib-card:hover .doc-lib-cover img { transform: scale(1.04); }
+        .doc-lib-cover:focus-visible { outline: 2px solid ${COLORS.accent}; outline-offset: -2px; }
+
+        .doc-lib-chip {
+          position: absolute;
+          top: 12px;
+          left: 12px;
+          padding: 5px 10px;
+          font-size: 0.64rem;
+          font-weight: 800;
+          letter-spacing: 0.7px;
+          text-transform: uppercase;
+          color: #FFFFFF;
+          background: rgba(48, 64, 80, 0.86);
+        }
+        .doc-lib-open {
+          position: absolute;
+          inset: auto 0 0 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 7px;
+          padding: 10px;
+          font-size: 0.78rem;
+          font-weight: 700;
+          color: #FFFFFF;
+          background: rgba(48, 64, 80, 0.9);
+          opacity: 0;
+          transition: opacity 200ms ease;
+        }
+        .doc-lib-card:hover .doc-lib-open,
+        .doc-lib-cover:focus-visible .doc-lib-open { opacity: 1; }
+
+        .doc-lib-body {
+          display: flex;
+          flex-direction: column;
+          flex: 1 1 auto;
+          padding: 18px 20px 20px;
+        }
+        .doc-lib-title {
+          font-size: 0.98rem;
+          font-weight: 800;
+          line-height: 1.35;
+          color: ${COLORS.text};
+          margin: 0 0 8px;
+        }
+        .doc-lib-title a { color: inherit; text-decoration: none; }
+        .doc-lib-title a:hover { color: ${COLORS.accent}; }
+        .doc-lib-summary {
+          font-size: 0.83rem;
+          line-height: 1.6;
+          color: ${COLORS.textMuted};
+          margin: 0 0 16px;
+        }
+        .doc-lib-foot {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          margin-top: auto;
+          padding-top: 14px;
+          border-top: 1px solid ${COLORS.divider};
+        }
+        .doc-lib-meta {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 0.74rem;
+          font-weight: 700;
+          letter-spacing: 0.3px;
+          color: ${COLORS.textMuted};
+          text-transform: uppercase;
+        }
+        .doc-lib-dl {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 8px 14px;
+          font-size: 0.76rem;
+          font-weight: 700;
+          color: ${COLORS.text};
+          background: #FFFFFF;
+          border: 1px solid ${COLORS.divider};
+          text-decoration: none;
+          white-space: nowrap;
+        }
+        .doc-lib-dl:hover { background: #F4F6F8; border-color: ${COLORS.text}; }
+
+        @media (prefers-reduced-motion: reduce) {
+          .doc-lib-card, .doc-lib-cover img { transition: none; }
+          .doc-lib-card:hover { transform: none; }
+          .doc-lib-card:hover .doc-lib-cover img { transform: none; }
+        }
+
         .btn {
           border-radius: 0 !important;
           font-weight: 700;
@@ -618,6 +753,82 @@ export const CertificationsPage: React.FC<CertificationsPageProps> = ({ onOpenQu
           />
         </div>
       )}
+
+      {/*
+        Technical reference library. Each card opens the standalone reader at
+        /library/:slug in a new tab, so the visitor keeps this page behind them.
+      */}
+      <section style={{ padding: '60px 0 70px', background: COLORS.bg, borderBottom: `1px solid ${COLORS.divider}` }}>
+        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
+          <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 40px' }}>
+            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: COLORS.accent, letterSpacing: '0.6px', textTransform: 'uppercase', display: 'block', marginBottom: '6px' }}>
+              TECHNICAL REFERENCE LIBRARY
+            </span>
+            <h2 style={{ fontSize: 'clamp(1.7rem, 2.8vw, 2.2rem)', fontWeight: 700, color: COLORS.text, margin: '0 0 12px', letterSpacing: '0.4px' }}>
+              Data Sheets &amp; Dimensional Charts
+            </h2>
+            <p style={{ color: COLORS.textMuted, fontSize: '1rem', lineHeight: 1.65, margin: 0 }}>
+              Grade chemistry, mechanical properties, pipe and fitting dimensions, tolerances and
+              weight formulae — the tables our sales desk works from. Open any sheet to read every
+              page in your browser, or download the PDF.
+            </p>
+          </div>
+
+          <div className="doc-lib-grid">
+            {technicalDocuments.map((docItem) => {
+              const viewerUrl = `/library/${docItem.slug}`;
+              return (
+                <article key={docItem.slug} className="doc-lib-card">
+                  <a
+                    className="doc-lib-cover"
+                    href={viewerUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Open ${docItem.title} in a new tab`}
+                  >
+                    <img
+                      src={docItem.cover}
+                      alt={`First page of ${docItem.title}`}
+                      width={440}
+                      height={570}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <span className="doc-lib-chip">{docItem.category}</span>
+                    <span className="doc-lib-open">
+                      <Maximize2 size={15} /> Open &amp; read all pages
+                    </span>
+                  </a>
+
+                  <div className="doc-lib-body">
+                    <h3 className="doc-lib-title">
+                      <a href={viewerUrl} target="_blank" rel="noopener noreferrer">
+                        {docItem.title}
+                      </a>
+                    </h3>
+                    <p className="doc-lib-summary">{docItem.summary}</p>
+
+                    <div className="doc-lib-foot">
+                      <span className="doc-lib-meta">
+                        <FileText size={14} />
+                        PDF · {docItem.pages} {docItem.pages === 1 ? 'page' : 'pages'} · {docItem.size}
+                      </span>
+                      <a
+                        className="doc-lib-dl"
+                        href={docItem.file}
+                        download
+                        aria-label={`Download ${docItem.title} as a PDF`}
+                      >
+                        <Download size={14} /> Download
+                      </a>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
       {/* 3. Section 1: Certifications Carousel Deck */}
       {/* 3. Section 1: Certifications Directory Deck (Centered) */}

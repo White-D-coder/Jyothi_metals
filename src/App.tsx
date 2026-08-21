@@ -24,6 +24,9 @@ const WeldInspectionPage = lazy(() => import('./pages/WeldInspectionPage').then(
 const QualityPolicyPage = lazy(() => import('./pages/QualityPolicyPage').then(m => ({ default: m.QualityPolicyPage })));
 const CertificationsPage = lazy(() => import('./pages/CertificationsPage').then(m => ({ default: m.CertificationsPage })));
 const ProductDetailPage = lazy(() => import('./pages/ProductDetailPage').then(m => ({ default: m.ProductDetailPage })));
+// Standalone PDF reader, opened in its own tab — deliberately outside the site
+// chrome, and lazy so pdf.js never lands in the main bundle.
+const DocumentViewerPage = lazy(() => import('./pages/DocumentViewerPage').then(m => ({ default: m.DocumentViewerPage })));
 
 // Map a legacy "tab" id (used across Navbar/Footer/pages) to its real URL path.
 const tabToPath = (tab: string): string => (tab === 'home' ? '/' : `/${tab}`);
@@ -90,6 +93,18 @@ export function App() {
   const handleSelectCategory = (categoryName: string) => {
     navigate(`/products?category=${encodeURIComponent(categoryName)}`);
   };
+
+  // The document reader fills its own tab: no navbar, no footer, no WhatsApp
+  // bubble over the page it is meant to be reading.
+  if (location.pathname.startsWith('/library/')) {
+    return (
+      <Suspense fallback={<PageLoader />}>
+        <Routes>
+          <Route path="/library/:slug" element={<DocumentViewerPage />} />
+        </Routes>
+      </Suspense>
+    );
+  }
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
