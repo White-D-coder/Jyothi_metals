@@ -1101,9 +1101,13 @@ export const getScrapedGradeTableData = (title: string): ScrapedGradeTableData =
     chemRows: [
       ['304', '0.07max', '2.0max', '0.75max', '0.045max', '0.03max', 'min: 18.0 max: 20.0', 'min: 8.0 max: 10.5', 'NA'],
       ['304L', '0.03max', '2.0max', '0.75max', '0.045max', '0.03max', 'min: 18.0 max: 20.0', 'min: 8.0 max: 12.0', '0.10 max'],
-      // Reproduced verbatim from champaksteel.com — the source seats this row's
-      // values under shifted headers. Kept as published to match the live site.
-      ['304H', 'min: 18.0 max:20.0', 'min: 8.0 max: 10.5', 'min: 0.04 max:0.10', '0.75 max', '2.0 max', '0.045 max', '0.03 max', '0.10 max'],
+      // Champak seats this row's values under shifted headers. Re-seated on
+      // 2026-08-20 to match palgottametal.com, the reference the site owner
+      // chose — same change as the `304H-column-shift` rule in
+      // scripts/champak/generate.cjs, which fixes the published tables. This
+      // copy feeds the 14 products that have no source page, so the two must be
+      // kept in step or the same grade prints two different chemistries.
+      ['304H', '0.04 - 0.10', '2.00 max', '0.75 max', '0.045 max', '0.030 max', '18.00 - 20.00', '8.0 - 10.5', '0.10 max'],
     ],
     mechHeaders: ['Grade', 'Tensile Strength ksi (min)', 'Yield Strength 0.2% ksi (min)', 'Elongation %', 'Hardness (Brinell) MAX', 'Hardness (Rockwell B) MAX'],
     mechRows: [

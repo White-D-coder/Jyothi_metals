@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronDown, Menu, X, Plus, Minus, Phone, Mail, Clock } from 'lucide-react';
+import { mainCategoryNames } from '../data/productCategories';
 
 interface NavbarProps {
   activeTab: string;
@@ -44,18 +45,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     }
   };
 
-  const productDropdownItems = [
-    'Pipes & Tubes',
-    'Plates & Sheets',
-    'Round Bars',
-    'Flanges',
-    'Forged Fittings',
-    'Buttweld Fittings',
-    'Fasteners',
-    'Gasketing Solutions',
-    'Structural Steel',
-    'Specialized Product',
-  ];
+  const productDropdownItems = mainCategoryNames;
 
   /* Mirrors the desktop <ul className="nav-menu"> above so the drawer offers the
      same seven entries with the same sub-lists — keep the two in step when a

@@ -103,6 +103,15 @@ export const additionalCategories: ProductCategory[] = [
       'TMT rebar 8 mm to 32 mm in Fe-500 and Fe-550D, angles 25 x 25 mm to 250 x 250 mm, beams 100 x 50 mm to 900 x 300 mm, channels 75 x 40 mm to 400 x 100 mm, and rails from 24 kg/m to 60 kg/m.',
   },
   {
+    name: 'Angles & Channels',
+    slug: 'angles-channels',
+    image: '/images/palgotta/ss-304-angles-channels.jpg',
+    description:
+      'Stainless steel angle and channel sections in equal, unequal, L, C, U, strut and slotted profiles, cut to length for structural frames, staircases, walkways, shelving and architectural fabrication where corrosion resistance matters as much as strength.',
+    dimensions:
+      'Angles 3/4" through 8" in 1/8" to 5/8" thickness; channels 80 mm to 150 mm base with 40 mm to 75 mm sides. Lengths up to 6 metres, to ASME, ASTM, EN, BS, GB, DIN and JIS.',
+  },
+  {
     name: 'Specialized Product',
     slug: 'specialized-product',
     image: '/images/champak/other-items-manufacturer-exporter.jpg',
@@ -123,3 +132,15 @@ export const getCategorySlug = (category: string): string | undefined =>
   allProductCategories.find(
     (c) => c.name.toLowerCase() === category.trim().toLowerCase()
   )?.slug;
+
+/**
+ * The main categories in navigation order.
+ *
+ * Four places used to hardcode this list — the header dropdown, the home tab
+ * strip, and the home and catalog mobile dropdowns — and they drifted apart:
+ * `Angles & Channels` was missing from all four despite having a product, a
+ * slug and its own detail-page treatment, and the home mobile dropdown had
+ * also lost Gasketing Solutions and Structural Steel. Deriving them from the
+ * one array means a new category is added here and appears everywhere.
+ */
+export const mainCategoryNames = allProductCategories.map((category) => category.name);

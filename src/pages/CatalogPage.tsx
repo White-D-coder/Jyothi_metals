@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Search, ChevronRight, ChevronDown, Check, Info } from 'lucide-react';
+import { mainCategoryNames } from '../data/productCategories';
 import {
   catalogProducts,
   type CatalogProduct,
@@ -211,18 +212,7 @@ export const CatalogPage: React.FC<CatalogPageProps> = ({
 
             {isMainCatDropdownOpen && (
               <div className="custom-mobile-dropdown-menu" style={{ borderRadius: 0 }}>
-                {[
-                  'Pipes & Tubes',
-                  'Plates & Sheets',
-                  'Round Bars',
-                  'Flanges',
-                  'Forged Fittings',
-                  'Buttweld Fittings',
-                  'Fasteners',
-                  'Gasketing Solutions',
-                  'Structural Steel',
-                  'Specialized Product',
-                ].map((catId) => {
+                {mainCategoryNames.map((catId) => {
                   const isSelected = currentCategoryName === catId;
                   return (
                     <button

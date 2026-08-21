@@ -104,19 +104,22 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
       code: 'ISO 9001:2015',
       title: 'Quality Management System',
       desc: 'Cert. No. QMS/010898/0619, valid up to 9 June 2028',
-      image: '/images/plant/inspection-packaging.jpg',
+      image: '/images/certificates/iso-9001-2015-thumb.jpg',
+      full: '/images/certificates/iso-9001-2015.jpg',
     },
     {
       code: 'ISO 14001:2015',
       title: 'Environmental Management System',
       desc: 'Cert. No. EMS/010896/0619, valid up to 9 June 2028',
-      image: '/images/plant/plant-overview.jpg',
+      image: '/images/certificates/iso-14001-2015-thumb.jpg',
+      full: '/images/certificates/iso-14001-2015.jpg',
     },
     {
       code: 'ISO 45001:2018',
       title: 'Occupational Health and Safety',
       desc: 'Cert. No. OHS/010897/0619, valid up to 9 June 2028',
-      image: '/images/plant/polishing-line.jpg',
+      image: '/images/certificates/iso-45001-2018-thumb.jpg',
+      full: '/images/certificates/iso-45001-2018.jpg',
     },
   ];
 
@@ -297,14 +300,18 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
           margin: 0;
         }
 
-        /* Certification deck: card lifts, photo pushes in behind it. */
+        /* Certification deck. These are the client's own certificate scans, so
+           the card is a document frame, not a photo tile: the previous version
+           cropped a plant photograph to fill and laid a dark gradient over the
+           lower half, which would render a certificate unreadable. */
         .cert-card {
-          position: relative;
-          height: 420px;
-          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          background: #FFFFFF;
           border: 1px solid #E0E8E8;
+          border-top: 4px solid #588078;
           box-shadow: 0 8px 24px rgba(48, 64, 80, 0.07);
-          cursor: pointer;
+          text-decoration: none;
           transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
                       box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -312,29 +319,37 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
           transform: translateY(-6px);
           box-shadow: 0 18px 40px rgba(48, 64, 80, 0.18);
         }
-        .cert-card img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          display: block;
-          /* Slower than the card lift so the photo reads as depth behind the
-             frame rather than moving with it. */
-          transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+        .cert-card-scan {
+          background: #F4F6F8;
+          border-bottom: 1px solid #E0E8E8;
+          padding: 18px;
         }
-        .cert-card:hover img {
-          transform: scale(1.08);
+        /* Portrait A4 scans: contain, never cover — cropping a certificate cuts
+           off the registrar's marks and the certificate number. */
+        .cert-card-scan img {
+          display: block;
+          width: 100%;
+          /* Tall enough that the scope wording and certificate number are
+             legible in the card itself, not just in the full-size scan. */
+          height: 380px;
+          object-fit: contain;
+          /* index.css applies a brightness/contrast lift to every img to make
+             the plant photography pop. A certificate is a document of record,
+             so it is reproduced as scanned. */
+          filter: none;
+        }
+        .cert-card-body {
+          padding: 22px 24px 24px;
         }
 
         @media (prefers-reduced-motion: reduce) {
           .timeline-detail { animation: none; }
           .timeline-detail-img img,
-          .cert-card,
-          .cert-card img {
+          .cert-card {
             transition: none;
           }
           .timeline-detail:hover .timeline-detail-img img,
-          .cert-card:hover,
-          .cert-card:hover img {
+          .cert-card:hover {
             transform: none;
           }
         }
@@ -678,37 +693,30 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
             }}
           >
             {certifications.map((cert) => (
-              <div key={cert.code} className="cert-card">
-                {/* Background Image */}
-                <img src={cert.image} alt={cert.title} />
+              /* Opens the full-resolution scan. The card already carried a
+                 pointer cursor but no handler; now the affordance is real. */
+              <a
+                key={cert.code}
+                className="cert-card"
+                href={cert.full}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`View the full ${cert.code} certificate`}
+              >
+                <div className="cert-card-scan">
+                  <img
+                    src={cert.image}
+                    alt={`${cert.code} ${cert.title} certificate issued to Jyoti Metal (India)`}
+                    loading="lazy"
+                  />
+                </div>
 
-                {/* Dark Gradient Overlay for Readability */}
-                <div
-                  style={{
-                    position: 'absolute',
-                    inset: 0,
-                    background: 'linear-gradient(180deg, rgba(0,0,0,0) 25%, rgba(15, 23, 42, 0.88) 100%)',
-                    zIndex: 1,
-                  }}
-                />
-
-                {/* Bottom Content Panel (Heading & Subheading Only) */}
-                <div
-                  style={{
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    padding: '32px 28px',
-                    zIndex: 2,
-                    color: '#FFFFFF',
-                  }}
-                >
+                <div className="cert-card-body">
                   <h3
                     style={{
                       fontSize: '1.45rem',
                       fontWeight: 800,
-                      color: '#FFFFFF',
+                      color: '#304050',
                       lineHeight: 1.25,
                       marginBottom: '8px',
                       letterSpacing: '0.4px',
@@ -721,7 +729,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                     style={{
                       fontSize: '0.88rem',
                       fontWeight: 700,
-                      color: '#CBD5E1',
+                      color: '#588078',
                       textTransform: 'uppercase',
                       letterSpacing: '0.6px',
                     }}
@@ -734,7 +742,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                     style={{
                       fontSize: '0.78rem',
                       fontWeight: 600,
-                      color: '#94A3B8',
+                      color: '#7C8894',
                       marginTop: '8px',
                       letterSpacing: '0.2px',
                     }}
@@ -742,7 +750,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
                     {cert.desc}
                   </div>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
         </div>

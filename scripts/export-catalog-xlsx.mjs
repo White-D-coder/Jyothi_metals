@@ -194,7 +194,10 @@ function resolveProduct(p) {
   // none of the three material-property sections rather than falling through to
   // the generic stainless tables. The sheet has to omit them for the same
   // reason, otherwise it stops describing what the site actually publishes.
-  const noMaterialSpecs = p.category === 'Gasketing Solutions';
+  // Angles & Channels is suppressed for a different reason: those pages publish
+  // a profile/size specification panel and a grade line-up only, by request.
+  const noMaterialSpecs =
+    p.category === 'Gasketing Solutions' || p.category === 'Angles & Channels';
 
   return {
     ...p,
@@ -208,7 +211,9 @@ function resolveProduct(p) {
     // A published product shows a section only when its source page has it —
     // `null` means the section is omitted on the site. Generic fallbacks are
     // reserved for products with no source page at all.
-    equivalent: spec
+    equivalent: p.category === 'Angles & Channels'
+      ? null
+      : spec
       ? (spec.equivalent
           ? { kind: 'table', heading: spec.equivalent.heading, data: expandSpecTable(spec.equivalent), note: spec.equivalent.note }
           : null)
