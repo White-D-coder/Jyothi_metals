@@ -27,6 +27,11 @@ import {
   getGradeSpecification,
   getGalleryImages,
 } from '../data/productFallbacks';
+import {
+  anglesChannelsContent,
+  anglesChannelsGroups,
+  isAnglesChannelsProduct,
+} from '../data/anglesChannels';
 
 interface ProductDetailPageProps {
   onOpenQuoteModal: (productName?: string) => void;
@@ -181,6 +186,17 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
   // product form, so it is derived from the whole product, not just the title.
   const gradeSpec = useMemo(() => getGradeSpecification(currentProduct), [currentProduct]);
 
+  // Angles & Channels pages are deliberately three blocks only — photo +
+  // description, the specification panel, then the grade line-up. Everything
+  // between (equivalent grades, chemistry, mechanicals, physicals, the
+  // applications list and the standards footer) is suppressed: a buyer picking
+  // a structural section is choosing a profile and a size, not comparing heats.
+  const isAnglesChannels = isAnglesChannelsProduct(currentProduct);
+  const acContent = anglesChannelsContent[currentProduct.id];
+  // Each published grade lists its own material group, so the Inconel page
+  // shows the Inconel line-up rather than every angle we stock.
+  const acGroup = anglesChannelsGroups[currentProduct.subCat];
+
   // Gaskets are fibre, graphite and PTFE composites, not a single alloy: one
   // chemistry row, tensile figure or thermal-expansion coefficient cannot
   // describe them. None of the 12 Gasketing Solutions products has a source
@@ -188,7 +204,8 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
   // the generic stainless fallbacks and publish figures that are simply wrong
   // for a jointing sheet. The whole group is suppressed instead — sealing data
   // (temperature/pressure limits, PxT) belongs there, not an alloy chemistry.
-  const showMaterialSpecs = currentProduct.category !== 'Gasketing Solutions';
+  const showMaterialSpecs =
+    currentProduct.category !== 'Gasketing Solutions' && !isAnglesChannels;
 
   // Gallery imagery
   const galleryImages = useMemo(
@@ -214,13 +231,19 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
   const visibleApps = appsExpanded ? allApps : allApps.slice(0, APPS_PREVIEW_COUNT);
 
   // Related products from same category
-  const relatedProducts = useMemo(() => {
-    const sameCat = catalogProducts.filter(
-      (p) => p.category === currentProduct.category && p.id !== currentProduct.id
-    );
-    const selected = sameCat.length >= 3 ? sameCat.slice(0, 3) : catalogProducts.slice(1, 4);
-    return selected;
-  }, [currentProduct]);
+  // Same category only. This used to pad out to three by falling back to the
+  // top of the whole catalogue whenever a category held fewer than three
+  // products, which put SS pipes under a heading reading "Related Metallurgical
+  // Stock (Angles & Channels)". Every other category has 10+ items, so dropping
+  // the padding changes nothing for them; the section hides itself when a
+  // category has no siblings yet.
+  const relatedProducts = useMemo(
+    () =>
+      catalogProducts
+        .filter((p) => p.category === currentProduct.category && p.id !== currentProduct.id)
+        .slice(0, 3),
+    [currentProduct]
+  );
 
   return (
     <div className="product-detail-root" style={{ background: '#F8F8F8', minHeight: '100vh', color: '#304050', paddingBottom: '80px' }}>
@@ -514,9 +537,13 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
                   </span>
                 </div>
 
-                {/* Short Description */}
+                {/* Short Description. Angles & Channels carry their own copy —
+                    the generic line below talks about solution annealing and
+                    high-pressure service, which describes pipe, not a section. */}
                 <p style={{ fontSize: '0.92rem', color: '#7C8894', lineHeight: 1.65, marginBottom: '24px' }}>
-                  Manufactured and stocked by Jyoti Metal (India) to stringent ASTM, ASME, and EN standards. Fully solution annealed and tested for high-pressure, severe corrosion environments.
+                  {acContent
+                    ? acContent.description
+                    : 'Manufactured and stocked by Jyoti Metal (India) to stringent ASTM, ASME, and EN standards. Fully solution annealed and tested for high-pressure, severe corrosion environments.'}
                 </p>
 
                 {/* Key Bullet Highlights */}
@@ -525,7 +552,10 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
                     <ShieldCheck size={16} color="#588078" /> 100% Spectral chemistry verification &amp; heat-lot tracking
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.86rem', color: '#304050', fontWeight: 600 }}>
-                    <Layers size={16} color="#588078" /> Hydrostatic pressure tested &amp; ultrasonic flaw scanned
+                    <Layers size={16} color="#588078" />{' '}
+                    {isAnglesChannels
+                      ? 'Straightness, squareness & section tolerance checked'
+                      : 'Hydrostatic pressure tested & ultrasonic flaw scanned'}
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.86rem', color: '#304050', fontWeight: 600 }}>
                     <FileCheck size={16} color="#588078" /> EN 10204 3.1 &amp; 3.2 Mill Test Certificate included
@@ -563,8 +593,8 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
               <img src={currentProduct.image || galleryImages[0]} alt={currentProduct.title} />
             </div>
             <div className="pd-spec-body">
-              <h2 className="pd-spec-heading">{gradeSpec.heading}</h2>
-              {gradeSpec.rows.map((row) => (
+              <h2 className="pd-spec-heading">{acContent ? acContent.specHeading : gradeSpec.heading}</h2>
+              {(acContent ? acContent.specRows : gradeSpec.rows).map((row) => (
                 <div key={row.label} className="pd-spec-row">
                   <b>{row.label}</b>: {row.value}
                 </div>
@@ -572,9 +602,81 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
             </div>
           </div>
 
+          {/* Grade line-up. Presentational on purpose — these are NOT links.
+              Only SS 304 has a page today, so anchoring the other eleven would
+              promise routes that do not exist; they are here so a buyer can see
+              the range and ask for a grade by name. Hence cursor: default and a
+              hover state that lifts the row without implying navigation. */}
+          {isAnglesChannels && acGroup && (
+            <div style={{ marginTop: '40px' }}>
+              <div
+                style={{
+                  background: '#121A24',
+                  color: '#ffffff',
+                  padding: '14px 22px',
+                  fontSize: '0.86rem',
+                  fontWeight: 700,
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                }}
+              >
+                {acGroup.heading}
+              </div>
+              <div
+                className="pd-supp-grid"
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                  gap: '10px',
+                  background: '#F8F8F8',
+                  border: '1px solid #E0E8E8',
+                  borderTop: 'none',
+                  padding: '20px',
+                }}
+              >
+                {acGroup.grades.map((grade) => {
+                  const isCurrent = grade === currentProduct.title;
+                  return (
+                    <div
+                      key={grade}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        padding: '11px 16px',
+                        background: isCurrent ? '#588078' : '#FFFFFF',
+                        border: `1px solid ${isCurrent ? '#588078' : '#E0E8E8'}`,
+                        color: isCurrent ? '#FFFFFF' : '#304050',
+                        fontSize: '0.86rem',
+                        fontWeight: isCurrent ? 700 : 600,
+                        cursor: 'default',
+                        transition: 'border-color 0.2s, background 0.2s, transform 0.2s',
+                      }}
+                      onMouseEnter={(e) => {
+                        if (isCurrent) return;
+                        e.currentTarget.style.borderColor = '#588078';
+                        e.currentTarget.style.transform = 'translateX(3px)';
+                      }}
+                      onMouseLeave={(e) => {
+                        if (isCurrent) return;
+                        e.currentTarget.style.borderColor = '#E0E8E8';
+                        e.currentTarget.style.transform = 'none';
+                      }}
+                    >
+                      <span>{grade}</span>
+                    </div>
+                  );
+                })}
+              </div>
+              <p style={{ fontSize: '0.8rem', color: '#7C8894', marginTop: '12px', lineHeight: 1.6 }}>
+                All grades above are stocked in angle and channel form. Ask our desk for a
+                size list and mill test certificate against the grade you need.
+              </p>
+            </div>
+          )}
+
             <div>
               {/* Section 0: Equivalent Grades */}
-              {spec?.equivalent && (
+              {!isAnglesChannels && spec?.equivalent && (
                 <SpecSection label="EQUIVALENT GRADES">
                   <SpecHeading>{spec.equivalent.heading}</SpecHeading>
                   <SpecTableView table={spec.equivalent} />
@@ -756,7 +858,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
               )}
 
               {/* Section 4: Application Industries */}
-              {allApps.length > 0 && (
+              {!isAnglesChannels && allApps.length > 0 && (
               <SpecSection label="APPLICATION INDUSTRIES">
                 <SpecHeading>Certified application industries</SpecHeading>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -822,7 +924,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
               show that page's "Specification of …" block verbatim (nothing at all
               when the source page has none); only products without a published
               source keep the generic fallback chips. */}
-          {spec ? (
+          {isAnglesChannels ? null : spec ? (
             spec.specification && (
               <div style={{ marginTop: '48px', paddingTop: '36px', borderTop: '1px solid #E0E8E8' }}>
                 <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#304050', marginBottom: '20px' }}>
@@ -886,7 +988,8 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
         </div>
       </section>
 
-      {/* 4. Bottom Related Stock Grid */}
+      {/* 4. Bottom Related Stock Grid — hidden until the category has siblings. */}
+      {relatedProducts.length > 0 && (
       <section className="pd-section" style={{ padding: '60px 0 20px' }}>
         <div className="container pd-container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
           <div className="pd-related-head" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '28px' }}>
@@ -955,6 +1058,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
           </div>
         </div>
       </section>
+      )}
     </div>
   );
 };

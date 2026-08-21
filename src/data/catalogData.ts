@@ -1871,6 +1871,90 @@ export const catalogProducts: CatalogProduct[] = [
   },
 
   // ---------------------------------------------------------------------
+  // Angles & Channels. Photography under /images/palgotta/ comes from the
+  // corresponding palgottametal.com product page, at the site owner's request
+  // — the same arrangement as /images/champak/. Structural sections, kept in
+  // their own
+  // category rather than under Structural Steel because that group is mild
+  // steel to IS 808 while these are corrosion-resistant grades sold on their
+  // finish and alloy. SS 304 is the first grade published; the other eleven
+  // stainless grades are listed on the detail page as stock we carry but do
+  // not yet have their own pages.
+  // ---------------------------------------------------------------------
+  {
+    id: 'ss-304-angles-channels',
+    title: 'Stainless Steel 304 Angles & Channels',
+    category: 'Angles & Channels',
+    subCat: 'Stainless Steel Angles & Channels',
+    image: '/images/palgotta/ss-304-angles-channels.jpg',
+    specs: [
+      'Equal, unequal, L, C, U, strut & slotted profiles',
+      'Angles 3/4" thru 8"  |  Channels 80-150 mm base',
+      'ASME, ASTM, EN, BS, GB, DIN, JIS',
+    ],
+  },
+  {
+    id: 'duplex-s31803-angles-channels',
+    title: 'EN 1.4462 / Duplex UNS S31803 / F51 / UNS S32205 / F60 Angles & Channels',
+    category: 'Angles & Channels',
+    subCat: 'Duplex / Super Duplex Angles & Channels',
+    image: '/images/palgotta/duplex-s31803-angles-channels.jpg',
+    specs: [
+      'Twice the yield of 304/316 in the same section',
+      'Angles 3/4" thru 8"  |  Channels 80-150 mm base',
+      'EN 1.4462 / UNS S31803 / S32205 / F51 / F60',
+    ],
+  },
+  {
+    id: 'super-duplex-s32750-angles-channels',
+    title: 'EN 1.4410 / Super Duplex UNS S32750 / F53 / 2507 Angles & Channels',
+    category: 'Angles & Channels',
+    subCat: 'Duplex / Super Duplex Angles & Channels',
+    image: '/images/palgotta/super-duplex-s32750-angles-channels.jpg',
+    specs: [
+      '25Cr / 7Ni / 3.7Mo for seawater & subsea duty',
+      'Angles 3/4" thru 8"  |  Channels 80-150 mm base',
+      'EN 1.4410 / UNS S32750 / F53 / 2507',
+    ],
+  },
+  {
+    id: 'inconel-600-angles-channels',
+    title: 'Inconel 600 Angles & Channels',
+    category: 'Angles & Channels',
+    subCat: 'Inconel / Incoloy Angles & Channels',
+    image: '/images/palgotta/inconel-600-angles-channels.jpg',
+    specs: [
+      'Nickel-chromium sections for heat & corrosion duty',
+      'Angles 3/4" thru 8"  |  Channels 80-150 mm base',
+      'UNS N06600 / W.Nr. 2.4816',
+    ],
+  },
+  {
+    id: 'titanium-gr2-angles-channels',
+    title: 'Titanium Gr 2 Angles & Channels',
+    category: 'Angles & Channels',
+    subCat: 'Titanium Angles & Channels',
+    image: '/images/palgotta/titanium-gr2-angles-channels.jpg',
+    specs: [
+      'Half the density of steel, seawater resistant',
+      'Angles 3/4" thru 8"  |  Channels 80-150 mm base',
+      'UNS R50400 / W.Nr. 3.7035',
+    ],
+  },
+  {
+    id: 'alloy-20-angles-channels',
+    title: 'Alloy 20 Angles & Channels',
+    category: 'Angles & Channels',
+    subCat: 'Other Angles & Channels',
+    image: '/images/palgotta/alloy-20-angles-channels.jpg',
+    specs: [
+      'Sulphuric acid service to ~85% concentration',
+      'Angles 3/4" thru 8"  |  Channels 80-150 mm base',
+      'UNS N08020 / Alloy 20Cb-3',
+    ],
+  },
+
+  // ---------------------------------------------------------------------
   // Champak parity: products listed on champaksteel.com's category pages that
   // were absent here. Titles, categories and spec chips are taken from the
   // cached pages — see scripts/champak/catalog-fill.cjs.

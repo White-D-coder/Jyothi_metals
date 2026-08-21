@@ -64,10 +64,10 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenQuoteModal }
               }}
             />
             <div>
-              <span className="footer-brand-title" style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 900, fontSize: '1.45rem', color: '#ffffff', lineHeight: 1.1, letterSpacing: '0.02em', display: 'block' }}>
+              <span className="footer-brand-title" style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 900, fontSize: '1.45rem', color: '#77b8b0', lineHeight: 1.1, letterSpacing: '0.02em', display: 'block' }}>
                 JYOTI METAL (INDIA)
               </span>
-              <div style={{ fontSize: '0.68rem', fontWeight: 800, color: '#77b8b0', letterSpacing: '0.12em', marginTop: '4px' }}>
+              <div style={{ fontSize: '0.68rem', fontWeight: 800, color: '#ffffff', letterSpacing: '0.12em', marginTop: '4px' }}>
                 AN ISO 9001:2015 CERTIFIED COMPANY
               </div>
             </div>

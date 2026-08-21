@@ -17,6 +17,7 @@ import {
   getFirstSubCategoryForCategory,
 } from '../data/catalogData';
 import { MetalPriceTicker } from '../components/MetalPriceTicker';
+import { mainCategoryNames } from '../data/productCategories';
 
 interface HomeProps {
   onNavigate: (page: string) => void;
@@ -1376,16 +1377,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
 
               {isMainCatDropdownOpen && (
                 <div className="custom-mobile-dropdown-menu">
-                  {[
-                    'Pipes & Tubes',
-                    'Plates & Sheets',
-                    'Round Bars',
-                    'Flanges',
-                    'Forged Fittings',
-                    'Buttweld Fittings',
-                    'Fasteners',
-                    'Specialized Product',
-                  ].map((catId) => {
+                  {mainCategoryNames.map((catId) => {
                     const isSelected = activeCatalogTab === catId;
                     return (
                       <button
@@ -1463,7 +1455,14 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
             style={{
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center',
+              // `safe center` centres the row while it fits, but degrades to
+              // flex-start once the ten tabs overflow. Plain `center` pushes the
+              // overflow out of BOTH ends, which parked "Pipes & Tubes" at
+              // left: -172px with scrollLeft already 0 — rendered, but off the
+              // box and unreachable by scrolling. Browsers without `safe`
+              // ignore the declaration and fall back to flex-start, which is
+              // the behaviour we want anyway.
+              justifyContent: 'safe center',
               gap: '10px',
               flexWrap: 'nowrap',
               overflowX: 'auto',
@@ -1472,23 +1471,12 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
               maxWidth: '100%',
             }}
           >
-            {[
-              { id: 'Pipes & Tubes', label: 'Pipes & Tubes' },
-              { id: 'Plates & Sheets', label: 'Plates & Sheets' },
-              { id: 'Round Bars', label: 'Round Bars' },
-              { id: 'Flanges', label: 'Flanges' },
-              { id: 'Forged Fittings', label: 'Forged Fittings' },
-              { id: 'Buttweld Fittings', label: 'Buttweld Fittings' },
-              { id: 'Fasteners', label: 'Fasteners' },
-              { id: 'Gasketing Solutions', label: 'Gasketing Solutions' },
-              { id: 'Structural Steel', label: 'Structural Steel' },
-              { id: 'Specialized Product', label: 'Specialized Product' },
-            ].map((tab) => (
+            {mainCategoryNames.map((tab) => (
               <button
-                key={tab.id}
+                key={tab}
                 onClick={() => {
-                  setActiveCatalogTab(tab.id);
-                  const defaultSub = getFirstSubCategoryForCategory(tab.id);
+                  setActiveCatalogTab(tab);
+                  const defaultSub = getFirstSubCategoryForCategory(tab);
                   setActiveSubCat(defaultSub);
                   setShowAllProducts(false);
                 }}
@@ -1498,16 +1486,16 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
                   fontWeight: 700,
                   cursor: 'pointer',
                   whiteSpace: 'nowrap',
-                  background: activeCatalogTab === tab.id ? '#51847D' : '#ffffff',
-                  color: activeCatalogTab === tab.id ? '#ffffff' : '#1e293b',
-                  border: activeCatalogTab === tab.id ? '2px solid #51847D' : '1px solid #e2e8f0',
+                  background: activeCatalogTab === tab ? '#51847D' : '#ffffff',
+                  color: activeCatalogTab === tab ? '#ffffff' : '#1e293b',
+                  border: activeCatalogTab === tab ? '2px solid #51847D' : '1px solid #e2e8f0',
                   borderRadius: '50px',
-                  boxShadow: activeCatalogTab === tab.id ? '0 6px 18px rgba(81, 132, 125, 0.25)' : '0 2px 4px rgba(0,0,0,0.02)',
+                  boxShadow: activeCatalogTab === tab ? '0 6px 18px rgba(81, 132, 125, 0.25)' : '0 2px 4px rgba(0,0,0,0.02)',
                   transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
                   flexShrink: 0,
                 }}
               >
-                {tab.label}
+                {tab}
               </button>
             ))}
           </div>
