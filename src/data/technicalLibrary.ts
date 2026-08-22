@@ -29,7 +29,7 @@ export const technicalDocuments: TechnicalDocument[] = [
     file: '/docs/stainless-steel-properties.pdf',
     cover: '/images/docs/stainless-steel-properties.jpg',
     pages: 1,
-    size: '750 KB',
+    size: '643 KB',
   },
   {
     slug: 'carbon-alloy-steel-properties',
@@ -40,7 +40,7 @@ export const technicalDocuments: TechnicalDocument[] = [
     file: '/docs/carbon-alloy-steel-properties.pdf',
     cover: '/images/docs/carbon-alloy-steel-properties.jpg',
     pages: 2,
-    size: '1.6 MB',
+    size: '1.5 MB',
   },
   {
     slug: 'pipe-dimensions-weights',
@@ -51,7 +51,7 @@ export const technicalDocuments: TechnicalDocument[] = [
     file: '/docs/pipe-dimensions-weights.pdf',
     cover: '/images/docs/pipe-dimensions-weights.jpg',
     pages: 2,
-    size: '1.2 MB',
+    size: '528 KB',
   },
   {
     slug: 'pipe-tube-specification-tolerance',
@@ -62,7 +62,7 @@ export const technicalDocuments: TechnicalDocument[] = [
     file: '/docs/pipe-tube-specification-tolerance.pdf',
     cover: '/images/docs/pipe-tube-specification-tolerance.jpg',
     pages: 1,
-    size: '164 KB',
+    size: '221 KB',
   },
   {
     slug: 'buttweld-fittings-dimensions',
@@ -73,7 +73,7 @@ export const technicalDocuments: TechnicalDocument[] = [
     file: '/docs/buttweld-fittings-dimensions.pdf',
     cover: '/images/docs/buttweld-fittings-dimensions.jpg',
     pages: 8,
-    size: '3.6 MB',
+    size: '3.5 MB',
   },
   {
     slug: 'flange-dimensions',
@@ -84,7 +84,7 @@ export const technicalDocuments: TechnicalDocument[] = [
     file: '/docs/flange-dimensions.pdf',
     cover: '/images/docs/flange-dimensions.jpg',
     pages: 4,
-    size: '1.9 MB',
+    size: '1.8 MB',
   },
   {
     slug: 'weight-calculation-formulae',
@@ -95,7 +95,7 @@ export const technicalDocuments: TechnicalDocument[] = [
     file: '/docs/weight-calculation-formulae.pdf',
     cover: '/images/docs/weight-calculation-formulae.jpg',
     pages: 1,
-    size: '583 KB',
+    size: '584 KB',
   },
 ];
 
