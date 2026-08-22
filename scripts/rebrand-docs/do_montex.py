@@ -21,11 +21,20 @@ FILES = {
         "Stainless Steel - Chemical & Mechanical Properties",
 }
 
+# Ghostscript flattened the catalogue to vector art, so the two maroons the
+# tables were printed in survive as plain DeviceCMYK fill operators.
+MAROON = {
+    '0.258057 0.986328 0.996094 0.241211 k': brand.fmt_rgb(brand.DEEP),
+    '0.247559 0.988281 1 0.253174 k': brand.fmt_rgb(brand.DEEP),
+}
+
 band_png = brand.to_png(brand.header_band(BAND.width, BAND.height))
 
 for fname, title in FILES.items():
     doc = pymupdf.open(os.path.join(SRC, fname))
+    recoloured = 0
     for page in doc:
+        recoloured += brand.recolour_contents(page, MAROON)
         page.draw_rect(BAND_WIPE, color=None, fill=(1, 1, 1), overlay=True)
         page.insert_image(BAND, stream=band_png, overlay=True)
 
@@ -37,4 +46,4 @@ for fname, title in FILES.items():
     brand.scrub_meta(doc, title)
     doc.save(os.path.join(OUT, fname), garbage=4, deflate=True)
     doc.close()
-    print("wrote", fname)
+    print(f"wrote {fname} ({recoloured} maroon fills re-tinted)")

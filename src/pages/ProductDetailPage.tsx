@@ -16,7 +16,6 @@ import { catalogProducts, type CatalogProduct } from '../data/catalogData';
 import { champakSpecs, type SpecTable } from '../data/champakSpecs';
 import { getChampakImage } from '../data/champakImages';
 import {
-  getAlloyPricePerKg,
   getAlloyComposition,
   getMechanicalProperties,
   getPhysicalProperties,
@@ -1024,12 +1023,12 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenQuot
                   <img src={rel.image} alt={rel.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
                 <div style={{ flex: 1 }}>
-                  <h4 style={{ fontSize: '0.92rem', fontWeight: 700, color: '#304050', margin: '0 0 4px 0', lineHeight: 1.3 }}>
+                  {/* Title only. The indicative ₹/kg that used to sit here is a
+                      generated figure, not a quotation, and it read as a firm
+                      price on a card the visitor has not asked to price. */}
+                  <h4 style={{ fontSize: '0.92rem', fontWeight: 700, color: '#304050', margin: 0, lineHeight: 1.3 }}>
                     {rel.title}
                   </h4>
-                  <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#588078' }}>
-                    &#8377;{getAlloyPricePerKg(rel.title)} INR / Kg
-                  </div>
                 </div>
                 <button
                   type="button"
