@@ -126,15 +126,15 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal }) => {
   const legacyPillars = [
     {
       title: 'Our Mission',
-      desc: 'To give the customer correct material at the correct time, with full test certificate and papers, at a fair rate.',
+      desc: 'Our mission is to provide customers with the correct material at the right time, backed by complete test certificates and documentation, at a fair and honest rate.',
     },
     {
       title: 'Our Vision',
-      desc: 'To be the first name a customer thinks of when he needs stainless steel pipes, tubes and other metal, in India and outside.',
+      desc: 'Our vision is to become the first name customers think of for stainless steel pipes, tubes, and other metals both in India and internationally.',
     },
     {
       title: 'How We Work',
-      desc: 'Right grade, right size. Proper testing. Delivery on the promised date. Clear rate, no hidden charges.',
+      desc: 'We work by supplying the right grade and size, ensuring proper testing, delivering on the promised date, and maintaining clear pricing with no hidden charges.',
     },
   ];
 
