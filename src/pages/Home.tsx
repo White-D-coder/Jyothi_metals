@@ -161,7 +161,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
   /* Hidden for now — the sector list and tile images were taken from
      champaksteel.com by hand and have not been confirmed as ours. Flip to true
      to bring the section back. */
-  const SHOW_INDUSTRIES_SECTION = false;
+  const SHOW_INDUSTRIES_SECTION = true;
 
   /* The sectors we supply, mirroring the "Industries We Serve" strip on
      champaksteel.com. Their strip carries 14 tiles, but Oil & Gas, Aeronautical
@@ -1708,6 +1708,40 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
         </div>
       </section>
 
+      {/* 9. Industries We Serve — sector tiles, mirroring the strip Champak
+          publishes. Rendered as a grid rather than their carousel so every
+          sector is visible at once without waiting for a rotation. */}
+      {SHOW_INDUSTRIES_SECTION && (
+      <section className="section bg-tint" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
+        <div className="container">
+          <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 46px' }} className="reveal">
+            <span className="small-label" style={{ color: '#51847D', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
+              WHERE OUR METAL GOES
+            </span>
+            <h2 className="section-title" style={{ fontSize: '2.5rem', color: '#061221', marginBottom: '14px', fontWeight: 900, letterSpacing: '0.02em' }}>
+              INDUSTRIES WE SERVE
+            </h2>
+            <div style={{ width: '60px', height: '4px', background: '#51847D', margin: '0 auto 16px' }} />
+            <p style={{ color: '#475569', fontSize: '1.05rem', lineHeight: 1.6 }}>
+              From refinery and petrochemical process lines to defence, power and heavy
+              engineering. Our certified stock is specified wherever material failure is not an option.
+            </p>
+          </div>
+
+          <div className="industry-grid reveal">
+            {industriesServed.map((industry) => (
+              <div key={industry.src} className="industry-card">
+                <div className="industry-card-media">
+                  <img src={industry.src} alt={`${industry.label} Industry`} title={industry.label} loading="lazy" />
+                </div>
+                <span className="industry-card-label">{industry.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      )}
+
       {/* 7. Client Testimonials 3-Column Vertical Infinite Marquee Section */}
       <section
         className="section bg-white"
@@ -1919,39 +1953,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onOpenQuoteModal }) => {
         ))}
       </section>
 
-      {/* 9. Industries We Serve — sector tiles, mirroring the strip Champak
-          publishes. Rendered as a grid rather than their carousel so every
-          sector is visible at once without waiting for a rotation. */}
-      {SHOW_INDUSTRIES_SECTION && (
-      <section className="section bg-tint" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
-        <div className="container">
-          <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 46px' }} className="reveal">
-            <span className="small-label" style={{ color: '#51847D', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
-              WHERE OUR METAL GOES
-            </span>
-            <h2 className="section-title" style={{ fontSize: '2.5rem', color: '#061221', marginBottom: '14px', fontWeight: 900, letterSpacing: '0.02em' }}>
-              INDUSTRIES WE SERVE
-            </h2>
-            <div style={{ width: '60px', height: '4px', background: '#51847D', margin: '0 auto 16px' }} />
-            <p style={{ color: '#475569', fontSize: '1.05rem', lineHeight: 1.6 }}>
-              From refinery and petrochemical process lines to defence, power and heavy
-              engineering. Our certified stock is specified wherever material failure is not an option.
-            </p>
-          </div>
 
-          <div className="industry-grid reveal">
-            {industriesServed.map((industry) => (
-              <div key={industry.src} className="industry-card">
-                <div className="industry-card-media">
-                  <img src={industry.src} alt={`${industry.label} Industry`} title={industry.label} loading="lazy" />
-                </div>
-                <span className="industry-card-label">{industry.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      )}
     </div>
   );
 };

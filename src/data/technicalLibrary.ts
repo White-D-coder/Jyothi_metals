@@ -72,8 +72,8 @@ export const technicalDocuments: TechnicalDocument[] = [
     category: 'Dimensional Data',
     file: '/docs/buttweld-fittings-dimensions.pdf',
     cover: '/images/docs/buttweld-fittings-dimensions.jpg',
-    pages: 8,
-    size: '3.5 MB',
+    pages: 7,
+    size: '2.8 MB',
   },
   {
     slug: 'flange-dimensions',
@@ -83,8 +83,8 @@ export const technicalDocuments: TechnicalDocument[] = [
     category: 'Dimensional Data',
     file: '/docs/flange-dimensions.pdf',
     cover: '/images/docs/flange-dimensions.jpg',
-    pages: 4,
-    size: '1.8 MB',
+    pages: 5,
+    size: '2.6 MB',
   },
   {
     slug: 'weight-calculation-formulae',
