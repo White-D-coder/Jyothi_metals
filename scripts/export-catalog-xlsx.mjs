@@ -16,7 +16,6 @@ import ExcelJS from 'exceljs';
 import { catalogProducts } from '../src/data/catalogData.ts';
 import { champakSpecs } from '../src/data/champakSpecs.ts';
 import {
-  getAlloyPricePerKg,
   getAlloyComposition,
   getMechanicalProperties,
   getPhysicalProperties,
@@ -24,11 +23,29 @@ import {
   getManufacturingStandards,
   getEquivalentGrades,
   getScrapedGradeTableData,
+  getGradeSpecification,
 } from '../src/data/productFallbacks.ts';
+import {
+  anglesChannelsContent,
+  anglesChannelsGroups,
+  isAnglesChannelsProduct,
+} from '../src/data/anglesChannels.ts';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'Jyothi_Metals_Product_Data.xlsx');
 const SITE = 'https://jyothi-metals.vercel.app';
+
+/* Copy rendered on every product page, held verbatim so the sheet reproduces
+   what the visitor reads rather than a paraphrase. These are literals in
+   src/pages/ProductDetailPage.tsx. */
+const RATING_LINE = '4.9 / 5.0 (Certified ISO 9001:2015 & ASME Audit Compliant)';
+const GENERIC_DESCRIPTION =
+  'Manufactured and stocked by Jyoti Metal (India) to stringent ASTM, ASME, and EN standards. ' +
+  'Fully solution annealed and tested for high-pressure, severe corrosion environments.';
+const FEATURE_CHEMISTRY = '100% Spectral chemistry verification & heat-lot tracking';
+const FEATURE_TEST_PIPE = 'Hydrostatic pressure tested & ultrasonic flaw scanned';
+const FEATURE_TEST_SECTION = 'Straightness, squareness & section tolerance checked';
+const FEATURE_MTC = 'EN 10204 3.1 & 3.2 Mill Test Certificate included';
 
 const GREEN = 'FF588078';
 const DARK = 'FF304050';
@@ -199,6 +216,9 @@ function resolveProduct(p) {
   const noMaterialSpecs =
     p.category === 'Gasketing Solutions' || p.category === 'Angles & Channels';
 
+  const isAC = isAnglesChannelsProduct(p);
+  const acContent = anglesChannelsContent[p.id] ?? null;
+
   return {
     ...p,
     spec,
@@ -206,7 +226,6 @@ function resolveProduct(p) {
     sourceUrl: spec?.source || '',
     sourceTitle: spec?.sourceTitle || '',
     pageUrl: `${SITE}/product-detail?id=${encodeURIComponent(p.id)}`,
-    pricePerKg: getAlloyPricePerKg(p.title),
 
     // A published product shows a section only when its source page has it —
     // `null` means the section is omitted on the site. Generic fallbacks are
@@ -247,14 +266,75 @@ function resolveProduct(p) {
           : null)
       : { kind: 'fallback', heading: 'Physical & Thermal Properties', data: kvGrid(getPhysicalProperties(p.title)) },
 
-    applications: spec ? spec.applications ?? [] : getCertifiedApplications(p.title),
-    applicationsArePublished: !!spec?.applications,
+    // --- Copy the visitor reads above the spec tabs ---------------------
+    ratingLine: RATING_LINE,
+    description: acContent ? acContent.description : GENERIC_DESCRIPTION,
+    keyFeatures: [FEATURE_CHEMISTRY, isAC ? FEATURE_TEST_SECTION : FEATURE_TEST_PIPE, FEATURE_MTC],
+    // The "<Product> Grades and Specification" panel.
+    gradeSpec: acContent
+      ? { heading: acContent.specHeading, rows: acContent.specRows }
+      : getGradeSpecification(p),
+    // Third block on an Angles & Channels page; no other category renders it.
+    gradeLineUp: isAC ? anglesChannelsGroups[p.subCat] ?? null : null,
+
+    // Angles & Channels also suppress the applications list and the whole
+    // standards footer (ProductDetailPage guards both with `!isAnglesChannels`),
+    // so the export must drop them or the sheet claims content the page never
+    // renders.
+    applications: isAC ? [] : spec ? spec.applications ?? [] : getCertifiedApplications(p.title),
+    applicationsArePublished: !isAC && !!spec?.applications,
     // The source page's "Specification of …" block. Published products show
     // this (or nothing when the source page has none); only products without
     // a published source fall back to the generic standards chips.
-    specification: spec?.specification ?? null,
-    standards: spec ? null : getManufacturingStandards(p.title),
+    specification: isAC ? null : spec?.specification ?? null,
+    standards: isAC || spec ? null : getManufacturingStandards(p.title),
   };
+}
+
+
+/* ------------------------------------------------------------------ *
+ * Flat-sheet serialisers
+ *
+ * The category sheets lay each table out as a real grid. The flat sheet has to
+ * fit the same table inside ONE cell, so a grid becomes pipe-separated columns
+ * and newline-separated rows — readable in Excel with wrap on, and still
+ * parseable if the sheet is fed into another system.
+ * ------------------------------------------------------------------ */
+
+/** `{grid}` (from expandSpecTable/plainGrid/kvGrid) -> one text block. */
+function gridToText(data) {
+  if (!data || !data.grid || !data.grid.length) return '';
+  return data.grid
+    .map((row) => row.map((cell) => (cell.text ?? '').toString().trim()).join(' | '))
+    .filter((line) => line.replace(/[|\s]/g, '').length)
+    .join('\n');
+}
+
+/** A resolved section ({kind, heading, data, ...}) -> heading + table text. */
+function sectionToText(section, omittedNote) {
+  if (!section) return omittedNote;
+  const parts = [];
+  if (section.heading) parts.push(section.heading);
+  if (section.kind === 'chips') {
+    parts.push(section.items.join('  |  '));
+  } else {
+    const body = gridToText(section.data);
+    if (body) parts.push(body);
+    if (section.note) parts.push(`Note: ${section.note}`);
+    // The generic chemical/mechanical tabs repeat themselves as a key/value
+    // strip under the table; the page shows both, so the sheet does too.
+    if (section.breakdown) {
+      const bd = gridToText(section.breakdown);
+      if (bd) parts.push('', 'Breakdown:', bd);
+    }
+  }
+  return parts.join('\n');
+}
+
+/** The "Grades and Specification" panel -> label: value lines. */
+function specPanelToText(panel) {
+  if (!panel || !panel.rows || !panel.rows.length) return '';
+  return [panel.heading, ...panel.rows.map((r) => `${r.label}: ${r.value}`)].join('\n');
 }
 
 /* ------------------------------------------------------------------ *
@@ -284,7 +364,10 @@ wb.created = new Date(Number(process.env.SOURCE_DATE_EPOCH || 0) * 1000 || Date.
     ['What this file is', 'Every product exactly as it appears on the live website. Nothing added, nothing summarised.'],
     ['Total products', String(products.length)],
     ['Categories', `${categories.length} — one worksheet each`],
-    ['Product Index sheet', 'One row per product. Filter/sort here, then open the matching category sheet for the full detail.'],
+    ['Applications are complete', 'Both the All Page Data sheet and the category sheets list EVERY application industry for a product. The website itself shows only the first four and hides the rest behind a "View More" link, so a sheet row will often carry more entries than the page shows on first paint — that is the sheet being complete, not wrong. Counts are 10 for products with a published source, 5 for products on generic data, 8 for Armour Steel Plates, and none for Angles & Channels (that category renders no applications block at all).'],
+    ['Suppressed sections', 'Gasketing Solutions products show no chemical, mechanical or physical data, and Angles & Channels show none of those plus no equivalent grades, no applications and no standards block — the site deliberately hides them (a jointing sheet has no alloy chemistry; a structural section is picked on profile and size). Those cells read "Not shown on this product page" and that is correct, not missing data.'],
+    ['All Page Data sheet', 'One row per product holding EVERY field the visitor can read on that product page — description, key features, rating line, card chips, the Grades & Specification panel, all five spec tabs, the standards block and the Angles & Channels grade line-up. Tables are flattened into a single cell: columns separated by " | ", rows by a line break. Rows are height-capped so the sheet scrolls; drag a row taller to read a long cell in full. "Not shown on this product page" means the site genuinely renders nothing there — see Suppressed sections.'],
+    ['Product Index sheet', 'A shorter one-row-per-product summary: which sections exist and where the data came from, without the table contents.'],
     ['Category sheets', 'Each product is a block: heading row, then the same five tabs the website shows (Equivalent Grades, Chemical Composition, Mechanical Properties, Physical Properties, Applications) plus the Manufacturing Standards & Specification block — the source page\'s own specification list for PUBLISHED products (omitted when the source page has none), generic standards chips only for GENERIC products.'],
     ['"Data Source" column', 'PUBLISHED = the real spec tables sourced from champaksteel.com, shown verbatim on the site. A PUBLISHED product whose source page lacks a section shows nothing for it — marked "omitted" in the index and category sheets. GENERIC = the product has no champaksteel.com page at all, so the site falls back to family-level default data (e.g. every non-316/duplex/titanium item shows the same SS 304 table). Check GENERIC rows first — those are the ones most likely to need real data.'],
     ['Website link', 'Each product block carries a clickable link to its live page, so you can compare side by side.'],
@@ -298,6 +381,111 @@ wb.created = new Date(Number(process.env.SOURCE_DATE_EPOCH || 0) * 1000 || Date.
   });
 }
 
+/* --- Sheet: All Page Data ---------------------------------------------
+ * One row per product carrying every field a visitor can read on that
+ * product's page, tables included. This is the sheet to open for the whole
+ * site's product copy at once; the category sheets remain the place to read
+ * one product's tables laid out properly.
+ * --------------------------------------------------------------------- */
+{
+  const ws = wb.addWorksheet('All Page Data', {
+    properties: { tabColor: { argb: DARK } },
+    views: [{ state: 'frozen', xSplit: 4, ySplit: 1 }],
+  });
+
+  const OMITTED = 'Not shown on this product page';
+
+  ws.columns = [
+    { header: '#', key: 'n', width: 5 },
+    { header: 'Category', key: 'cat', width: 20 },
+    { header: 'Sub-Category', key: 'sub', width: 34 },
+    { header: 'Product Name', key: 'title', width: 42 },
+    { header: 'Product ID', key: 'id', width: 30 },
+    { header: 'Description', key: 'desc', width: 70 },
+    { header: 'Key Features', key: 'feat', width: 46 },
+    { header: 'Rating Line', key: 'rating', width: 30 },
+    { header: 'Card Spec Chips', key: 'chips', width: 40 },
+    { header: 'Grades & Specification', key: 'gradespec', width: 70 },
+    { header: 'Equivalent Grades', key: 'eq', width: 60 },
+    { header: 'Chemical Composition', key: 'chem', width: 70 },
+    { header: 'Mechanical Properties', key: 'mech', width: 70 },
+    { header: 'Physical Properties', key: 'phys', width: 50 },
+    { header: 'Applications', key: 'apps', width: 55 },
+    { header: 'Manufacturing Standards / Specification', key: 'std', width: 60 },
+    { header: 'Grade Line-Up', key: 'lineup', width: 50 },
+    { header: 'Image File', key: 'img', width: 42 },
+    { header: 'Data Source', key: 'src', width: 13 },
+    { header: 'Live Page', key: 'page', width: 26 },
+    { header: 'Source Reference', key: 'ref', width: 52 },
+  ];
+
+  const head = ws.getRow(1);
+  head.height = 32;
+  head.eachCell((cell) => {
+    cell.font = { bold: true, color: { argb: 'FFFFFFFF' }, size: 10 };
+    cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: DARK } };
+    cell.alignment = { vertical: 'middle', horizontal: 'center', wrapText: true };
+  });
+
+  products.forEach((p, i) => {
+    const standards = p.specification
+      ? specPanelToText({ heading: p.specification.heading, rows: p.specification.rows })
+      : p.standards
+      ? p.standards.join('  |  ')
+      : OMITTED;
+
+    const row = ws.addRow({
+      n: i + 1,
+      cat: p.category,
+      sub: p.subCat,
+      title: p.title,
+      id: p.id,
+      desc: p.description,
+      feat: p.keyFeatures.map((f) => `• ${f}`).join('\n'),
+      rating: p.ratingLine,
+      chips: p.specs.map((c) => `• ${c}`).join('\n'),
+      gradespec: specPanelToText(p.gradeSpec) || OMITTED,
+      eq: sectionToText(p.equivalent, OMITTED),
+      chem: sectionToText(p.chemical, OMITTED),
+      mech: sectionToText(p.mechanical, OMITTED),
+      phys: sectionToText(p.physical, OMITTED),
+      apps: p.applications.length ? p.applications.map((a) => `• ${a}`).join('\n') : OMITTED,
+      std: standards,
+      lineup: p.gradeLineUp
+        ? [p.gradeLineUp.heading, ...p.gradeLineUp.grades.map((g) => `• ${g}`)].join('\n')
+        : OMITTED,
+      img: p.image,
+      src: p.isPublished ? 'PUBLISHED' : 'GENERIC',
+      page: { text: 'Open page', hyperlink: p.pageUrl },
+      ref: p.sourceUrl ? { text: p.sourceTitle || p.sourceUrl, hyperlink: p.sourceUrl } : '—',
+    });
+
+    // Top-aligned + wrapped: these cells hold whole tables, so a vertically
+    // centred cell would leave the first line floating mid-row.
+    row.eachCell({ includeEmpty: true }, (cell) => {
+      cell.font = { size: 10, color: { argb: DARK } };
+      cell.alignment = { vertical: 'top', wrapText: true };
+      cell.border = { bottom: { style: 'hair', color: { argb: 'FFD8E0DE' } } };
+      if (i % 2 === 1) cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: ZEBRA } };
+    });
+
+    row.getCell('title').font = { size: 10, bold: true, color: { argb: DARK } };
+    const srcCell = row.getCell('src');
+    srcCell.alignment = { vertical: 'top', horizontal: 'center' };
+    srcCell.font = { size: 10, bold: true, color: { argb: p.isPublished ? 'FF1B7F5A' : 'FFB45309' } };
+    srcCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: p.isPublished ? 'FFE7F5EF' : 'FFFEF3C7' } };
+    row.getCell('page').font = { size: 10, color: { argb: GREEN }, underline: true };
+    if (p.sourceUrl) row.getCell('ref').font = { size: 10, color: { argb: GREEN }, underline: true };
+
+    // Height-capped rather than auto-fit: a full chemistry table would push one
+    // row past a screen and make the sheet unscrollable. Drag a row taller in
+    // Excel to read a long cell in full.
+    row.height = 118;
+  });
+
+  ws.autoFilter = { from: { row: 1, column: 1 }, to: { row: 1, column: ws.columns.length } };
+}
+
 /* --- Sheet: Product Index --- */
 {
   const ws = wb.addWorksheet('Product Index', { properties: { tabColor: { argb: GREEN } }, views: [{ state: 'frozen', ySplit: 1 }] });
@@ -309,7 +497,6 @@ wb.created = new Date(Number(process.env.SOURCE_DATE_EPOCH || 0) * 1000 || Date.
     { header: 'Category', key: 'cat', width: 22 },
     { header: 'Sub-Category', key: 'sub', width: 40 },
     { header: 'Card Spec Chips (shown on catalogue card)', key: 'chips', width: 46 },
-    { header: 'Price Shown (INR/Kg)', key: 'price', width: 18 },
     { header: 'Data Source', key: 'src', width: 14 },
     { header: 'Equivalent Grades', key: 'eq', width: 17 },
     { header: 'Chemical Comp.', key: 'chem', width: 16 },
@@ -337,7 +524,6 @@ wb.created = new Date(Number(process.env.SOURCE_DATE_EPOCH || 0) * 1000 || Date.
       cat: p.category,
       sub: p.subCat,
       chips: p.specs.join('  |  '),
-      price: p.pricePerKg,
       src: p.isPublished ? 'PUBLISHED' : 'GENERIC',
       eq: p.equivalent ? (p.equivalent.kind === 'table' ? 'Published table' : 'Generic chips') : '— omitted',
       chem: p.chemical ? (p.chemical.kind === 'table' ? 'Published table' : 'Generic table') : '— omitted',
@@ -365,7 +551,7 @@ wb.created = new Date(Number(process.env.SOURCE_DATE_EPOCH || 0) * 1000 || Date.
     if (p.sourceUrl) row.getCell('ref').font = { size: 10, color: { argb: GREEN }, underline: true };
   });
 
-  ws.autoFilter = { from: { row: 1, column: 1 }, to: { row: 1, column: 16 } };
+  ws.autoFilter = { from: { row: 1, column: 1 }, to: { row: 1, column: ws.columns.length } };
 }
 
 /* --- One sheet per category --- */
@@ -404,7 +590,6 @@ categories.forEach((cat) => {
     r = writeMetaRow(ws, r, 'Sub-Category', p.subCat, false);
     r = writeMetaRow(ws, r, 'Card Spec Chips', p.specs.join('  |  '), false);
     r = writeMetaRow(ws, r, 'Image File', p.image, false);
-    r = writeMetaRow(ws, r, 'Price Shown (INR/Kg)', `₹${p.pricePerKg} INR / Kg`, false);
     r = writeMetaRow(
       ws, r, 'Data Source',
       p.isPublished
