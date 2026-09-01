@@ -12,6 +12,14 @@
  * which stays inside the free quota; drop it to 15 on a paid plan).
  */
 
+// `process` is imported rather than taken off the global scope on purpose.
+// This file has no other imports, so nothing pulls @types/node in for it, and
+// the api/ directory sits outside every tsconfig project (tsconfig.app covers
+// src, tsconfig.node covers vite.config). Vercel type-checks it against the
+// root config and fails with TS2591 on the bare global. The explicit import
+// makes the binding real without adding a tsconfig just for one folder.
+import process from 'node:process';
+
 const UPSTREAM = 'https://api.metals.dev/v1/latest';
 
 /**
