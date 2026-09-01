@@ -112,13 +112,15 @@ const priceOf = (metals: Record<string, unknown>, key: string): number | null =>
 };
 
 /**
- * With `currency=USD` the currencies map is quoted as units-per-USD. Guard the
- * range so a change in their convention shows no rupee figure at all rather
- * than a wrong one.
+ * With `currency=USD` Metals.Dev returns currencies as USD per unit (e.g. INR ~0.0105).
+ * Handle both units-per-USD and USD-per-unit formats safely.
  */
 const inrPerUsd = (currencies: Record<string, unknown> | undefined): number | null => {
   const rate = asNumber(currencies?.INR);
-  return rate && rate >= 40 && rate <= 200 ? rate : null;
+  if (!rate) return null;
+  if (rate >= 0.005 && rate <= 0.03) return 1 / rate;
+  if (rate >= 40 && rate <= 200) return rate;
+  return null;
 };
 
 async function fetchSnapshot(apiKey: string): Promise<Snapshot> {
