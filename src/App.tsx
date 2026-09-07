@@ -16,6 +16,7 @@ const ServicesPage = lazy(() => import('./pages/ServicesPage').then(m => ({ defa
 const InfrastructurePage = lazy(() => import('./pages/InfrastructurePage').then(m => ({ default: m.InfrastructurePage })));
 const QualityPage = lazy(() => import('./pages/QualityPage').then(m => ({ default: m.QualityPage })));
 const BlogPage = lazy(() => import('./pages/BlogPage').then(m => ({ default: m.BlogPage })));
+const BlogPostPage = lazy(() => import('./pages/BlogPostPage').then(m => ({ default: m.BlogPostPage })));
 const CareersPage = lazy(() => import('./pages/CareersPage').then(m => ({ default: m.CareersPage })));
 const FaqPage = lazy(() => import('./pages/FaqPage').then(m => ({ default: m.FaqPage })));
 const LaserCuttingPage = lazy(() => import('./pages/LaserCuttingPage').then(m => ({ default: m.LaserCuttingPage })));
@@ -151,6 +152,10 @@ export function App() {
             <Route
               path="/blog"
               element={<BlogPage onOpenQuoteModal={handleOpenQuoteModal} onNavigate={navigateTab} />}
+            />
+            <Route
+              path="/blog/:slug"
+              element={<BlogPostPage onOpenQuoteModal={handleOpenQuoteModal} />}
             />
             <Route
               path="/careers"
