@@ -1,100 +1,20 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   ArrowUpRight,
   Calendar,
   User,
   Clock,
 } from 'lucide-react';
+import { articles, blogCategories } from '../data/blogArticles';
 
 interface BlogPageProps {
   onOpenQuoteModal: (productName?: string) => void;
   onNavigate?: (tab: string) => void;
 }
 
-interface Article {
-  id: number;
-  title: string;
-  excerpt: string;
-  category: string;
-  date: string;
-  readTime: string;
-  image: string;
-  author: string;
-}
-
-const categories = [
-  'All Blogs',
-  'Materials Science',
-  'Manufacturing',
-  'Industry Trends',
-  'Case Studies',
-  'Sustainability',
-];
-
-const articles: Article[] = [
-  {
-    id: 1,
-    title: 'CHOOSING BETWEEN 304 AND 316L STAINLESS FOR MARINE SERVICE',
-    excerpt: 'How 2-3% molybdenum addition prevents pitting and crevice corrosion in offshore marine & chemical process environments.',
-    category: 'Materials Science',
-    date: 'July 18, 2026',
-    readTime: '8 min read',
-    image: '/images/pexels-bence-szemerey-337043-6804265.jpg',
-    author: 'Dr. Anita Rao',
-  },
-  {
-    id: 2,
-    title: 'DUPLEX VS SUPER DUPLEX CORROSION RESISTANCE GUIDE',
-    excerpt: 'Comparing PREN ratings and ferrite-austenite phase balance for aggressive oilfield and chemical processing pipelines.',
-    category: 'Materials Science',
-    date: 'June 28, 2026',
-    readTime: '10 min read',
-    image: '/images/pexels-eugeniofr-30005294.jpg',
-    author: 'Dr. Anita Rao',
-  },
-  {
-    id: 3,
-    title: 'VACUUM ARC REMELTING & HIGH-CYCLE ALLOY FATIGUE',
-    excerpt: 'Refining grain boundaries and stripping non-metallic inclusions for aerospace-grade structural titanium & nickel forgings.',
-    category: 'Manufacturing',
-    date: 'July 09, 2026',
-    readTime: '6 min read',
-    image: '/images/pexels-sergey-sergeev-2153675005-32845683.jpg',
-    author: 'Rajesh Menon',
-  },
-  {
-    id: 4,
-    title: 'ZERO-CARBON ELECTRIC ARC FURNACE STEELMAKING',
-    excerpt: 'Transitioning to 100% renewable powered EAF production to cut carbon intensity by 65% across raw melt heats.',
-    category: 'Sustainability',
-    date: 'June 15, 2026',
-    readTime: '7 min read',
-    image: '/images/pexels-jakubzerdzicki-33813584.jpg',
-    author: 'Priya Nair',
-  },
-  {
-    id: 5,
-    title: 'EN 10204 3.1 VS 3.2 MILL CERTIFICATION COMPLIANCE',
-    excerpt: 'Understanding independent third-party inspection (Lloyds/TUV) and full heat-lot material origin traceability.',
-    category: 'Industry Trends',
-    date: 'June 03, 2026',
-    readTime: '5 min read',
-    image: '/images/pexels-willians-huerta-2157111846-36397988.jpg',
-    author: 'Vikram Shah',
-  },
-  {
-    id: 6,
-    title: 'TITANIUM GRADE 5 AEROSPACE FIELD CASE STUDY',
-    excerpt: 'Tracking Ti-6Al-4V structural bracket dimensional tolerance retention through 10,000 thermal shock cycles.',
-    category: 'Case Studies',
-    date: 'May 22, 2026',
-    readTime: '12 min read',
-    image: '/images/pexels-tokuo-nobuhiro-79378678-20472153.jpg',
-    author: 'Rajesh Menon',
-  },
-];
-
-export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal }) => {
+export const BlogPage: React.FC<BlogPageProps> = () => {
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState<string>('All Blogs');
 
   const filteredArticles = selectedCategory === 'All Blogs'
@@ -176,7 +96,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal }) => {
 
         {/* Category Filter Bar */}
         <div style={{ display: 'flex', gap: '10px', overflowX: 'auto', paddingBottom: '12px', marginBottom: '36px' }}>
-          {categories.map((cat) => {
+          {blogCategories.map((cat) => {
             const isActive = selectedCategory === cat;
             return (
               <button
@@ -223,7 +143,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal }) => {
                 boxShadow: '0 4px 14px rgba(0, 0, 0, 0.02)',
                 transition: 'transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
               }}
-              onClick={() => onOpenQuoteModal(article.title)}
+              onClick={() => navigate(`/blog/${article.slug}`)}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = '#588078';
                 e.currentTarget.style.transform = 'translateY(-4px)';
