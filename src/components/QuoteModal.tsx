@@ -20,18 +20,53 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
   const [email, setEmail] = useState('');
   const [company, setCompany] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
+    if (submitting) return;
+
+    setSubmitting(true);
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('/api/send-inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          category: 'Quote Request',
+          name,
+          email,
+          company,
+          material,
+          shape,
+          quantityKgs,
+          message: specs,
+        }),
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(data.error || 'We could not send your quote request. Please try again.');
+      }
+
+      setSubmitted(true);
       setTimeout(() => {
         setSubmitted(false);
+        setSpecs('');
         onClose();
       }, 2500);
-    }, 200);
+    } catch (error) {
+      setErrorMessage(
+        error instanceof Error ? error.message : 'We could not send your quote request. Please try again.',
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -214,9 +249,16 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                 ></textarea>
               </div>
 
+              {errorMessage && (
+                <p role="alert" style={{ color: '#B42318', fontSize: '0.86rem', lineHeight: 1.5, margin: 0, padding: '10px 12px', background: '#FEF3F2', border: '1px solid #FDA29B' }}>
+                  {errorMessage}
+                </p>
+              )}
+
               <button
                 type="submit"
                 className="btn btn-primary"
+                disabled={submitting}
                 style={{
                   width: '100%',
                   padding: '14px',
@@ -228,7 +270,8 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                   fontWeight: 700,
                   letterSpacing: '0.7px',
                   textTransform: 'uppercase',
-                  cursor: 'pointer',
+                  cursor: submitting ? 'not-allowed' : 'pointer',
+                  opacity: submitting ? 0.7 : 1,
                   marginTop: '4px',
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -236,7 +279,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                   gap: '10px',
                 }}
               >
-                Submit Quote Request <Send size={16} />
+                {submitting ? 'Sending…' : 'Submit Quote Request'} <Send size={16} />
               </button>
             </form>
           </>
