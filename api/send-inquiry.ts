@@ -7,6 +7,7 @@ const CATEGORY_LABELS: Record<string, string> = {
   'Technical Spec Consultation': 'Metallurgy / CAD Spec Consultation',
   'Mill Test Certificate': 'Mill Test Certificate Request',
   'Career Inquiry': 'Careers & Supply Partnerships',
+  'Quote Request': 'Precision Quote Request',
 };
 
 interface InquiryPayload {
@@ -15,6 +16,11 @@ interface InquiryPayload {
   email?: string;
   phone?: string;
   message?: string;
+  // Extra fields sent by the Request-a-Quote modal.
+  company?: string;
+  material?: string;
+  shape?: string;
+  quantityKgs?: number | string;
 }
 
 const escapeHtml = (value: string) =>
@@ -79,10 +85,20 @@ export default async function handler(req: any, res: any) {
   const message = (payload.message || '').trim();
   const category = (payload.category || '').trim();
   const categoryLabel = CATEGORY_LABELS[category] || category || 'General Inquiry';
+  const company = (payload.company || '').trim();
+  const material = (payload.material || '').trim();
+  const shape = (payload.shape || '').trim();
+  const quantityKgs = String(payload.quantityKgs ?? '').trim();
+  const isQuote = category === 'Quote Request';
 
-  if (!name || !email || !message) {
+  // A quote is fully described by material/shape/quantity; free-text specs are optional there.
+  if (!name || !email || (!message && !isQuote)) {
     res.statusCode = 400;
     return res.end(JSON.stringify({ error: 'Name, email and message are required.' }));
+  }
+  if (isQuote && (!material || !shape || !quantityKgs)) {
+    res.statusCode = 400;
+    return res.end(JSON.stringify({ error: 'Material, shape and quantity are required.' }));
   }
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -96,6 +112,10 @@ export default async function handler(req: any, res: any) {
     ['Email', email],
     ['Phone', phone || '—'],
   ];
+  if (company) rows.push(['Company', company]);
+  if (isQuote) {
+    rows.push(['Material', material], ['Product Form', shape], ['Quantity (Kgs)', quantityKgs]);
+  }
 
   const html = `
     <div style="font-family:Arial,Helvetica,sans-serif;color:#304050;font-size:14px;line-height:1.6">
@@ -109,7 +129,7 @@ export default async function handler(req: any, res: any) {
           .join('')}
       </table>
       <div style="font-weight:700;margin-bottom:6px">Message / Requirement Details</div>
-      <div style="white-space:pre-wrap;border-left:3px solid #588078;padding-left:12px">${escapeHtml(message)}</div>
+      <div style="white-space:pre-wrap;border-left:3px solid #588078;padding-left:12px">${escapeHtml(message || '—')}</div>
       <p style="color:#64748b;font-size:12px;margin-top:24px">Sent from the jyotimetal.co.in contact form.</p>
     </div>
   `;
@@ -118,7 +138,7 @@ export default async function handler(req: any, res: any) {
     ...rows.map(([label, value]) => `${label}: ${value}`),
     '',
     'Message / Requirement Details:',
-    message,
+    message || '—',
   ].join('\n');
 
   try {
@@ -127,7 +147,9 @@ export default async function handler(req: any, res: any) {
       from: process.env.SMTP_FROM || `"Jyoti Metal Website" <${process.env.SMTP_USER}>`,
       to: TO_ADDRESS,
       replyTo: `"${name}" <${email}>`,
-      subject: `[${categoryLabel}] Website inquiry from ${name}`,
+      subject: isQuote
+        ? `[${categoryLabel}] ${quantityKgs} Kgs ${material} ${shape} — ${name}${company ? `, ${company}` : ''}`
+        : `[${categoryLabel}] Website inquiry from ${name}`,
       text,
       html,
     });

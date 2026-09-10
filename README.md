@@ -30,3 +30,16 @@ If you are developing a production application, we recommend enabling type-aware
 ```
 
 See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+
+## Contact form & quote request emails
+
+Both the Contact page form and the "Request a Precision Quote" modal POST to
+`api/send-inquiry.ts`, which sends the email through SMTP with nodemailer.
+During `npm run dev` the same handler is served locally by `vite.config.ts`;
+on Vercel it runs as a serverless function.
+
+To enable sending, fill the `SMTP_*` and `INQUIRY_TO` values described in
+`.env.example` — locally in `.env`, and on Vercel under
+**Project → Settings → Environment Variables** (then redeploy).
+Until they are set the forms show a friendly error asking the visitor to email
+info@jyotimetal.co.in directly.
